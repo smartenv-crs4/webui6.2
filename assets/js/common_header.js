@@ -23,7 +23,7 @@ var header_template = `	<div class="header">
           <li class="topbar-devider"></li>
           <li><a href="page_faq.html" data-i18n="nav.help">Help</a></li>
           <li class="topbar-devider"></li>
-          <li><a href="page_login.html">Login</a></li>
+          <li><a href="page_login_and_registration.html">Login</a></li>
         </ul>
       </div>
       <!-- End Topbar -->
