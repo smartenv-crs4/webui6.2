@@ -10,10 +10,10 @@
 	<meta name="author" content="">
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="favicon.ico">
+	<!--link rel="shortcut icon" href="favicon.ico" -->
 
 	<!-- Web Fonts -->
-	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,700&amp;subset=cyrillic,latin">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700&amp;subset=cyrillic,latin">
 
 	<!-- CSS Global Compulsory -->
 	<link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
@@ -21,7 +21,7 @@
 
 	<!-- CSS Header and Footer -->
 	<!-- link rel="stylesheet" href="assets/css/headers/header-v6.css" -->
-  <link rel="stylesheet" href="assets/css/headers/header-default.css">  
+  <link rel="stylesheet" href="assets/css/headers/header-default.css">
 	<link rel="stylesheet" href="assets/css/footers/footer-v1.css">
 
 	<!-- CSS Implementing Plugins -->
@@ -39,115 +39,20 @@
 
 	<!-- CSS Customization -->
 	<link rel="stylesheet" href="assets/css/custom.css">
-  
+
   <link rel="stylesheet" href="assets/css/plugins/bootstrap-select.min.css">
-  
-  
-   <!-- JS Global Compulsory -->
-	<script src="assets/plugins/jquery/jquery.min.js"></script>
-	<script src="assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-	<!-- JS Implementing Plugins -->
-	<script src="assets/plugins/back-to-top.js"></script>
-	<script src="assets/plugins/backstretch/jquery.backstretch.min.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/style-switcher.js"></script>
-  
-  
-  <script type="text/javascript" src="assets/js/plugins/bootstrap-select.min.js"></script>
-  <script type="text/javascript" src="assets/js/plugins/i18nextXHRBackend.min.js"></script>
-  <!--script type="text/javascript" src="https://raw.githubusercontent.com/i18next/i18next-xhr-backend/master/i18nextXHRBackend.min.js"></script-->  
-  <script type="text/javascript" src="assets/js/plugins/i18next.min.js"></script>
-  <!-- script type="text/javascript" src="https://raw.githubusercontent.com/i18next/i18next/master/i18next.min.js"></script -->
-  <script type="text/javascript" src="assets/js/plugins/jquery-i18next.min.js"></script>
-  <!-- script type="text/javascript" src="https://raw.githubusercontent.com/i18next/jquery-i18next/master/jquery-i18next.min.js"></script -->
-  <script type="text/javascript" src="assets/js/plugins/handlebars-v4.0.5.js"></script>
 
-	<!-- JS Customization -->
-	<script src="assets/js/custom.js"></script>
 
-	<!-- JS Page Level -->
-	<script src="assets/js/app.js"></script>
-      
-  <script lang="javascript">
-    jQuery(document).ready(function () {
-      //jQuery('body').localize();
-      /*
-      jQuery('.lang-select').click(function() {
-              i18next.changeLanguage(this.innerHTML);
-              jQuery('.nav').localize();
-          });
-      */
-    });
-  </script>
 
-  
 </head>
 
 <body>
 	<!--=== Content Part ===-->
 	<div class="forms-wrapper">
 		<!--=== Header ===-->
-		<div class="header">
-			<div class="container">
-				<!-- Logo -->
-				<a class="logo" href="index.html">
-					<img src="assets/img/logo.png" alt="Logo">
-				</a>
-				<!-- End Logo -->
+		<div id="header_p"></div>
 
-				<!-- Topbar -->
-				<div class="topbar">
-					<ul class="loginbar pull-right">
-						<li class="hoverSelector">
-							<i class="fa fa-globe"></i>
-							<a>Languages</a>
-							<ul class="languages hoverSelectorBlock">
-								<li class="active">
-									<a href="#" data-lng="en">English <i class="fa fa-check"></i></a>
-								</li>
-								<li><a href="#" data-lng="en">English</a></li>
-								<li><a href="#" data-lng="it">Italiano</a></li>								
-							</ul>
-						</li>
-						<li class="topbar-devider"></li>
-						<li><a href="page_faq.html">Help</a></li>
-						<li class="topbar-devider"></li>						
-					</ul>
-				</div>
-				<!-- End Topbar -->
-
-				<!-- Toggle get grouped for better mobile display -->
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="fa fa-bars"></span>
-				</button>
-				<!-- End Toggle -->
-			</div><!--/end container-->
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
-				<div class="container">
-					<ul class="nav navbar-nav">
-            <li></li>
-						<!-- Search Block -->
-						<li>
-              <div>&nbsp;</div>
-							<!--i class="search fa fa-search search-btn"></i>
-							<div class="search-open">
-								<div class="input-group animated fadeInDown">
-									<input type="text" class="form-control" placeholder="Search">
-									<span class="input-group-btn">
-										<button class="btn-u" type="button">Go</button>
-									</span>
-								</div>
-							</div-->
-						</li>
-						<!-- End Search Block -->
-					</ul>
-				</div><!--/end container-->
-			</div><!--/navbar-collapse-->
-		</div>
 		<!--=== End Header ===-->
 		<div class="container content-md">
 
@@ -157,9 +62,9 @@
 					<div class="form-block-header">
 						<h2 class="margin-bottom-15">Sign In</h2>
 					</div>
-          
+
           <div class="alert alert-danger invisible margin-bottom-20" id="signInResponse">
-						
+
 					</div>
 
 					<div class="input-group margin-bottom-20">
@@ -170,7 +75,7 @@
 					<div class="input-group margin-bottom-20">
 						<span class="input-group-addon rounded-left"><i class="icon-lock color-white"></i></span>
 						<input type="password" class="form-control rounded-right" placeholder="Password" id="signInPassword">
-					</div>          
+					</div>
 
 
 
@@ -200,11 +105,11 @@
 				<!--Reg Block-->
 				<div class="form-block reg-block col-md-6 col-sm-12 rounded-right equal-height-column">
 					<div class="form-block-header">
-						<h2 class="margin-bottom-10">Sign Up</h2>						
+						<h2 class="margin-bottom-10">Sign Up</h2>
 					</div>
-          
+
           <div class="alert alert-danger invisible margin-bottom-20" id="signUpResponse"></div>
-          
+
           <div class="input-group margin-bottom-20">
 						<span class="input-group-addon rounded-left"><i class="icon-envelope"></i></span>
 						<input type="email" class="form-control rounded-right" placeholder="Your email" id="signUpEmail">
@@ -214,24 +119,24 @@
 						<span class="input-group-addon rounded-left"><i class="icon-pencil"></i></span>
 						<input type="text" class="form-control rounded-right" placeholder="Your name" id="signUpName">
 					</div>
-                
+
 
 					<div class="input-group margin-bottom-20">
 						<span class="input-group-addon rounded-left"><i class="icon-lock"></i></span>
 						<input type="password" class="form-control rounded-right" placeholder="Password" id="signUpPassword">
 					</div>
-          
+
           <div class="input-group margin-bottom-20">
 						<span class="input-group-addon rounded-left"><i class="icon-lock"></i></span>
 						<input type="password" class="form-control rounded-right" placeholder="Retype password" id="signUpPassword2">
 					</div>
-                    
-          <div class="margin-bottom-20">                        
-            <select name="userType" class="selectpicker form-control" title="You are a ..." id="signUpUserType">              
+
+          <div class="margin-bottom-20">
+            <select name="userType" class="selectpicker form-control" title="You are a ..." id="signUpUserType">
               <option data-hidden="true">You are a ...</option>
               <option value="customer">Customer</option>
               <option value="supplier">Supplier</option>
-            </select>                          
+            </select>
           </div>
 
 					<div class="checkbox margin-bottom-15">
@@ -258,143 +163,119 @@
 	</div>
 	<!--=== End Content Part ===-->
 
-  <!--=== Footer v1 ===-->
-  <div id="footer-v1" class="footer-v1">
-      <div class="footer">
-          <div class="container">
-              <div class="row">
-                  <!-- About -->
-                  <div class="col-md-3 md-margin-bottom-40">
-                      <a href="index.html"><img id="logo-footer" class="footer-logo" src="assets/img/logo2-default.png" alt=""></a>
-                      <p>About Unify dolor sit amet, consectetur adipiscing elit. Maecenas eget nisl id libero tincidunt sodales.</p>
-                      <p>Duis eleifend fermentum ante ut aliquam. Cras mi risus, dignissim sed adipiscing ut, placerat non arcu.</p>
-                  </div>
-                  <!-- End About -->
+    <!--=== Footer Version 1 ===-->
+    <div class="footer-v1">
 
-                  <!-- Latest -->
-                  <div class="col-md-3 md-margin-bottom-40">
-                      <div class="posts">
-                          <div class="headline"><h2>Latest Posts</h2></div>
-                          <ul class="list-unstyled latest-list">
-                              <li>
-                                  <a href="#">Incredible content</a>
-                                  <small>May 8, 2014</small>
-                              </li>
-                              <li>
-                                  <a href="#">Best shoots</a>
-                                  <small>June 23, 2014</small>
-                              </li>
-                              <li>
-                                  <a href="#">New Terms and Conditions</a>
-                                  <small>September 15, 2014</small>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-                  <!-- End Latest -->
 
-                  <!-- Link List -->
-                  <div class="col-md-3 md-margin-bottom-40">
-                      <div class="headline"><h2>Useful Links</h2></div>
-                      <ul class="list-unstyled link-list">
-                          <li><a href="#">About us</a><i class="fa fa-angle-right"></i></li>
-                          <li><a href="#">Portfolio</a><i class="fa fa-angle-right"></i></li>
-                          <li><a href="#">Latest jobs</a><i class="fa fa-angle-right"></i></li>
-                          <li><a href="#">Community</a><i class="fa fa-angle-right"></i></li>
-                          <li><a href="#">Contact us</a><i class="fa fa-angle-right"></i></li>
-                      </ul>
-                  </div>
-                  <!-- End Link List -->
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            2015 &copy; All Rights Reserved.
+                            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                        </p>
+                    </div>
 
-                  <!-- Address -->
-                  <div class="col-md-3 map-img md-margin-bottom-40">
-                      <div class="headline"><h2>Contact Us</h2></div>
-                      <address class="md-margin-bottom-40">
-                          25, Lorem Lis Street, Orange <br />
-                          California, US <br />
-                          Phone: 800 123 3456 <br />
-                          Fax: 800 123 3456 <br />
-                          Email: <a href="mailto:info@anybiz.com" class="">info@anybiz.com</a>
-                      </address>
-                  </div>
-                  <!-- End Address -->
-              </div>
-          </div>
-      </div><!--/footer-->
+                    <!-- Social Links -->
+                    <div class="col-md-6">
+                        <ul class="footer-socials list-inline">
+                            <li>
+                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype">
+                                    <i class="fa fa-skype"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google Plus">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Linkedin">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest">
+                                    <i class="fa fa-pinterest"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dribbble">
+                                    <i class="fa fa-dribbble"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End Social Links -->
+                </div>
+            </div>
+        </div><!--/copyright-->
+    </div>
+    <!--=== End Footer Version 1 ===-->
+    <!-- JS Global Compulsory -->
+    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <script src="assets/plugins/jquery/jquery-migrate.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-      <div class="copyright">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-6">
-                      <p>
-                          2015 &copy; All Rights Reserved.
-                         <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-                      </p>
-                  </div>
+    <!-- JS Implementing Plugins -->
+    <script src="assets/plugins/back-to-top.js"></script>
+    <script src="assets/plugins/backstretch/jquery.backstretch.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/style-switcher.js"></script>
 
-                  <!-- Social Links -->
-                  <div class="col-md-6">
-                      <ul class="footer-socials list-inline">
-                          <li>
-                              <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
-                                  <i class="fa fa-facebook"></i>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype">
-                                  <i class="fa fa-skype"></i>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google Plus">
-                                  <i class="fa fa-google-plus"></i>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Linkedin">
-                                  <i class="fa fa-linkedin"></i>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest">
-                                  <i class="fa fa-pinterest"></i>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter">
-                                  <i class="fa fa-twitter"></i>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dribbble">
-                                  <i class="fa fa-dribbble"></i>
-                              </a>
-                          </li>
-                      </ul>
-                  </div>
-                  <!-- End Social Links -->
-              </div>
-          </div>
-      </div><!--/copyright-->
-  </div>
-  <!--=== End Footer v1 ===-->
 
-		<script>
-		jQuery(document).ready(function() {
-			App.init();
-			StyleSwitcher.initStyleSwitcher();
-		});
-	</script>
-	<script>
-		$(".forms-wrapper").backstretch([
-			"assets/img/bg/6.jpg",
-			"assets/img/bg/5.jpg",
-			"assets/img/bg/7.jpg",
-			], {
-				fade: 1000,
-				duration: 7000
-			});
-	</script>
+    <script type="text/javascript" src="assets/js/plugins/bootstrap-select.min.js"></script>
+    <script src="assets/js/translations/translation.js"></script>
+    <!--script type="text/javascript" src="https://raw.githubusercontent.com/i18next/i18next-xhr-backend/master/i18nextXHRBackend.min.js"></script-->
+    <script type="text/javascript" src="assets/js/plugins/i18next.min.js"></script>
+    <!-- script type="text/javascript" src="https://raw.githubusercontent.com/i18next/i18next/master/i18next.min.js"></script -->
+    <script type="text/javascript" src="assets/js/plugins/jquery-i18next.min.js"></script>
+    <!-- script type="text/javascript" src="https://raw.githubusercontent.com/i18next/jquery-i18next/master/jquery-i18next.min.js"></script -->
+
+    <!-- JS Customization -->
+    <script src="assets/js/custom.js"></script>
+
+    <!-- JS Page Level -->
+    <script src="assets/js/app.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script type="text/javascript" src="assets/js/common_header.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            App.init();
+            //App.initCounter();
+            //	App.initParallaxBg();
+            //OwlCarousel.initOwlCarousel();
+            StyleSwitcher.initStyleSwitcher();
+         //   $('#header_p').html(header_template);
+
+
+            $(".forms-wrapper").backstretch([
+                "assets/img/port/login_1.jpg",
+                "assets/img/port/login_2.jpg",
+                "assets/img/port/login_3.jpg",
+                "assets/img/port/login_4.jpg",
+            ], {
+                fade: 1000,
+                duration: 7000
+            });
+        });
+
+
+    </script>
+    <div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 558px; width: 1872px; z-index: -999999; position: fixed;">
+        <img style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1872px; height: 1248px; max-width: none; z-index: -999999; left: 0px; top: -345px;" src="assets/img/port/login_1.jpg">
+    </div>
 	<!--[if lt IE 9]>
   <script src="assets/plugins/respond.js"></script>
   <script src="assets/plugins/html5shiv.js"></script>

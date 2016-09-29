@@ -13,14 +13,15 @@ var header_template = `	<div class="header">
             <i class="fa fa-globe"></i>
             <a>Languages</a>
             <ul class="languages hoverSelectorBlock">
-              <li class="active">
-                <a class="lang-select" data-lang="en" href="#">English <i class="fa fa-check"></i></a>
+              <li class="active ">
+                <a class="" data-lng="en" href="#">English <i class="fa fa-check"></i></a>
               </li>
-              <li><a class="lang-select" data-lang="it" href="#">Italiano</a></li>
+              <li><a href="#" data-lng="en">English</a></li>
+              <li><a  data-lng="it" href="#">Italiano</a></li>
             </ul>
           </li>
           <li class="topbar-devider"></li>
-          <li><a href="page_faq.html" data-i18n="nav.help"></a></li>
+          <li><a href="page_faq.html" data-i18n="nav.help">Help</a></li>
           <li class="topbar-devider"></li>
           <li><a href="page_login.html">Login</a></li>
         </ul>

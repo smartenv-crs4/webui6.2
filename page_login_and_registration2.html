@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<title>Login/Registration | Unify - Responsive Website Template</title>
+
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Favicon -->
+	<!--link rel="shortcut icon" href="favicon.ico" -->
+
+	<!-- Web Fonts -->
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700&amp;subset=cyrillic,latin">
+
+	<!-- CSS Global Compulsory -->
+	<link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+
+	<!-- CSS Header and Footer -->
+	<!-- link rel="stylesheet" href="assets/css/headers/header-v6.css" -->
+  <link rel="stylesheet" href="assets/css/headers/header-default.css">
+	<link rel="stylesheet" href="assets/css/footers/footer-v1.css">
+
+	<!-- CSS Implementing Plugins -->
+	<link rel="stylesheet" href="assets/plugins/animate.css">
+	<link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
+	<link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/plugins/brand-buttons/brand-buttons-inversed.css">
+    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+	<!-- CSS Theme -->
+	<link rel="stylesheet" href="assets/css/theme-skins/dark.css" id="style_color">
+	<link rel="stylesheet" href="assets/css/theme-colors/dark-red.css">
+
+	<!-- CSS Page Style -->
+	<link rel="stylesheet" href="assets/css/pages/page_log_reg_v3.css">
+
+	<!-- CSS Customization -->
+	<link rel="stylesheet" href="assets/css/custom.css">
+
+  <link rel="stylesheet" href="assets/css/plugins/bootstrap-select.min.css">
+
+
+
+
+</head>
+
+<body>
+	<!--=== Content Part ===-->
+	<div class="forms-wrapper">
+		<!--=== Header ===-->
+		<div></div>
+
+		<!--=== End Header ===-->
+		<div class="container content-md">
+
+			<div class="row space-xlg-hor equal-height-columns">
+	<!--login Block-->
+				<div class="form-block login-block col-md-6 col-sm-12 rounded-left equal-height-column">
+					<div class="form-block-header">
+
+						<h2 class="margin-bottom-15">Sign In</h2>
+					</div>
+
+          <div class="alert alert-danger invisible margin-bottom-20" id="signInResponse">
+
+					</div>
+
+					<div class="input-group margin-bottom-20">
+						<span class="input-group-addon rounded-left"><i class="icon-user color-white"></i></span>
+						<input type="text" class="form-control rounded-right" placeholder="Email" id="signInEmail">
+					</div>
+
+					<div class="input-group margin-bottom-20">
+						<span class="input-group-addon rounded-left"><i class="icon-lock color-white"></i></span>
+						<input type="password" class="form-control rounded-right" placeholder="Password" id="signInPassword">
+					</div>
+
+
+
+					<div class="row margin-bottom-70">
+						<div class="col-md-12">
+							<button type="submit" class="btn-u btn-block rounded" onclick="signIn()">Sign In</button>
+						</div>
+					</div>
+					<!--div class="social-login">
+						<div class="or rounded-x">Or</div>
+						<ul class="list-unstyled">
+							<li>
+								<button class="btn rounded btn-block btn-lg btn-facebook-inversed margin-bottom-20">
+									<i class="fa fa-facebook"></i> Sign in with Facebook
+								</button>
+							</li>
+							<li>
+								<button class="btn rounded btn-block btn-lg btn-twitter-inversed">
+									<i class="fa fa-twitter"></i> Sign in with Twitter
+								</button>
+							</li>
+						</ul>
+					</div -->
+				</div>
+				<!--End login Block-->
+
+				<!--Reg Block-->
+				<div class="form-block reg-block col-md-6 col-sm-12 rounded-right equal-height-column">
+					<div class="form-block-header">
+                        <img src="assets/img/port/logo1-default.png" style="width: 178px;"">
+						<h2 class="margin-bottom-10">Sign Up</h2>
+					</div>
+
+          <div class="alert alert-danger invisible margin-bottom-20" id="signUpResponse"></div>
+
+          <div class="input-group margin-bottom-20">
+						<span class="input-group-addon rounded-left"><i class="icon-envelope"></i></span>
+						<input type="email" class="form-control rounded-right" placeholder="Your email" id="signUpEmail">
+					</div>
+
+					<div class="input-group margin-bottom-20">
+						<span class="input-group-addon rounded-left"><i class="icon-pencil"></i></span>
+						<input type="text" class="form-control rounded-right" placeholder="Your name" id="signUpName">
+					</div>
+
+
+					<div class="input-group margin-bottom-20">
+						<span class="input-group-addon rounded-left"><i class="icon-lock"></i></span>
+						<input type="password" class="form-control rounded-right" placeholder="Password" id="signUpPassword">
+					</div>
+
+          <div class="input-group margin-bottom-20">
+						<span class="input-group-addon rounded-left"><i class="icon-lock"></i></span>
+						<input type="password" class="form-control rounded-right" placeholder="Retype password" id="signUpPassword2">
+					</div>
+
+          <div class="margin-bottom-20">
+            <select name="userType" class="selectpicker form-control" title="You are a ..." id="signUpUserType">
+              <option data-hidden="true">You are a ...</option>
+              <option value="customer">Customer</option>
+              <option value="supplier">Supplier</option>
+            </select>
+          </div>
+
+					<div class="checkbox margin-bottom-15">
+						<label>
+							<input type="checkbox">
+							<p>I agree to terms &amp; conditions</p>
+						</label>
+
+						<!--label>
+							<input type="checkbox">
+							<p>Subscribe to our newsletter</p>
+						</label-->
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<button onclick="signUp()" class="btn-u btn-block rounded">Continue</button>
+						</div>
+					</div>
+				</div>
+				<!--End Reg Block-->
+			</div>
+		</div><!--/container-->
+	</div>
+	<!--=== End Content Part ===-->
+
+    <!--=== Footer Version 1 ===-->
+    <div class="footer-v1">
+
+
+        <div class="copyright">
+            <div class="container">
+                <div class="row" >
+                    <div class="col-md-6">
+                        <p>
+                            2015 &copy; All Rights Reserved.
+                            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                        </p>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="col-md-6 sky-form">
+                        <label class="select list-inline">
+                            <select style="    background-color: #223539;
+    height: 33px;
+    padding: 6px 10px; border: 0px;color: white;">
+                                <option value="0">Italiano</option>
+                                <option value="1">Inglese</option>
+                            </select>
+                            <i style="background: none;"></i>
+                        </label>
+                    </div>
+                    <!-- End Social Links -->
+                </div>
+            </div>
+        </div><!--/copyright-->
+    </div>
+    <!--=== End Footer Version 1 ===-->
+    <!-- JS Global Compulsory -->
+    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <script src="assets/plugins/jquery/jquery-migrate.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- JS Implementing Plugins -->
+    <script src="assets/plugins/back-to-top.js"></script>
+    <script src="assets/plugins/backstretch/jquery.backstretch.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/style-switcher.js"></script>
+
+
+    <script type="text/javascript" src="assets/js/plugins/bootstrap-select.min.js"></script>
+    <script src="assets/js/translations/translation.js"></script>
+    <!--script type="text/javascript" src="https://raw.githubusercontent.com/i18next/i18next-xhr-backend/master/i18nextXHRBackend.min.js"></script-->
+    <script type="text/javascript" src="assets/js/plugins/i18next.min.js"></script>
+    <!-- script type="text/javascript" src="https://raw.githubusercontent.com/i18next/i18next/master/i18next.min.js"></script -->
+    <script type="text/javascript" src="assets/js/plugins/jquery-i18next.min.js"></script>
+    <!-- script type="text/javascript" src="https://raw.githubusercontent.com/i18next/jquery-i18next/master/jquery-i18next.min.js"></script -->
+
+    <!-- JS Customization -->
+    <script src="assets/js/custom.js"></script>
+
+    <!-- JS Page Level -->
+    <script src="assets/js/app.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script type="text/javascript" src="assets/js/common_header.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            App.init();
+            //App.initCounter();
+            //	App.initParallaxBg();
+            //OwlCarousel.initOwlCarousel();
+            StyleSwitcher.initStyleSwitcher();
+         //   $('#header_p').html(header_template);
+
+
+            $(".forms-wrapper").backstretch([
+                "assets/img/port/login_1.jpg",
+                "assets/img/port/login_2.jpg",
+                "assets/img/port/login_3.jpg",
+                "assets/img/port/login_4.jpg",
+            ], {
+                fade: 1000,
+                duration: 7000
+            });
+        });
+
+
+    </script>
+    <div class="backstretch" style="left: 0px; top: 0px; overflow: hidden; margin: 0px; padding: 0px; height: 558px; width: 1872px; z-index: -999999; position: fixed;">
+        <img style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1872px; height: 1248px; max-width: none; z-index: -999999; left: 0px; top: -345px;" src="assets/img/port/login_1.jpg">
+    </div>
+	<!--[if lt IE 9]>
+  <script src="assets/plugins/respond.js"></script>
+  <script src="assets/plugins/html5shiv.js"></script>
+  <script src="assets/plugins/placeholder-IE-fixes.js"></script>
+  <![endif]-->
+</body>
+</html>

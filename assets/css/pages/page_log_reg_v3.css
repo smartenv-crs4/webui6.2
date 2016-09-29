@@ -54,7 +54,7 @@ body {
 	height: 100%;
 	z-index: -1;
 	content: "";
-	background: rgba(34,53,57,.8);
+	background: rgba(34,53,57,.3);
 }
 .head {
 	text-align: center;
@@ -139,7 +139,8 @@ body {
 
 /* Login form */
 .login-block {
-	background: #69c4c7;
+	/*background: #69c4c7;*/
+	background: #1d4976;
 }
 .login-block h2 {
 	color: #fff;

@@ -165,7 +165,7 @@ body.header-fixed-space-default {
 
 /*Logo*/
 .header .logo {
-	
+
 	min-height: 40px;
 	min-width: 100px;
 	display: table-cell;
@@ -173,11 +173,11 @@ body.header-fixed-space-default {
 }
 
 .header .logo img {
-        width: 15.3em;
+        width: 11em;
 	z-index: 1;
-	margin: 20px 0;
+	margin: 14px 0;
 	position: relative;
-       
+
 }
 
 /*Big Logo Style*/
