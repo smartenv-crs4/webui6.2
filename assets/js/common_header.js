@@ -54,3 +54,73 @@ var header_template = `	<div class="header">
       </div><!--/end container-->
     </div><!--/navbar-collapse-->
   </div>`;
+
+var profile_customer = `
+<h2 class="heading-md">Manage your Name, ID and Email Addresses.</h2>
+<p>Below are the name and email addresses on file for your account.</p>
+<br>
+<dl class="dl-horizontal">
+  <dt><strong data-i18n="profile.email"></strong></dt>
+  <dd>
+    {{email}}
+    <span>
+      <a class="pull-right" href="#">
+        <!-- i class="fa fa-pencil"></i -->
+      </a>
+    </span>
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.type"></strong></dt>
+  <dd>
+    {{type}}
+    <span>
+      <a class="pull-right" href="#">
+        <!-- i class="fa fa-pencil"></i -->
+      </a>
+    </span>
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.name"></strong></dt>
+  <dd>
+    {{name}}
+    <span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span>
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.address"></strong></dt>
+  <dd>
+    {{address}}
+    <span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span>
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.phone"></strong></dt>
+  <dd>
+    {{phone}}
+    <span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span>
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.favoriteSuppliers">Office Number </strong></dt>
+  <dd>
+    {{favoriteSuppliers}}
+    <span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span>
+  </dd>
+  <hr>     
+</dl>
+<button type="button" class="btn-u btn-u-default">Cancel</button>
+<button type="button" class="btn-u">Save Changes</button>
+`;

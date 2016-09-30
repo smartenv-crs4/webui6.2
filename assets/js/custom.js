@@ -8,7 +8,7 @@ _access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOi
 var lng = localStorage.lng;
 
 jQuery(document).ready(function(){
-  $('#header_p').html(header_template);
+  jQuery('#header_p').html(header_template);
   if (lng != undefined)
   {
     var l = jQuery(".languages a[data-lng='" + lng +"']");
@@ -23,11 +23,13 @@ jQuery(document).ready(function(){
         c.className = "fa fa-check";
         lngSel.find("a").first().append(c);
         i18next.changeLanguage(lng, function(){});
+        jQuery('body').localize();
       }
     }
   }
 
   jQuery(".languages a").click(function(){
+    console.log("aaaaa");
     if(jQuery(this).attr("data-lng"))
     {
       lng = jQuery(this).attr("data-lng");
@@ -39,9 +41,28 @@ jQuery(document).ready(function(){
       c.className = "fa fa-check";
       lngSel.find("a").first().append(c);
       i18next.changeLanguage(lng, function(){});
+      jQuery('body').localize();
     }
 
   });
+  
+  if(jQuery(".footer-language").length > 0)
+  {
+    var fl = jQuery(".footer-language select").first();
+    
+    if (lng != undefined)
+    {
+      fl.val(lng);
+    }
+    
+    fl.change(function(){
+      var lng = jQuery(this).val();
+      localStorage.lng = lng;
+      i18next.changeLanguage(lng, function(){});
+      jQuery('body').localize();
+      
+    });
+  }
 
 
 });
@@ -139,7 +160,12 @@ function signIn()
       // success
       if(xhr.status == 201)
       {
+        console.log(sessionStorage.userId);
         sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
+        sessionStorage.userId = data["access_credentials"]["userId"];
+        sessionStorage.email = email;
+        window.location.replace("page_profile_settings.html");
+        
         return;
       }
       // error
@@ -283,6 +309,68 @@ function signUp()
   });
 
 
+}
+
+
+function getUserProfile()
+{      
+  
+  if(sessionStorage.userId == undefined)
+  {    
+    console.log(sessionStorage.userId);    
+    window.location.replace("page_login_and_registration2.html");
+  }
+  
+  //console.log(sessionStorage.token);
+  jQuery.ajax({
+    url: _userMsUrl + "users/" + sessionStorage.userId,
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    success: function(data, textStatus, xhr)
+    { 
+      console.log(data.type);     
+      // success
+      if(data.type == "customer")
+      {
+        var template = Handlebars.compile(profile_customer); 
+        jQuery('#profile').html(template(data));
+        jQuery('#profile').localize();
+
+      }
+                      
+    },     
+    error: function(xhr, status)
+    {      
+      switch(xhr.status)
+      {
+        case 400: 
+          if(xhr.responseJSON.error == "invalid_token")
+            respBlock.html(i18next.t("error.unauthorized"))
+          else if(xhr.responseJSON.error == "BadRequest")
+            respBlock.html(i18next.t("error.missing_user_or_password"));
+          else
+            respBlock.html(xhr.responseJSON.error_message);
+          break;
+        case 401:
+          respBlock.html(i18next.t("error.bad_request"));
+          break;
+        case 403:
+          respBlock.html(i18next.t("error.invalid_auth"));
+          break;
+        case 500:
+          respBlock.html(i18next.t("error.internal_server_error"));
+          break;        
+        default:
+          respBlock.html(xhr.responseJSON.error_message);
+      }
+      respBlock.removeClass("invisible");            
+      return;    
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    }                    
+  });        
 }
 
 
