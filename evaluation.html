@@ -76,13 +76,6 @@
 				    <input type="email" name="email" id="email" placeholder="Your e-mail">
 				</label>
 			</section -->
-			<section>
-				<label class="label"></label>
-				<label class="textarea">
-				    <i class="icon-append fa fa-comment"></i>
-	                   		    <textarea rows="3" name="review" id="review" placeholder="Text of the review"></textarea>
-				</label>
-			</section>
 
 			<section>
 				<div class="rating">
@@ -100,16 +93,16 @@
 				</div>
 
 				<div class="rating">
-					<input type="radio" name="reliability" id="reliability-5">
-					<label for="reliability-5"><i class="fa fa-star"></i></label>
-					<input type="radio" name="reliability" id="reliability-4">
-					<label for="reliability-4"><i class="fa fa-star"></i></label>
-					<input type="radio" name="reliability" id="reliability-3">
-					<label for="reliability-3"><i class="fa fa-star"></i></label>
-					<input type="radio" name="reliability" id="reliability-2">
-					<label for="reliability-2"><i class="fa fa-star"></i></label>
-					<input type="radio" name="reliability" id="reliability-1">
-					<label for="reliability-1"><i class="fa fa-star"></i></label>
+					<input type="radio" name="delivery" id="delivery-5">
+					<label for="delivery-5"><i class="fa fa-star"></i></label>
+					<input type="radio" name="delivery" id="delivery-4">
+					<label for="delivery-4"><i class="fa fa-star"></i></label>
+					<input type="radio" name="delivery" id="delivery-3">
+					<label for="delivery-3"><i class="fa fa-star"></i></label>
+					<input type="radio" name="delivery" id="delivery-2">
+					<label for="delivery-2"><i class="fa fa-star"></i></label>
+					<input type="radio" name="delivery" id="delivery-1">
+					<label for="delivery-1"><i class="fa fa-star"></i></label>
 					Delivery
 				</div>
 				<div class="rating">
@@ -126,9 +119,16 @@
 					Overall rating
 				</div>
 			</section>
+			<section>
+				<label class="label"></label>
+				<label class="textarea">
+				    <i class="icon-append fa fa-comment"></i>
+	                   		    <textarea rows="3" name="review" id="review" placeholder="Write your comment here"></textarea>
+				</label>
+			</section>
 		</fieldset>
 		<footer>
-			<button type="submit" class="btn-u">Submit</button>
+			<button type="submit" class="btn-u" onclick="sendEvaluation()" >Submit</button>
 		</footer>
 	</form>
 <!-- End Review Form-->
