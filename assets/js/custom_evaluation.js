@@ -100,8 +100,37 @@ function isValidEmailAddress(emailAddress)
 
 
  /*******************************************
+ ************* EVALUATION START *************
  *******************************************/
 
+function getStarRating(stars)
+{
+	var rate = 0;
+	for (var i = 0; i < stars.length; i++) {
+		if (stars[i].checked === true) {
+			rate = (stars[i].id).slice(-1);
+		};
+	};
+	return rate;
+};
+
+function sendEvaluation()
+{
+	var overall = jQuery("input[name='overall']");
+	var overall_rate = getStarRating(overall);
+	console.log('overall_rate is: ' + overall_rate);
+	var quality = jQuery("input[name='quality']");
+	var quality_rate = getStarRating(quality);
+	console.log('quality_rate is: ' + quality_rate);
+	var delivery = jQuery("input[name='delivery']");
+	var delivery_rate = getStarRating(delivery);
+	console.log('delivery_rate is: ' + delivery_rate);
+	var review = jQuery("textarea[name='review']").val();
+	console.log('review is: ' + review);
+};
+ /*******************************************
+ ************* EVALUATION END ***************
+ *******************************************/
 
 function signIn()
 {
