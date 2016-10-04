@@ -17,7 +17,7 @@ var translation = {
                 "internal_server_error": "Internal server error",
                 "invalid_auth": "Invalid email and/or password",
                 "password_differs": "Passwords must be equals",
-                "unknown_user_type": "Select a valid user type"
+                "unknown_user_type": "Select a valid user type"                
             },
             "profile":{
                 "email": "Email",
@@ -25,7 +25,17 @@ var translation = {
                 "name": "Name",
                 "address": "Address",
                 "phone": "Telephone number",
-                "favoriteSuppliers": "Favorite suppliers"              
+                "favoriteSuppliers": "Favorite suppliers",
+                "logo": "Logo",
+                "description": "Description",
+                "web": "Web site",
+                "categories": "Categories",
+                "pIva": "VATIN",
+                
+                "saved": "Your profile has been successfully updated",
+                "emptyText": "Empty",
+                "cancel": "Cancel",
+                "save": "Save"
             }
         }
 
@@ -33,7 +43,7 @@ var translation = {
     it: {
         translation: {
             "nav": {
-                  "home": "Home",
+                "home": "Home",
                 "about": "Chi siamo",
                 "services": "Servizi",
                 "contacts": "Contatti",
@@ -55,7 +65,19 @@ var translation = {
                 "name": "Nome",
                 "address": "Indirizzo",
                 "phone": "Numero di telefono",
-                "favoriteSuppliers": "Fornitori preferiti"              
+                "favoriteSuppliers": "Fornitori preferiti",
+                "logo": "Logo",
+                "description": "Descrizione",
+                "web": "Sito web",
+                "categories": "Categorie",
+                "pIva": "Partita IVA",
+                
+                "saved": "Il tuo profilo è stato aggiornato correttamente",
+                "emptyText": "Vuoto",
+                "cancel": "Annulla",
+                "save": "Salva"
+                
+                
             }
         }
     }
