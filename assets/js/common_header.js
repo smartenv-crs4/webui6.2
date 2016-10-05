@@ -24,6 +24,8 @@ var header_template = `	<div class="header">
           <li><a href="page_faq.html" data-i18n="nav.help">Help</a></li>
           <li class="topbar-devider"></li>
           <li><a href="page_login_and_registration.html">Login</a></li>
+          <li class="topbar-devider"></li>
+          <li><a href="#" onclick="logout()">Logout</a></li>
         </ul>
       </div>
       <!-- End Topbar -->
@@ -63,6 +65,78 @@ var profile_customer = `
   <dt><strong data-i18n="profile.email"></strong></dt>
   <dd>
     {{email}}
+    <!-- span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span -->
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.type"></strong></dt>
+  <dd>
+    {{type}}
+    <!-- span>
+      <a class="pull-right" href="#">
+        <!-- i class="fa fa-pencil"></i -->
+      </a>
+    </span -->
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.name"></strong></dt>
+  <dd>
+    <a class="editable editable-click" data-name="name" data-i18n="[data-emptytext]profile.emptyText" id="ed-name" data-type="text" href="#">{{name}}</a>
+    <!-- span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span -->
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.address"></strong></dt>
+  <dd>
+    <a class="editable editable-click" data-name="address" data-i18n="[data-emptytext]profile.emptyText" id="ed-address" data-type="text" href="#">{{address}}</a>
+    <!-- span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span -->
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.phone"></strong></dt>
+  <dd>
+    <a class="editable editable-click" data-name="phone" data-i18n="[data-emptytext]profile.emptyText" id="ed-phone data-type="text" href="#">{{phone}}</a>
+    <!-- span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span -->
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.favoriteSuppliers"></strong></dt>
+  <dd>
+    <a class="editable editable-click" data-name="favoriteSupplier" data-i18n="[data-emptytext]profile.emptyText" id="ed-favoriteSuppliers" data-type="text" href="#">{{favoriteSuppliers}}</a>
+    <!-- span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span -->
+  </dd>
+  <hr>     
+</dl>
+<button type="button" class="btn-u btn-u-default" data-i18n="profile.cancel" onclick="getUserProfile()">Cancel</button>
+<button type="button" class="btn-u" data-i18n="profile.save" onclick="updateProfile()">Save Changes</button>
+`;
+
+ 
+
+var profile_supplier = `
+<h2 class="heading-md">Manage your Name, ID and Email Addresses.</h2>
+<p>Below are the name and email addresses on file for your account.</p>
+<br>
+<dl class="dl-horizontal">
+  <dt><strong data-i18n="profile.email"></strong></dt>
+  <dd>
+    {{email}}
     <span>
       <a class="pull-right" href="#">
         <!-- i class="fa fa-pencil"></i -->
@@ -71,7 +145,7 @@ var profile_customer = `
   </dd>
   <hr>
   <dt><strong data-i18n="profile.type"></strong></dt>
-  <dd>
+  <dd>    
     {{type}}
     <span>
       <a class="pull-right" href="#">
@@ -82,45 +156,89 @@ var profile_customer = `
   <hr>
   <dt><strong data-i18n="profile.name"></strong></dt>
   <dd>
-    {{name}}
-    <span>
+    <a class="editable editable-click" data-name="name" data-i18n="[data-emptytext]profile.emptyText" id="ed-name" data-type="text" href="#">{{name}}</a>
+    <!-- span>
       <a class="pull-right" href="#">
         <i class="fa fa-pencil"></i>
       </a>
-    </span>
+    </span -->
   </dd>
   <hr>
   <dt><strong data-i18n="profile.address"></strong></dt>
-  <dd>
-    {{address}}
-    <span>
+  <dd contenteditable="true">
+    <a class="editable editable-click" data-name="address" data-i18n="[data-emptytext]profile.emptyText" id="ed-address" data-type="text" href="#">{{address}}</a>
+    <!-- span>
       <a class="pull-right" href="#">
         <i class="fa fa-pencil"></i>
       </a>
-    </span>
+    </span -->
   </dd>
   <hr>
   <dt><strong data-i18n="profile.phone"></strong></dt>
   <dd>
-    {{phone}}
-    <span>
+    <a class="editable editable-click" data-name="phone" data-i18n="[data-emptytext]profile.emptyText" id="ed-phone" data-type="text" href="#">{{phone}}</a>
+    <!-- span>
       <a class="pull-right" href="#">
         <i class="fa fa-pencil"></i>
       </a>
-    </span>
+    </span -->
   </dd>
   <hr>
-  <dt><strong data-i18n="profile.favoriteSuppliers">Office Number </strong></dt>
+  <dt><strong data-i18n="profile.logo"></strong></dt>
   <dd>
-    {{favoriteSuppliers}}
-    <span>
+    <a class="editable editable-click" data-name="logo" data-i18n="[data-emptytext]profile.emptyText" id="ed-logo" data-type="text" href="#">{{logo}}</a>
+    <!-- span>
       <a class="pull-right" href="#">
         <i class="fa fa-pencil"></i>
       </a>
-    </span>
+    </span -->
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.description"></strong></dt>
+  <dd>
+    <a class="editable editable-click" data-name="description" data-i18n="[data-emptytext]profile.emptyText" id="ed-description" data-type="textarea" href="#">{{description}}</a>
+    <!-- span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span -->
   </dd>
   <hr>     
+  <dt><strong data-i18n="profile.web"></strong></dt>
+  <dd>
+    <a class="editable editable-click" data-name="web" data-i18n="[data-emptytext]profile.emptyText" id="ed-web" data-type="text" href="#">{{web}}</a>
+    <!-- span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span -->
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.categories"></strong></dt>
+  <dd>
+    <a class="editable editable-click" data-name="categories" data-i18n="[data-emptytext]profile.emptyText" id="ed-categories" data-type="text" href="#">{{categories}}</a>
+    <!-- span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span -->
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.pIva"></strong></dt>
+  <dd>
+    <a class="editable editable-click" data-name="pIva" data-i18n="[data-emptytext]profile.emptyText" id="ed-piva" data-type="text" href="#">{{pIva}}</a>
+    <!-- span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span -->
+  </dd>
+  <hr>
 </dl>
-<button type="button" class="btn-u btn-u-default">Cancel</button>
-<button type="button" class="btn-u">Save Changes</button>
+<button type="button" class="btn-u btn-u-default" data-i18n="profile.cancel" onclick="getUserProfile()"></button>
+<button type="button" class="btn-u" data-i18n="profile.save" onclick="updateProfile()"></button>
 `;
+
+
+
+
