@@ -1,6 +1,5 @@
 /* Add here all your css styles (customizations) */
 
-
 /* RFQ    === Start === */
 .chat {
     margin: 0;
@@ -64,3 +63,11 @@
 }
 
 /* RFQ    === End === */
+
+.s-results .results-number {
+    color: #999;
+    display: block;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
