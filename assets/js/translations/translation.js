@@ -32,6 +32,7 @@ var translation = {
                 "categories": "Categories",
                 "pIva": "VATIN",
                 
+                "title": "Manage your profile information",
                 "saved": "Your profile has been successfully updated",
                 "emptyText": "Empty",
                 "cancel": "Cancel",
@@ -72,6 +73,7 @@ var translation = {
                 "categories": "Categorie",
                 "pIva": "Partita IVA",
                 
+                "title": "Gestisci le informazioni del tuo profilo",
                 "saved": "Il tuo profilo è stato aggiornato correttamente",
                 "emptyText": "Vuoto",
                 "cancel": "Annulla",
