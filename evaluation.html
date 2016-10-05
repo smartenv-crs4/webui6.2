@@ -50,6 +50,13 @@
 </head>
 
 <body>
+<!-- first of all check if user is logged in -->
+<script type="text/javascript">
+  if(sessionStorage.userId == undefined)
+  {
+    window.location.replace("page_login_and_registration2.html");
+  }
+</script>
 	<!--=== Content Part ===-->
     <div>
 	<div class="forms-wrapper">
@@ -60,10 +67,11 @@
 		<div class="container content-md">
 
 			<div class="row space-xlg-hor equal-height-columns">
-<!-- Review Form-->
-<form action="#" id="sky-form2" class="sky-form">
+<!-- Evaluation Form-->
+<div action="#" id="my-sky-form2" class="sky-form">
 	<header>Your opinion is really important to us!</header>
 		<fieldset>
+			<div class="alert alert-danger invisible margin-bottom-20" id="evaluationResponse"></div>
 			<!-- section>
 				<label class="input">
 					<i class="icon-append fa fa-user"></i>
@@ -128,10 +136,10 @@
 			</section>
 		</fieldset>
 		<footer>
-			<button type="submit" class="btn-u" onclick="sendEvaluation()" >Submit</button>
+			<button class="btn-u" onclick="sendEvaluation()" >Submit</button>
 		</footer>
-	</form>
-<!-- End Review Form-->
+	</div>
+<!-- End of Evaluation Form-->
 
 
 
