@@ -1,1 +1,8 @@
 /* Add here all your css styles (customizations) */
+
+.s-results .results-number {
+    color: #999;
+    display: block;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
