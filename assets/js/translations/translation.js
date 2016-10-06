@@ -32,9 +32,19 @@ var translation = {
                 "categories": "Categories",
                 "pIva": "VATIN",
                 
+                "passwordTitle": "Manage your password",
+                "passwordTitle2": "Below you can change your password",
+                "editPassword": "Change Password",
+                "oldPasswordPlaceholder": "Your current password",
+                "newPasswordPlaceholder": "New password",
+                "newPassword2Placeholder": "Retype the new password",
+                "passwordSaved": "Your password has been updated successfully",
+                
                 "title": "Manage your profile information",
+                "edit": "Edit profile",
+                
                 "saved": "Your profile has been successfully updated",
-                "emptyText": "Empty",
+                "emptyText": "Empty",               
                 "cancel": "Cancel",
                 "save": "Save"
             }
@@ -73,7 +83,16 @@ var translation = {
                 "categories": "Categorie",
                 "pIva": "Partita IVA",
                 
+                "passwordTitle": "Gestisci la tua password",
+                "passwordTitle2": "Qui puoi cambiare la tua password",
+                "editPassword": "Cambia la password",
+                "oldPasswordPlaceholder": "La tua password attuale",
+                "newPasswordPlaceholder": "Inserisci la nuova password",
+                "newPassword2Placeholder": "Conferma la nuova password",
+                "passwordSaved": "La tua password è stata aggiornata correttamente",
+                
                 "title": "Gestisci le informazioni del tuo profilo",
+                "edit": "Modifica il profilo",                
                 "saved": "Il tuo profilo è stato aggiornato correttamente",
                 "emptyText": "Vuoto",
                 "cancel": "Annulla",
