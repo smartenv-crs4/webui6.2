@@ -269,6 +269,9 @@ function signUp()
       if(xhr.status == 201)
       {
         sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
+        sessionStorage.userId = data["created_resource"]["id"];
+        sessionStorage.email = email;
+        window.location.replace("page_profile_settings.html");
       }
       else
       {
@@ -322,7 +325,6 @@ function logout()
 
 function getUserProfile()
 {      
-  
   if(sessionStorage.userId == undefined)
   {      
     window.location.replace("page_login_and_registration2.html");
@@ -335,6 +337,8 @@ function getUserProfile()
     contentType: "application/json; charset=utf-8",
     success: function(data, textStatus, xhr)
     {  
+      var defaultImg = "assets/img/team/img32-md.jpg";
+      
       // success
       if(data.type == "customer")
       {
@@ -348,6 +352,16 @@ function getUserProfile()
         jQuery('#profile').html(template(data));
         jQuery('#profile').localize();
       }
+      
+      if(data.logo)
+      {
+        jQuery("#imgBox").attr("src", data.logo);                
+      }
+      else
+      {
+        jQuery("#imgBox").attr("src", defaultImg);
+      }
+      
       jQuery(".editable").editable();
       jQuery(".editable").css("color", "black");
       
@@ -366,6 +380,8 @@ function getUserProfile()
     },     
     error: function(xhr, status)
     {      
+      var respBlock = jQuery("#responseBlock");
+      
       switch(xhr.status)
       {
         case 400: 
@@ -377,10 +393,8 @@ function getUserProfile()
             respBlock.html(xhr.responseJSON.error_message);
           break;
         case 401:
-          respBlock.html(i18next.t("error.bad_request"));
+          respBlock.html(i18next.t("error.unauthorized"));
           break;
-        case 403:
-          respBlock.html(i18next.t("error.invalid_auth"));
           break;
         case 500:
           respBlock.html(i18next.t("error.internal_server_error"));
@@ -388,7 +402,7 @@ function getUserProfile()
         default:
           respBlock.html(xhr.responseJSON.error_message);
       }
-      respBlock.removeClass("invisible");            
+      respBlock.removeClass("hidden");            
       return;    
     },
     beforeSend: function(xhr, settings) 
@@ -413,7 +427,7 @@ function updateProfile()
   jQuery("#profile .editable").each(function(){
     var name = jQuery(this).data("name");
     var value = jQuery(this).editable('getValue')[name];
-    if(value)
+    if(value || jQuery(this).hasClass("editable-unsaved"))
     {
       data.user[name] = value;    
     }
@@ -426,41 +440,38 @@ function updateProfile()
     contentType: "application/json; charset=utf-8",
     data: JSON.stringify(data),
     dataType: "json",
-    success: function(data, textStatus, xhr)
+    success: function(dataResp, textStatus, xhr)
     {  
       jQuery('.editable-unsaved').removeClass('editable-unsaved');
-      jQuery.jGrowl(i18next.t("profile.saved"), {theme:'bg-color-green1', life: 5000});                                            
+      jQuery.jGrowl(i18next.t("profile.saved"), {theme:'bg-color-green1', life: 5000});
+      
+      var defaultImg = "assets/img/team/img32-md.jpg";      
+      
+      if(data.user.logo)
+      {
+        console.log("si");
+        jQuery("#imgBox").attr("src", data.user.logo);     
+      }
+      else
+      {
+        console.log("no");
+        jQuery("#imgBox").attr("src", defaultImg);
+      }      
     },     
     error: function(xhr, status)
-    {      
-      console.log(xhr);
-      jQuery.jGrowl(xhr.responseJSON.message, {theme:'bg-color-red', life: 5000});
-      
-      /*
-      switch(xhr.status)
+    {
+      var msg;
+      try
       {
-        case 400: 
-          if(xhr.responseJSON.error == "invalid_token")
-            respBlock.html(i18next.t("error.unauthorized"))
-          else if(xhr.responseJSON.error == "BadRequest")
-            respBlock.html(i18next.t("error.missing_user_or_password"));
-          else
-            respBlock.html(xhr.responseJSON.error_message);
-          break;
-        case 401:
-          respBlock.html(i18next.t("error.bad_request"));
-          break;
-        case 403:
-          respBlock.html(i18next.t("error.invalid_auth"));
-          break;
-        case 500:
-          respBlock.html(i18next.t("error.internal_server_error"));
-          break;        
-        default:
-          respBlock.html(xhr.responseJSON.error_message);
+        msg = xhr.responseJSON.message;
       }
-      respBlock.removeClass("invisible");            
-      */
+      catch(err)
+      {
+        msg = i18next.t("error.internal_server_error");
+      }
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+            
       return;    
     },
     beforeSend: function(xhr, settings) 

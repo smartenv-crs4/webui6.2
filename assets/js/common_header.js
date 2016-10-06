@@ -58,8 +58,7 @@ var header_template = `	<div class="header">
   </div>`;
 
 var profile_customer = `
-<h2 class="heading-md">Manage your Name, ID and Email Addresses.</h2>
-<p>Below are the name and email addresses on file for your account.</p>
+<h2 class="heading-md" data-i18n="profile.title"></h2>
 <br>
 <dl class="dl-horizontal">
   <dt><strong data-i18n="profile.email"></strong></dt>
@@ -112,6 +111,16 @@ var profile_customer = `
     </span -->
   </dd>
   <hr>
+  <dt><strong data-i18n="profile.logo"></strong></dt>
+  <dd>
+    <a class="editable editable-click" data-name="logo" data-i18n="[data-emptytext]profile.emptyText" id="ed-logo" data-type="text" href="#">{{logo}}</a>
+    <!-- span>
+      <a class="pull-right" href="#">
+        <i class="fa fa-pencil"></i>
+      </a>
+    </span -->
+  </dd>
+  <hr>
   <dt><strong data-i18n="profile.favoriteSuppliers"></strong></dt>
   <dd>
     <a class="editable editable-click" data-name="favoriteSupplier" data-i18n="[data-emptytext]profile.emptyText" id="ed-favoriteSuppliers" data-type="text" href="#">{{favoriteSuppliers}}</a>
@@ -130,8 +139,7 @@ var profile_customer = `
  
 
 var profile_supplier = `
-<h2 class="heading-md">Manage your Name, ID and Email Addresses.</h2>
-<p>Below are the name and email addresses on file for your account.</p>
+<h2 class="heading-md" data-i18n="profile.title"></h2>
 <br>
 <dl class="dl-horizontal">
   <dt><strong data-i18n="profile.email"></strong></dt>
