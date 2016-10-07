@@ -44,6 +44,9 @@ var translation = {
                 "categories": "Categories",
                 "pIva": "VATIN",
                 
+                "customer": "customer",
+                "supplier": "supplier",
+                
                 "passwordTitle": "Manage your password",
                 "passwordTitle2": "Below you can change your password",
                 "editPassword": "Change Password",
@@ -51,6 +54,10 @@ var translation = {
                 "newPasswordPlaceholder": "New password",
                 "newPassword2Placeholder": "Retype the new password",
                 "passwordSaved": "Your password has been updated successfully",
+                
+                "favoriteSuppliers": "Favorite suppliers",
+                "favoriteTitle": "Mange your favorite suppliers' list",
+                "favoriteTitle2": "Below you can add or remove suppliers from your list",
                 
                 "title": "Manage your profile information",
                 "edit": "Edit profile",
@@ -108,6 +115,9 @@ var translation = {
                 "categories": "Categorie",
                 "pIva": "Partita IVA",
                 
+                "customer": "cliente",
+                "supplier": "fornitore",
+                
                 "passwordTitle": "Gestisci la tua password",
                 "passwordTitle2": "Qui puoi cambiare la tua password",
                 "editPassword": "Cambia la password",
@@ -115,6 +125,10 @@ var translation = {
                 "newPasswordPlaceholder": "Inserisci la nuova password",
                 "newPassword2Placeholder": "Conferma la nuova password",
                 "passwordSaved": "La tua password è stata aggiornata correttamente",
+                
+                "favoriteSuppliers": "Fornitori preferiti",
+                "favoriteTitle": "Gestisci la tua lista dei fornitori preferiti",
+                "favoriteTitle2": "Qui puoi rimuovere e aggiungere fornitori dalla tua lista dei preferiti",
                 
                 "title": "Gestisci le informazioni del tuo profilo",
                 "edit": "Modifica il profilo",                

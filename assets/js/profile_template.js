@@ -13,8 +13,8 @@ var customerProfileTemplate = `
   </dd>
   <hr>
   <dt><strong data-i18n="profile.type"></strong></dt>
-  <dd>
-    {{type}}
+  <dd id="pType" data-accountType={{type}}>
+    {{typeTranslate}}
     <!-- span>
       <a class="pull-right" href="#">
         <!-- i class="fa fa-pencil"></i -->
@@ -93,8 +93,8 @@ var supplierProfileTemplate = `
   </dd>
   <hr>
   <dt><strong data-i18n="profile.type"></strong></dt>
-  <dd>    
-    {{type}}
+  <dd id="pType" data-accountType={{type}}>    
+    {{typeTranslate}}
     <span>
       <a class="pull-right" href="#">
         <!-- i class="fa fa-pencil"></i -->
@@ -214,4 +214,41 @@ var changePasswordTemplate = `
 </div>
 `;
 
+var favoriteTabTemplate = `
+<li><a data-toggle="tab" href="#favoriteTab" data-i18n="profile.favoriteSuppliers"></a></li>
+`;
 
+var favoriteTemplate = `
+<div id="favoriteTab" class="profile-edit tab-pane fade">									
+  <h2 class="heading-md" data-i18n="profile.favoriteTitle"></h2>
+  <p data-i18n="profile.favoriteTitle2"></p>
+  <br>
+  <div id="favoriteSuppliersList">     
+  </div>
+</div>
+`;
+
+
+
+var favoriteTableTemplate = `
+<div class="table-search-v1 margin-bottom-30">
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>								
+        </tr>
+      </thead>
+      <tbody>
+        {{#each favoritList}}               
+          <tr data-supplier-id="{{_id}}">
+            <td>
+              {{name}}									
+            </td>                  
+          </tr>
+        {{/each}}							
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

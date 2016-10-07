@@ -1,20 +1,18 @@
 jQuery(document).ready(function(){
   jQuery("#inupblock").keypress(function (e) {
     var key = e.which;
-    console.log(key);
     if(key == 13)  // the enter key code
     {
       signIn();      
       return false;  
     }
-  });   
+  });  
 });
 
 
 jQuery(document).on("translate", function(){
   jQuery('.selectpicker').selectpicker('refresh');
 })
-
 
 function signIn()
 {
@@ -56,7 +54,7 @@ function signIn()
         sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
         sessionStorage.userId = data["access_credentials"]["userId"];
         sessionStorage.email = email;
-        window.location.replace("page_profile_settings.html");
+        redirectToPrevPage();
         
         return;
       }
@@ -161,7 +159,7 @@ function signUp()
         sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
         sessionStorage.userId = data["created_resource"]["id"];
         sessionStorage.email = email;
-        window.location.replace("page_profile_settings.html");
+        redirectToPrevPage();
       }
       else
       {

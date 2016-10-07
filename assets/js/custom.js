@@ -126,7 +126,34 @@ function isValidEmailAddress(emailAddress)
 
 function logout()
 {
-  sessionStorage.token = undefined;
-  sessionStorage.userId = undefined;
+  //sessionStorage.token = undefined;
+  //sessionStorage.userId = undefined;
+  sessionStorage.clear();
   window.location.replace("page_login_and_registration2.html");  
+}
+
+
+function redirectToLogin()
+{
+  sessionStorage.prevPage = window.location.href;
+  window.location.href = "page_login_and_registration2.html";
+}
+
+function redirectToHome()
+{
+  window.location.href = "index.html";
+}
+
+function redirectToPrevPage()
+{
+  if(sessionStorage.prevPage != undefined)
+  {
+    var p = sessionStorage.prevPage;
+    sessionStorage.prevPage = undefined;    
+    window.location.href = p;
+  }
+  else
+  {
+    redirectToHome();
+  }
 }

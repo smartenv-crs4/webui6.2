@@ -3,7 +3,7 @@ function getUserProfile()
 {      
   if(sessionStorage.userId == undefined)
   {      
-    window.location.replace("page_login_and_registration2.html");
+    redirectToLogin();
   }
   
   jQuery('#profileContent').localize();
@@ -25,16 +25,30 @@ function getUserProfile()
       // success
       if(data.type == "customer")
       {
+        data.typeTranslate = i18next.t("profile.customer");
         var template = Handlebars.compile(customerProfileTemplate); 
-        jQuery('#profile').html(template(data));
-        jQuery('#profile').localize();        
+        jQuery('#profile').html(template(data));                      
+        jQuery('#profile').localize();
+        
+        
+        var tFavTab = Handlebars.compile(favoriteTabTemplate); 
+        jQuery("#tabContainer").append(tFavTab());
+        jQuery("#tabContainer").localize();
+        
+        var tFav = Handlebars.compile(favoriteTemplate); 
+        jQuery("#tabBodyContainer").append(tFav());
+        jQuery("#tabBodyContainer").localize();                           
+        
       }
       else if(data.type == "supplier")
       {
+        data.typeTranslate = i18next.t("profile.supplier");
         var template = Handlebars.compile(supplierProfileTemplate); 
         jQuery('#profile').html(template(data));
         jQuery('#profile').localize();
       }
+      
+      getFavoriteSuppliers();
       
       if(data.logo)
       {
@@ -49,7 +63,13 @@ function getUserProfile()
       jQuery(".editable").css("color", "black");
       
       
-      jQuery(document).on("translate", function(){        
+      jQuery(document).on("translate", function(){   
+        var aType = jQuery("#pType").data("accounttype");        
+        if(aType == "customer")
+          jQuery("#pType").html(i18next.t("profile.customer"));
+        else if(aType == "supplier")
+          jQuery("#pType").html(i18next.t("profile.supplier"));
+          
         jQuery(".editable").each(function(){          
           jQuery(this).editable("option", "emptytext", jQuery(this).data("emptytext"));          
         });               
@@ -101,7 +121,7 @@ function updateProfile()
 {
   if(sessionStorage.userId == undefined)
   {      
-    window.location.replace("page_login_and_registration2.html");
+    redirectToLogin();
   }
   
   var data = new Object();
@@ -168,7 +188,7 @@ function changePassword()
 {
   if(sessionStorage.userId == undefined)
   {      
-    window.location.replace("page_login_and_registration2.html");
+    redirectToLogin();
   }
   
   var oldPassword = jQuery("#oldPassword").val();
@@ -226,4 +246,56 @@ function changePassword()
       xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
     }                    
   });  
+}
+
+
+
+
+
+
+
+
+function getFavoriteSuppliers()
+{
+  if(sessionStorage.userId == undefined)
+  {      
+    redirectToLogin(); 
+  }
+  
+  var ret;
+  
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/favorites",
+    type: "GET",    
+    contentType: "application/json; charset=utf-8",
+    success: function(dataResp, textStatus, xhr)
+    {        
+      var tFavTab = Handlebars.compile(favoriteTableTemplate); 
+      jQuery("#favoriteSuppliersList").append(tFavTab(dataResp.favoriteSupplier));        
+      console.log(dataResp);
+      console.log(dataResp.favoriteSupplier);
+        
+    },     
+    error: function(xhr, status)
+    {
+      var msg;
+      try
+      {        
+        msg = xhr.responseJSON.message;
+      }
+      catch(err)
+      {
+        msg = i18next.t("error.internal_server_error");
+      }
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+            
+      return;    
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    }                    
+  });  
+  
 }
