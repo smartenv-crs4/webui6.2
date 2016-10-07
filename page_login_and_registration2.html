@@ -63,7 +63,7 @@
 				<div class="form-block login-block col-md-6 col-sm-12 rounded-left equal-height-column" id="inupblock">
 					<div class="form-block-header">
 
-						<h2 class="margin-bottom-15">Sign In</h2>
+						<h2 class="margin-bottom-15"data-i18n="login.signIn"></h2>
 					</div>
 
           <div class="alert alert-danger invisible margin-bottom-20" id="signInResponse">
@@ -84,7 +84,7 @@
 
 					<div class="row margin-bottom-70">
 						<div class="col-md-12">
-							<button type="submit" class="btn-u btn-block rounded" onclick="signIn()">Sign In</button>
+							<button type="submit" class="btn-u btn-block rounded" onclick="signIn()" data-i18n="login.signIn"></button>
 						</div>
 					</div>
 					<!--div class="social-login">
@@ -108,38 +108,37 @@
 				<!--Reg Block-->
 				<div class="form-block reg-block col-md-6 col-sm-12 rounded-right equal-height-column">
 					<div class="form-block-header">
-                        <img src="assets/img/port/logo1-default.png" style="width: 178px;"">
-						<h2 class="margin-bottom-10">Sign Up</h2>
+						<h2 class="margin-bottom-10" data-i18n="login.signUp">></h2>
 					</div>
 
           <div class="alert alert-danger invisible margin-bottom-20" id="signUpResponse"></div>
 
           <div class="input-group margin-bottom-20">
 						<span class="input-group-addon rounded-left"><i class="icon-envelope"></i></span>
-						<input type="email" class="form-control rounded-right" placeholder="Your email" id="signUpEmail">
+						<input type="email" class="form-control rounded-right" data-i18n="[placeholder]login.yourEmail" id="signUpEmail">
 					</div>
 
 					<div class="input-group margin-bottom-20">
 						<span class="input-group-addon rounded-left"><i class="icon-pencil"></i></span>
-						<input type="text" class="form-control rounded-right" placeholder="Your name" id="signUpName">
+						<input type="text" class="form-control rounded-right" data-i18n="[placeholder]login.yourName" id="signUpName">
 					</div>
 
 
 					<div class="input-group margin-bottom-20">
 						<span class="input-group-addon rounded-left"><i class="icon-lock"></i></span>
-						<input type="password" class="form-control rounded-right" placeholder="Password" id="signUpPassword">
+						<input type="password" class="form-control rounded-right" data-i18n="[placeholder]login.choosePassword" id="signUpPassword">
 					</div>
 
           <div class="input-group margin-bottom-20">
 						<span class="input-group-addon rounded-left"><i class="icon-lock"></i></span>
-						<input type="password" class="form-control rounded-right" placeholder="Retype password" id="signUpPassword2">
+						<input type="password" class="form-control rounded-right" data-i18n="[placeholder]login.retypePassword" id="signUpPassword2">
 					</div>
 
           <div class="margin-bottom-20">
             <select name="userType" class="selectpicker form-control" title="You are a ..." id="signUpUserType">
-              <option data-hidden="true">You are a ...</option>
-              <option value="customer">Customer</option>
-              <option value="supplier">Supplier</option>
+              <option data-hidden="true" data-i18n="login.userType"></option>
+              <option value="customer" data-i18n="login.customer"></option>
+              <option value="supplier" data-i18n="login.supplier"></option>
             </select>
           </div>
 
@@ -157,7 +156,7 @@
 
 					<div class="row">
 						<div class="col-md-12">
-							<button onclick="signUp()" class="btn-u btn-block rounded">Continue</button>
+							<button onclick="signUp()" class="btn-u btn-block rounded" data-i18n="login.signUp"></button>
 						</div>
 					</div>
 				</div>

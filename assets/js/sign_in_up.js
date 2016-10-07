@@ -8,9 +8,12 @@ jQuery(document).ready(function(){
       return false;  
     }
   });   
-  
-  
 });
+
+
+jQuery(document).on("translate", function(){
+  jQuery('.selectpicker').selectpicker('refresh');
+})
 
 
 function signIn()

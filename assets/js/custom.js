@@ -7,6 +7,7 @@ _access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOi
 var lng = localStorage.lng;
 
 jQuery(document).ready(function(){
+  jQuery('body').localize();
   jQuery('#header_p').html(header_template);
   if (lng != undefined)
   {
@@ -40,7 +41,7 @@ jQuery(document).ready(function(){
       lngSel.find("a").first().append(c);
       i18next.changeLanguage(lng, function(){});
       jQuery('body').localize();
-      jQuery(document).trigger('translation');
+      jQuery(document).trigger('translate');
     }
 
   });
@@ -59,7 +60,7 @@ jQuery(document).ready(function(){
       localStorage.lng = lng;
       i18next.changeLanguage(lng, function(){});
       jQuery('body').localize();
-      jQuery(document).trigger('translation');
+      jQuery(document).trigger('translate');
       
     });
   }

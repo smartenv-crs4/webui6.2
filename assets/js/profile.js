@@ -49,7 +49,7 @@ function getUserProfile()
       jQuery(".editable").css("color", "black");
       
       
-      jQuery(document).on("translation", function(){        
+      jQuery(document).on("translate", function(){        
         jQuery(".editable").each(function(){          
           jQuery(this).editable("option", "emptytext", jQuery(this).data("emptytext"));          
         });               

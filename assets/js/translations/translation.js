@@ -19,6 +19,18 @@ var translation = {
                 "password_differs": "Passwords must be equals",
                 "unknown_user_type": "Select a valid user type"                
             },
+            "login": {
+                "signUp": "Sign Up",
+                "signIn": "Sign In",
+                "yourEmail": "Your email",
+                "yourName": "Your name",
+                "password": "Password",
+                "choosePassword": "Choose password",
+                "retypePassword": "Retype password",
+                "userType": "Yuu are a ...",
+                "customer": "Customer",
+                "supplier": "Supplier"              
+            },
             "profile":{
                 "email": "Email",
                 "type": "Account type",
@@ -69,6 +81,19 @@ var translation = {
                 "invalid_auth": "Email e/o password errati",
                 "password_differs": "Le password differiscono",
                 "unknown_user_type": "Seleziona il tipo di account che vuoi creare"
+            },
+            "login": {
+                "signUp": "Registrati",
+                "signIn": "Accedi",
+                "yourEmail": "Il tuo indirizzo email",
+                "yourName": "Il tuo nome",
+                "password": "Password",
+                "choosePassword": "Scegli una password",
+                "retypePassword": "Conferma password",
+                "userType": "Sei un ...",
+                "customer": "Cliente",
+                "supplier": "Fornitore"
+              
             },
             "profile":{
                 "email": "Email",
