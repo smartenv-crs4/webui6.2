@@ -271,9 +271,8 @@ function getFavoriteSuppliers()
     success: function(dataResp, textStatus, xhr)
     {        
       var tFavTab = Handlebars.compile(favoriteTableTemplate); 
-      jQuery("#favoriteSuppliersList").append(tFavTab(dataResp.favoriteSupplier));        
-      console.log(dataResp);
-      console.log(dataResp.favoriteSupplier);
+      jQuery("#favoriteSuppliersList").append(tFavTab(dataResp));        
+      console.log(dataResp);      
         
     },     
     error: function(xhr, status)
