@@ -3,10 +3,10 @@ jQuery(document).ready(function(){
     var key = e.which;
     if(key == 13)  // the enter key code
     {
-      signIn();      
-      return false;  
+      signIn();
+      return false;
     }
-  });  
+  });
 });
 
 
@@ -55,7 +55,7 @@ function signIn()
         sessionStorage.userId = data["access_credentials"]["userId"];
         sessionStorage.email = email;
         redirectToPrevPage();
-        
+
         return;
       }
       // error

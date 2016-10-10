@@ -23,3 +23,19 @@
 .rfq p button{
     margin-top: 1em;
 }
+
+.rfq .btn-sm .editable-submit{
+    margin-right: 0px;
+
+    height: 30px;
+}
+
+.rfq .glyphicon{
+    line-height: inherit;
+    margin:0px;
+
+}
+
+.rfq .glyphicon-ok{
+    color:#fff!important;
+}
