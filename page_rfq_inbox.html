@@ -15,7 +15,7 @@
 	<link rel="shortcut icon" href="favicon.ico">
 
 	<!-- Web Fonts -->
-	<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
 	<!-- CSS Global Compulsory -->
 	<link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
@@ -42,6 +42,7 @@
 
 	<!-- CSS Customization -->
 	<link rel="stylesheet" href="assets/css/custom.css">
+	<link rel="stylesheet" href="assets/css/custom_rfq.css">
 </head>
 
 <body>
@@ -71,7 +72,7 @@
 							<a href="page_profile_projects.html"><i class="fa fa-cubes"></i> My Projects</a>
 						</li>
 						<li class="list-group-item">
-							<a href="page_profile_comments.html"><i class="fa fa-comments"></i> Comments</a>
+							<a href="page_rfq_inbox.html"><i class="fa fa-paper-plane"></i> RFQs</a>
 						</li>
 						<li class="list-group-item">
 							<a href="page_profile_history.html"><i class="fa fa-history"></i> History</a>
@@ -168,138 +169,25 @@
 				<!-- Profile Content -->
 				<div class="col-md-9">
 					<div class="profile-body">
-
-
-						<hr>
-
-
 						<div class="row">
 							<!--Alert-->
-							<div class="sm-margin-bottom-30">
+							<div class="sm-margin-bottom-30 rfq-container">
+								<div class="panel-heading-v2 overflow-h">
+									<h2 class="heading-xs pull-left"><i class="fa fa-paper-plane fa-fw"></i> RFQs Inbox</h2>
+									<a href="#"><i class="fa fa-cog pull-right"></i></a>
+								</div>
+								<hr>
 								<div class="panel panel-profile">
-									<div class="panel-heading overflow-h">
-										<h2 class="panel-title heading-sm pull-left"><i class="fa fa-send"></i>RFQs Inbox</h2>
-										<a href="#"><i class="fa fa-cog pull-right"></i></a>
-									</div>
-									<div id="scrollbar3" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
-										<div class="alert-blocks alert-blocks-pending alert-dismissable">
-											<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-											<img class="rounded-x" src="assets/img/testimonials/img3.jpg" alt="">
-											<div class="overflow-h">
-												<strong class="color-yellow">Pending... <small class="pull-right"><em>Just now</em></small></strong>
-												<p>Your friend request has been sent.</p>
-											</div>
-										</div>
-										<div class="alert-blocks alert-blocks-success alert-dismissable">
-											<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-											<img class="rounded-x" src="assets/img/testimonials/img2.jpg" alt="">
-											<div class="overflow-h">
-												<strong class="color-green">Accepted. <small class="pull-right"><em>7 hours ago</em></small></strong>
-												<p>Your friend request has been accepted.</p>
-											</div>
-										</div>
-										<div class="alert-blocks alert-blocks-info alert-dismissable">
-											<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-											<i class="icon-custom rounded-x icon-bg-blue fa fa-bolt"></i>
-											<div class="overflow-h">
-												<strong class="color-blue">Info <small class="pull-right"><em>2 days ago</em></small></strong>
-												<p>Your friend request has been denied :)</p>
-											</div>
-										</div>
-										<div class="alert-blocks alert-blocks-error alert-dismissable">
-											<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-											<img class="rounded-x" src="assets/img/testimonials/img6.jpg" alt="">
-											<div class="overflow-h">
-												<strong class="color-red">Denied! <small class="pull-right"><em>2 days ago</em></small></strong>
-												<p>Your friend request has been denied.</p>
-											</div>
-										</div>
-										<div class="alert-blocks alert-dismissable">
-											<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-											<i class="icon-custom rounded-x icon-bg-dark fa fa-magic"></i>
-											<div class="overflow-h">
-												<strong class="color-dark">Default <small class="pull-right"><em>Just now</em></small></strong>
-												<p><strong>Adam Johnson's</strong> friend request pending..</p>
-											</div>
-										</div>
-										<div class="alert-blocks alert-blocks-pending alert-dismissable">
-											<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-											<i class="icon-custom rounded-x icon-bg-yellow fa fa-info"></i>
-											<div class="overflow-h">
-												<strong class="color-yellow">Pending <small class="pull-right"><em>Just now</em></small></strong>
-												<p><strong>Adam Johnson's</strong> friend request pending..</p>
-											</div>
+
+
+									<div id="inbox-rfqs-container">
+
 										</div>
 									</div>
 								</div>
 							</div>
 							<!--End Alert-->
-							<!--Start Discussion
-							<div class="col-sm-5">
-								<div class="panel panel-profile">
-									<div class="panel-heading overflow-h">
-										<h2 class="panel-title heading-sm pull-left"><i class="fa fa-comments-o"></i> Discussions</h2>
-										<a href="page_profile_comments.html" class="btn-u btn-brd btn-brd-hover btn-u-dark btn-u-xs pull-right">View All</a>
-									</div>
-									<div id="scrollbar4" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
-										<div class="comment">
-											<img src="assets/img/testimonials/img6.jpg" alt="">
-											<div class="overflow-h">
-												<strong>Taylor Lee<small class="pull-right"> 25m</small></strong>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-												<ul class="list-inline comment-list">
-													<li><i class="fa fa-heart"></i> <a href="#">23</a></li>
-													<li><i class="fa fa-comments"></i> <a href="#">5</a></li>
-												</ul>
-											</div>
-										</div>
-										<div class="comment">
-											<img src="assets/img/testimonials/img2.jpg" alt="">
-											<div class="overflow-h">
-												<strong>Miranda Clarsson<small class="pull-right"> 44m</small></strong>
-												<p>Donec cursus, orci non posuere luctus, risus massa luctus nisi, sit amet cursus leo massa id arcu. Nunc tincidunt magna sit amet sapien congue.</p>
-												<ul class="list-inline comment-list">
-													<li><i class="fa fa-heart"></i> <a href="#">23</a></li>
-													<li><i class="fa fa-comments"></i> <a href="#">5</a></li>
-												</ul>
-											</div>
-										</div>
-										<div class="comment">
-											<img src="assets/img/testimonials/img4.jpg" alt="">
-											<div class="overflow-h">
-												<strong>Natasha Kolnikova<small class="pull-right"> 7h</small></strong>
-												<p>Suspendisse est est, sollicitudin eget auctor et, pharetra eu sapien. Mauris mollis libero ac auctor iaculis.</p>
-												<ul class="list-inline comment-list">
-													<li><i class="fa fa-heart"></i> <a href="#">23</a></li>
-													<li><i class="fa fa-comments"></i> <a href="#">5</a></li>
-												</ul>
-											</div>
-										</div>
-										<div class="comment">
-											<img src="assets/img/testimonials/img1.jpg" alt="">
-											<div class="overflow-h">
-												<strong>Mikel Andrews<small class="pull-right"> 15h</small></strong>
-												<p>Nam ut dolor cursus nibh aliquet bibendum in eget risus.</p>
-												<ul class="list-inline comment-list">
-													<li><i class="fa fa-heart"></i> <a href="#">20</a></li>
-													<li><i class="fa fa-comments"></i> <a href="#">5</a></li>
-												</ul>
-											</div>
-										</div>
-										<div class="comment">
-											<img src="assets/img/testimonials/img7.jpg" alt="">
-											<div class="overflow-h">
-												<strong>Edward Rooster<small class="pull-right"> 1d</small></strong>
-												<p>Nam ut dolor cursus nibh aliquet bibendum in eget risus. Mauris mollis libero ac auctor iaculis.</p>
-												<ul class="list-inline comment-list">
-													<li><i class="fa fa-heart"></i> <a href="#">23</a></li>
-													<li><i class="fa fa-comments"></i> <a href="#">5</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>-->
+
 						</div><!--/end row-->
 
 						<hr>
@@ -488,12 +376,17 @@
 	<script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
 	<script type="text/javascript" src="assets/plugins/counter/waypoints.min.js"></script>
 	<script type="text/javascript" src="assets/plugins/counter/jquery.counterup.min.js"></script>
 	<script type="text/javascript" src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- JS Translation -->
+	<script src="assets/js/translations/translation.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/i18next.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/jquery-i18next.min.js"></script>
+
 	<!-- JS Customization -->
 	<script type="text/javascript" src="assets/js/custom.js"></script>
 	<!-- JS Page Level -->
@@ -501,8 +394,11 @@
 	<script type="text/javascript" src="assets/js/plugins/datepicker.js"></script>
 	<!--<script type="text/javascript" src="assets/js/plugins/style-switcher.js"></script>-->
 	<script type="text/javascript" src="assets/js/common_header.js"></script>
+
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-	<!--<script type="text/javascript" src="assets/js/custom.js"></script>-->
+	<script type="text/javascript" src="assets/js/custom_rfq.js"></script>
+	 <script type="text/javascript" src="assets/js/utils.js"></script>
+
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
@@ -510,7 +406,7 @@
 			//App.initScrollBar();
 			//Datepicker.initDatepicker();
 			//StyleSwitcher.initStyleSwitcher();
-
+			getConversations();
 		});
 	</script>
 	<!--[if lt IE 9]>

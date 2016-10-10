@@ -9,7 +9,7 @@ var header_template = `	<div class="header">
       <!-- Topbar -->
       <div class="topbar">
         <ul class="loginbar pull-right">
-          <li class="hoverSelector">
+          <li class="hoverSelector">    
             <i class="fa fa-globe"></i>
             <a>Languages</a>
             <ul class="languages hoverSelectorBlock">
