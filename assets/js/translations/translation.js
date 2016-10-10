@@ -19,6 +19,18 @@ var translation = {
                 "password_differs": "Passwords must be equals",
                 "unknown_user_type": "Select a valid user type"                
             },
+            "login": {
+                "signUp": "Sign Up",
+                "signIn": "Sign In",
+                "yourEmail": "Your email",
+                "yourName": "Your name",
+                "password": "Password",
+                "choosePassword": "Choose password",
+                "retypePassword": "Retype password",
+                "userType": "Yuu are a ...",
+                "customer": "Customer",
+                "supplier": "Supplier"              
+            },
             "profile":{
                 "email": "Email",
                 "type": "Account type",
@@ -32,9 +44,26 @@ var translation = {
                 "categories": "Categories",
                 "pIva": "VATIN",
                 
+                "customer": "customer",
+                "supplier": "supplier",
+                
+                "passwordTitle": "Manage your password",
+                "passwordTitle2": "Below you can change your password",
+                "editPassword": "Change Password",
+                "oldPasswordPlaceholder": "Your current password",
+                "newPasswordPlaceholder": "New password",
+                "newPassword2Placeholder": "Retype the new password",
+                "passwordSaved": "Your password has been updated successfully",
+                
+                "favoriteSuppliers": "Favorite suppliers",
+                "favoriteTitle": "Mange your favorite suppliers' list",
+                "favoriteTitle2": "Below you can add or remove suppliers from your list",
+                
                 "title": "Manage your profile information",
+                "edit": "Edit profile",
+                
                 "saved": "Your profile has been successfully updated",
-                "emptyText": "Empty",
+                "emptyText": "Empty",               
                 "cancel": "Cancel",
                 "save": "Save"
             }
@@ -60,6 +89,19 @@ var translation = {
                 "password_differs": "Le password differiscono",
                 "unknown_user_type": "Seleziona il tipo di account che vuoi creare"
             },
+            "login": {
+                "signUp": "Registrati",
+                "signIn": "Accedi",
+                "yourEmail": "Il tuo indirizzo email",
+                "yourName": "Il tuo nome",
+                "password": "Password",
+                "choosePassword": "Scegli una password",
+                "retypePassword": "Conferma password",
+                "userType": "Sei un ...",
+                "customer": "Cliente",
+                "supplier": "Fornitore"
+              
+            },
             "profile":{
                 "email": "Email",
                 "type": "Tipo di account",
@@ -73,7 +115,23 @@ var translation = {
                 "categories": "Categorie",
                 "pIva": "Partita IVA",
                 
+                "customer": "cliente",
+                "supplier": "fornitore",
+                
+                "passwordTitle": "Gestisci la tua password",
+                "passwordTitle2": "Qui puoi cambiare la tua password",
+                "editPassword": "Cambia la password",
+                "oldPasswordPlaceholder": "La tua password attuale",
+                "newPasswordPlaceholder": "Inserisci la nuova password",
+                "newPassword2Placeholder": "Conferma la nuova password",
+                "passwordSaved": "La tua password è stata aggiornata correttamente",
+                
+                "favoriteSuppliers": "Fornitori preferiti",
+                "favoriteTitle": "Gestisci la tua lista dei fornitori preferiti",
+                "favoriteTitle2": "Qui puoi rimuovere e aggiungere fornitori dalla tua lista dei preferiti",
+                
                 "title": "Gestisci le informazioni del tuo profilo",
+                "edit": "Modifica il profilo",                
                 "saved": "Il tuo profilo è stato aggiornato correttamente",
                 "emptyText": "Vuoto",
                 "cancel": "Annulla",
