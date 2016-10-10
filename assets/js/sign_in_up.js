@@ -54,6 +54,7 @@ function signIn()
         sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
         sessionStorage.userId = data["access_credentials"]["userId"];
         sessionStorage.email = email;
+        getProfileInfo(false);
         redirectToPrevPage();
         
         return;
@@ -159,6 +160,7 @@ function signUp()
         sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
         sessionStorage.userId = data["created_resource"]["id"];
         sessionStorage.email = email;
+        getProfileInfo(false);
         redirectToPrevPage();
       }
       else

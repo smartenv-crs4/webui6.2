@@ -57,7 +57,7 @@ var translation = {
                 
                 "favoriteSuppliers": "Favorite suppliers",
                 "favoriteTitle": "Mange your favorite suppliers' list",
-                "favoriteTitle2": "Below you can add or remove suppliers from your list",
+                "favoriteTitle2": "Below you can show your favorite suppliers",
                 
                 "title": "Manage your profile information",
                 "edit": "Edit profile",
@@ -66,6 +66,10 @@ var translation = {
                 "emptyText": "Empty",               
                 "cancel": "Cancel",
                 "save": "Save"
+            },
+            "publicProfile": {
+                "web": "Web site:",
+                "address": "Address:"              
             }
         }
 
@@ -128,17 +132,21 @@ var translation = {
                 
                 "favoriteSuppliers": "Fornitori preferiti",
                 "favoriteTitle": "Gestisci la tua lista dei fornitori preferiti",
-                "favoriteTitle2": "Qui puoi rimuovere e aggiungere fornitori dalla tua lista dei preferiti",
+                "favoriteTitle2": "Qui puoi visualizzare i fornitori salvati nella tua lista dei preferiti",
                 
                 "title": "Gestisci le informazioni del tuo profilo",
                 "edit": "Modifica il profilo",                
                 "saved": "Il tuo profilo è stato aggiornato correttamente",
                 "emptyText": "Vuoto",
                 "cancel": "Annulla",
-                "save": "Salva"
-                
-                
+                "save": "Salva"                                
+            },
+            "publicProfile": {
+                "web": "Web site:",
+                "address": "Address:"
+              
             }
+            
         }
     }
 };

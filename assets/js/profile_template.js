@@ -61,16 +61,11 @@ var customerProfileTemplate = `
       </a>
     </span -->
   </dd>
-  <hr>
+  <!-- hr>
   <dt><strong data-i18n="profile.favoriteSuppliers"></strong></dt>
   <dd>
-    <a class="editable editable-click" data-name="favoriteSupplier" data-i18n="[data-emptytext]profile.emptyText" id="ed-favoriteSuppliers" data-type="text" href="#">{{favoriteSuppliers}}</a>
-    <!-- span>
-      <a class="pull-right" href="#">
-        <i class="fa fa-pencil"></i>
-      </a>
-    </span -->
-  </dd>
+    <a class="editable editable-click" data-name="favoriteSupplier" data-i18n="[data-emptytext]profile.emptyText" id="ed-favoriteSuppliers" data-type="text" href="#">{{favoriteSuppliers}}</a>    
+  </dd -->
   <hr>     
 </dl>
 <button type="button" class="btn-u btn-u-default" data-i18n="profile.cancel" onclick="getUserProfile()">Cancel</button>
@@ -240,7 +235,7 @@ var favoriteTableTemplate = `
         </tr>
       </thead>
       <tbody>
-        {{#each favoritList}}               
+        {{#each this}}               
           <tr data-supplier-id="{{_id}}">
             <td>
               {{name}}									

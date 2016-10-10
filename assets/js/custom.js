@@ -157,3 +157,59 @@ function redirectToPrevPage()
     redirectToHome();
   }
 }
+
+
+function getProfileInfo(async)
+{      
+  if(sessionStorage.userId == undefined)
+  {      
+    return;
+  }
+  
+  
+  if(async == undefined)
+    async = true;
+  
+  
+  //console.log(sessionStorage.token);
+  jQuery.ajax({
+    url: _userMsUrl + "users/" + sessionStorage.userId,
+    type: "GET",
+    async: async,
+    contentType: "application/json; charset=utf-8",
+    success: function(data, textStatus, xhr)
+    { 
+      sessionStorage.type = data.type;      
+                      
+    },     
+    error: function(xhr, status)
+    {      
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    }                    
+  });        
+}
+
+
+
+
+
+function getUrlParameter(sParam) 
+{
+  var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+    sURLVariables = sPageURL.split('&'),
+    sParameterName,
+    i;
+
+  for (i = 0; i < sURLVariables.length; i++) 
+  {
+    sParameterName = sURLVariables[i].split('=');
+
+    if (sParameterName[0] === sParam) 
+    {
+      return sParameterName[1] === undefined ? true : sParameterName[1];
+    }
+  }
+}
