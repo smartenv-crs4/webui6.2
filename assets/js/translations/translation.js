@@ -17,7 +17,9 @@ var translation = {
                 "internal_server_error": "Internal server error",
                 "invalid_auth": "Invalid email and/or password",
                 "password_differs": "Passwords must be equals",
-                "unknown_user_type": "Select a valid user type"                
+                "unknown_user_type": "Select a valid user type",
+                "invalid_pdf": "You can upload only pdf files",
+                "disk_quota_exceeded" : "Disk quota exceeded"
             },
             "login": {
                 "signUp": "Sign Up",
@@ -44,6 +46,10 @@ var translation = {
                 "categories": "Categories",
                 "pIva": "VATIN",
                 
+                "documents": "Documents",
+                "documentsTitle": "Manage your public documents",
+                "documentsTitle2": "Below you can add or remove documents",
+                
                 "customer": "customer",
                 "supplier": "supplier",
                 
@@ -58,6 +64,9 @@ var translation = {
                 "favoriteSuppliers": "Favorite suppliers",
                 "favoriteTitle": "Mange your favorite suppliers' list",
                 "favoriteTitle2": "Below you can show your favorite suppliers",
+                "documentsInputLabel": "Choose a pdf document",
+                "uploadDocument": "Upload",
+                "documentSaved": "Document saved",
                 
                 "title": "Manage your profile information",
                 "edit": "Edit profile",
@@ -69,7 +78,9 @@ var translation = {
             },
             "publicProfile": {
                 "web": "Web site:",
-                "address": "Address:"              
+                "address": "Address:",
+                
+                "noSupplier": "Missing Supplier code"              
             }
         }
 
@@ -91,7 +102,9 @@ var translation = {
                 "internal_server_error": "Errore interno del server",
                 "invalid_auth": "Email e/o password errati",
                 "password_differs": "Le password differiscono",
-                "unknown_user_type": "Seleziona il tipo di account che vuoi creare"
+                "unknown_user_type": "Seleziona il tipo di account che vuoi creare",
+                "invalid_pdf": "Puoi caricare soltanto file pdf",
+                "disk_quota_exceeded" : "La quota disco a tua disposizione è stata superata"
             },
             "login": {
                 "signUp": "Registrati",
@@ -119,6 +132,13 @@ var translation = {
                 "categories": "Categorie",
                 "pIva": "Partita IVA",
                 
+                "documents": "Documenti",
+                "documentsTitle": "Gestisci i tuoi documenti pubblici",
+                "documentsTitle2": "Qui puoi aggiungere o rimuovere documenti",
+                "documentsInputLabel": "Scegli un documento pdf",
+                "uploadDocument": "Upload",
+                "documentSaved": "Documento salvato",
+                
                 "customer": "cliente",
                 "supplier": "fornitore",
                 
@@ -143,7 +163,9 @@ var translation = {
             },
             "publicProfile": {
                 "web": "Web site:",
-                "address": "Address:"
+                "address": "Address:",
+                
+                "noSupplier": "Codice fornitore mancante"
               
             }
             

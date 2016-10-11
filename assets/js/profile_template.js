@@ -170,11 +170,7 @@ var supplierProfileTemplate = `
   <dt><strong data-i18n="profile.pIva"></strong></dt>
   <dd>
     <a class="editable editable-click" data-name="pIva" data-i18n="[data-emptytext]profile.emptyText" id="ed-piva" data-type="text" href="#">{{pIva}}</a>
-    <!-- span>
-      <a class="pull-right" href="#">
-        <i class="fa fa-pencil"></i>
-      </a>
-    </span -->
+   
   </dd>
   <hr>
 </dl>
@@ -219,6 +215,25 @@ var favoriteTemplate = `
   <p data-i18n="profile.favoriteTitle2"></p>
   <br>
   <div id="favoriteSuppliersList">     
+  </div>
+</div>
+`;
+
+
+var documentsTabTemplate = `
+<li><a data-toggle="tab" href="#documentsTab" data-i18n="profile.documents"></a></li>
+`;
+
+var documentsTemplate = `
+<div id="documentsTab" class="profile-edit tab-pane fade">									
+  <h2 class="heading-md" data-i18n="profile.documentsTitle"></h2>
+  <p data-i18n="profile.documentsTitle2"></p>
+  <br>
+    <div class="row">
+      <div class="col-xs-10"><input  type="file" id="documentInput" name="document"></div>
+      <button type="button" class="btn-u" data-i18n="profile.uploadDocument" onclick="uploadDocument()"></button>
+    </div>
+  <div id="documentsList">     
   </div>
 </div>
 `;
