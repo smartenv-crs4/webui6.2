@@ -164,8 +164,8 @@ var translation = {
                 "save": "Salva"                                
             },
             "publicProfile": {
-                "web": "Web site:",
-                "address": "Address:",
+                "web": "Sito web:",
+                "address": "Indirizzo:",
                 
                 "noSupplier": "Codice fornitore mancante"
               

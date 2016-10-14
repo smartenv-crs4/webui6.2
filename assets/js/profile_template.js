@@ -279,7 +279,7 @@ var documentsTableTemplate = `
             <td>
               <a href="{{url}}"> {{name}} </a>
               <span>
-                <a class="pull-right" href="#" onclick="deleteDocument('{{name}}')">
+                <a class="pull-right" href="#" onclick="deleteDocument('{{name}}')" >
                   <i class="fa fa-trash"></i>
                </a>
              </span>
