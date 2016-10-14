@@ -23,9 +23,10 @@ var header_template = `	<div class="header">
           <li class="topbar-devider"></li>
           <li><a href="page_faq.html" data-i18n="nav.help">Help</a></li>
           <li class="topbar-devider"></li>
-          <li><a href="page_login_and_registration.html">Login</a></li>
-          <li class="topbar-devider"></li>
-          <li><a href="#" onclick="logout()">Logout</a></li>
+          <li id="h_login"><a href="page_login_and_registration.html">Login</a></li>          
+          <li id="h_logout"><a href="#" onclick="logout()">Logout</a></li>   
+                                           
+          <li style="padding-left:20px" id="h_user"><strong></strong></li>
         </ul>
       </div>
       <!-- End Topbar -->

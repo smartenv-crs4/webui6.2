@@ -3,7 +3,7 @@
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-	<title>Profile Settings | Unify - Responsive Website Template</title>
+	<title>Profile Me | Unify - Responsive Website Template</title>
 
 	<!-- Meta -->
 	<meta charset="utf-8">
@@ -14,18 +14,23 @@
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="favicon.ico">
 
-	<!-- Web Fonts -->	
-	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
-
+	<!-- Web Fonts -->
+	<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
 	<!-- CSS Global Compulsory -->
 	<link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
+  
+  <!-- JS Translation -->
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/3.4.3/i18next.min.js"></script -->
+  <script src="assets/js/plugins/i18next.min.js"></script>
+	<script src="assets/js/translations/translation.js"></script>
+	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.1.0/jquery-i18next.min.js"></script -->
+  <script src="assets/js/plugins/jquery-i18next.min.js"></script>
 
 	<!-- CSS Header and Footer -->
 	<link rel="stylesheet" href="assets/css/headers/header-default.css">
 	<link rel="stylesheet" href="assets/css/footers/footer-v1.css">
-
 
 	<!-- CSS Implementing Plugins -->
 	<link rel="stylesheet" href="assets/plugins/animate.css">
@@ -37,6 +42,7 @@
 
 	<!-- CSS Page Style -->
 	<link rel="stylesheet" href="assets/css/pages/profile.css">
+	<link rel="stylesheet" href="assets/css/pages/shortcode_timeline2.css">
 
 	<!-- CSS Theme -->
 	<link rel="stylesheet" href="assets/css/theme-skins/dark.css" id="style_color">
@@ -44,35 +50,30 @@
 
 	<!-- CSS Customization -->
 	<link rel="stylesheet" href="assets/css/custom.css">
-  <!-- link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.css" -->
-  <link rel="stylesheet" href="assets/css/bootstrap-editable.css">
-
-  <!-- link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.5/jquery.jgrowl.min.css" -->
-  <link rel="stylesheet" href="assets/css/jquery.jgrowl.min.css">
-
-
-	<!-- CSS Page Style Import-->
+  
+  	<!-- CSS Page Style Import-->
 	<link rel="stylesheet" href="assets/css/pages/page_log_reg_v3.css">
+  
 </head>
 
-<body >
+<body>
 	<div class="wrapper">
-		<!--=== Header ===-->
+			<!--=== Header ===-->
 		<div id="header_p"></div>
 		<!--=== End Header ===-->
-
+    
 		<!--=== Profile ===-->
 		<div class="container content profile">
 			<div class="row">
 				<!--Left Sidebar-->
 				<div class="col-md-3 md-margin-bottom-40">
-					<img class="img-responsive profile-img margin-bottom-20" src="assets/img/team/img32-md.jpg" alt="" id="imgBox">
+					<img class="img-responsive profile-img margin-bottom-20" src="assets/img/team/img32-md.jpg" alt="">
 
 					<ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
 						<li class="list-group-item">
 							<a href="page_profile.html"><i class="fa fa-bar-chart-o"></i> Overall</a>
 						</li>
-						<li class="list-group-item">
+						<li class="list-group-item active">
 							<a href="page_profile_me.html"><i class="fa fa-user"></i> Profile</a>
 						</li>
 						<li class="list-group-item">
@@ -82,12 +83,12 @@
 							<a href="page_profile_projects.html"><i class="fa fa-cubes"></i> My Projects</a>
 						</li>
 						<li class="list-group-item">
-							<a href="page_rfq_inbox.html"><i class="fa fa-paper-plane"></i> RFQs</a>
+							<a href="page_profile_comments.html"><i class="fa fa-comments"></i> Comments</a>
 						</li>
 						<li class="list-group-item">
 							<a href="page_profile_history.html"><i class="fa fa-history"></i> History</a>
 						</li>
-						<li class="list-group-item active">
+						<li class="list-group-item">
 							<a href="page_profile_settings.html"><i class="fa fa-cog"></i> Settings</a>
 						</li>
 					</ul>
@@ -177,31 +178,16 @@
 				<!--End Left Sidebar-->
 
 				<!-- Profile Content -->
-				<div class="col-md-9" id="profileContent">
-					<div class="profile-body margin-bottom-20">
-						<div class="tab-v1">
-							<ul class="nav nav-justified nav-tabs" id="tabContainer">
-								<li class="active"><a data-toggle="tab" href="#profile" data-i18n="profile.edit"></a></li>
-								<li><a data-toggle="tab" href="#passwordTab" data-i18n="profile.editPassword"></a></li>
-							</ul>
-							<div class="tab-content" id="tabBodyContainer">
-                <div id="responseBlock" class="alert alert-danger hidden"></div>
-								<div id="profile" class="profile-edit tab-pane fade in active">
-								</div>
-								<div id="passwordTab" class="profile-edit tab-pane fade">									
-								</div>
-							</div>
-						</div>
-					</div>
+				<div class="col-md-9">
+					<div class="profile-body" id="profile-body">						
+					</div> 
 				</div>
 				<!-- End Profile Content -->
-			</div><!--/end row-->
+			</div>
 		</div>
 		<!--=== End Profile ===-->
 
-
-
-		<!--=== Footer Version 1 ===-->
+			<!--=== Footer Version 1 ===-->
 		<div class="footer-v1">
 			<div class="footer">
 				<div class="container">
@@ -298,86 +284,43 @@
 		<!--=== End Footer Version 1 ===-->
 	</div><!--/wrapper-->
 
-
+	
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-	<!-- JS Translation -->
-	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/3.4.3/i18next.min.js"></script -->
-  <script src="assets/js/plugins/i18next.min.js"></script>
-	<script src="assets/js/translations/translation.js"></script>
-	<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.1.0/jquery-i18next.min.js"></script -->
-  <script src="assets/js/plugins/jquery-i18next.min.js"></script>
-
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
-	<script type="text/javascript" src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
+
 	<script type="text/javascript" src="assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<!-- JS Customization -->
-	<!-- <script type="text/javascript" src="assets/js/custom.js"></script>
-	JS Page Level -->
+	<script type="text/javascript" src="assets/js/custom.js"></script>
+	<!-- JS Page Level -->
 	<script type="text/javascript" src="assets/js/app.js"></script>
-	<script type="text/javascript" src="assets/js/forms/reg.js"></script>
-	<script type="text/javascript" src="assets/js/forms/checkout.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/datepicker.js"></script>
-	<script type="text/javascript" src="assets/js/common_header.js"></script>
-  <script type="text/javascript" src="assets/js/profile_template.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/circles-master.js"></script>
+	
+  <script type="text/javascript" src="assets/js/common_header.js"></script>
+  <script type="text/javascript" src="assets/js/public_profile_template.js"></script>
 	<!-- script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script -->
   <script type="text/javascript" src="assets/js/plugins/handlebars.min.js"></script>
-  <!-- script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js"></script -->
-  <script type="text/javascript" src="assets/js/plugins/bootstrap-editable.min.js"></script>
-  <!-- script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.5/jquery.jgrowl.min.js"></script -->
-  <script type="text/javascript" src="assets/js/plugins/jquery.jgrowl.min.js"></script>
-
-  <script type="text/javascript" src="assets/js/plugins/bootstrap-filestyle.min.js"></script>
 
 	<script type="text/javascript" src="assets/js/custom.js"></script>
   <script type="text/javascript" src="assets/js/profile.js"></script>
+  <script type="text/javascript" src="assets/js/public_profile.js"></script>
+  
+  
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			App.init();
-			//App.initCounter();
-			//	App.initParallaxBg();
-			//OwlCarousel.initOwlCarousel();
-			//$('#header_p').html(header_template);
-      getUserProfile();
-
-/*
-			i18next.init({
-				lng: 'en', // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
-				resources:  translation
-			}, function (err, t) {
-
-				jqueryI18next.init(i18next, $ );
-				$('body').localize();
-
-				$('.lang-select').click(function() {
-					i18next.changeLanguage($(this).data('lang'));
-					$('body').localize();
-				});
-
-
-			});
-      */
-
+			App.init();			
 		});
 	</script>
-
 	<!--[if lt IE 9]>
 	<script src="assets/plugins/respond.js"></script>
 	<script src="assets/plugins/html5shiv.js"></script>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<script src="assets/plugins/sky-forms-pro/skyforms/js/sky-forms-ie8.js"></script>
-	<![endif]-->
-
-	<!--[if lt IE 10]>
-	<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
+	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
 </body>
 </html>
