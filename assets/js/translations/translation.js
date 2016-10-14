@@ -29,7 +29,7 @@ var translation = {
                 "password": "Password",
                 "choosePassword": "Choose password",
                 "retypePassword": "Retype password",
-                "userType": "Yuu are a ...",
+                "userType": "You are a ...",
                 "customer": "Customer",
                 "supplier": "Supplier"              
             },
@@ -49,6 +49,7 @@ var translation = {
                 "documents": "Documents",
                 "documentsTitle": "Manage your public documents",
                 "documentsTitle2": "Below you can add or remove documents",
+                "documentDeleted": "The document has been deleted successfully",
                 
                 "customer": "customer",
                 "supplier": "supplier",
@@ -138,6 +139,7 @@ var translation = {
                 "documentsInputLabel": "Scegli un documento pdf",
                 "uploadDocument": "Upload",
                 "documentSaved": "Documento salvato",
+                "documentDeleted": "Il documento  stato cancellato correttamente",
                 
                 "customer": "cliente",
                 "supplier": "fornitore",
@@ -162,8 +164,8 @@ var translation = {
                 "save": "Salva"                                
             },
             "publicProfile": {
-                "web": "Web site:",
-                "address": "Address:",
+                "web": "Sito web:",
+                "address": "Indirizzo:",
                 
                 "noSupplier": "Codice fornitore mancante"
               

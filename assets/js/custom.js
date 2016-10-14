@@ -64,6 +64,17 @@ jQuery(document).ready(function(){
       
     });
   }
+  
+  if(sessionStorage.token)
+  {    
+    jQuery("#h_login").hide();
+    jQuery("#h_user strong").html(sessionStorage.email);
+  }
+  else
+  {    
+    jQuery("#h_logout").hide();
+    jQuery("#h_user").hide();
+  }
 
 
 });
@@ -165,7 +176,6 @@ function getProfileInfo(async)
   {      
     return;
   }
-  
   
   if(async == undefined)
     async = true;

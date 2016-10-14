@@ -220,26 +220,6 @@ var favoriteTemplate = `
 `;
 
 
-var documentsTabTemplate = `
-<li><a data-toggle="tab" href="#documentsTab" data-i18n="profile.documents"></a></li>
-`;
-
-var documentsTemplate = `
-<div id="documentsTab" class="profile-edit tab-pane fade">									
-  <h2 class="heading-md" data-i18n="profile.documentsTitle"></h2>
-  <p data-i18n="profile.documentsTitle2"></p>
-  <br>
-    <div class="row">
-      <div class="col-xs-10"><input  type="file" id="documentInput" name="document"></div>
-      <button type="button" class="btn-u" data-i18n="profile.uploadDocument" onclick="uploadDocument()"></button>
-    </div>
-  <div id="documentsList">     
-  </div>
-</div>
-`;
-
-
-
 var favoriteTableTemplate = `
 <div class="table-search-v1 margin-bottom-30">
   <div class="table-responsive">
@@ -262,3 +242,55 @@ var favoriteTableTemplate = `
   </div>
 </div>
 `;
+
+
+var documentsTabTemplate = `
+<li><a data-toggle="tab" href="#documentsTab" data-i18n="profile.documents"></a></li>
+`;
+
+var documentsTemplate = `
+<div id="documentsTab" class="profile-edit tab-pane fade">									
+  <h2 class="heading-md" data-i18n="profile.documentsTitle"></h2>
+  <p data-i18n="profile.documentsTitle2"></p>
+  <br>
+    <div class="row">
+      <div class="col-xs-10"><input  type="file" id="documentInput" name="document"></div>
+      <button type="button" class="btn-u" data-i18n="profile.uploadDocument" onclick="uploadDocument()"></button>
+    </div>
+    <hr />
+  <div id="documentsList">     
+  </div>
+</div>
+`;
+
+
+var documentsTableTemplate = `
+<div class="table-search-v1 margin-bottom-30">
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th data-i18n="profile.documents"></th>								
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this}}               
+          <tr>
+            <td>
+              <a href="{{url}}"> {{name}} </a>
+              <span>
+                <a class="pull-right" href="#" onclick="deleteDocument('{{name}}')" >
+                  <i class="fa fa-trash"></i>
+               </a>
+             </span>
+            </td>                  
+          </tr>
+        {{/each}}							
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
+
+

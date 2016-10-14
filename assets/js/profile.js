@@ -47,6 +47,10 @@ function getUserProfile()
         var template = Handlebars.compile(supplierProfileTemplate); 
         jQuery('#profile').html(template(data));
         jQuery('#profile').localize();
+        
+        
+        getDocumentList();
+        
                 
         var tDocTab = Handlebars.compile(documentsTabTemplate); 
         jQuery("#tabContainer").append(tDocTab());
@@ -59,8 +63,7 @@ function getUserProfile()
         //jQuery("#documentInput").filestyle();          
         jQuery("#documentInput").filestyle({buttonText: i18next.t("profile.documentsInputLabel"),
             buttonBefore: true});
-        
-        
+            
       }
       
       
@@ -332,6 +335,7 @@ function uploadDocument()
     success: function(data)
     {
       jQuery.jGrowl(i18next.t("profile.documentSaved"), {theme:'bg-color-green1', life: 5000});
+      getDocumentList();
     },
     error: function(xhr, status)
     {
@@ -367,3 +371,113 @@ function uploadDocument()
     } 
   });
 }
+
+
+function getDocumentList()
+{
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/attachment/" + sessionStorage.userId,     
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    success: function(data, textStatus, xhr)
+    {      
+      var dd = [];
+      for(var i in data.files)
+      {
+        var d ={}
+        d.url = _brokerMsUrl + "users/attachment/" + sessionStorage.userId + "/" + data.files[i];
+        d.name = data.files[i];
+        dd.push(d);
+      }
+        
+      var tDocTable = Handlebars.compile(documentsTableTemplate);      
+      jQuery("#documentsList").html(tDocTable(dd));
+      jQuery("#documentsList").localize();
+                      
+            
+    },
+    error: function(xhr, status)
+    {
+      var msg;
+      
+      switch(xhr.status)
+      {
+        case 400:
+          msg = i18next.t("error.invalid_pdf");
+          break;
+        case 403:
+          msg = i18next.t("error.unauthorized");
+          break;
+        case 500:
+          msg = i18next.t("disk_quota_exceeded");
+          break;
+        default:
+          try
+          {        
+            msg = xhr.responseJSON.message;
+          }
+          catch(err)
+          {
+            msg = i18next.t("error.internal_server_error");
+          }
+      }
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    } 
+  });
+}
+
+
+
+
+function deleteDocument(name)
+{
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/actions/attachment/" + name,
+    type: "DELETE",
+    contentType: "application/json; charset=utf-8",
+    success: function(data, textStatus, xhr)
+    {      
+      jQuery.jGrowl(i18next.t("profile.documentDeleted"), {theme:'bg-color-green1', life: 5000});
+      getDocumentList();                                  
+    },
+    error: function(xhr, status)
+    {
+      var msg;
+      
+      switch(xhr.status)
+      {
+        case 400:
+          msg = i18next.t("error.invalid_pdf");
+          break;
+        case 403:
+          msg = i18next.t("error.unauthorized");
+          break;
+        case 500:
+          msg = i18next.t("disk_quota_exceeded");
+          break;
+        default:
+          try
+          {        
+            msg = xhr.responseJSON.message;
+          }
+          catch(err)
+          {
+            msg = i18next.t("error.internal_server_error");
+          }
+      }
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    } 
+  });
+  
+}
+
