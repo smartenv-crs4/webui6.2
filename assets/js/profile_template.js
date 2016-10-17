@@ -233,7 +233,10 @@ var favoriteTableTemplate = `
         {{#each this}}               
           <tr data-supplier-id="{{_id}}">
             <td>
-              {{name}}									
+              {{name}}		
+              <span class="pull-right"  style="cursor:pointer"onclick="removeFavoriteSupplier('{{_id}}')">
+                <i class="fa fa-remove"></i>
+              </span>
             </td>                  
           </tr>
         {{/each}}							
@@ -278,9 +281,13 @@ var documentsTableTemplate = `
           <tr>
             <td>
               <a href="{{url}}"> {{name}} </a>
-              <span>
-                <a class="pull-right" href="#" onclick="deleteDocument('{{name}}')" >
-                  <i class="fa fa-trash"></i>
+              <span>                
+                <a class="pull-right" data-toggle="confirmation" 
+                   data-placement="top" href="#" data-on-confirm="deleteDocument" data-fname="{{name}}" 
+                   data-btn-ok-class="btn-success important-white"
+                   data-i18n="[data-btn-cancel-label]profile.no;[data-btn-ok-label]profile.yes;[data-title]profile.areYouSure;[data-content]profile.confirmDeleteDocument"
+                   data-btn-cancel-class="btn-danger important-white" data-popout="true">
+                  <i class="fa fa-remove"></i>
                </a>
              </span>
             </td>                  
