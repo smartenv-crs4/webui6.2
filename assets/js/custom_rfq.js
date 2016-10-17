@@ -23,14 +23,6 @@ Handlebars.registerHelper('if_eq', function(a, b, opts) {
     }
 });
 
-
-
-Handlebars.registerHelper('otherName', function(customer, supplier) {
-    console.log(customer._id);
-    if(customer._id == sessionStorage.userId) return customer.name;
-    else return supplier.name;
-});
-
 Handlebars.registerHelper('userLogo', function(customer, supplier) {
     if((customer._id == sessionStorage.userId) && customer.logo) return customer.logo;
     else if(supplier.logo) return supplier.logo;
@@ -68,10 +60,11 @@ var inbox_rfq_template = `
 {{#each docs}}
 {{#if completed}}<div class="alert-blocks alert-blocks-pending alert-dismissable">{{else}}
 <div class="alert-blocks alert-blocks-success alert-dismissable">{{/if}}
-  <a style="cursor: pointer;" onclick="getConversationRequestsAndMessages('{{{_id}}}')">  <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+  <a style="cursor: pointer;" onclick="getConversationRequestsAndMessages('{{{_id}}}')">  
+  <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
 <img class="rounded-x" src={{userLogo customer supplier}} alt="">
     <div class="overflow-h">
-    <span><strong class="color-dark">{{otherName customer supplier}}</strong></span>
+    <span><strong class="color-dark">{{#if_eq sessionStorage.userId customer._id}}{{supplier.name}}{{else}}{{customer.name}}{{/if_eq}}</strong></span>
 <small class="pull-right"><em class="color-grey">{{formatDate dateIn}}</em></small>
 
     <p> {{#if completed}}<small class="color-red" style="float: right; ">Close</small>{{else}}
@@ -114,7 +107,7 @@ var inbox_rfq_requests_messages = `
 										</h4>
 									</div>
 									<div id="collapse-{{inc @index}}" class="panel-collapse collapse">
-										<div class="service-block-v3 alert-blocks service-block-u">
+										<div class="alert-blocks service-block-u">
 											<img class="rounded-x" src={{productLogo product}} alt="">
 											<strong class="service-heading">{{product.name}}</strong>
 											<p><h3 class="heading-xs">{{formatDate dateIn}}</h3></p>
@@ -124,11 +117,11 @@ var inbox_rfq_requests_messages = `
 											<div class="row margin-bottom-20">
 												<div class="col-xs-6 service-in">
 													<small>Quote</small>
-													<h4 class="counter">{{quote}}</h4>
+													<h4 class="counter"><a id="quote_{{inc @index}}" class="editable" data-type="text">{{quote}}</a></h4>
 												</div>
 												<div class="col-xs-6 text-right service-in">
 													<small>Quantity</small>
-													<h4 class="counter">{{quantity}}</h4>
+													<h4 class="counter"><a id="quantity_{{inc @index}}" class="editable" data-type="text">{{quantity}}</a></h4>
 												</div>
 											</div>
 											
@@ -146,7 +139,8 @@ var inbox_rfq_requests_messages = `
 												
 											</div>
 											
-											<p><button class=" btn-u btn-u-default" type="button">Cancel</button><button class=" btn-u btn-u-sea" type="button">Save</button></p>
+											<p><button class=" btn-u btn-u-default" type="button">Cancel</button><button class="btn-u btn-u-sea" disabled type="button">Save</button><button class="btn-u btn-u-red" disabled type="button">Reject</button></p>
+											<small id="unsaved_{{inc @index}}" class="hidden">Change Unsaved</small>
 										</div>
 									</div>
 								</div>
@@ -199,7 +193,8 @@ var inbox_rfq_requests_messages = `
 `;
 
 jQuery(document).ready(function() {
-    jQuery('#inbox-rfqs-container').html(inbox_rfq_template);
+    jQuery('#inbox-rfqs-container').html(inbox_rfq_empty_template);
+
 
 });
 
@@ -290,6 +285,12 @@ console.log("getConversationRequestsAndMessages");
 
                 // Add the compiled html to the page
                 $("#inbox-rfqs-container").html(theCompiledHtml);
+                $('.editable').editable();
+                $('.editable').on('save', function(e, params) {
+                    var id = (e.target.id);
+                    id = id.split("_")[1];
+                    $('#unsaved_'+ id).removeClass('hidden');
+                });
             }
 
 
@@ -322,4 +323,72 @@ console.log("getConversationRequestsAndMessages");
         }
     });
 }
+/*
+function setRequest(id_conv, id_req)
+{
+    if(sessionStorage.userId == undefined)
+    {
+        window.location.replace("page_login_and_registration.html");
+    }
+    console.log("setRequest");
+    var type = sessionStorage.userType;
 
+
+
+    jQuery.ajax({
+        url: _localServiceUrl + "conversations/"+ id_conv,
+        type: "POST,
+        contentType: "application/json",
+        dataType: 'json',
+        success: function(data, textStatus, xhr)
+        {
+
+            if(data){
+                // Compile the template
+                var theTemplate = Handlebars.compile(inbox_rfq_requests_messages);
+
+                console.log(data);
+                // Pass our data to the template
+                var theCompiledHtml = theTemplate(data);
+
+                // Add the compiled html to the page
+                $("#inbox-rfqs-container").html(theCompiledHtml);
+                $('.editable').editable();
+                $('.editable').on('save', function(e, params) {
+                    var id = (e.target.id);
+                    id = id.split("_")[1];
+                    $('#unsaved_'+ id).removeClass('hidden');
+                });
+            }
+
+
+
+
+        },
+        error: function(xhr, status)
+        {
+            console.log(xhr.responseJSON.error);
+
+            switch(xhr.status)
+            {
+                case 404:
+                    if(xhr.responseJSON.error == "Not Found")
+                        $("#inbox-rfqs-container").html(Handlebars.compile(inbox_rfq_empty_template));
+                    break;
+                case 500:
+                    $("#inbox-rfqs-container").html("error.internal_server_error");
+                    break;
+                default:
+                    $("#inbox-rfqs-container").html(xhr.responseJSON.error_message);
+            }
+            return;
+        },
+        beforeSend: function(xhr, settings)
+        {
+            console.log(xhr);
+            console.log(sessionStorage.token);
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+        }
+    });
+}
+*/
