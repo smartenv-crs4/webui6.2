@@ -3,6 +3,7 @@ var _authMsUrl  = "http://seidue.crs4.it:3007/";
 var _userMsUrl  = "http://seidue.crs4.it:3008/";
 var _brokerMsUrl  = "http://seidue.crs4.it:3009/api/v1/";
 _access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzg1NTc1MjQ3NTY4fQ.Du2bFjd0jB--geRhnNtbiHxcjQHr5AyzIFmTr3NFDcM";
+var defaultImg = "assets/img/team/img32-md.jpg";
 
 var lng = localStorage.lng;
 
@@ -14,6 +15,18 @@ jQuery(document).ready(function(){
     var sbT = Handlebars.compile(sidebarTemplate);      
     jQuery("#sidebar").html(sbT);
     jQuery("#sidebar").localize();
+    
+    
+    if(sessionStorage.logo && sessionStorage.logo.trim() != "")
+    {
+      jQuery("#imgBox").attr("src", sessionStorage.logo);                
+    }
+    else
+    {
+      jQuery("#imgBox").attr("src", defaultImg);
+    }
+    
+    
   }
   
   
