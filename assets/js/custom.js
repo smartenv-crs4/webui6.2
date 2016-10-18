@@ -200,6 +200,9 @@ function getProfileInfo(async)
     success: function(data, textStatus, xhr)
     { 
       sessionStorage.type = data.type;      
+      sessionStorage.name = data.name;
+      sessionStorage.logo = data.logo;
+      
                       
     },     
     error: function(xhr, status)
