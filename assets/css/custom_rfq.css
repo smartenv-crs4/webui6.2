@@ -14,8 +14,6 @@
 
 }
 
-
-
 .rfq .statistics small{
     float:right;
 
@@ -36,6 +34,14 @@
 
 }
 
-.rfq .glyphicon-ok{
+.rfq .glyphicon-ok, .accordion-toggle span{
     color:#fff!important;
+}
+
+.request_buttons{
+    margin-top:2em;
+}
+
+.inbox-rfq-header strong{
+    color: #585f69;
 }

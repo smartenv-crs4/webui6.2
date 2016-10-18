@@ -9,13 +9,13 @@ var defaultImg = "assets/img/team/img32-md.jpg";
 var defaultImgPr = "assets/img/port/no_image_available.png";
 
 
-Handlebars.registerHelper('isCustomer', function(type) {
 
-    if(type == 'customer') return true;
-    else return false;
-});
+
+
 
 Handlebars.registerHelper('if_eq', function(a, b, opts) {
+    if(a) a=a.toString();
+    if(b) b=b.toString();
     if (a == b) {
         return opts.fn(this);
     } else {
@@ -23,22 +23,77 @@ Handlebars.registerHelper('if_eq', function(a, b, opts) {
     }
 });
 
+Handlebars.registerHelper('if_eq_or_eq', function(a, b, c, d, opts) {
+    if (a.toString() == b.toString() || c.toString() == d.toString()) {
+        return opts.fn(this);
+    } else {
+        return opts.inverse(this);
+    }
+});
+
+Handlebars.registerHelper('iff', function(a, operator, b, opts) {
+    var bool = false;
+    switch(operator) {
+        case '==':
+            bool = a.toString() == b.toString();
+            break;
+        case '>':
+            bool = a.toString() > b.toString();
+            break;
+        case '<':
+            bool = a.toString() < b.toString();
+            break;
+        default:
+            throw "Unknown operator " + operator;
+    }
+
+    if (bool) {
+        return opts.fn(this);
+    } else {
+        return opts.inverse(this);
+    }
+});
+
 Handlebars.registerHelper('userLogo', function(customer, supplier) {
-    if((customer._id == sessionStorage.userId) && customer.logo) return customer.logo;
-    else if(supplier.logo) return supplier.logo;
+    if((customer._id == sessionStorage.userId) && supplier.logo) return supplier.logo;
+    else if(customer.logo) return customer.logo;
     else return defaultImg;
 });
 
 Handlebars.registerHelper('productLogo', function(product) {
-    if(product.images.length > 0) return product.images[0];
+    if(product.images && product.images.length > 0) return product.images[0];
     else return defaultImgPr;
 });
 
-Handlebars.registerHelper('formatDate', function(date) {
-  var d = new Date(date);
-  return formatDate(d);
+Handlebars.registerHelper('formatStatus', function(status) {
+    console.log(status);
+    var s = '';
+    switch(status) {
+        case 'pending':
+            s = 'Pending';
+            break;
+        case 'acceptedByC':
+            s = 'Accepted by Customer';
+            break;
+        case 'acceptedByS':
+            s = 'Accepted by Supplier';
+            break;
+        case 'rejectedByS':
+            s = 'Rejected by Supplier';
+            break;
+        case 'rejectedByC':
+            s = 'Rejected by Customer';
+            break;
+        default:
+            throw "Unknown status ";
+    }
+    return s;
 });
 
+Handlebars.registerHelper('formatDate', function(date) {
+    var d = new Date(date);
+    return formatDate(d);
+});
 
 Handlebars.registerHelper("inc", function(value, options)
 {
@@ -54,146 +109,11 @@ Handlebars.registerHelper("lastModification", function(status, customer, supplie
     }
 });
 
-
-var inbox_rfq_template = `
-<div id="inbox-rfqs" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
-{{#each docs}}
-{{#if completed}}<div class="alert-blocks alert-blocks-pending alert-dismissable">{{else}}
-<div class="alert-blocks alert-blocks-success alert-dismissable">{{/if}}
-  <a style="cursor: pointer;" onclick="getConversationRequestsAndMessages('{{{_id}}}')">  
-  <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-<img class="rounded-x" src={{userLogo customer supplier}} alt="">
-    <div class="overflow-h">
-    <span><strong class="color-dark">{{#if_eq sessionStorage.userId customer._id}}{{supplier.name}}{{else}}{{customer.name}}{{/if_eq}}</strong></span>
-<small class="pull-right"><em class="color-grey">{{formatDate dateIn}}</em></small>
-
-    <p> {{#if completed}}<small class="color-red" style="float: right; ">Close</small>{{else}}
-   <small class="color-green" style="float: right; ">Pending...</small>{{/if}}
-    <strong>  Subject: <small>{{subject}}</small></strong></p>
-</div></a>
-</div>
-{{/each}}
-</div>
-`;
-
-var inbox_rfq_empty_template = `
-<div id="inbox-rfqs" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
-<div class="alert-blocks alert-dismissable">
-<strong>  No RFQs Found!</strong>
-</div>
-
-</div>
-`;
-
-
-
-var inbox_rfq_requests_messages = `
-
-							<div class="col-lg-6 panel panel-default	">
-								<div class="panel-heading overflow-h">
-									<i class="fa fa-tasks fa-fw"></i> Requests
-
-								</div>
-							<div class="panel-group acc-v1" id="accordion-1">
-							{{#each requests}}
-								<div class="rfq panel panel-default">
-									<div class="panel-heading">
-										<h4 class="panel-title">
-											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-{{inc @index}}">
-												{{inc @index}} - RFQ Subject: {{product.name}}
-												<i class="fa  fa-check-circle fa-lg pull-right"></i>
-											</a>
-
-										</h4>
-									</div>
-									<div id="collapse-{{inc @index}}" class="panel-collapse collapse">
-										<div class="alert-blocks service-block-u">
-											<img class="rounded-x" src={{productLogo product}} alt="">
-											<strong class="service-heading">{{product.name}}</strong>
-											<p><h3 class="heading-xs">{{formatDate dateIn}}</h3></p>
-                                           <hr>
-											<div class="clearfix margin-bottom-10"></div>
-
-											<div class="row margin-bottom-20">
-												<div class="col-xs-6 service-in">
-													<small>Quote</small>
-													<h4 class="counter"><a id="quote_{{inc @index}}" class="editable" data-type="text">{{quote}}</a></h4>
-												</div>
-												<div class="col-xs-6 text-right service-in">
-													<small>Quantity</small>
-													<h4 class="counter"><a id="quantity_{{inc @index}}" class="editable" data-type="text">{{quantity}}</a></h4>
-												</div>
-											</div>
-											
-											<div class="statistics">
-											
-												<h3 class="heading-xs">Status <span class="pull-right">{{status}}</span></h3>
-												<!--<div class="progress progress-u progress-xxs">
-													<div style="width: 67%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="67" role="progressbar" class="progress-bar progress-bar-light">
-													</div>
-												</div>-->
-												
-												<hr>
-												<small>Last modification <strong> {{lastModification status ../customer ../supplier}}</strong></small>
-												
-												
-											</div>
-											
-											<p><button class=" btn-u btn-u-default" type="button">Cancel</button><button class="btn-u btn-u-sea" disabled type="button">Save</button><button class="btn-u btn-u-red" disabled type="button">Reject</button></p>
-											<small id="unsaved_{{inc @index}}" class="hidden">Change Unsaved</small>
-										</div>
-									</div>
-								</div>
-								{{/each}}
-							</div>							
-                            </div>	
-                            <div class="col-lg-6 chat-panel panel panel-default">
-								<div class="panel-heading overflow-h">
-									<i class="fa fa-comments fa-fw"></i> Messages
-
-								</div>
-								<!-- /.panel-heading -->
-								
-								<div class="panel-body">
-									<ul class="chat">
-									{{#each messages}}
-										<li class="{{#if_eq type 'customer'}}left{{else}}right{{/if_eq}} clearfix">
-                                    <span class="chat-img {{#if_eq type 'customer'}}pull-left{{else}}pull-right{{/if_eq}}">
-                                        <img src="{{sender.logo}}" alt="User Avatar" class="img-circle">
-                                    </span>
-											<div class="chat-body clearfix">
-												<div class="header">
-													<strong class="{{#if_eq type 'supplier'}}pull-right{{/if_eq}} primary-font">{{sender.name}}</strong>
-													<small class="{{#if_eq type 'customer'}}pull-right{{/if_eq}} text-muted">
-														<i class="fa fa-clock-o fa-fw"></i> {{formatDate dateIn}}
-													</small>
-												</div>
-												<p>
-													{{text}}
-												</p>
-											</div>
-										</li>
-										{{/each}}   
-										</ul>
-								</div>
-										<!-- /.panel-body -->
-								<div class="panel-footer">
-									<div class="input-group">
-										<input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here...">
-                                            <span class="input-group-btn">
-                                            <button class="btn btn-warning btn-sm" id="btn-chat">
-                                            Send
-                                            </button>
-                                         </span>
-									</div>
-								</div>
-								<!-- /.panel-footer -->
-							</div>
-		
-`;
-
 jQuery(document).ready(function() {
-    jQuery('#inbox-rfqs-container').html(inbox_rfq_empty_template);
+    $('#inbox-rfqs-container').html("<div>Loading data ... </div>");
+    $("body").localize();
+
+
 
 
 });
@@ -205,9 +125,6 @@ function getConversations()
     {
         window.location.replace("page_login_and_registration.html");
     }
-
-    //console.log(sessionStorage.token);
-    //console.log(sessionStorage.userId);
      jQuery.ajax({
         url: _localServiceUrl + "conversations?by_uid="+ sessionStorage.userId,
         type: "GET",
@@ -218,14 +135,20 @@ function getConversations()
 
             if(data.docs.length>0){
                 // Compile the template
-                var theTemplate = Handlebars.compile(inbox_rfq_template);
+                var source = $("#inbox_rfq_template").html();
+                var theTemplate = Handlebars.compile(source);
 
-                console.log(data);
+
                 // Pass our data to the template
+                data.currentUser = sessionStorage.type;
+                console.log(data);
                 var theCompiledHtml = theTemplate(data);
 
                 // Add the compiled html to the page
                 $("#inbox-rfqs-container").html(theCompiledHtml);
+
+
+                $("body").localize();
             }
 
 
@@ -234,13 +157,13 @@ function getConversations()
         },
         error: function(xhr, status)
         {
-            console.log(xhr.responseJSON.error);
-
             switch(xhr.status)
-            {
+            {   case 401:
+                window.location.replace("page_login_and_registration.html");
+                    break;
                 case 404:
                     if(xhr.responseJSON.error == "Not Found")
-                        $("#inbox-rfqs-container").html(Handlebars.compile(inbox_rfq_empty_template));
+                        $("#inbox-rfqs-container").html(Handlebars.compile($("#inbox_rfq_empty_template").html()));
                     break;
                 case 500:
                     $("#inbox-rfqs-container").html("error.internal_server_error");
@@ -252,8 +175,6 @@ function getConversations()
         },
         beforeSend: function(xhr, settings)
         {
-            console.log(xhr);
-            console.log(sessionStorage.token);
             xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
         }
     });
@@ -266,7 +187,7 @@ function getConversationRequestsAndMessages(id_conv)
     {
         window.location.replace("page_login_and_registration.html");
     }
-console.log("getConversationRequestsAndMessages");
+    console.log("getConversationRequestsAndMessages");
     jQuery.ajax({
         url: _localServiceUrl + "conversations/"+ id_conv,
         type: "GET",
@@ -275,22 +196,102 @@ console.log("getConversationRequestsAndMessages");
         success: function(data, textStatus, xhr)
         {
 
+            var socket = io.connect('http://localhost:3000',{reconnection:false});
+            socket.once('connect', function() {
+                socket.emit('join', data._id);
+            });
+
+            socket.on('message', function(msg){
+                var source = $("#rfq_new_message_template").html();
+                var theTemplate = Handlebars.compile(source);
+
+
+                // Pass our data to the template
+                var theCompiledHtml = theTemplate(msg);
+
+                // Add the compiled html to the page
+                $("#rfq-list-messages").append(theCompiledHtml);
+
+            });
+
+            socket.on('request', function(rqs){
+                console.log(rqs);
+                var source = $("#request-partial").html();
+                var theTemplate = Handlebars.compile(source);
+
+
+                // Pass our data to the template
+                rqs.completed = data.completed;
+                rqs.expired = data.expired;
+                rqs.currentUser = sessionStorage.type;
+                rqs.customer = data.customer;
+                rqs.supplier = data.supplier;
+                rqs._id_c = data._id;
+
+                var theCompiledHtml = theTemplate(rqs);
+
+                // Add the compiled html to the page
+              //  $("#rfq-panel-"+rqs._id).replaceWith(theCompiledHtml);
+            });
+
+            socket.on('error', function(msg){
+                console.log(msg);
+                alert('error: ' + msg);
+            });
+
+
             if(data){
                 // Compile the template
-                var theTemplate = Handlebars.compile(inbox_rfq_requests_messages);
 
-                console.log(data);
+                var source = $("#inbox_rfq_requests_messages").html();
+                Handlebars.registerPartial("request", $("#request-partial").html());
+                var theTemplate = Handlebars.compile(source);
+
                 // Pass our data to the template
+                var userType =sessionStorage.type;
+                data.currentUser = userType;
+                console.log(data);
                 var theCompiledHtml = theTemplate(data);
+
 
                 // Add the compiled html to the page
                 $("#inbox-rfqs-container").html(theCompiledHtml);
-                $('.editable').editable();
-                $('.editable').on('save', function(e, params) {
+
+                $("body").localize();
+
+
+                if(sessionStorage.type =="customer")
+                    $("#inbox-rfq-header-name").text(data.supplier.name);
+                else
+                    $("#inbox-rfq-header-name").text(data.customer.name);
+
+
+
+
+
+                $('.editable-field').editable();
+                $('.editable-field').on('save', function(e, params) {
+                    var userType =sessionStorage.type;
+                    data.currentUser = userType;
+                    var newStatus = '';
+
                     var id = (e.target.id);
-                    id = id.split("_")[1];
+                    id = id.split("-")[1];
+
+
                     $('#unsaved_'+ id).removeClass('hidden');
+                    $("#cancel-req-"+id).removeClass("hidden");
+                    $("#save-accept-req-"+id).removeClass("hidden");
+                    $("#supplier-accept-"+id).addClass("hidden");
+                    $("#supplier-reject-"+id).addClass("hidden");
+                    $("#customer-accept-"+id).addClass("hidden");
+                    $("#customer-reject-"+id).addClass("hidden");
+
                 });
+
+                $("body").localize();
+
+
             }
 
 
@@ -303,6 +304,9 @@ console.log("getConversationRequestsAndMessages");
 
             switch(xhr.status)
             {
+                case 401:
+                    window.location.replace("page_login_and_registration.html");
+                    break;
                 case 404:
                     if(xhr.responseJSON.error == "Not Found")
                         $("#inbox-rfqs-container").html(Handlebars.compile(inbox_rfq_empty_template));
@@ -323,46 +327,215 @@ console.log("getConversationRequestsAndMessages");
         }
     });
 }
-/*
-function setRequest(id_conv, id_req)
-{
+
+
+function resetRequest(num_req, old_quote, old_quantity){
+
+    console.log(old_quantity);
+    $('#unsaved_'+ num_req).addClass('hidden');
+    $("#cancel-req-"+num_req).addClass("hidden");
+    $("#save-accept-req-"+num_req).addClass("hidden");
+    $("#supplier-accept-"+num_req).removeClass("hidden");
+    $('#quote-'+num_req).text(old_quote);
+    $('#quantity-'+num_req).text(old_quantity);
+
+    $("#customer-accept-"+num_req).removeClass("hidden");
+    $("#customer-reject-"+num_req).removeClass("hidden");
+
+}
+
+
+function createRequest(completed, expired, customer, supplier, id_conv, rqs){
+    $("#rfq-panel-"+rqs._id+".quote a").val(rqs.quote);
+    $("#rfq-panel-"+rqs._id+".quantity a").val(rqs.quantity);
+
+}
+
+function acceptByCustomer(id_conv, id_req, num_req, name) {
     if(sessionStorage.userId == undefined)
     {
         window.location.replace("page_login_and_registration.html");
     }
-    console.log("setRequest");
-    var type = sessionStorage.userType;
-
-
-
     jQuery.ajax({
-        url: _localServiceUrl + "conversations/"+ id_conv,
-        type: "POST,
+         url: _localServiceUrl + "conversations/"+ id_conv+"/requests/"+id_req+"/actions/custaccept",
+         type: "POST",
         contentType: "application/json",
         dataType: 'json',
         success: function(data, textStatus, xhr)
         {
+            console.log("Request modify correctly by customer");
 
-            if(data){
-                // Compile the template
-                var theTemplate = Handlebars.compile(inbox_rfq_requests_messages);
+            $("#status-"+num_req).text("Modificated By Customer");
+            $("#last-modify-"+num_req).text(name);
+            $("#req-buttons-"+num_req).addClass("hidden");
 
-                console.log(data);
-                // Pass our data to the template
-                var theCompiledHtml = theTemplate(data);
+            $("#quote-"+num_req).editable('disable');
+            $("#quantity-"+num_req).editable('disable');
+        },
+        error: function(xhr, status)
+        {
+            console.log(xhr.responseJSON.error);
 
-                // Add the compiled html to the page
-                $("#inbox-rfqs-container").html(theCompiledHtml);
-                $('.editable').editable();
-                $('.editable').on('save', function(e, params) {
-                    var id = (e.target.id);
-                    id = id.split("_")[1];
-                    $('#unsaved_'+ id).removeClass('hidden');
-                });
+            switch(xhr.status)
+            {
+                case 404:
+                    if(xhr.responseJSON.error == "Not Found")
+                        $("#inbox-rfqs-container").html(Handlebars.compile(inbox_rfq_empty_template));
+                    break;
+                case 500:
+                    $("#inbox-rfqs-container").html("error.internal_server_error");
+                    break;
+                default:
+                    $("#inbox-rfqs-container").html(xhr.responseJSON.error_message);
             }
+            return;
+        },
+        beforeSend: function(xhr, settings)
+        {
+            console.log(xhr);
+            console.log(sessionStorage.token);
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+        }
+    });
 
 
 
+}
+
+
+function modifyByCustomer(id_conv, id_req, num_req, name) {
+    if(sessionStorage.userId == undefined)
+    {
+        window.location.replace("page_login_and_registration.html");
+    }
+    var quote = $("#quote-"+num_req).text();
+    var quantity = $("#quantity-"+num_req).text();
+    var data = {'quantity' : quantity, 'quote' : quote};
+    console.log(data);
+    jQuery.ajax({
+        url: _localServiceUrl + "conversations/"+ id_conv+"/requests/"+id_req+"/actions/custmodify",
+        type: "POST",
+        contentType: "application/json",
+       // dataType: 'json',
+        data: JSON.stringify(data),
+        success: function(data, textStatus, xhr)
+        {
+            console.log("Request modify correctly by customer");
+            $('#unsaved_'+ num_req).addClass('hidden');
+            $("#status-"+num_req).text("Modified By Customer");
+            $("#last-modify-"+num_req).text(name);
+            $("#req-buttons-"+num_req).addClass("hidden");
+            $("#quote-"+num_req).editable('disable');
+            $("#quantity-"+num_req).editable('disable');
+        },
+        error: function(xhr, status)
+        {
+            console.log(xhr.responseJSON.error);
+
+            switch(xhr.status)
+            {
+                case 404:
+                    if(xhr.responseJSON.error == "Not Found")
+                        $("#inbox-rfqs-container").html(Handlebars.compile(inbox_rfq_empty_template));
+                    break;
+                case 500:
+                    $("#inbox-rfqs-container").html("error.internal_server_error");
+                    break;
+                default:
+                    $("#inbox-rfqs-container").html(xhr.responseJSON.error_message);
+            }
+            return;
+        },
+        beforeSend: function(xhr, settings)
+        {
+            console.log(xhr);
+            console.log(sessionStorage.token);
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+        }
+    });
+
+
+
+}
+
+function acceptBySupplier(id_conv, id_req, num_req, old_quote, old_quantity, name) {
+    var url = _localServiceUrl + "conversations/"+ id_conv+"/requests/"+id_req+"/actions/suppaccept";
+    if(sessionStorage.userId == undefined)
+    {
+        window.location.replace("page_login_and_registration.html");
+    }
+    var quote = $("#quote-"+num_req).text();
+    var quantity = $("#quantity-"+num_req).text();
+    var data = {quantity : quantity, quote : quote};
+    jQuery.ajax({
+        url: _localServiceUrl + "conversations/"+ id_conv+"/requests/"+id_req+"/actions/suppaccept",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        dataType: 'json',
+        success: function(data, textStatus, xhr)
+        {
+            console.log("Request accepted correctly by supplier");
+            if(old_quote!=quote || old_quantity!= quantity)
+                $("#status-"+num_req).html("Modified&Accepted By Supplier");
+            else
+                $("#status-"+num_req).text("Accepted By Supplier");
+            $("#last-modify-"+num_req).text(name);
+
+
+            $('#unsaved_'+ num_req).addClass('hidden');
+            $("#req-buttons-"+num_req).addClass("hidden");
+            $("#quote-"+num_req).editable('disable');
+            $("#quantity-"+num_req).editable('disable');
+        },
+        error: function(xhr, status)
+        {
+            console.log(xhr.responseJSON.error);
+
+            switch(xhr.status)
+            {
+                case 404:
+                    if(xhr.responseJSON.error == "Not Found")
+                        $("#inbox-rfqs-container").html(Handlebars.compile(inbox_rfq_empty_template));
+                    break;
+                case 500:
+                    $("#inbox-rfqs-container").html("error.internal_server_error");
+                    break;
+                default:
+                    $("#inbox-rfqs-container").html(xhr.responseJSON.error_message);
+            }
+            return;
+        },
+        beforeSend: function(xhr, settings)
+        {
+            console.log(xhr);
+            console.log(sessionStorage.token);
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+        }
+    });
+
+
+}
+
+function rejectedBySupplier(id_conv, id_req, num_req, name) {
+    if(sessionStorage.userId == undefined)
+    {
+        window.location.replace("page_login_and_registration.html");
+    }
+
+    jQuery.ajax({
+        url: _localServiceUrl + "conversations/"+ id_conv+"/requests/"+id_req+"/actions/suppreject",
+        type: "POST",
+        contentType: "application/json",
+        dataType: 'json',
+        success: function(data, textStatus, xhr)
+        {
+            console.log("Request rejected correctly by supplier");
+            $("#status-"+num_req).text("Rejected By Supplier");
+            $("#last-modify-"+num_req).text(name);
+            $("#req-buttons-"+num_req).addClass("hidden");
+            $("#quote-"+num_req).editable('disable');
+            $("#quantity-"+num_req).editable('disable');
 
         },
         error: function(xhr, status)
@@ -390,5 +563,111 @@ function setRequest(id_conv, id_req)
             xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
         }
     });
+
+
 }
-*/
+
+function rejectedByCustomer(id_conv, id_req, num_req, name) {
+
+    if(sessionStorage.userId == undefined)
+    {
+        window.location.replace("page_login_and_registration.html");
+    }
+
+    jQuery.ajax({
+        url: _localServiceUrl + "conversations/"+ id_conv+"/requests/"+id_req+"/actions/custreject",
+        type: "POST",
+        contentType: "application/json",
+        dataType: 'json',
+        success: function(data, textStatus, xhr)
+        {
+            console.log("Request rejected correctly by customer");
+            $("#status-"+num_req).text("Rejected By Customer");
+            $("#last-modify-"+num_req).text(name);
+            $("#req-buttons-"+num_req).addClass("hidden");
+            $("#quote-"+num_req).editable('disable');
+            $("#quantity-"+num_req).editable('disable');
+
+        },
+        error: function(xhr, status)
+        {
+            console.log(xhr.responseJSON.error);
+
+            switch(xhr.status)
+            {
+                case 404:
+                    if(xhr.responseJSON.error == "Not Found")
+                        $("#inbox-rfqs-container").html(Handlebars.compile(inbox_rfq_empty_template));
+                    break;
+                case 500:
+                    $("#inbox-rfqs-container").html("error.internal_server_error");
+                    break;
+                default:
+                    $("#inbox-rfqs-container").html(xhr.responseJSON.error_message);
+            }
+            return;
+        },
+        beforeSend: function(xhr, settings)
+        {
+            console.log(xhr);
+            console.log(sessionStorage.token);
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+        }
+    });
+
+}
+
+function sendMessage(id_conv) {
+
+    if(sessionStorage.userId == undefined)
+    {
+        window.location.replace("page_login_and_registration.html");
+    }
+    var text = $("#rfq-input-msg").val();
+    var data = {
+        sender: sessionStorage.userId,
+        type: sessionStorage.type,
+        dateIn: new Date(),
+        draft: false,
+        automatic: false,
+        text: text
+      //  attachments: ["http//:url"]
+    };
+    console.log(JSON.stringify(data));
+    jQuery.ajax({
+        url: _localServiceUrl + "conversations/"+ id_conv+"/messages",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        dataType: 'json',
+        success: function(data, textStatus, xhr)
+        {
+
+
+        },
+        error: function(xhr, status)
+        {
+            console.log(xhr.responseJSON.error);
+
+            switch(xhr.status)
+            {
+                case 404:
+                    if(xhr.responseJSON.error == "Not Found")
+                        $("#inbox-rfqs-container").html(Handlebars.compile(inbox_rfq_empty_template));
+                    break;
+                case 500:
+                    $("#inbox-rfqs-container").html("error.internal_server_error");
+                    break;
+                default:
+                    $("#inbox-rfqs-container").html(xhr.responseJSON.error_message);
+            }
+            return;
+        },
+        beforeSend: function(xhr, settings)
+        {
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+        }
+    });
+
+
+}
