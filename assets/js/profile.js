@@ -47,10 +47,8 @@ function getUserProfile()
         var template = Handlebars.compile(supplierProfileTemplate); 
         jQuery('#profile').html(template(data));
         jQuery('#profile').localize();
-        
-        
-        getDocumentList();
-        
+                
+        getDocumentList();        
                 
         var tDocTab = Handlebars.compile(documentsTabTemplate); 
         jQuery("#tabContainer").append(tDocTab());
@@ -94,8 +92,22 @@ function getUserProfile()
           jQuery(this).editable("option", "emptytext", jQuery(this).data("emptytext"));          
         });               
         jQuery(".editable-empty").each(function(){
-          jQuery(this).html(jQuery(this).data("emptytext"));
-          
+          jQuery(this).html(jQuery(this).data("emptytext"));          
+        });
+        
+             
+        jQuery('[data-toggle=confirmation]').confirmation("destroy");            
+        jQuery('[data-toggle=confirmation]').popover("destroy");
+        jQuery('[data-toggle=confirmation]').attr('data-original-title', i18next.t("profile.areYouSure"));
+        //jQuery('[data-toggle=confirmation]').attr('data-btn-cancel-label', i18next.t("profile.no"));
+        //jQuery('[data-toggle=confirmation]').attr('data-btn-ok-label', i18next.t("profile.yes"));
+        
+        
+        jQuery('[data-toggle=confirmation]').confirmation({
+          rootSelector: '[data-toggle=confirmation]',
+          btnOkLabel: i18next.t("profile.yes"),
+          btnCancelLabel: i18next.t("profile.no"),
+          title: i18next.t("profile.areYouSure")      
         });
       });
       
@@ -291,8 +303,9 @@ function getFavoriteSuppliers()
     success: function(dataResp, textStatus, xhr)
     {        
       var tFavTab = Handlebars.compile(favoriteTableTemplate); 
+      jQuery("#favoriteSuppliersList").empty();
       jQuery("#favoriteSuppliersList").append(tFavTab(dataResp));        
-      //console.log(dataResp);      
+      //console.log(dataResp);                  
         
     },     
     error: function(xhr, status)
@@ -393,8 +406,70 @@ function getDocumentList()
       var tDocTable = Handlebars.compile(documentsTableTemplate);      
       jQuery("#documentsList").html(tDocTable(dd));
       jQuery("#documentsList").localize();
-                      
-            
+      
+      
+      jQuery('[data-toggle=confirmation]').confirmation({
+        rootSelector: '[data-toggle=confirmation]',
+        // other options
+      });
+    },
+    error: function(xhr, status)
+    {
+      var msg;
+      
+      switch(xhr.status)
+      {
+        case 400:
+          msg = i18next.t("error.invalid_pdf");
+          break;
+        case 403:
+          msg = i18next.t("error.unauthorized");
+          break;
+        case 500:
+          msg = i18next.t("disk_quota_exceeded");
+          break;
+        default:
+          try
+          {        
+            msg = xhr.responseJSON.message;
+          }
+          catch(err)
+          {
+            msg = i18next.t("error.internal_server_error");
+          }
+      }
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    } 
+  });
+}
+
+function deleteDocument(name)
+{
+  if(!name)
+  {
+    console.log(jQuery(this).data("fnme"));
+    console.log(jQuery(this));
+    name = jQuery(this).data("fname");
+    if(!name)
+    {
+      jQuery.jGrowl("No name", {theme:'bg-color-red', life: 5000});
+      return;      
+    }
+  }
+  
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/actions/attachment/" + name,
+    type: "DELETE",
+    contentType: "application/json; charset=utf-8",
+    success: function(data, textStatus, xhr)
+    {      
+      jQuery.jGrowl(i18next.t("profile.documentDeleted"), {theme:'bg-color-green1', life: 5000});
+      getDocumentList();                                  
     },
     error: function(xhr, status)
     {
@@ -433,43 +508,28 @@ function getDocumentList()
 
 
 
-
-function deleteDocument(name)
+function removeFavoriteSupplier(sid)
 {
   jQuery.ajax({
-    url: _brokerMsUrl + "users/actions/attachment/" + name,
+    url: _brokerMsUrl + "users/actions/favorites/" + sid,
     type: "DELETE",
     contentType: "application/json; charset=utf-8",
     success: function(data, textStatus, xhr)
     {      
-      jQuery.jGrowl(i18next.t("profile.documentDeleted"), {theme:'bg-color-green1', life: 5000});
-      getDocumentList();                                  
+      getFavoriteSuppliers();  
     },
     error: function(xhr, status)
     {
       var msg;
-      
-      switch(xhr.status)
-      {
-        case 400:
-          msg = i18next.t("error.invalid_pdf");
-          break;
-        case 403:
-          msg = i18next.t("error.unauthorized");
-          break;
-        case 500:
-          msg = i18next.t("disk_quota_exceeded");
-          break;
-        default:
-          try
-          {        
-            msg = xhr.responseJSON.message;
-          }
-          catch(err)
-          {
-            msg = i18next.t("error.internal_server_error");
-          }
+
+      try
+      {        
+        msg = xhr.responseJSON.message;
       }
+      catch(err)
+      {
+        msg = i18next.t("error.internal_server_error");
+      }      
       
       jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
     },

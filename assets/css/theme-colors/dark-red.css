@@ -24,6 +24,10 @@ a.read-more:hover {
 	color:#d40000;
 }
 
+.important-white{
+  color: #FFF !important;
+}
+
 /* Headers Default
 ------------------------------------*/
 .header .navbar-nav > .active > a {

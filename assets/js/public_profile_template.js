@@ -1,5 +1,31 @@
+var starFullTemplate = `
+<span  class="pull-right" aria-label="Left Align">
+  <span style="" class="yellow glyphicon glyphicon-star" aria-hidden="true"></span>
+</span>
+`
+
+var starEmptyTemplate =  `
+ <button type="button" class="btn btn-default pull-right" data-i18n="[title]publicProfile.addSupplier" aria-label="Left Align" onclick="addToFavorite()">
+  <span style="" class="yellow glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+</button>
+`;
+
 var pTemplate = `
 <div class="profile-bio">
+  {{#if isCustomer}}
+    <div id="starBlock" >   
+      {{#if noFavorite}} 
+        <button type="button" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" data-i18n="[title]publicProfile.addSupplier" onclick="addToFavorite()">
+          <span style="" class="yellow glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+        </button>
+      {{else}}
+        <span  class="pull-right" aria-label="Left Align">
+          <span style="" class="yellow glyphicon glyphicon-star" aria-hidden="true"></span>
+        </span>
+      {{/if}}
+    </div>
+  {{/if}}
+  
   <div class="row">
     <div class="col-md-5">
       {{#if logo}}

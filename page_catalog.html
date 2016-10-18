@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en"> <!--<![endif]-->
+<head>
+    <title>Catalog Page - Cagliari Port 2020</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Web Fonts -->
+    <link rel='stylesheet' type='text/css'
+          href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- CSS Header and Footer -->
+    <link rel="stylesheet" href="assets/css/headers/header-default.css">
+    <link rel="stylesheet" href="assets/css/footers/footer-v1.css">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="assets/plugins/animate.css">
+    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+
+    <!-- CSS Page Style -->
+    <link rel="stylesheet" href="assets/css/pages/profile.css">
+
+    <!-- CSS Theme -->
+    <link rel="stylesheet" href="assets/css/theme-skins/dark.css" id="style_color">
+    <link rel="stylesheet" href="assets/css/theme-colors/dark-red.css">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/custom_rfq.css">
+    <style type="text/css">
+        .giveMeEllipsis {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 5; /* number of lines to show */
+            line-height: 1;        /* fallback */
+            max-height: 5;       /* fallback */
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="wrapper">
+    <!--=== Header ===-->
+    <div id="header_p"></div>
+    <!--=== End Header ===-->
+
+    <!--=== Profile ===-->
+    <div class="container content profile">
+        <div class="row">
+            <!--Left Sidebar-->
+            <div id="sidebar"></div>
+            <!--End Left Sidebar-->
+
+            <!-- Catalog Content -->
+            <div class="col-md-9">
+                <div class="">
+                    <div class="row">
+                        <!--Alert-->
+                        <div class="sm-margin-bottom-30 col-md-8">
+                            <div class="panel-heading-v2 overflow-h">
+                                <div class="row well">
+                                    <div class="col-md-3"><h2 class="heading-xs pull-left"><i
+                                            class="fa fa-file fa-fw"></i> Catalog </h2>
+                                    </div>
+                                    <div class="col-md-9">
+
+                                        <!--
+
+
+.search-block form.page-search-form .checkbox  -->
+                                        <ul class="list-inline clear-both">
+
+                                            <li class="sort-list-btn">
+                                                <div class="btn-group row">
+                                                    <div class="col-md-6" style="padding-right: 0px;">
+                                                        <input class="form-control margin-bottom-10" name="code"
+                                                               type="text">
+                                                    </div>
+                                                    <div class="col-md-4"
+                                                         style="padding-left: 0px;padding-right: 0px;width: 100px;">
+
+                                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                                data-toggle="dropdown">
+                                                            Categories <span class="caret"></span>
+                                                        </button>
+
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="#">All</a></li>
+                                                            <li><a href="#">Best Sales</a></li>
+                                                            <li><a href="#">Top Last Week Sales</a></li>
+                                                            <li><a href="#">New Arrived</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-2" style="padding-left: 0px;">
+                                                        <button type="button" class="btn-u ">Search</button>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="row search-block">
+                                                    <form action="" class="sky-form page-search-form"
+                                                          style="margin-left: 15px;">
+                                                        <div class="inline-group">
+                                                            <label class="checkbox"><input type="checkbox"
+                                                                                           name="checkbox-inline"
+                                                                                           checked=""><i></i>All</label>
+                                                            <label class="checkbox"><input type="checkbox"
+                                                                                           name="checkbox-inline"><i></i>In
+                                                                catalog</label>
+                                                        </div>
+                                                    </form>
+
+
+                                                </div>
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div id="products_container" class="table-search-v2">
+
+                            </div>
+
+                        </div>
+                        <!--End Alert-->
+                        <div id="files_container" class="col-md-4">
+
+
+                        </div>
+
+                    </div><!--/end row-->
+
+                    <hr>
+
+
+                </div>
+                <!-- End Profile Content -->
+            </div>
+        </div><!--/container-->
+        <!--=== End Profile ===-->
+
+        <!--=== Footer Version 1 ===-->
+        <div class="footer-v1">
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <!-- About -->
+                        <div class="col-md-4 md-margin-bottom-40">
+                            <a href="index.html"><img id="logo-footer" class="footer-logo"
+                                                      src="assets/img/port/crs4.png" alt=""></a>
+                            <p>Il CRS4 è un centro di ricerca interdisciplinare privato fondato dalla Regione Autonoma
+                                della Sardegna.</p>
+
+                        </div><!--/col-md-3-->
+                        <!-- End About -->
+
+                        <!-- Link List -->
+                        <div class="col-md-4 md-margin-bottom-40">
+                            <div class="headline"><h2>Useful Links</h2></div>
+                            <ul class="list-unstyled link-list">
+                                <li><a href="#">About us</a><i class="fa fa-angle-right"></i></li>
+                                <li><a href="#">Site</a><i class="fa fa-angle-right"></i></li>
+                                <li><a href="#">Contact us</a><i class="fa fa-angle-right"></i></li>
+                            </ul>
+                        </div><!--/col-md-3-->
+                        <!-- End Link List -->
+
+                        <!-- Address -->
+                        <div class="col-md-4 map-img md-margin-bottom-40">
+                            <div class="headline"><h2>Contact Us</h2></div>
+                            <address class="md-margin-bottom-40">
+                                Edificio 1 <br/>
+                                Loc. Pixina Manna <br/>
+                                Pula, CA <br/>
+                                Email: <a href="mailto:cport2020@gmail.com" class="">cport2020@gmail.com</a>
+                            </address>
+                        </div><!--/col-md-3-->
+                        <!-- End Address -->
+                    </div>
+                </div>
+            </div><!--/footer-->
+
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                2015 &copy; All Rights Reserved.
+                                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                            </p>
+                        </div>
+
+                        <!-- Social Links -->
+                        <div class="col-md-6">
+                            <ul class="footer-socials list-inline">
+                                <li>
+                                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Facebook">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Skype">
+                                        <i class="fa fa-skype"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Google Plus">
+                                        <i class="fa fa-google-plus"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Linkedin">
+                                        <i class="fa fa-linkedin"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Pinterest">
+                                        <i class="fa fa-pinterest"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Twitter">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Dribbble">
+                                        <i class="fa fa-dribbble"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End Social Links -->
+                    </div>
+                </div>
+            </div><!--/copyright-->
+        </div>
+        <!--=== End Footer Version 1 ===-->
+    </div><!--/wrapper-->
+
+    <!--=== Style Switcher ===-->
+    <i class="style-switcher-btn fa fa-cogs hidden-xs"></i>
+    <div class="style-switcher animated fadeInRight">
+        <div class="style-swticher-header">
+            <div class="style-switcher-heading">Style Switcher</div>
+            <div class="theme-close"><i class="icon-close"></i></div>
+        </div>
+
+        <div class="style-swticher-body">
+            <!-- Theme Colors -->
+            <div class="style-switcher-heading">Theme Colors</div>
+            <ul class="list-unstyled">
+                <li class="theme-default theme-active" data-style="default" data-header="light"></li>
+                <li class="theme-blue" data-style="blue" data-header="light"></li>
+                <li class="theme-orange" data-style="orange" data-header="light"></li>
+                <li class="theme-red" data-style="red" data-header="light"></li>
+                <li class="theme-light" data-style="light" data-header="light"></li>
+                <li class="theme-purple last" data-style="purple" data-header="light"></li>
+                <li class="theme-aqua" data-style="aqua" data-header="light"></li>
+                <li class="theme-brown" data-style="brown" data-header="light"></li>
+                <li class="theme-dark-blue" data-style="dark-blue" data-header="light"></li>
+                <li class="theme-light-green" data-style="light-green" data-header="light"></li>
+                <li class="theme-dark-red" data-style="dark-red" data-header="light"></li>
+                <li class="theme-teal last" data-style="teal" data-header="light"></li>
+            </ul>
+
+            <!-- Theme Skins -->
+            <div class="style-switcher-heading">Theme Skins</div>
+            <div class="row no-col-space margin-bottom-20 skins-section">
+                <div class="col-xs-6">
+                    <button data-skins="default"
+                            class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn handle-skins-btn">Light
+                    </button>
+                </div>
+                <div class="col-xs-6">
+                    <button data-skins="dark" class="btn-u btn-u-xs btn-u-dark btn-block skins-btn">Dark</button>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Layout Styles -->
+            <div class="style-switcher-heading">Layout Styles</div>
+            <div class="row no-col-space margin-bottom-20">
+                <div class="col-xs-6">
+                    <a href="javascript:void(0);"
+                       class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn wide-layout-btn">Wide</a>
+                </div>
+                <div class="col-xs-6">
+                    <a href="javascript:void(0);" class="btn-u btn-u-xs btn-u-dark btn-block boxed-layout-btn">Boxed</a>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- Theme Type -->
+            <div class="style-switcher-heading">Theme Types and Versions</div>
+            <div class="row no-col-space margin-bottom-10">
+                <div class="col-xs-6">
+                    <a href="E-Commerce/index.html" class="btn-u btn-u-xs btn-u-dark btn-block">Shop UI
+                        <small class="dp-block">Template</small>
+                    </a>
+                </div>
+                <div class="col-xs-6">
+                    <a href="One-Pages/Classic/index.html" class="btn-u btn-u-xs btn-u-dark btn-block">One Page
+                        <small class="dp-block">Template</small>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row no-col-space">
+                <div class="col-xs-6">
+                    <a href="Blog-Magazine/index.html" class="btn-u btn-u-xs btn-u-dark btn-block">Blog
+                        <small class="dp-block">Template</small>
+                    </a>
+                </div>
+                <div class="col-xs-6">
+                    <a href="RTL/index.html" class="btn-u btn-u-xs btn-u-dark btn-block">RTL
+                        <small class="dp-block">Version</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div><!--/style-switcher-->
+    <!--=== End Style Switcher ===-->
+
+    <!-- JS Global Compulsory -->
+
+    <script id="filetable" type="text/x-handlebars-template">
+        <div class="table-search-v2">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Files</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each files}}
+                    <tr>
+                        <td class="well">
+                            <div class="row ">
+
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-1">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                </div>
+                                <div class="col-md-8">
+                                    <h3 style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
+                                        {{filename}}</h3>
+                                </div>
+                                <div class="col-md-1">
+
+                                    <button type="button"
+                                            class="btn-u btn-u-sm btn-u-dark"><i
+                                            class="fa fa-download"
+                                            onclick="window.open('{{../url}}{{filename}}')"></i></button>
+
+
+                                </div>
+                            </div>
+
+
+                        </td>
+                    </tr>
+                    {{/each}}
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </script>
+
+    <script id="productstable" type="text/x-handlebars-template">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Products</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {{#each products}}
+                <tr>
+                    <td class="well">
+                        <div class="row full-width">
+                            <div class="col-md-2">
+                                <img class="img-bordered"
+                                     src="{{images.[0]}}"
+                                     onError="this.onerror=null;this.src='http://news.siteintelgroup.com/blog/components/com_easyblog/themes/wireframe/images/placeholder-image.png'"
+                                     alt="">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <h3><a href="#">{{name}}</a></h3>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <ul class="list-inline table-buttons"
+                                            style="display: inline-flex;">
+
+                                            <li>
+                                                <button type="button"
+                                                        class="btn-u btn-u-sm btn-u-dark"><i
+                                                        class="fa fa-edit"></i></button>
+                                            </li>
+                                            <li>
+                                                <button type="button"
+                                                        class="btn-u btn-u-sm btn-u-dark"><i
+                                                        class="fa fa-trash-o"></i></button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="giveMeEllipsis">{{description}}</div>
+                                    <!-- small class="hex">Joined February 28, 2014</small -->
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </td>
+
+                </tr>
+                {{/each}}
+
+                </tbody>
+            </table>
+
+            <div id="pagination_container"></div>
+
+
+        </div>
+</div>
+
+</script>
+
+<script id="pagination_template" type="text/x-handlebars-template">
+
+    <div class="text-left">
+        <ul class="pagination">
+            {{#paginate pagination type="first"}}
+            {{#if disabled}}{{else}}<li><a href="#" onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">First</a></li> {{/if}}
+            {{/paginate}}
+            {{#paginate pagination type="previous"}}
+            {{#if disabled}}{{else}}<li>  <a href="#" onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">Prev</a></li>{{/if}}
+            {{/paginate}}
+            {{#paginate pagination type="middle" limit="7"}}
+            <li {{#if active}}class="active" {{/if}}><a href="#" onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">{{n}}</a></li>
+            {{/paginate}}
+            {{#paginate pagination type="next"}}
+            {{#if disabled}}{{else}}<li><a href="#" onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">Next</a></li> {{/if}}
+            {{/paginate}}
+            {{#paginate pagination type="last"}}
+            {{#if disabled}}{{else}}<li><a href="#" onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">Last</a></li> {{/if}}
+            {{/paginate}}
+        </ul>
+    </div>
+</script>
+
+
+<script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- JS Implementing Plugins -->
+<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
+<script type="text/javascript" src="assets/plugins/counter/waypoints.min.js"></script>
+<script type="text/javascript" src="assets/plugins/counter/jquery.counterup.min.js"></script>
+<script type="text/javascript" src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!-- JS Translation -->
+<script src="assets/js/translations/translation.js"></script>
+<script type="text/javascript" src="assets/js/plugins/i18next.min.js"></script>
+<script type="text/javascript" src="assets/js/plugins/jquery-i18next.min.js"></script>
+
+<!-- JS Customization -->
+<script type="text/javascript" src="assets/js/sidebar.js"></script>
+<script type="text/javascript" src="assets/js/custom.js"></script>
+<!-- JS Page Level -->
+<script type="text/javascript" src="assets/js/app.js"></script>
+<script type="text/javascript" src="assets/js/plugins/datepicker.js"></script>
+<!--<script type="text/javascript" src="assets/js/plugins/style-switcher.js"></script>-->
+<script type="text/javascript" src="assets/js/common_header.js"></script>
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+<script type="text/javascript" src="assets/js/utils.js"></script>
+<script type="text/javascript" src="assets/js/handlebars-paginate.js"></script>
+
+
+<script type="text/javascript">
+    var supId = "57f5059fe8094b7137fa3efd";
+    var getfilesURL = _brokerMsUrl + "users/attachment/" + supId;
+    var getproductsURL = _brokerMsUrl + "products?supplierId=" + supId;
+   // getproductsURL = _brokerMsUrl + "products";
+
+    function getfiles(url, templateid, target) {
+        $.get(url, function (data) {
+            console.log(data);
+            if (!window[templateid + "_template"]) {
+                window[templateid + "_template"] = Handlebars.compile($('#' + templateid).html());
+            }
+
+            var files = [];
+            for (var i = 0; i < data.files.length; ++i)
+                files.push({filename: data.files[i]})
+
+            var compiled = window[templateid + "_template"]({
+                files: files,
+                url: _brokerMsUrl + "/users/attachment/" + supId + "/"
+            });
+
+            $(target).empty();
+            $(target).html(compiled);
+        });
+    }
+
+    function getproducts(url, templateid, target, page) {
+        if (page) {
+            if (url.indexOf("?") === -1)
+                url += "?page=" + page;
+            else
+                url += "&page=" + page
+        }
+        $.get(url, function (data) {
+            console.log(data);
+            if (!window[templateid + "_template_fun"]) {
+                window[templateid + "_template_fun"] = Handlebars.compile($('#' + templateid).html());
+            }
+
+
+            var compiled = window[templateid + "_template_fun"]({
+                products: data.docs
+
+            });
+
+            $(target).empty();
+            $(target).html(compiled);
+
+
+            if (!window["pagination_template_fun"]) {
+                window["pagination_template_fun"] = Handlebars.compile($("#pagination_template").html());
+            }
+
+            var pagination = window["pagination_template_fun"]({
+                pagination: {
+                    page: data.page,
+                    pageCount: data.pages
+                }
+            });
+
+            $("#pagination_container").empty();
+            $("#pagination_container").html(pagination);
+        });
+    }
+
+</script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+
+
+        Handlebars.registerHelper('paginate', paginate);
+
+        App.init();
+        //App.initCounter();
+        //App.initScrollBar();
+        //Datepicker.initDatepicker();
+        //StyleSwitcher.initStyleSwitcher();
+        //   getConversations();
+        getfiles(getfilesURL, "filetable", '#files_container');
+        getproducts(getproductsURL, 'productstable', '#products_container');
+
+
+    });
+</script>
+<!--[if lt IE 9]>
+<script src="assets/plugins/respond.js"></script>
+<script src="assets/plugins/html5shiv.js"></script>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<script src="assets/plugins/sky-forms-pro/skyforms/js/sky-forms-ie8.js"></script>
+<![endif]-->
+
+<!--[if lt IE 10]>
+<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
+<![endif]-->
+</body>
+</html>

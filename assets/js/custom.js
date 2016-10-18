@@ -6,7 +6,17 @@ _access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOi
 
 var lng = localStorage.lng;
 
-jQuery(document).ready(function(){
+jQuery(document).ready(function(){  
+  var sb = jQuery("#sidebar");
+  
+  if(sb.length > 0)
+  {
+    var sbT = Handlebars.compile(sidebarTemplate);      
+    jQuery("#sidebar").html(sbT);
+    jQuery("#sidebar").localize();
+  }
+  
+  
   jQuery('body').localize();
   jQuery('#header_p').html(header_template);
   if (lng != undefined)
@@ -64,7 +74,7 @@ jQuery(document).ready(function(){
       
     });
   }
-  
+    
   if(sessionStorage.token)
   {    
     jQuery("#h_login").hide();
@@ -190,6 +200,9 @@ function getProfileInfo(async)
     success: function(data, textStatus, xhr)
     { 
       sessionStorage.type = data.type;      
+      sessionStorage.name = data.name;
+      sessionStorage.logo = data.logo;
+      
                       
     },     
     error: function(xhr, status)
@@ -201,9 +214,6 @@ function getProfileInfo(async)
     }                    
   });        
 }
-
-
-
 
 
 function getUrlParameter(sParam) 
@@ -223,3 +233,5 @@ function getUrlParameter(sParam)
     }
   }
 }
+
+
