@@ -3,12 +3,12 @@ var translation = {
     en: {
         translation: {
             "nav": {
-              "home": "Home",
+                "home": "Home",
                 "about": "About",
                 "services": "Services",
                 "contacts": "Contacts",
                 "help": "Help"
-            },  
+            },
             "error": {
                 "invalid_email": "Your email address is not valid",
                 "bad_request": "Bad request",
@@ -19,7 +19,7 @@ var translation = {
                 "password_differs": "Passwords must be equals",
                 "unknown_user_type": "Select a valid user type",
                 "invalid_pdf": "You can upload only pdf files",
-                "disk_quota_exceeded" : "Disk quota exceeded"
+                "disk_quota_exceeded": "Disk quota exceeded"
             },
             "login": {
                 "signUp": "Sign Up",
@@ -31,9 +31,9 @@ var translation = {
                 "retypePassword": "Retype password",
                 "userType": "You are a ...",
                 "customer": "Customer",
-                "supplier": "Supplier"              
+                "supplier": "Supplier"
             },
-            "profile":{
+            "profile": {
                 "email": "Email",
                 "type": "Account type",
                 "name": "Name",
@@ -45,15 +45,15 @@ var translation = {
                 "web": "Web site",
                 "categories": "Categories",
                 "pIva": "VATIN",
-                
+
                 "documents": "Documents",
                 "documentsTitle": "Manage your public documents",
                 "documentsTitle2": "Below you can add or remove documents",
                 "documentDeleted": "The document has been deleted successfully",
-                
+
                 "customer": "customer",
                 "supplier": "supplier",
-                
+
                 "passwordTitle": "Manage your password",
                 "passwordTitle2": "Below you can change your password",
                 "editPassword": "Change Password",
@@ -61,27 +61,43 @@ var translation = {
                 "newPasswordPlaceholder": "New password",
                 "newPassword2Placeholder": "Retype the new password",
                 "passwordSaved": "Your password has been updated successfully",
-                
+
                 "favoriteSuppliers": "Favorite suppliers",
                 "favoriteTitle": "Mange your favorite suppliers' list",
                 "favoriteTitle2": "Below you can show your favorite suppliers",
                 "documentsInputLabel": "Choose a pdf document",
                 "uploadDocument": "Upload",
                 "documentSaved": "Document saved",
-                
+
                 "title": "Manage your profile information",
                 "edit": "Edit profile",
-                
+
                 "saved": "Your profile has been successfully updated",
-                "emptyText": "Empty",               
+                "emptyText": "Empty",
                 "cancel": "Cancel",
                 "save": "Save"
             },
             "publicProfile": {
                 "web": "Web site:",
                 "address": "Address:",
-                
-                "noSupplier": "Missing Supplier code"              
+
+                "noSupplier": "Missing Supplier code"
+            },
+            "catalog": {
+                "catalog": "Catalog",
+                "search": "Search",
+                "all": "All",
+                "incatalog": "In catalog",
+                "products": "Products",
+                "files": "Attached Files",
+                "more": "More",
+                "less": "Less"
+            },
+            "pagination": {
+                "next": "Next",
+                "prev": "Prev",
+                "last": "Last",
+                "first": "First"
             }
         }
 
@@ -94,7 +110,7 @@ var translation = {
                 "services": "Servizi",
                 "contacts": "Contatti",
                 "help": "Aiuto"
-            },  
+            },
             "error": {
                 "invalid_email": "L'indirizzo email inserito non &egrave; valido",
                 "bad_request": "Richiesta non valida",
@@ -105,7 +121,7 @@ var translation = {
                 "password_differs": "Le password differiscono",
                 "unknown_user_type": "Seleziona il tipo di account che vuoi creare",
                 "invalid_pdf": "Puoi caricare soltanto file pdf",
-                "disk_quota_exceeded" : "La quota disco a tua disposizione è stata superata"
+                "disk_quota_exceeded": "La quota disco a tua disposizione è stata superata"
             },
             "login": {
                 "signUp": "Registrati",
@@ -118,9 +134,9 @@ var translation = {
                 "userType": "Sei un ...",
                 "customer": "Cliente",
                 "supplier": "Fornitore"
-              
+
             },
-            "profile":{
+            "profile": {
                 "email": "Email",
                 "type": "Tipo di account",
                 "name": "Nome",
@@ -132,7 +148,7 @@ var translation = {
                 "web": "Sito web",
                 "categories": "Categorie",
                 "pIva": "Partita IVA",
-                
+
                 "documents": "Documenti",
                 "documentsTitle": "Gestisci i tuoi documenti pubblici",
                 "documentsTitle2": "Qui puoi aggiungere o rimuovere documenti",
@@ -140,10 +156,10 @@ var translation = {
                 "uploadDocument": "Upload",
                 "documentSaved": "Documento salvato",
                 "documentDeleted": "Il documento  stato cancellato correttamente",
-                
+
                 "customer": "cliente",
                 "supplier": "fornitore",
-                
+
                 "passwordTitle": "Gestisci la tua password",
                 "passwordTitle2": "Qui puoi cambiare la tua password",
                 "editPassword": "Cambia la password",
@@ -151,26 +167,41 @@ var translation = {
                 "newPasswordPlaceholder": "Inserisci la nuova password",
                 "newPassword2Placeholder": "Conferma la nuova password",
                 "passwordSaved": "La tua password è stata aggiornata correttamente",
-                
+
                 "favoriteSuppliers": "Fornitori preferiti",
                 "favoriteTitle": "Gestisci la tua lista dei fornitori preferiti",
                 "favoriteTitle2": "Qui puoi visualizzare i fornitori salvati nella tua lista dei preferiti",
-                
+
                 "title": "Gestisci le informazioni del tuo profilo",
-                "edit": "Modifica il profilo",                
+                "edit": "Modifica il profilo",
                 "saved": "Il tuo profilo è stato aggiornato correttamente",
                 "emptyText": "Vuoto",
                 "cancel": "Annulla",
-                "save": "Salva"                                
+                "save": "Salva"
             },
             "publicProfile": {
                 "web": "Sito web:",
                 "address": "Indirizzo:",
-                
+
                 "noSupplier": "Codice fornitore mancante"
-              
+
+            },
+            "catalog": {
+                "catalog": "Catalogo",
+                "search": "Cerca",
+                "all": "Tutto",
+                "incatalog": "Solo catalogo",
+                "products": "Prodotti",
+                "files": "File Caricati",
+                "more": "Leggi",
+                "less": "Meno"
+            },
+            "pagination": {
+                "next": "Prossima",
+                "prev": "Precedente",
+                "last": "Ultima",
+                "first": "Prima"
             }
-            
         }
     }
 };

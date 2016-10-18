@@ -54,8 +54,8 @@
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 5; /* number of lines to show */
-            line-height: 1;        /* fallback */
-            max-height: 5;       /* fallback */
+            /*  line-height: 1;  fallback */
+            max-height: 5; /* fallback */
         }
     </style>
 
@@ -71,209 +71,101 @@
     <div class="container content profile">
         <div class="row">
             <!--Left Sidebar-->
-            <div class="col-md-3 md-margin-bottom-40">
-                <img class="img-responsive profile-img margin-bottom-20" src="assets/img/team/img32-md.jpg" alt="">
-
-                <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
-                    <li class="list-group-item active">
-                        <a href="page_profile.html"><i class="fa fa-bar-chart-o"></i> Overall</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="page_profile_me.html"><i class="fa fa-user"></i> Profile</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="page_profile_users.html"><i class="fa fa-group"></i> Users</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="page_profile_projects.html"><i class="fa fa-cubes"></i> My Projects</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="page_rfq_inbox.html"><i class="fa fa-paper-plane"></i> RFQs</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="page_profile_history.html"><i class="fa fa-history"></i> History</a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="page_profile_settings.html"><i class="fa fa-cog"></i> Settings</a>
-                    </li>
-                </ul>
-
-                <div class="panel-heading-v2 overflow-h">
-                    <h2 class="heading-xs pull-left"><i class="fa fa-bar-chart-o"></i> Task Progress</h2>
-                    <a href="#"><i class="fa fa-cog pull-right"></i></a>
-                </div>
-                <h3 class="heading-xs">Web Design <span class="pull-right">92%</span></h3>
-                <div class="progress progress-u progress-xxs">
-                    <div style="width: 92%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="92" role="progressbar"
-                         class="progress-bar progress-bar-u">
-                    </div>
-                </div>
-                <h3 class="heading-xs">Unify Project <span class="pull-right">85%</span></h3>
-                <div class="progress progress-u progress-xxs">
-                    <div style="width: 85%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="85" role="progressbar"
-                         class="progress-bar progress-bar-blue">
-                    </div>
-                </div>
-                <h3 class="heading-xs">Sony Corporation <span class="pull-right">64%</span></h3>
-                <div class="progress progress-u progress-xxs margin-bottom-40">
-                    <div style="width: 64%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="64" role="progressbar"
-                         class="progress-bar progress-bar-dark">
-                    </div>
-                </div>
-
-                <hr>
-
-                <!--Notification-->
-                <div class="panel-heading-v2 overflow-h">
-                    <h2 class="heading-xs pull-left"><i class="fa fa-bell-o"></i> Notification</h2>
-                    <a href="#"><i class="fa fa-cog pull-right"></i></a>
-                </div>
-                <ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark">
-                    <li class="notification">
-                        <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope"></i>
-                        <div class="overflow-h">
-                            <span><strong>Albert Heller</strong> has sent you email.</span>
-                            <small>Two minutes ago</small>
-                        </div>
-                    </li>
-                    <li class="notification">
-                        <img class="rounded-x" src="assets/img/testimonials/img6.jpg" alt="">
-                        <div class="overflow-h">
-                            <span><strong>Taylor Lee</strong> started following you.</span>
-                            <small>Today 18:25 pm</small>
-                        </div>
-                    </li>
-                    <li class="notification">
-                        <i class="icon-custom icon-sm rounded-x icon-bg-yellow icon-line fa fa-bolt"></i>
-                        <div class="overflow-h">
-                            <span><strong>Natasha Kolnikova</strong> accepted your invitation.</span>
-                            <small>Yesterday 1:07 pm</small>
-                        </div>
-                    </li>
-                    <li class="notification">
-                        <img class="rounded-x" src="assets/img/testimonials/img1.jpg" alt="">
-                        <div class="overflow-h">
-                            <span><strong>Mikel Andrews</strong> commented on your Timeline.</span>
-                            <small>23/12 11:01 am</small>
-                        </div>
-                    </li>
-                    <li class="notification">
-                        <i class="icon-custom icon-sm rounded-x icon-bg-blue icon-line fa fa-comments"></i>
-                        <div class="overflow-h">
-                            <span><strong>Bruno Js.</strong> added you to group chating.</span>
-                            <small>Yesterday 1:07 pm</small>
-                        </div>
-                    </li>
-                    <li class="notification">
-                        <img class="rounded-x" src="assets/img/testimonials/img6.jpg" alt="">
-                        <div class="overflow-h">
-                            <span><strong>Taylor Lee</strong> changed profile picture.</span>
-                            <small>23/12 15:15 pm</small>
-                        </div>
-                    </li>
-                </ul>
-                <button type="button" class="btn-u btn-u-default btn-u-sm btn-block">Load More</button>
-                <!--End Notification-->
-
-                <div class="margin-bottom-50"></div>
-
-                <!--Datepicker-->
-                <form action="#" id="sky-form2" class="sky-form">
-                    <div id="inline-start"></div>
-                </form>
-                <!--End Datepicker-->
-            </div>
+            <div class="sidebar "></div>
             <!--End Left Sidebar-->
 
             <!-- Catalog Content -->
-            <div class="col-md-9">
-                <div class="">
-                    <div class="row">
-                        <!--Alert-->
-                        <div class="sm-margin-bottom-30 col-md-8">
-                            <div class="panel-heading-v2 overflow-h">
-                                <div class="row well">
-                                    <div class="col-md-3"><h2 class="heading-xs pull-left"><i
-                                            class="fa fa-file fa-fw"></i> Catalog </h2>
-                                    </div>
-                                    <div class="col-md-9">
 
-                                        <!--
+            <div style="width:auto;">
+                <div class="row">
+                    <!--Alert-->
+                    <div class="sm-margin-bottom-30 col-md-8">
+                        <div class="panel-heading-v2 overflow-h">
+                            <div class="row well">
+                                <div class="col-md-3"><h2 class="heading-xs pull-left"><i
+                                        class="fa fa-file fa-fw"></i> <span data-i18n="catalog.catalog"></span></h2>
+                                </div>
+                                <div class="col-md-9">
+
+                                    <!--
 
 
 .search-block form.page-search-form .checkbox  -->
-                                        <ul class="list-inline clear-both">
+                                    <ul class="list-inline clear-both">
 
-                                            <li class="sort-list-btn">
-                                                <div class="btn-group row">
-                                                    <div class="col-md-6" style="padding-right: 0px;">
-                                                        <input class="form-control margin-bottom-10" name="code"
-                                                               type="text">
-                                                    </div>
-                                                    <div class="col-md-4"
-                                                         style="padding-left: 0px;padding-right: 0px;width: 100px;">
-
-                                                        <button type="button" class="btn btn-default dropdown-toggle"
-                                                                data-toggle="dropdown">
-                                                            Categories <span class="caret"></span>
-                                                        </button>
-
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">All</a></li>
-                                                            <li><a href="#">Best Sales</a></li>
-                                                            <li><a href="#">Top Last Week Sales</a></li>
-                                                            <li><a href="#">New Arrived</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-md-2" style="padding-left: 0px;">
-                                                        <button type="button" class="btn-u ">Search</button>
-
-
-                                                    </div>
+                                        <li class="sort-list-btn">
+                                            <div class="btn-group row">
+                                                <div class="col-md-6" style="padding-right: 0px;">
+                                                    <input class="form-control margin-bottom-10" name="code"
+                                                           type="text">
                                                 </div>
-                                                <div class="row search-block">
-                                                    <form action="" class="sky-form page-search-form"
-                                                          style="margin-left: 15px;">
-                                                        <div class="inline-group">
-                                                            <label class="checkbox"><input type="checkbox"
-                                                                                           name="checkbox-inline"
-                                                                                           checked=""><i></i>All</label>
-                                                            <label class="checkbox"><input type="checkbox"
-                                                                                           name="checkbox-inline"><i></i>In
-                                                                catalog</label>
-                                                        </div>
-                                                    </form>
+                                                <div class="col-md-4"
+                                                     style="padding-left: 0px;padding-right: 0px;width: 100px;">
+
+                                                    <button type="button" class="btn btn-default dropdown-toggle"
+                                                            data-i18n="profile.categories"
+                                                            data-toggle="dropdown">
+                                                        <span class="caret"></span>
+                                                    </button>
+
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="#">All</a></li>
+                                                        <li><a href="#">Best Sales</a></li>
+                                                        <li><a href="#">Top Last Week Sales</a></li>
+                                                        <li><a href="#">New Arrived</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-2" style="padding-left: 0px;">
+                                                    <button type="button" class="btn-u "
+                                                            data-i18n="catalog.search"></button>
 
 
                                                 </div>
-                                            </li>
+                                            </div>
+                                            <div class="row search-block">
+                                                <form action="" class="sky-form page-search-form"
+                                                      style="margin-left: 15px;">
+                                                    <div class="inline-group">
+                                                        <label class="checkbox"><input type="checkbox"
+                                                                                       name="checkbox-inline"
+                                                                                       checked=""><i></i><span
+                                                                data-i18n="catalog.all"></span></label>
+                                                        <label class="checkbox"><input type="checkbox"
+                                                                                       name="checkbox-inline"><i></i><span
+                                                                data-i18n="catalog.incatalog"></span></label>
+                                                    </div>
+                                                </form>
 
-                                        </ul>
 
-                                    </div>
+                                            </div>
+                                        </li>
 
+                                    </ul>
 
                                 </div>
-                            </div>
-                            <div id="products_container" class="table-search-v2">
+
 
                             </div>
-
                         </div>
-                        <!--End Alert-->
-                        <div id="files_container" class="col-md-4">
-
+                        <div id="products_container" class="table-search-v2">
 
                         </div>
 
-                    </div><!--/end row-->
+                    </div>
+                    <!--End Alert-->
+                    <div id="files_container" class="col-md-4">
 
-                    <hr>
+
+                    </div>
+
+                </div><!--/end row-->
+
+                <hr>
 
 
-                </div>
-                <!-- End Profile Content -->
             </div>
+                <!-- End Profile Content -->
+
         </div><!--/container-->
         <!--=== End Profile ===-->
 
@@ -477,7 +369,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>Files</th>
+                        <th data-i18n="catalog.files"></th>
 
                     </tr>
                     </thead>
@@ -525,7 +417,7 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>Products</th>
+                    <th data-i18n="catalog.products"></th>
 
                 </tr>
                 </thead>
@@ -541,12 +433,12 @@
                                      alt="">
                             </div>
                             <div class="col-md-10">
-                                <div class="row">
+                                <div class="row" id="{{_id}}" >
                                     <div class="col-md-9">
                                         <h3><a href="#">{{name}}</a></h3>
                                     </div>
                                     <div class="col-md-3">
-                                        <ul class="list-inline table-buttons"
+                                        <!--ul class="list-inline table-buttons"
                                             style="display: inline-flex;">
 
                                             <li>
@@ -559,12 +451,13 @@
                                                         class="btn-u btn-u-sm btn-u-dark"><i
                                                         class="fa fa-trash-o"></i></button>
                                             </li>
-                                        </ul>
+                                        </ul -->
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="giveMeEllipsis">{{description}}</div>
-                                    <!-- small class="hex">Joined February 28, 2014</small -->
+                                    <div class="giveMeEllipsis blog-author-desc">{{description}}</div>
+                                    <a  class="more" data-i18n="catalog.more"></a>
+                                    <a  class="less" style="display:none" data-i18n="catalog.less"></a>
                                 </div>
 
                             </div>
@@ -593,19 +486,37 @@
     <div class="text-left">
         <ul class="pagination">
             {{#paginate pagination type="first"}}
-            {{#if disabled}}{{else}}<li><a href="#" onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">First</a></li> {{/if}}
+            {{#if disabled}}{{else}}
+            <li><a href="#"
+                   onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});"
+                   data-i18n="pagination.first"></a></li>
+            {{/if}}
             {{/paginate}}
             {{#paginate pagination type="previous"}}
-            {{#if disabled}}{{else}}<li>  <a href="#" onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">Prev</a></li>{{/if}}
+            {{#if disabled}}{{else}}
+            <li><a href="#"
+                   onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">
+                &lt;</a></li>
+            {{/if}}
             {{/paginate}}
             {{#paginate pagination type="middle" limit="7"}}
-            <li {{#if active}}class="active" {{/if}}><a href="#" onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">{{n}}</a></li>
+            <li {{#if active}} class="active" {{/if}}>
+            <a href="#"
+                     onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">{{n}}</a></li>
             {{/paginate}}
             {{#paginate pagination type="next"}}
-            {{#if disabled}}{{else}}<li><a href="#" onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">Next</a></li> {{/if}}
+            {{#if disabled}}{{else}}
+            <li><a href="#"
+                   onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">
+                &gt;</a></li>
+            {{/if}}
             {{/paginate}}
             {{#paginate pagination type="last"}}
-            {{#if disabled}}{{else}}<li><a href="#" onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">Last</a></li> {{/if}}
+            {{#if disabled}}{{else}}
+            <li><a href="#"
+                   onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});"
+                   data-i18n="pagination.last"></a></li>
+            {{/if}}
             {{/paginate}}
         </ul>
     </div>
@@ -643,10 +554,22 @@
 
 
 <script type="text/javascript">
-    var supId = "57f5059fe8094b7137fa3efd";
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+
+    var supId = getParameterByName("supplier"); //"57f5059fe8094b7137fa3efd";
     var getfilesURL = _brokerMsUrl + "users/attachment/" + supId;
     var getproductsURL = _brokerMsUrl + "products?supplierId=" + supId;
-   // getproductsURL = _brokerMsUrl + "products";
+    //getproductsURL = _brokerMsUrl + "products";
 
     function getfiles(url, templateid, target) {
         $.get(url, function (data) {
@@ -666,6 +589,7 @@
 
             $(target).empty();
             $(target).html(compiled);
+            $("table").localize();
         });
     }
 
@@ -688,6 +612,7 @@
 
             });
 
+
             $(target).empty();
             $(target).html(compiled);
 
@@ -705,8 +630,28 @@
 
             $("#pagination_container").empty();
             $("#pagination_container").html(pagination);
+            $("table").localize();
+            $("ul.pagination").localize();
+            $(".more").click(showMore);
+            $(".less").click(showLess);
+
         });
     }
+
+    function showMore(e) {
+        var el = e.currentTarget;
+        $(el).siblings(".blog-author-desc").removeClass("giveMeEllipsis");
+        $(el).hide();
+        $(el).siblings(".less").show();
+    }
+
+    function showLess(e) {
+        var el = e.currentTarget;
+        $(el).siblings(".blog-author-desc").addClass("giveMeEllipsis");
+        $(el).hide();
+        $(el).siblings(".more").show();
+    }
+
 
 </script>
 
@@ -724,6 +669,8 @@
         //   getConversations();
         getfiles(getfilesURL, "filetable", '#files_container');
         getproducts(getproductsURL, 'productstable', '#products_container');
+        $("body").localize();
+
 
 
     });
@@ -731,7 +678,7 @@
 <!--[if lt IE 9]>
 <script src="assets/plugins/respond.js"></script>
 <script src="assets/plugins/html5shiv.js"></script>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="assets/plugins/sky-forms-pro/skyforms/js/sky-forms-ie8.js"></script>
 <![endif]-->
 
