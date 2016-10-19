@@ -26,7 +26,7 @@ var header_template = `	<div class="header">
           <li id="h_login"><a href="page_login_and_registration.html">Login</a></li>          
           <li id="h_logout"><a href="#" onclick="logout()">Logout</a></li>   
                                            
-          <li style="padding-left:20px" id="h_user"><strong></strong></li>
+          <li style="padding-left:20px" id="h_user"><a href="page_profile_settings.html" ><strong></strong></a></li>
         </ul>
       </div>
       <!-- End Topbar -->

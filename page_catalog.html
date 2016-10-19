@@ -71,100 +71,95 @@
     <div class="container content profile">
         <div class="row">
             <!--Left Sidebar-->
-            <div class="sidebar "></div>
+            <div id="sidebar">
+
+            </div>
             <!--End Left Sidebar-->
 
             <!-- Catalog Content -->
 
-            <div style="width:auto;">
-                <div class="row">
-                    <!--Alert-->
-                    <div class="sm-margin-bottom-30 col-md-8">
-                        <div class="panel-heading-v2 overflow-h">
-                            <div class="row well">
-                                <div class="col-md-3"><h2 class="heading-xs pull-left"><i
-                                        class="fa fa-file fa-fw"></i> <span data-i18n="catalog.catalog"></span></h2>
-                                </div>
-                                <div class="col-md-9">
+            <div class="row">
+                <!--Alert-->
+                <div class="sm-margin-bottom-30 col-md-8">
+                    <div class="panel-heading-v2 overflow-h">
+                        <div class="row well">
+                            <div class="col-md-3"><h2 class="heading-xs pull-left"><i
+                                    class="fa fa-file fa-fw"></i> <span data-i18n="catalog.catalog"></span></h2>
+                            </div>
+                            <div class="col-md-9">
 
-                                    <!--
+                                <!--.search-block form.page-search-form .checkbox  -->
+                                <ul class="list-inline clear-both">
 
-
-.search-block form.page-search-form .checkbox  -->
-                                    <ul class="list-inline clear-both">
-
-                                        <li class="sort-list-btn">
-                                            <div class="btn-group row">
-                                                <div class="col-md-6" style="padding-right: 0px;">
-                                                    <input class="form-control margin-bottom-10" name="code"
-                                                           type="text">
-                                                </div>
-                                                <div class="col-md-4"
-                                                     style="padding-left: 0px;padding-right: 0px;width: 100px;">
-
-                                                    <button type="button" class="btn btn-default dropdown-toggle"
-                                                            data-i18n="profile.categories"
-                                                            data-toggle="dropdown">
-                                                        <span class="caret"></span>
-                                                    </button>
-
-                                                    <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="#">All</a></li>
-                                                        <li><a href="#">Best Sales</a></li>
-                                                        <li><a href="#">Top Last Week Sales</a></li>
-                                                        <li><a href="#">New Arrived</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-md-2" style="padding-left: 0px;">
-                                                    <button type="button" class="btn-u "
-                                                            data-i18n="catalog.search"></button>
-
-
-                                                </div>
+                                    <li class="sort-list-btn">
+                                        <div class="btn-group row">
+                                            <div class="col-md-6" style="padding-right: 0px;">
+                                                <input class="form-control margin-bottom-10" name="code"
+                                                       type="text">
                                             </div>
-                                            <div class="row search-block">
-                                                <form action="" class="sky-form page-search-form"
-                                                      style="margin-left: 15px;">
-                                                    <div class="inline-group">
-                                                        <label class="checkbox"><input type="checkbox"
-                                                                                       name="checkbox-inline"
-                                                                                       checked=""><i></i><span
-                                                                data-i18n="catalog.all"></span></label>
-                                                        <label class="checkbox"><input type="checkbox"
-                                                                                       name="checkbox-inline"><i></i><span
-                                                                data-i18n="catalog.incatalog"></span></label>
-                                                    </div>
-                                                </form>
+                                            <div class="col-md-4"
+                                                 style="padding-left: 0px;padding-right: 0px;width: 100px;">
+
+                                                <button type="button" class="btn btn-default dropdown-toggle"
+                                                        data-i18n="profile.categories"
+                                                        data-toggle="dropdown">
+                                                    <span class="caret"></span>
+                                                </button>
+
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">All</a></li>
+                                                    <li><a href="#">Best Sales</a></li>
+                                                    <li><a href="#">Top Last Week Sales</a></li>
+                                                    <li><a href="#">New Arrived</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-2" style="padding-left: 0px;">
+                                                <button type="button" class="btn-u "
+                                                        data-i18n="catalog.search"></button>
 
 
                                             </div>
-                                        </li>
+                                        </div>
+                                        <div class="row search-block">
+                                            <form action="" class="sky-form page-search-form"
+                                                  style="margin-left: 15px;">
+                                                <div class="inline-group">
+                                                    <label class="checkbox"><input type="checkbox"
+                                                                                   name="checkbox-inline"
+                                                                                   checked=""><i></i><span
+                                                            data-i18n="catalog.all"></span></label>
+                                                    <label class="checkbox"><input type="checkbox"
+                                                                                   name="checkbox-inline"><i></i><span
+                                                            data-i18n="catalog.incatalog"></span></label>
+                                                </div>
+                                            </form>
 
-                                    </ul>
 
-                                </div>
+                                        </div>
+                                    </li>
 
+                                </ul>
 
                             </div>
-                        </div>
-                        <div id="products_container" class="table-search-v2">
+
 
                         </div>
-
                     </div>
-                    <!--End Alert-->
-                    <div id="files_container" class="col-md-4">
-
+                    <div id="products_container" class="table-search-v2">
 
                     </div>
 
-                </div><!--/end row-->
+                </div>
+                <!--End Alert-->
+                <div id="files_container" class="col-md-4">
 
-                <hr>
+
+                </div>
+
+            </div><!--/end row-->
 
 
-            </div>
-                <!-- End Profile Content -->
+            <!-- End Profile Content -->
 
         </div><!--/container-->
         <!--=== End Profile ===-->
@@ -433,7 +428,7 @@
                                      alt="">
                             </div>
                             <div class="col-md-10">
-                                <div class="row" id="{{_id}}" >
+                                <div class="row" id="{{_id}}">
                                     <div class="col-md-9">
                                         <h3><a href="#">{{name}}</a></h3>
                                     </div>
@@ -456,8 +451,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="giveMeEllipsis blog-author-desc">{{description}}</div>
-                                    <a  class="more" data-i18n="catalog.more"></a>
-                                    <a  class="less" style="display:none" data-i18n="catalog.less"></a>
+                                    <a class="more" data-i18n="catalog.more"></a>
+                                    <a class="less" style="display:none" data-i18n="catalog.less"></a>
                                 </div>
 
                             </div>
@@ -500,9 +495,10 @@
             {{/if}}
             {{/paginate}}
             {{#paginate pagination type="middle" limit="7"}}
-            <li {{#if active}} class="active" {{/if}}>
-            <a href="#"
-                     onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">{{n}}</a></li>
+            <li class="{{#if active}}active{{/if}}">
+                <a href="#"
+                   onclick="javascript:getproducts(getproductsURL, 'productstable', '#products_container', {{n}});">{{n}}</a>
+            </li>
             {{/paginate}}
             {{#paginate pagination type="next"}}
             {{#if disabled}}{{else}}
@@ -539,6 +535,7 @@
 <script type="text/javascript" src="assets/js/plugins/jquery-i18next.min.js"></script>
 
 <!-- JS Customization -->
+<script type="text/javascript" src="assets/js/sidebar.js"></script>
 <script type="text/javascript" src="assets/js/custom.js"></script>
 <!-- JS Page Level -->
 <script type="text/javascript" src="assets/js/app.js"></script>
@@ -569,7 +566,7 @@
     var supId = getParameterByName("supplier"); //"57f5059fe8094b7137fa3efd";
     var getfilesURL = _brokerMsUrl + "users/attachment/" + supId;
     var getproductsURL = _brokerMsUrl + "products?supplierId=" + supId;
-    //getproductsURL = _brokerMsUrl + "products";
+//    getproductsURL = _brokerMsUrl + "products";
 
     function getfiles(url, templateid, target) {
         $.get(url, function (data) {
@@ -670,7 +667,6 @@
         getfiles(getfilesURL, "filetable", '#files_container');
         getproducts(getproductsURL, 'productstable', '#products_container');
         $("body").localize();
-
 
 
     });

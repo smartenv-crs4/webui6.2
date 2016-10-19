@@ -51,6 +51,9 @@ var translation = {
                 "documentsTitle2": "Below you can add or remove documents",
                 "documentDeleted": "The document has been deleted successfully",
 
+                "areYouSure": "Are you sure ?",
+                "confirmDeleteDocument": "Do you want to remove this  document ?",
+
                 "customer": "customer",
                 "supplier": "supplier",
 
@@ -67,7 +70,9 @@ var translation = {
                 "favoriteTitle2": "Below you can show your favorite suppliers",
                 "documentsInputLabel": "Choose a pdf document",
                 "uploadDocument": "Upload",
+
                 "documentSaved": "Document saved",
+
 
                 "title": "Manage your profile information",
                 "edit": "Edit profile",
@@ -75,13 +80,17 @@ var translation = {
                 "saved": "Your profile has been successfully updated",
                 "emptyText": "Empty",
                 "cancel": "Cancel",
-                "save": "Save"
+                "save": "Save",
+                "yes": "Yes",
+                "no": "No"
+
             },
             "publicProfile": {
                 "web": "Web site:",
                 "address": "Address:",
 
-                "noSupplier": "Missing Supplier code"
+                "noSupplier": "Missing Supplier code",
+                "addSupplier": "Add to favorites"
             },
             "catalog": {
                 "catalog": "Catalog",
@@ -98,6 +107,7 @@ var translation = {
                 "prev": "Prev",
                 "last": "Last",
                 "first": "First"
+
             }
         }
 
@@ -149,6 +159,7 @@ var translation = {
                 "categories": "Categorie",
                 "pIva": "Partita IVA",
 
+
                 "documents": "Documenti",
                 "documentsTitle": "Gestisci i tuoi documenti pubblici",
                 "documentsTitle2": "Qui puoi aggiungere o rimuovere documenti",
@@ -157,6 +168,8 @@ var translation = {
                 "documentSaved": "Documento salvato",
                 "documentDeleted": "Il documento  stato cancellato correttamente",
 
+                "areYouSure": "Confermi ?",
+                "confirmDeleteDocument": "Vuoi rimuovere questo documento ?",
                 "customer": "cliente",
                 "supplier": "fornitore",
 
@@ -177,13 +190,20 @@ var translation = {
                 "saved": "Il tuo profilo è stato aggiornato correttamente",
                 "emptyText": "Vuoto",
                 "cancel": "Annulla",
-                "save": "Salva"
+
+                "save": "Salva",
+                "yes": "Si",
+                "no": "No"
+
             },
             "publicProfile": {
                 "web": "Sito web:",
                 "address": "Indirizzo:",
 
-                "noSupplier": "Codice fornitore mancante"
+                    "noSupplier": "Codice fornitore mancante",
+                    "addSupplier": "Aggiungi ai preferiti"
+
+
 
             },
             "catalog": {
@@ -201,6 +221,10 @@ var translation = {
                 "prev": "Precedente",
                 "last": "Ultima",
                 "first": "Prima"
+
+
+
+
             }
         }
     }
