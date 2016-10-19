@@ -64,15 +64,16 @@ function getUserProfile()
             
       }
       
-      
+      /*
       if(data.logo)
       {
         jQuery("#imgBox").attr("src", data.logo);                
       }
       else
       {
-        jQuery("#imgBox").attr("src", defaultImg);
+        jQuery("#imgBox").attr("src", defaultImg);      
       }
+      */
       
       jQuery(".editable").editable();
       jQuery(".editable").css("color", "black");
@@ -184,13 +185,13 @@ function updateProfile()
       
       if(data.user.logo)
       {
-        console.log("si");
-        jQuery("#imgBox").attr("src", data.user.logo);     
+        jQuery("#imgBox").attr("src", data.user.logo);  
+        sessionStorage.logo = data.user.logo;   
       }
       else
       {
-        console.log("no");
         jQuery("#imgBox").attr("src", defaultImg);
+        sessionStorage.logo = undefined;
       }      
     },     
     error: function(xhr, status)
