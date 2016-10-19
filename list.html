@@ -1,662 +1,326 @@
 <!DOCTYPE html>
-<!--[if IE 8]>
-<html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]>
-<html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en"> <!--<![endif]-->
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-    <title>Discover | Unify - Responsive Website Template</title>
+	<title>Discover | Unify - Responsive Website Template</title>
 
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="favicon.ico">
 
-    <!-- Web Fonts -->
-    <link rel='stylesheet' type='text/css'
-          href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+	<!-- Web Fonts -->
+	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
-    <!-- CSS reset -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+	<!-- CSS reset -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
 
-    <!-- CSS Global Compulsory -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+	<!-- CSS Global Compulsory -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- CSS Header and Footer -->
-    <link rel="stylesheet" href="assets/css/headers/header-default.css">
-    <link rel="stylesheet" href="assets/css/footers/footer-v1.css">
+	<!-- CSS Header and Footer -->
+	<link rel="stylesheet" href="assets/css/headers/header-default.css">
+	<link rel="stylesheet" href="assets/css/footers/footer-v1.css">
 
-    <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="assets/plugins/animate.css">
-    <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
-    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
-    <!--[if lt IE 9]>
-    <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms-ie8.css"><![endif]-->
+	<!-- CSS Implementing Plugins -->
+	<link rel="stylesheet" href="assets/plugins/animate.css">
+	<link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+	<link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+	<link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+	<!--[if lt IE 9]><link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms-ie8.css"><![endif]-->
 
-    <!-- CSS Page Style -->
-    <link rel="stylesheet" href="assets/css/pages/page_search.css">
+	<!-- CSS Page Style -->
+	<link rel="stylesheet" href="assets/css/pages/page_search.css">
 
-    <!-- CSS Theme -->
-    <link rel="stylesheet" href="assets/css/theme-colors/dark-red_.css" id="style_color">
-    <link rel="stylesheet" href="assets/css/theme-skins/dark.css">
+	<!-- CSS Theme -->
+	<link rel="stylesheet" href="assets/css/theme-colors/dark-red_.css" id="style_color">
+	<link rel="stylesheet" href="assets/css/theme-skins/dark.css">
 
-    <!-- CSS Customization -->
-    <link rel="stylesheet" href="assets/css/custom.css">
+	<!-- CSS Customization -->
+	<link rel="stylesheet" href="assets/css/custom.css">
 
-    <!-- CSS Page Style Import-->
-    <link rel="stylesheet" href="assets/css/pages/page_log_reg_v3.css">
+	<!-- CSS Page Style Import-->
+	<link rel="stylesheet" href="assets/css/pages/page_log_reg_v3.css">
 </head>
 
 <body>
-<div class="wrapper">
-    <!--=== Header ===-->
-    <div id="header_p"></div>
-    <!--=== End Header ===-->
+	<div  class="wrapper">
+		<!--=== Header ===-->
+    <div id="header_p" ></div>
+		<!--=== End Header ===-->
 
-    <!--=== Search Block ===-->
-    <div class=" parallaxBg">
-        <div class="container">
-            <div class="col-md-6 col-md-offset-3">
-                <h1>Discover <span class="color-green">new</span> suppliers</h1>
+		<!--=== Search Block ===-->
+		<div class=" parallaxBg">
+			<div class="container">
+				<div class="col-md-6 col-md-offset-3">
+					<h1>Discover <span class="color-green">new</span> suppliers</h1>
 
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search suppliers ...">
+					<div class="input-group">
+						<input type="text" id="product" class="form-control" placeholder="Search products ...">
 						<span class="input-group-btn">
-							<button class="btn-u btn-u-lg" type="button"><i class="fa fa-search"></i></button>
+							<button class="btn-u btn-u-lg" id="btn_search" type="button"><i class="fa fa-search"></i></button>
 						</span>
-                </div>
+					</div>
 
-                <form action="" class="sky-form page-search-form">
-                    <div class="inline-group">
-                        <label class="checkbox"><input type="checkbox" name="checkbox-inline"
-                                                       checked><i></i>Recent</label>
-                        <label class="checkbox"><input type="checkbox" name="checkbox-inline"><i></i>Related</label>
-                        <label class="checkbox"><input type="checkbox" name="checkbox-inline"><i></i>Popular</label>
-                        <label class="checkbox"><input type="checkbox" name="checkbox-inline"><i></i>Most Common</label>
-
-                    </div>
-                </form>
-            </div>
+					
+				</div>
+			</div>
+		</div><!--/container-->
+		<div class="container content-sm">
+		<div class="table-search-v2">
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+					<tr>
+						<th>Supplier Image</th>
+						<th class="hidden-sm">About</th>
+						<th>Contacts</th>
+						<th>Action</th>
+					</tr>
+					</thead>
+					<tbody id="t_list">
+					
+                    <!--
+					<tr>
+						<td>
+							<img class="rounded-x" src="assets/img/testimonials/user.jpg" alt="">
+						</td>
+						<td>
+							<h3><a href="#">Etiam bibendum orci ut ante sagittis, sit amet imperdiet augue vulputate</a></h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non malesuada ante. Donec vel arcu.</p>
+							<small class="hex">Joined March 5, 2014</small>
+						</td>
+						<td>
+							<ul class="list-inline s-icons">
+								<li>
+									<a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Facebook" href="#">
+										<i class="fa fa-facebook"></i>
+									</a>
+								</li>
+								<li>
+									<a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Twitter" href="#">
+										<i class="fa fa-twitter"></i>
+									</a>
+								</li>
+								<li>
+									<a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Dropbox" href="#">
+										<i class="fa fa-dropbox"></i>
+									</a>
+								</li>
+								<li>
+									<a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Linkedin" href="#">
+										<i class="fa fa-linkedin"></i>
+									</a>
+								</li>
+							</ul>
+							<span><a href="#">info@example.com</a></span>
+							<span><a href="#">www.htmlstream.com</a></span>
+						</td>
+						<td>
+							<ul class="list-inline star-vote" style="display: inline-flex">
+								<li><i class="color-green fa fa-star"></i></li>
+								<li><i class="color-green fa fa-star"></i></li>
+								<li><i class="color-green fa fa-star"></i></li>
+								<li><i class="color-green fa fa-star-half-o"></i></li>
+								<li><i class="color-green fa fa-star-o"></i></li>
+							</ul>
+						</td>
+					</tr>
+                    -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+        <div class="margin-bottom-30" id="t_paginate"></div>
+        
+        
+        
+        
         </div>
-    </div><!--/container-->
-    <div class="container content-sm s-results">
+        
+        
+        
+        
+        
+        
 
-        <script type="text/x-handlebars-template">
+		<!--=== Footer Version 1 ===-->
+		<div class="footer-v1">
+			<div class="footer">
+				<div class="container">
+					<div class="row">
+						<!-- About -->
+						<div class="col-md-4 md-margin-bottom-40">
+							<a href="index.html"><img id="logo-footer" class="footer-logo" src="assets/img/port/crs4.png" alt=""></a>
+							<p>Il CRS4 è un centro di ricerca interdisciplinare privato fondato dalla Regione Autonoma della Sardegna.</p>
 
-            <div class="panel-heading">
-                <h3 class="panel-title"><span
-                        class="results-number">Found {{total}} results for: <b>{{query}}</b></span></h3>
-            </div>
-            <div class="table-search-v2">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>Supplier Image</th>
-                            <th class="hidden-sm">Description</th>
-                            <th>Categories</th>
-                            <th>Contacts</th>
-                            <th>Rating</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <img class="rounded-x" src="{{img}}" alt="">
-                            </td>
-                            <td class="td-width">
-                                <h3><a href="#">{{name}}</a></h3>
-                                <p>{{description}}</p>
-                                <small class="hex">Joined February 28, 2014</small>
-                            </td>
-                            <td>
-                                <span class="label label-success">Success</span>
-                            </td>
-                            <td>
-                                <ul class="list-inline s-icons">
-                                    <li>
-                                        <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                           data-original-title="Facebook" href="#">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                           data-original-title="Twitter" href="#">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                           data-original-title="Dropbox" href="#">
-                                            <i class="fa fa-dropbox"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                           data-original-title="Linkedin" href="#">
-                                            <i class="fa fa-linkedin"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <span><a href="#">{{email}}</a></span>
-                                <span><a href="#">{{website}}</a></span>
-                            </td>
-                            <td>
-                                <ul class="list-inline star-vote" style="display: inline-flex">
-                                    <li><i class="color-green fa fa-star"></i></li>
-                                    <li><i class="color-green fa fa-star"></i></li>
-                                    <li><i class="color-green fa fa-star"></i></li>
-                                    <li><i class="color-green fa fa-star-half-o"></i></li>
-                                    <li><i class="color-green fa fa-star-o"></i></li>
-                                </ul>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+						</div><!--/col-md-3-->
+						<!-- End About -->
 
-            <div class="text-left">
-                <ul class="pagination">
-                    <li><a href="#">«</a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">...</a></li>
-                    <li><a href="#">157</a></li>
-                    <li><a href="#">158</a></li>
-                    <li><a href="#">»</a></li>
-                </ul>
-            </div>
-        </script>
-        <div class="panel-heading">
-            <h3 class="panel-title"><span class="results-number">Found 907 results for query: <b>nothing</b></span></h3>
-        </div>
-        <div class="table-search-v2">
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>Supplier Image</th>
-                        <th class="hidden-sm">Description</th>
-                        <th>Categories</th>
-                        <th>Contacts</th>
-                        <th>Rating</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <img class="rounded-x" src="assets/img/testimonials/img1.jpg" alt="">
-                        </td>
-                        <td class="td-width">
-                            <h3><a href="#">Sed nec elit arcu</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non
-                                malesuada ante. Donec vel arcu.</p>
-                            <small class="hex">Joined February 28, 2014</small>
-                        </td>
-                        <td>
-                            <span class="label label-success">Success</span>
-                        </td>
-                        <td>
-                            <ul class="list-inline s-icons">
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Facebook" href="#">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Twitter" href="#">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Dropbox" href="#">
-                                        <i class="fa fa-dropbox"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Linkedin" href="#">
-                                        <i class="fa fa-linkedin"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <span><a href="#">info@example.com</a></span>
-                            <span><a href="#">www.htmlstream.com</a></span>
-                        </td>
-                        <td>
-                            <ul class="list-inline star-vote" style="display: inline-flex">
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star-half-o"></i></li>
-                                <li><i class="color-green fa fa-star-o"></i></li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img class="rounded-x" src="assets/img/testimonials/img2.jpg" alt="">
-                        </td>
-                        <td>
-                            <h3><a href="#">Donec at aliquam est, a mattis mauris</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non
-                                malesuada ante. Donec vel arcu.</p>
-                            <small class="hex">Joined March 2, 2014</small>
-                        </td>
-                        <td>
-                            <span class="label label-info"> Pending</span>
-                        </td>
-                        <td>
-                            <ul class="list-inline s-icons">
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Facebook" href="#">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Twitter" href="#">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Dropbox" href="#">
-                                        <i class="fa fa-dropbox"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Linkedin" href="#">
-                                        <i class="fa fa-linkedin"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <span><a href="#">info@example.com</a></span>
-                            <span><a href="#">www.htmlstream.com</a></span>
-                        </td>
-                        <td>
-                            <ul class="list-inline star-vote" style="display: inline-flex">
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star-half-o"></i></li>
-                                <li><i class="color-green fa fa-star-o"></i></li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img class="rounded-x" src="assets/img/testimonials/img3.jpg" alt="">
-                        </td>
-                        <td>
-                            <h3><a href="#">Pellentesque semper tempus vehicula</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non
-                                malesuada ante. Donec vel arcu.</p>
-                            <small class="hex">Joined March 3, 2014</small>
-                        </td>
-                        <td>
-                            <span class="label label-warning">Expiring</span>
-                        </td>
-                        <td>
-                            <ul class="list-inline s-icons">
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Facebook" href="#">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Twitter" href="#">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Dropbox" href="#">
-                                        <i class="fa fa-dropbox"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Linkedin" href="#">
-                                        <i class="fa fa-linkedin"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <span><a href="#">info@example.com</a></span>
-                            <span><a href="#">www.htmlstream.com</a></span>
-                        </td>
-                        <td>
-                            <ul class="list-inline star-vote" style="display: inline-flex">
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star-half-o"></i></li>
-                                <li><i class="color-green fa fa-star-o"></i></li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img class="rounded-x" src="assets/img/testimonials/img4.jpg" alt="">
-                        </td>
-                        <td>
-                            <h3><a href="#">Alesuada fames ac turpis egestas</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non
-                                malesuada ante. Donec vel arcu.</p>
-                            <small class="hex">Joined March 4, 2014</small>
-                        </td>
-                        <td>
-                            <span class="label label-danger">Error!</span>
-                        </td>
-                        <td>
-                            <ul class="list-inline s-icons">
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Facebook" href="#">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Twitter" href="#">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Dropbox" href="#">
-                                        <i class="fa fa-dropbox"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Linkedin" href="#">
-                                        <i class="fa fa-linkedin"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <span><a href="#">info@example.com</a></span>
-                            <span><a href="#">www.htmlstream.com</a></span>
-                        </td>
-                        <td>
-                            <ul class="list-inline star-vote" style="display: inline-flex">
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star-half-o"></i></li>
-                                <li><i class="color-green fa fa-star-o"></i></li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img class="rounded-x" src="assets/img/testimonials/user.jpg" alt="">
-                        </td>
-                        <td>
-                            <h3><a href="#">Etiam bibendum orci ut ante sagittis, sit amet imperdiet augue vulputate</a>
-                            </h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non
-                                malesuada ante. Donec vel arcu.</p>
-                            <small class="hex">Joined March 5, 2014</small>
-                        </td>
-                        <td>
-                            <span class="label label-success">Success</span>
-                        </td>
-                        <td>
-                            <ul class="list-inline s-icons">
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Facebook" href="#">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Twitter" href="#">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Dropbox" href="#">
-                                        <i class="fa fa-dropbox"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-placement="top" data-toggle="tooltip" class="tooltips"
-                                       data-original-title="Linkedin" href="#">
-                                        <i class="fa fa-linkedin"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <span><a href="#">info@example.com</a></span>
-                            <span><a href="#">www.htmlstream.com</a></span>
-                        </td>
-                        <td>
-                            <ul class="list-inline star-vote" style="display: inline-flex">
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star"></i></li>
-                                <li><i class="color-green fa fa-star-half-o"></i></li>
-                                <li><i class="color-green fa fa-star-o"></i></li>
-                            </ul>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="text-left">
-            <ul class="pagination">
-                <li><a href="#">«</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">...</a></li>
-                <li><a href="#">157</a></li>
-                <li><a href="#">158</a></li>
-                <li><a href="#">»</a></li>
-            </ul>
-        </div>
-    </div>
+						<!-- Link List -->
+						<div class="col-md-4 md-margin-bottom-40">
+							<div class="headline"><h2>Useful Links</h2></div>
+							<ul class="list-unstyled link-list">
+								<li><a href="#">About us</a><i class="fa fa-angle-right"></i></li>
+								<li><a href="#">Site</a><i class="fa fa-angle-right"></i></li>
+								<li><a href="#">Contact us</a><i class="fa fa-angle-right"></i></li>
+							</ul>
+						</div><!--/col-md-3-->
+						<!-- End Link List -->
+
+						<!-- Address -->
+						<div class="col-md-4 map-img md-margin-bottom-40">
+							<div class="headline"><h2>Contact Us</h2></div>
+							<address class="md-margin-bottom-40">
+								Edificio 1 <br />
+								Loc. Pixina Manna <br />
+								Pula, CA <br />
+								Email: <a href="mailto:cport2020@gmail.com" class="">cport2020@gmail.com</a>
+							</address>
+						</div><!--/col-md-3-->
+						<!-- End Address -->
+					</div>
+				</div>
+			</div><!--/footer-->
+
+			<div class="copyright">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6">
+							<p>
+								2015 &copy; All Rights Reserved.
+								<a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+							</p>
+						</div>
+
+						<!-- Social Links -->
+						<div class="col-md-6">
+							<ul class="footer-socials list-inline">
+								<li>
+									<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
+										<i class="fa fa-facebook"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype">
+										<i class="fa fa-skype"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google Plus">
+										<i class="fa fa-google-plus"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Linkedin">
+										<i class="fa fa-linkedin"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest">
+										<i class="fa fa-pinterest"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter">
+										<i class="fa fa-twitter"></i>
+									</a>
+								</li>
+								<li>
+									<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dribbble">
+										<i class="fa fa-dribbble"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<!-- End Social Links -->
+					</div>
+				</div>
+			</div><!--/copyright-->
+		</div>
+		<!--=== End Footer Version 1 ===-->
+	</div><!--/End Wrapper-->
 
 
-    <!--=== Footer Version 1 ===-->
-    <div class="footer-v1">
-        <div class="footer">
-            <div class="container">
-                <div class="row">
-                    <!-- About -->
-                    <div class="col-md-4 md-margin-bottom-40">
-                        <a href="index.html"><img id="logo-footer" class="footer-logo" src="assets/img/port/crs4.png"
-                                                  alt=""></a>
-                        <p>Il CRS4 è un centro di ricerca interdisciplinare privato fondato dalla Regione Autonoma della
-                            Sardegna.</p>
+	<!-- JS Global Compulsory -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-                    </div><!--/col-md-3-->
-                    <!-- End About -->
+	<!-- JS Translation -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/3.4.3/i18next.min.js"></script>
+	<script src="assets/js/translations/translation.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.1.0/jquery-i18next.min.js"></script>
 
-                    <!-- Link List -->
-                    <div class="col-md-4 md-margin-bottom-40">
-                        <div class="headline"><h2>Useful Links</h2></div>
-                        <ul class="list-unstyled link-list">
-                            <li><a href="#">About us</a><i class="fa fa-angle-right"></i></li>
-                            <li><a href="#">Site</a><i class="fa fa-angle-right"></i></li>
-                            <li><a href="#">Contact us</a><i class="fa fa-angle-right"></i></li>
-                        </ul>
-                    </div><!--/col-md-3-->
-                    <!-- End Link List -->
+		<!-- JS Implementing Plugins -->
+	<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
+	<!-- <script type="text/javascript" src="assets/plugins/jquery.parallax.js"></script>
+	<script type="text/javascript" src="assets/plugins/counter/waypoints.min.js"></script>
+	<script type="text/javascript" src="assets/plugins/counter/jquery.counterup.min.js"></script>
+	<script type="text/javascript" src="assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>-->
+	<!-- JS Customization -->
 
-                    <!-- Address -->
-                    <div class="col-md-4 map-img md-margin-bottom-40">
-                        <div class="headline"><h2>Contact Us</h2></div>
-                        <address class="md-margin-bottom-40">
-                            Edificio 1 <br/>
-                            Loc. Pixina Manna <br/>
-                            Pula, CA <br/>
-                            Email: <a href="mailto:cport2020@gmail.com" class="">cport2020@gmail.com</a>
-                        </address>
-                    </div><!--/col-md-3-->
-                    <!-- End Address -->
-                </div>
-            </div>
-        </div><!--/footer-->
+	<!-- JS Page Level -->
+	<script type="text/javascript" src="assets/js/app.js"></script>
+	<!--<script type="text/javascript" src="assets/js/plugins/owl-carousel.js"></script>-->
+	<script src="assets/plugins/backstretch/jquery.backstretch.min.js"></script>
+	<script type="text/javascript" src="assets/js/common_header.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+	<script type="text/javascript" src="assets/js/custom.js"></script>
+	<script type="text/javascript" src="js/page_list.js"></script>
+    <script type="text/javascript">
+		jQuery(document).ready(function() {
+			App.init();
+			//App.initCounter();
+		//	App.initParallaxBg();
+			//OwlCarousel.initOwlCarousel();
+			$('#header_p').html(header_template);
 
-        <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>
-                            2015 &copy; All Rights Reserved.
-                            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-                        </p>
-                    </div>
+			i18next.init({
+					lng: 'en', // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
+					resources:  translation
+			}, function (err, t) {
 
-                    <!-- Social Links -->
-                    <div class="col-md-6">
-                        <ul class="footer-socials list-inline">
-                            <li>
-                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
-                                   data-original-title="Facebook">
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
-                                   data-original-title="Skype">
-                                    <i class="fa fa-skype"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
-                                   data-original-title="Google Plus">
-                                    <i class="fa fa-google-plus"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
-                                   data-original-title="Linkedin">
-                                    <i class="fa fa-linkedin"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
-                                   data-original-title="Pinterest">
-                                    <i class="fa fa-pinterest"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
-                                   data-original-title="Twitter">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title=""
-                                   data-original-title="Dribbble">
-                                    <i class="fa fa-dribbble"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- End Social Links -->
-                </div>
-            </div>
-        </div><!--/copyright-->
-    </div>
-    <!--=== End Footer Version 1 ===-->
-</div><!--/End Wrapper-->
+					jqueryI18next.init(i18next, $ );
+					$('body').localize();
+
+					$('.lang-select').click(function() {
+							i18next.changeLanguage($(this).data('lang'));
+							$('body').localize();
+					});
 
 
-<!-- JS Global Compulsory -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			});
 
-<!-- JS Translation -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/3.4.3/i18next.min.js"></script>
-<script src="assets/js/translations/translation.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.1.0/jquery-i18next.min.js"></script>
+			$(".search-block").backstretch([
+				"assets/img/port/login_1.jpg",
+				"assets/img/port/login_2.jpg",
+				"assets/img/port/login_3.jpg",
+				//"assets/img/port/login_4.jpg",
+				"assets/img/port/login_5.jpg",
+				"assets/img/port/login_7.jpg",
+				"assets/img/port/login_8.jpg",
+			], {
+				fade: 1000,
+				duration: 4000
+			});
 
-<!-- JS Implementing Plugins -->
-<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
-<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
-<!-- <script type="text/javascript" src="assets/plugins/jquery.parallax.js"></script>
-<script type="text/javascript" src="assets/plugins/counter/waypoints.min.js"></script>
-<script type="text/javascript" src="assets/plugins/counter/jquery.counterup.min.js"></script>
-<script type="text/javascript" src="assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>-->
-<!-- JS Customization -->
-
-<!-- JS Page Level -->
-<script type="text/javascript" src="assets/js/app.js"></script>
-<!--<script type="text/javascript" src="assets/js/plugins/owl-carousel.js"></script>-->
-<script src="assets/plugins/backstretch/jquery.backstretch.min.js"></script>
-<script type="text/javascript" src="assets/js/common_header.js"></script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-<script type="text/javascript" src="assets/js/custom.js"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function () {
-        App.init();
-        //App.initCounter();
-        //	App.initParallaxBg();
-        //OwlCarousel.initOwlCarousel();
-        $('#header_p').html(header_template);
-
-        i18next.init({
-            lng: 'en', // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
-            resources: translation
-        }, function (err, t) {
-
-            jqueryI18next.init(i18next, $);
-            $('body').localize();
-
-            $('.lang-select').click(function () {
-                i18next.changeLanguage($(this).data('lang'));
-                $('body').localize();
-            });
-
-
-        });
-
-        $(".search-block").backstretch([
-            "assets/img/port/login_1.jpg",
-            "assets/img/port/login_2.jpg",
-            "assets/img/port/login_3.jpg",
-            //"assets/img/port/login_4.jpg",
-            "assets/img/port/login_5.jpg",
-            "assets/img/port/login_7.jpg",
-            "assets/img/port/login_8.jpg",
-        ], {
-            fade: 1000,
-            duration: 4000
-        });
-
-    });
-</script>
-<!--[if lt IE 9]>
-<script src="assets/plugins/respond.js"></script>
-<script src="assets/plugins/html5shiv.js"></script>
-<script src="assets/plugins/placeholder-IE-fixes.js"></script>
-<![endif]-->
+		});
+	</script>
+	<!--[if lt IE 9]>
+	<script src="assets/plugins/respond.js"></script>
+	<script src="assets/plugins/html5shiv.js"></script>
+	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
+	<![endif]-->
 </body>
 </html>
