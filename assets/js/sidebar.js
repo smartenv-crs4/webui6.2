@@ -1,5 +1,5 @@
 var sidebarTemplate = `
-<div class="col-md-3 md-margin-bottom-40">
+<div class=" md-margin-bottom-40">
   <img class="img-responsive profile-img margin-bottom-20" src="assets/img/team/img32-md.jpg" alt="" id="imgBox">
 
   <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">

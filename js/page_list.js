@@ -138,7 +138,7 @@ function render_row(data, var_par)
                                       var id = ($(this).attr('data-id'));
                                       var par = ($(this).attr('data-par'));
                                       
-                                      link = ('page_catalague.html?'+par+'&idSupplier='+id).replace("??", "?").replace("?&", "?");
+                                      link = ('page_catalog.html?'+par+'&idSupplier='+id).replace("??", "?").replace("?&", "?");
                                       window.location.href = link;
                                         
                                 });

@@ -100,7 +100,8 @@ var translation = {
                 "products": "Products",
                 "files": "Attached Files",
                 "more": "More",
-                "less": "Less"
+                "less": "Less",
+                "pdf" : "Pdf file"
             },
             "pagination": {
                 "next": "Next",
@@ -213,8 +214,9 @@ var translation = {
                 "incatalog": "Solo catalogo",
                 "products": "Prodotti",
                 "files": "File Caricati",
-                "more": "Leggi",
-                "less": "Meno"
+                "more": "Leggi tutto",
+                "less": "Meno",
+                "pdf" : "File pdf"
             },
             "pagination": {
                 "next": "Prossima",
