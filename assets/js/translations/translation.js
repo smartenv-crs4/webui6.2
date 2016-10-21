@@ -3,7 +3,7 @@ var translation = {
     en: {
         translation: {
             "nav": {
-              "home": "Home",
+                "home": "Home",
                 "about": "About",
                 "services": "Services",
                 "contacts": "Contacts",
@@ -28,7 +28,6 @@ var translation = {
             },
             "buttons":{
                 "send":"Send",
-
             },
             "login": {
                 "signUp": "Sign Up",
@@ -42,7 +41,7 @@ var translation = {
                 "customer": "Customer",
                 "supplier": "Supplier"
             },
-            "profile":{
+            "profile": {
                 "email": "Email",
                 "type": "Account type",
                 "name": "Name",
@@ -59,9 +58,9 @@ var translation = {
                 "documentsTitle": "Manage your public documents",
                 "documentsTitle2": "Below you can add or remove documents",
                 "documentDeleted": "The document has been deleted successfully",
+
                 "areYouSure": "Are you sure ?",
                 "confirmDeleteDocument": "Do you want to remove this  document ?",
-
 
                 "customer": "customer",
                 "supplier": "supplier",
@@ -134,6 +133,24 @@ var translation = {
                 "updateDone":"The Request is updated!",
                 "rfqExpired":"RFQ is expired",
                 "NaN":"Is required a number!"
+
+            },
+            "catalog": {
+                "catalog": "Catalog",
+                "search": "Search",
+                "all": "All",
+                "incatalog": "In catalog",
+                "products": "Products",
+                "files": "Attached Files",
+                "more": "More",
+                "less": "Less",
+                "pdf" : "Pdf file"
+            },
+            "pagination": {
+                "next": "Next",
+                "prev": "Prev",
+                "last": "Last",
+                "first": "First"
             }
         }
 
@@ -180,7 +197,7 @@ var translation = {
                 "supplier": "Fornitore"
 
             },
-            "profile":{
+            "profile": {
                 "email": "Email",
                 "type": "Tipo di account",
                 "name": "Nome",
@@ -204,7 +221,6 @@ var translation = {
 
                 "areYouSure": "Confermi ?",
                 "confirmDeleteDocument": "Vuoi rimuovere questo documento ?",
-
 
                 "customer": "cliente",
                 "supplier": "fornitore",
@@ -230,6 +246,7 @@ var translation = {
                 "save": "Salva",
                 "yes": "Si",
                 "no": "No"
+
             },
             "publicProfile": {
                 "web": "Sito web:",
@@ -272,6 +289,26 @@ var translation = {
                 "NaN":"E' richiesto un numero!"
 
             }
+            },
+            "catalog": {
+                "catalog": "Catalogo",
+                "search": "Cerca",
+                "all": "Tutto",
+                "incatalog": "Solo catalogo",
+                "products": "Prodotti",
+                "files": "File Caricati",
+                "more": "Leggi tutto",
+                "less": "Meno",
+                "pdf" : "File pdf"
+            },
+            "pagination": {
+                "next": "Prossima",
+                "prev": "Precedente",
+                "last": "Ultima",
+                "first": "Prima"
+
+
+
 
         }
     }

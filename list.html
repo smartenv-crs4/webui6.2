@@ -75,7 +75,7 @@
 			</div>
 		</div><!--/container-->
 		<div class="container content-sm">
-		<div class="table-search-v2">
+		<div class="table-search-v2" id="divSearch_table">
 			<div class="table-responsive">
 				<table class="table table-bordered table-striped">
 					<thead>
@@ -135,7 +135,7 @@
 						</td>
 					</tr>
                     -->
-					</tbody>
+					</tbody>a
 				</table>
 			</div>
 		</div>
@@ -147,9 +147,12 @@
         
         </div>
         
-        
-        
-        
+        <div class="container" id="divNoResult" style="display: none">
+        <div class="jumbotron" style="text-align: center">
+          <h2>Nessun supplier trovato</h2>
+          
+        </div>
+        </div>
         
         
 
@@ -279,7 +282,8 @@
 	<script type="text/javascript" src="assets/js/custom.js"></script>
 	<script type="text/javascript" src="js/page_list.js"></script>
     <script type="text/javascript">
-		jQuery(document).ready(function() {
+		
+        jQuery(document).ready(function() {
 			App.init();
 			//App.initCounter();
 		//	App.initParallaxBg();

@@ -191,10 +191,13 @@ function getConversationRequestsAndMessages(id_conv)
         success: function(data, textStatus, xhr)
         {
 
-            var socket = io.connect('http://localhost:3000',{reconnection:false});
+            var socket = io.connect('http://localhost:3000',{reconnection:true});
             socket.once('connect', function() {
                 socket.emit('join', data._id);
             });
+
+
+
 
             socket.on('message', function(msg){
                 var source;
@@ -650,7 +653,7 @@ function viewError(error){
             break;
 
         default:
-            jQuery.jGrowl(i18next.t("request_rejected"), {theme:'bg-color-red', life: 5000});
+            jQuery.jGrowl(i18next.t("error.request_rejected"), {theme:'bg-color-red', life: 5000});
     }
     return;
 }
