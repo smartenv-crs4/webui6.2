@@ -301,3 +301,38 @@ var documentsTableTemplate = `
 
 
 
+
+
+var certificationsTabTemplate = `
+<li><a data-toggle="tab" href="#certificationsTab" data-i18n="profile.certifications"></a></li>
+`;
+
+var certificationsTemplate = `
+<div id="certificationsTab" class="profile-edit tab-pane fade">									
+  <h2 class="heading-md" data-i18n="profile.certificationsTitle"></h2>
+  <p data-i18n="profile.certificationsTitle2"></p>
+  <br>
+  </div>
+</div>
+`;
+
+
+var certificationsTableTemplate = `
+<div class="table-search-v1 margin-bottom-30">
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>								
+        </tr>
+      </thead>
+      <tbody>              
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
+
+
+

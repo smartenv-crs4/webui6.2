@@ -11,8 +11,7 @@ function getUserProfile()
   var templatePassword = Handlebars.compile(changePasswordTemplate); 
   jQuery('#passwordTab').html(templatePassword());
   jQuery('#passwordTab').localize();  
-  
-  
+    
   //console.log(sessionStorage.token);
   jQuery.ajax({
     url: _userMsUrl + "users/" + sessionStorage.userId,
@@ -56,11 +55,19 @@ function getUserProfile()
         
         var tDoc = Handlebars.compile(documentsTemplate); 
         jQuery("#tabBodyContainer").append(tDoc());
-        jQuery("#tabBodyContainer").localize();   
+        //jQuery("#tabBodyContainer").localize();   
         
         //jQuery("#documentInput").filestyle();          
         jQuery("#documentInput").filestyle({buttonText: i18next.t("profile.documentsInputLabel"),
             buttonBefore: true});
+            
+        var tCertTab = Handlebars.compile(certificationsTabTemplate); 
+        jQuery("#tabContainer").append(tCertTab());
+        jQuery("#tabContainer").localize();
+        
+        var tCert = Handlebars.compile(certificationsTemplate); 
+        jQuery("#tabBodyContainer").append(tCert());
+        jQuery("#tabBodyContainer").localize();  
             
       }
       
@@ -111,8 +118,7 @@ function getUserProfile()
           title: i18next.t("profile.areYouSure")      
         });
       });
-      
-                      
+                            
     },     
     error: function(xhr, status)
     {      
@@ -147,8 +153,6 @@ function getUserProfile()
     }                    
   });        
 }
-
-
 
 function updateProfile()
 {
@@ -228,7 +232,6 @@ function changePassword()
   var newPassword = jQuery("#newPassword1").val();
   var newPassword2 = jQuery("#newPassword2").val();
   
-
   if(newPassword !== newPassword2 || newPassword === "")
   {
     jQuery.jGrowl(i18next.t("error.password_differs"), {theme:'bg-color-red', life: 5000});    
@@ -280,13 +283,6 @@ function changePassword()
     }                    
   });  
 }
-
-
-
-
-
-
-
 
 function getFavoriteSuppliers()
 {

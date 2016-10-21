@@ -81,6 +81,9 @@ var translation = {
 
                 "documentSaved": "Document saved",
 
+                "certifications": "Certifications",
+                "certificationsTitle": "Mange your certifications",
+                "certificationsTitle2": "Below you can show your certifications",                             
 
                 "title": "Manage your profile information",
                 "edit": "Edit profile",
@@ -237,6 +240,9 @@ var translation = {
                 "favoriteTitle": "Gestisci la tua lista dei fornitori preferiti",
                 "favoriteTitle2": "Qui puoi visualizzare i fornitori salvati nella tua lista dei preferiti",
 
+                "certifications": "Certificazioni",
+                "certificationsTitle": "Gestisci le tue certificazioni",
+                "certificationsTitle2": "Qui puoi visualizzare le certificazioni associate al tuo account",  
                 "title": "Gestisci le informazioni del tuo profilo",
                 "edit": "Modifica il profilo",
                 "saved": "Il tuo profilo è stato aggiornato correttamente",
