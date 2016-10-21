@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
     <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-
+    <link rel="stylesheet" href="assets/css/jquery.jgrowl.min.css">
 
     <!-- CSS Page Style -->
     <link rel="stylesheet" href="assets/css/pages/profile.css">
@@ -48,6 +48,9 @@
     <!-- CSS Customization -->
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/custom_rfq.css">
+
+
+    >
 </head>
 
 <body>
@@ -328,7 +331,8 @@
 <script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
 <script type="text/javascript" src="assets/plugins/counter/waypoints.min.js"></script>
 <script type="text/javascript" src="assets/plugins/counter/jquery.counterup.min.js"></script>
-<script type="text/javascript" src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+<!--<script type="text/javascript" src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>-->
 <script type="text/javascript" src="assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
 
 <!-- JS Translation -->
@@ -347,6 +351,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script type="text/javascript" src="assets/js/plugins/jquery.jgrowl.min.js"></script>
 
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script type="text/javascript" src="assets/js/custom_rfq.js"></script>
@@ -440,22 +445,12 @@
         <div class="panel-body">
             <ul id="rfq-list-messages" class="chat">
                 {{#each messages}}
-                <li class="{{#if_eq type 'customer'}}left{{else}}right{{/if_eq}} clearfix">
-                                    <span class="chat-img {{#if_eq type 'customer'}}pull-left{{else}}pull-right{{/if_eq}}">
-                                        <img src="{{sender.logo}}" alt="User Avatar" class="img-circle">
-                                    </span>
-                    <div class="chat-body clearfix">
-                        <div class="header">
-                            <strong class="{{#if_eq type 'supplier'}}pull-right{{/if_eq}} primary-font">{{sender.name}}</strong>
-                            <small class="{{#if_eq type 'customer'}}pull-right{{/if_eq}} text-muted">
-                                <i class="fa fa-clock-o fa-fw"></i> {{formatDate dateIn}}
-                            </small>
-                        </div>
-                        <p>
-                            {{text}}
-                        </p>
-                    </div>
-                </li>
+                {{#if automatic}}
+                    {{> message-auto}}
+                {{else}}
+                    {{> message}}
+                {{/if}}
+
                 {{/each}}
             </ul>
         </div>
@@ -477,13 +472,21 @@
 
 
 <script id="request-partial" type="text/x-handlebars-template">
-    <div id="rfq-panel-{{_id}}" class="rfq panel panel-default">
+    <div id="rfq-panel-{{_id}}" data-value="{{inc @index}}" class="rfq panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1"
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-{{inc @index}}"
                    href="#collapse-{{inc @index}}">
                     {{inc @index}} - RFQ <span data-i18n="rfq.requestSubject"></span>: {{product.name}}
-                    <i class="fa  fa-check-circle fa-lg pull-right"></i>
+                    {{#if_eq_or_eq status 'pending' status 'acceptedByS'}}
+                        <i class="fa fa-exclamation-circle fa-lg pull-right"></i>
+                    {{/if_eq_or_eq}}
+                    {{#if_eq_or_eq status 'rejectedByC' status 'rejectedByS'}}
+                        <i class="fa fa-times-circle fa-lg pull-right"></i>
+                    {{/if_eq_or_eq}}
+                    {{#if_eq status 'acceptedByC'}}
+                        <i class="fa fa-check-circle fa-lg pull-right"></i>
+                    {{/if_eq}}
                 </a>
 
             </h4>
@@ -502,22 +505,22 @@
                          <small data-i18n="rfq.requestQuote">Quote</small>
                         <h4 class="counter quote">
                              {{#if_eq_or_eq completed 'true' expired 'true'}}
-                             <a id="quote-{{inc @index}}" data-type="text">{{quote}}</a>
+                             <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quote}}</a>
                              {{else}}
-                             {{#if_eq_or_eq status 'acceptedByC' status 'rejectedByC'}}
-                             <a id="quote-{{inc @index}}" data-type="text">{{quote}}</a>
-                             {{/if_eq_or_eq}}
-                             {{#if_eq status 'pending'}}
-                             <a id="quote-{{inc @index}}" {{#if_eq currentUser
-                             'supplier'}}class="editable-field"{{/if_eq}} data-type="text">{{quote}}</a>
-                             {{/if_eq}}
-                             {{#if_eq status 'acceptedByS'}}
-                             <a id="quote-{{inc @index}}" {{#if_eq currentUser
-                             'customer'}}class="editable-field"{{/if_eq}} data-type="text">{{quote}}</a>
-                             {{/if_eq}}
-                             {{#if_eq status 'rejectedByS'}}
-                             <a id="quote-{{inc @index}}" data-type="text">{{quote}}</a>
-                             {{/if_eq}}
+                                 {{#if_eq_or_eq status 'acceptedByC' status 'rejectedByC'}}
+                                 <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quote}}</a>
+                                 {{/if_eq_or_eq}}
+                                 {{#if_eq status 'pending'}}
+                                 <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq currentUser
+                                 'supplier'}}class="editable-field"{{/if_eq}}  data-type="text">{{quote}}</a>
+                                 {{/if_eq}}
+                                 {{#if_eq status 'acceptedByS'}}
+                                 <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq currentUser
+                                 'customer'}}class="editable-field"{{/if_eq}} data-type="text">{{quote}}</a>
+                                 {{/if_eq}}
+                                 {{#if_eq status 'rejectedByS'}}
+                                 <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quote}}</a>
+                                 {{/if_eq}}
                              {{/if_eq_or_eq}}
 
 
@@ -527,21 +530,21 @@
                          <small data-i18n="rfq.requestQuantity">Quantity</small>
                          <h4 class="counter quantity">
                              {{#if_eq_or_eq completed 'true' expired 'true'}}
-                             <a id="quantity-{{inc @index}}" data-type="text">{{quantity}}</a>
+                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quantity}}</a>
                              {{else}}
                              {{#if_eq_or_eq status 'acceptedByC' status 'rejectedByC'}}
-                             <a id="quantity-{{inc @index}}" data-type="text">{{quantity}}</a>
+                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quantity}}</a>
                              {{/if_eq_or_eq}}
                              {{#if_eq status 'pending'}}
-                             <a id="quantity-{{inc @index}}" {{#if_eq currentUser
-                             'supplier'}}class="editable-field"{{/if_eq}} data-type="text">{{quantity}}</a>
+                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq currentUser
+                             'supplier'}}class="editable-field"{{/if_eq}}" data-type="text">{{quantity}}</a>
                              {{/if_eq}}
                              {{#if_eq status 'acceptedByS'}}
-                             <a id="quantity-{{inc @index}}" {{#if_eq currentUser
-                             'customer'}}class="editable-field"{{/if_eq}} data-type="text">{{quantity}}</a>
+                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq currentUser
+                             'customer'}}class="editable-field"{{/if_eq}}  data-type="text">{{quantity}}</a>
                              {{/if_eq}}
                              {{#if_eq status 'rejectedByS'}}
-                             <a id="quantity-{{inc @index}}" data-type="text">{{quantity}}</a>
+                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quantity}}</a>
                              {{/if_eq}}
                              {{/if_eq_or_eq}}
 
@@ -553,10 +556,6 @@
 
                     <h3 class="heading-xs"><span  data-i18n="rfq.requestStatus"></span> <span class="status-rfq pull-right" id="status-{{inc @index}}"
                                                                                               value={{status}} data-i18n="rfq.{{status}}"></span></h3>
-                    <!--<div class="progress progress-u progress-xxs">
-                        <div style="width: 67%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="67" role="progressbar" class="progress-bar progress-bar-light">
-                        </div>
-                    </div>-->
 
                     <hr>
                     <small><span  data-i18n="rfq.requestLastModification"></span> <strong id="last-modify-{{inc @index}}" > {{lastModification status
@@ -572,36 +571,35 @@
                             onclick="resetRequest('{{inc @index}}','{{quote}}','{{quantity}}')" type="button" data-i18n="rfq.requestCancel">
                     </button>
                     {{#if_eq currentUser 'supplier'}}
-                    <button id="save-accept-req-{{inc @index}}" class="hidden btn-u btn-u-sea" type="button"
-                            onclick="acceptBySupplier('{{_id_c}}','{{_id}}','{{inc @index}}','{{quote}}','{{quantity}}','{{supplier.name}}')" data-i18n="rfq.requestSaveAccept">
 
-                    </button>
+                        <button id="save-accept-req-{{inc @index}}" class="hidden btn-u btn-u-sea" type="button"
+                                onclick="acceptBySupplier('{{_id_c}}','{{_id}}','{{inc @index}}','{{quote}}','{{quantity}}','{{supplier.name}}')" data-i18n="rfq.requestSaveAccept">
+
+                        </button>
+
+                            <button id="accept-{{inc @index}}"
+                                    class="default-button {{#if_not_eq status 'pending'}} hidden {{/if_not_eq}} accept-rfq btn-u btn-u-green"
+                                    type="button"
+                                    onclick="acceptBySupplier('{{_id_c}}','{{_id}}','{{inc @index}}','{{quote}}','{{quantity}}','{{supplier.name}}')" data-i18n="rfq.requestAccept">
+                            </button>
+                            <button id="reject-{{inc @index}}" class="default-button {{#if_not_eq status 'pending'}} hidden{{/if_not_eq}} reject-rfq btn-u btn-u-red"
+                                    type="button"
+                                    onclick="rejectedBySupplier('{{_id_c}}','{{_id}}','{{inc @index}}','{{supplier.name}}')"  data-i18n="rfq.requestReject">
+                            </button>
+
                     {{else}}
-                    <button id="save-accept-req-{{inc @index}}" class="hidden btn-u btn-u-sea" type="button"
-                            onclick="modifyByCustomer('{{_id_c}}','{{_id}}','{{inc @index}}','{{customer.name}}')" data-i18n="rfq.requestSave">
-                    </button>
-                    {{/if_eq}}
-                    {{#if_eq status 'pending'}}
-                    <button id="supplier-accept-{{inc @index}}"
-                            class="{{#if_eq currentUser 'customer'}}hidden{{/if_eq}} accept-rfq btn-u btn-u-green"
-                            type="button"
-                            onclick="acceptBySupplier('{{_id_c}}','{{_id}}','{{inc @index}}','{{quote}}','{{quantity}}','{{supplier.name}}')" data-i18n="rfq.requestAccept">
-                    </button>
-                    <button id="supplier-reject-{{inc @index}}" class="{{#if_eq currentUser 'customer'}}hidden{{/if_eq}} reject-rfq btn-u btn-u-red"
-                            type="button"
-                            onclick="rejectedBySupplier('{{_id_c}}','{{_id}}','{{inc @index}}','{{supplier.name}}')"  data-i18n="rfq.requestReject">
-                    </button>
+                        <button id="save-accept-req-{{inc @index}}" class="hidden btn-u btn-u-sea" type="button"
+                                onclick="modifyByCustomer('{{_id_c}}','{{_id}}','{{inc @index}}','{{customer.name}}')" data-i18n="rfq.requestSave">
+                        </button>
 
-                    {{/if_eq}}
-                    {{#if_eq status 'acceptedByS'}}
-                    <button id="customer-accept-{{inc @index}}" class="{{#if_eq currentUser 'supplier'}}hidden{{/if_eq}} accept-rfq btn-u btn-u-green"
-                            type="button" onclick="acceptByCustomer('{{_id_c}}','{{_id}}','{{inc @index}}','{{customer.name}}')" data-i18n="rfq.requestAccept">
+                        <button id="accept-{{inc @index}}" class="default-button {{#if_not_eq status 'acceptedByS'}} hidden  {{/if_not_eq}} accept-rfq btn-u btn-u-green"
+                                type="button" onclick="acceptByCustomer('{{_id_c}}','{{_id}}','{{inc @index}}','{{customer.name}}')" data-i18n="rfq.requestConfirm">
 
-                    </button>
-                    <button id="customer-reject-{{inc @index}}"  class="{{#if_eq currentUser 'supplier'}}hidden{{/if_eq}} reject-rfq btn-u btn-u-red"
-                            type="button"
-                            onclick="rejectedByCustomer('{{_id_c}}','{{_id}}','{{inc @index}}','{{customer.name}}')"  data-i18n="rfq.requestReject">
-                    </button>
+                        </button>
+                        <button id="reject-{{inc @index}}"  class="default-button  {{#if_not_eq status 'acceptedByS'}} hidden  {{/if_not_eq}} reject-rfq btn-u btn-u-red"
+                                type="button"
+                                onclick="rejectedByCustomer('{{_id_c}}','{{_id}}','{{inc @index}}','{{customer.name}}')"  data-i18n="rfq.requestGiveup">
+                        </button>
                     {{/if_eq}}
                 </div>
                 {{/if_eq}}
@@ -636,6 +634,20 @@
     </div>
 </li>
 </script>
+<!--End Template RFQ Message -->
+
+<!--Template RFQ Message Auto-->
+
+<script id="rfq_new_message_auto_template" type="text/x-handlebars-template">
+    <div class="rfq-notify alert alert-warning fade in alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <a class="alert-link" href="#accordion-{{link}}" onclick="openRequest({{link}})"><strong type="text" data-i18n="warning"></strong>
+            <span type="text" data-i18n="{{text}}">{{text}} </span> {{link}}</a>
+    </div>
+
+</script>
+<!--End Template RFQ Message Auto-->
+
 
 <!--Template No RFQ -->
 <script id="inbox_rfq_empty_template" type="text/x-handlebars-template">

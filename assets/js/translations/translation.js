@@ -19,7 +19,12 @@ var translation = {
                 "password_differs": "Passwords must be equals",
                 "unknown_user_type": "Select a valid user type",
                 "invalid_pdf": "You can upload only pdf files",
-                "disk_quota_exceeded" : "Disk quota exceeded"
+                "disk_quota_exceeded" : "Disk quota exceeded",
+                "request_rejected":"The request has bee rejected"
+            },
+            "warning":{
+                "warning":"Warning!",
+                "emptyResult":"No result to show"
             },
             "buttons":{
                 "send":"Send",
@@ -104,18 +109,31 @@ var translation = {
                 "requestLastModification": "Last Modification ",
                 "messages": "Messages",
                 "requestAccept": "Accept",
+                "requestConfirm": "Confirm",
                 "requestSaveAccept": "Save&Accept",
                 "requestReject": "Reject",
+                "requestGiveup": "Give Up",
                 "requestSave": "Save",
                 "requestCancel": "Cancel",
                 "pending": "Pending",
-                "rejectedByC": "Rejected By Customer",
+                "rejectedByC": "Gave Up By Customer",
                 "rejectedByS": "Rejected By Supplier",
                 "acceptedByS": "Accepted By Supplier",
-                "acceptedByC": "Accepted By Customer",
-                "rfq.close":"Close",
-                "rfq.expired":"Expired",
-                "writeMessage":"Type your message here..."
+                "modifyAndAcceptedByS": "Accepted By Supplier",
+                "acceptedByC": "Confirmed By Customer",
+                "modifyByC": "Modified By Customer",
+                "close":"Close",
+                "expired":"Expired",
+                "writeMessage":"Type your message here...",
+                "confirmedRequestMsg":"The customer has confirmed the Request",
+                "acceptedRequestMsg":"The supplier has accepted the Request",
+                "rejectedRequestMsg":"The supplier has rejected the Request",
+                "gaveupRequestMsg":"The customer has gave up the Request",
+                "modifiedRequestMsg":"The customer has modified the Request",
+                "warning":"Warning!",
+                "updateDone":"The Request is updated!",
+                "rfqExpired":"RFQ is expired",
+                "NaN":"Is required a number!"
             }
         }
 
@@ -139,7 +157,12 @@ var translation = {
                 "password_differs": "Le password differiscono",
                 "unknown_user_type": "Seleziona il tipo di account che vuoi creare",
                 "invalid_pdf": "Puoi caricare soltanto file pdf",
-                "disk_quota_exceeded" : "La quota disco a tua disposizione è stata superata"
+                "disk_quota_exceeded" : "La quota disco a tua disposizione è stata superata",
+                "request_rejected":"La richiesta non può essere accolta"
+            },
+            "warning":{
+                "warning":"Attenzione!",
+                "emptyResult":"Nessun risultato da mostrare"
             },
             "buttons":{
                 "send":"Invia"
@@ -227,14 +250,27 @@ var translation = {
                 "requestReject": "Rifiuta",
                 "requestSave": "Salva",
                 "requestCancel": "Cancella",
+                "requestConfirm": "Conferma",
+                "requestGiveup": "Annulla",
                 "pending":"In corso...",
-                "rejectedByC": "Rifiutata dal Customer",
+                "rejectedByC": "Annullata dal Customer",
                 "rejectedByS": "Rifiutata dal Supplier",
                 "acceptedByS": "Accettata dal Supplier",
-                "acceptedByC": "Accettata dal Customer",
-                "rfq.close":"Completata",
-                "rfq.expired":"Scaduta",
-                "writeMessage":"Scrivi il tuo messaggio qui..."
+                "acceptedByC": "Confermata dal Customer",
+                "modifyByC": "Modificata dal Customer",
+                "close":"Completata",
+                "expired":"Scaduta",
+                "writeMessage":"Scrivi il tuo messaggio qui...",
+                "confirmedRequestMsg":"Il cliente ha confermato la Richiesta",
+                "acceptedRequestMsg":"Il fornitore ha accettato la Richiesta",
+                "rejectedRequestMsg":"Il fornitore ha rifiutato la Richiesta",
+                "gaveupRequestMsg":"Il cliente ha annullato la Richiesta",
+                "modifiedRequestMsg":"Il cliente ha modificato la Richiesta",
+                "warning":"Attenzione!",
+                "updateDone":"La tua Richiesta è stata aggiornata!",
+                "rfqExpired":"L'RFQ è scaduta!",
+                "NaN":"E' richiesto un numero!"
+
             }
 
         }
