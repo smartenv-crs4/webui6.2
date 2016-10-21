@@ -99,7 +99,6 @@ function signIn()
   });
 }
 
-
 function signUp()
 {
   var email = jQuery("#signUpEmail").val();
@@ -121,7 +120,6 @@ function signUp()
     respBlock.removeClass("invisible");
     return;
   }
-
 
   if(password !== password2 || password === "")
   {
@@ -161,6 +159,7 @@ function signUp()
         sessionStorage.userId = data["created_resource"]["id"];
         sessionStorage.email = email;
         getProfileInfo(false);
+        sessionStorage.prevPage = "page_profile_settings.html";
         redirectToPrevPage();
       }
       else
