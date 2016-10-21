@@ -68,6 +68,8 @@ $( "#btn_search" ).click(function(e) {
 
 function render_row(data, var_par)
 {
+    $('#divNoResult').css('display', 'none');
+    
     var link = '';
     
     var tab = '';
@@ -152,6 +154,9 @@ function render_paginate(tot_page, act_page, var_par)
    if (!var_par)
         var_par = '';
         
+    $('#divSearch_table').css('display', 'block');
+                                          
+    
     var str = '<div class="text-left" id="divPagination">'
     + '<ul class="pagination"><li><a ';
    if (act_page > 1) 
@@ -271,11 +276,26 @@ function get_list(var_par)
                                       total     = data.total;
                                       
                                       $('#t_list').empty();
+                                      $('#t_paginate').empty();
+                                          
                                       
                                       
-                                      render_row(data, var_par);
-                                      if (pages > 1)
-                                        render_paginate(pages, page);
+                                      if (data.total > 0)
+                                      {
+                                          render_row(data, var_par);
+                                          if (pages > 1)
+                                          {
+                                              console.log('asffggg');
+                                              render_paginate(pages, page);
+                                          }  
+                                      }
+                                      else
+                                      {
+                                          $('#divSearch_table').css('display', 'none');
+                                          $('#divNoResult').css('display', 'block');
+                                      }
+                                      
+                                                                              
                                   },
                                   error: function()
                                   {
