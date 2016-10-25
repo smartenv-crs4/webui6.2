@@ -105,10 +105,10 @@
                     <div class="sm-margin-bottom-30 col-md-8">
                         <div class="panel-heading-v2 overflow-h">
                             <div class="row well">
-                                <div class="col-md-3"><h2 class="heading-xs pull-left"><i
+                                <div class="col-md-4"><h2 class="heading-xs pull-left"><i
                                         class="fa fa-file fa-fw"></i> <span data-i18n="catalog.catalog"></span></h2>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-8">
 
                                     <!--.search-block form.page-search-form .checkbox  -->
                                     <ul class="list-inline clear-both">
@@ -321,6 +321,7 @@
                             {{/each}}
                         </ul>
                         <ul class="list-inline pull-right">
+                           {{#if ../isSupplier}} <li><a href="#"><i class="  fa fa-edit"></i></a></li> {{/if}}
                             <li><a href="#"><i class="expand-list rounded-x fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="expand-list rounded-x fa fa-photo"></i></a></li>
                             <li><a href="#"><i class="expand-list rounded-x fa fa-star"></i></a></li>
@@ -342,7 +343,7 @@
                 <div class="panel-heading overflow-h">
                     <h2 class="panel-title heading-sm pull-left"><i class="fa fa-file"></i><span
                             data-i18n="catalog.files"></span></h2>
-
+                    {{#if isSupplier}}<a href="#"><i class="fa fa-upload pull-right"></i></a> {{/if}}
                 </div>
                 <div id="scrollbar2" class="panel-body no-padding mCustomScrollbar _mCS_3 mCS-autoHide"
                      data-mcs-theme="minimal-dark" style="position: relative; overflow: visible;">
@@ -356,12 +357,17 @@
                                 <div class="date-formats">
                                     <i onclick="javascript:window.open('{{../url}}{{filename}}');"
                                        class="fa fa-file-pdf-o"></i>
+
                                 </div>
+
                                 <div class="overflow-h">
                                     <h3 class="heading-xs"><a href="{{../url}}{{filename}}"
                                                               target="_blank">{{filename}}</a>
                                     </h3>
                                     <p data-i18n="catalog.pdf"></p>
+                                    {{#if ../isSupplier}}
+                                    <i class="fa fa-remove"></i>
+                                    {{/if}}
                                 </div>
                             </div>
                             {{/each}}
@@ -490,7 +496,8 @@
 
                 var compiled = window[templateid + "_template"]({
                     files: files,
-                    url: _brokerMsUrl + "/users/attachment/" + supId + "/"
+                    url: _brokerMsUrl + "/users/attachment/" + supId + "/",
+                    isSupplier: currentSupplier
                 });
 
                 $(target).empty();
@@ -514,7 +521,8 @@
 
 
                 var compiled = window[templateid + "_template_fun"]({
-                    products: data.docs
+                    products: data.docs,
+                    isSupplier: currentSupplier
 
                 });
 
@@ -569,6 +577,9 @@
     </script>
 
     <script type="text/javascript">
+        var userType = "customer";
+        var currentSupplier = false;
+
         jQuery(document).ready(function () {
 
 
@@ -580,15 +591,26 @@
             //Datepicker.initDatepicker();
             //StyleSwitcher.initStyleSwitcher();
             //   getConversations();
+
+
+            var logged = false;
+            if (window.sessionStorage && sessionStorage.token)
+                    logged = true;
+            if (logged)
+                $("#sidebar").show();
+
+            if (window.sessionStorage && sessionStorage.type)
+                    userType = sessionStorage.type;
+
+            if (userType == "supplier" && supId == window.sessionStorage.userId){
+                currentSupplier = true;
+            }
             getfiles(getfilesURL, "filetable", '#files_container');
             getproducts(getproductsURL, 'productstable', '#products_container');
             $("body").localize();
 
-
-            if (window.localstorage && localstorage.token)
-                $("#sidebar").show();
-
         });
+
     </script>
     <!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>

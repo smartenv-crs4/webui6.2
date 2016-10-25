@@ -26,6 +26,11 @@ jQuery(document).ready(function(){
       jQuery("#imgBox").attr("src", defaultImg);
     }
     
+    if(sessionStorage.token)
+    {
+      sb.show();
+    }
+    
     
   }
   
@@ -227,7 +232,6 @@ function getProfileInfo(async)
     }                    
   });        
 }
-
 
 function getUrlParameter(sParam) 
 {
