@@ -428,9 +428,9 @@
             <i class="fa fa-tasks fa-fw"></i>
             <span data-i18n="rfq.requests"></span>
         </div>
-        <div class="panel-group acc-v1" id="accordion-1">
+        <div class="panel-group acc-v1" id="accordion-panel">
             {{#each requests}}
-            {{> request completed=../completed expired=../expired currentUser=../currentUser customer=../customer supplier=../supplier _id_c=../_id}}
+            {{> request completed=../completed expired=../expired currentUser=../currentUser customer=../customer supplier=../supplier _id_c=../_id munits=../measureunits}}
 
         {{/each}}
     </div>
@@ -442,7 +442,7 @@
         </div>
         <!-- /.panel-heading -->
 
-        <div class="panel-body">
+        <div class="panel-body cont-list-messages">
             <ul id="rfq-list-messages" class="chat">
                 {{#each messages}}
                 {{#if automatic}}
@@ -475,7 +475,7 @@
     <div id="rfq-panel-{{_id}}" data-value="{{inc @index}}" class="rfq panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-{{inc @index}}"
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-panel"
                    href="#collapse-{{inc @index}}">
                     {{inc @index}} - RFQ <span data-i18n="rfq.requestSubject"></span>: {{product.name}}
                     {{#if_eq_or_eq status 'pending' status 'acceptedByS'}}
@@ -502,7 +502,7 @@
 
                  <div class="row margin-bottom-20">
                      <div class="col-xs-6 service-in">
-                         <small data-i18n="rfq.requestQuote">Quote</small>
+                         <strong data-i18n="rfq.requestQuote">Quote</strong>
                         <h4 class="counter quote">
                              {{#if_eq_or_eq completed 'true' expired 'true'}}
                              <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quote}}</a>
@@ -527,27 +527,39 @@
                          </h4>
                      </div>
                      <div class="col-xs-6 text-right service-in">
-                         <small data-i18n="rfq.requestQuantity">Quantity</small>
+                         <strong data-i18n="rfq.requestQuantity">Quantity</strong>
                          <h4 class="counter quantity">
+
                              {{#if_eq_or_eq completed 'true' expired 'true'}}
-                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quantity}}</a>
+                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quantity.number}}</a>
+
                              {{else}}
                              {{#if_eq_or_eq status 'acceptedByC' status 'rejectedByC'}}
-                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quantity}}</a>
+                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quantity.number}}</a>
                              {{/if_eq_or_eq}}
                              {{#if_eq status 'pending'}}
                              <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq currentUser
-                             'supplier'}}class="editable-field"{{/if_eq}}" data-type="text">{{quantity}}</a>
+                             'supplier'}}class="editable-field"{{/if_eq}}" data-type="text">{{quantity.number}}</a>
                              {{/if_eq}}
                              {{#if_eq status 'acceptedByS'}}
                              <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq currentUser
-                             'customer'}}class="editable-field"{{/if_eq}}  data-type="text">{{quantity}}</a>
+                             'customer'}}class="editable-field"{{/if_eq}}  data-type="text">{{quantity.number}}</a>
                              {{/if_eq}}
                              {{#if_eq status 'rejectedByS'}}
-                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quantity}}</a>
+                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quantity.number}}</a>
                              {{/if_eq}}
                              {{/if_eq_or_eq}}
 
+                             <form class="sky-form rfq-select-form">
+                                 <label class="select rfq-select-label">
+                                     <select id="selectqnty-{{inc @index}}" {{#unless  quantity}} disabled {{/unless}} class="rfq-select" >
+                                     {{#each munits}}
+                                         <option {{#if_eq this  ../quantity.unity}}  selected="" {{/if_eq}} {{#if_eq this  '--'}} {{#unless  ../quantity}} selected="" {{/unless}} disabled  {{/if_eq}} value={{this}} data-i18n="rfq.{{this}}"></option>
+                                     {{/each}}
+                                 </select>
+                                     <i></i>
+                                     </label>
+                             </form>
                          </h4>
                      </div>
                  </div>
@@ -568,7 +580,7 @@
 
                 <div id="req-buttons-{{inc @index}}"  class="request_buttons">
                     <button id="cancel-req-{{inc @index}}" class="hidden btn-u btn-u-default"
-                            onclick="resetRequest('{{inc @index}}','{{quote}}','{{quantity}}')" type="button" data-i18n="rfq.requestCancel">
+                            onclick="resetRequest('{{inc @index}}','{{quote}}','{{quantity.number}}','{{quantity.unity}}')" type="button" data-i18n="rfq.requestCancel">
                     </button>
                     {{#if_eq currentUser 'supplier'}}
 
