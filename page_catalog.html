@@ -88,6 +88,7 @@
     <div id="header_p"></div>
     <!--=== End Header ===-->
 
+
     <!--=== Profile ===-->
     <div class="container content profile">
         <div class="row">
@@ -100,80 +101,115 @@
             <!-- Catalog Content -->
             <div class="autoexpand">
 
-                <div class="row">
-                    <!--Alert-->
-                    <div class="sm-margin-bottom-30 col-md-8">
-                        <div class="panel-heading-v2 overflow-h">
-                            <div class="row well">
-                                <div class="col-md-4"><h2 class="heading-xs pull-left"><i
-                                        class="fa fa-file fa-fw"></i> <span data-i18n="catalog.catalog"></span></h2>
-                                </div>
-                                <div class="col-md-8">
+                <div class="profile-body margin-bottom-20">
+                    <div class="tab-v1">
+                        <ul class="nav nav-justified nav-tabs" id="tabContainer">
+                            <li class="active"><a data-toggle="tab" href="#profile"
+                                                  ><i class="fa fa-user"></i>&nbsp;<span data-i18n="profile.profile">Profile</span></a></li>
+                            <li><a data-toggle="tab" href="#catalogTab"><i class="fa fa-book"></i>&nbsp;<span  data-i18n="catalog.catalog">Catalog</span></a></li>
 
-                                    <!--.search-block form.page-search-form .checkbox  -->
-                                    <ul class="list-inline clear-both">
-
-                                        <li class="sort-list-btn">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="">
-						<span class="input-group-btn">
-							<button class="btn-u" type="button"><i class="fa fa-search"></i> <span data-i18n="catalog.search"></span></button>
-						</span>
-                                            </div>
-                                            <!--div class="btn-group row">
-                                                <div class="col-md-10" style="padding-right: 0px;">
-                                                    <input class="form-control margin-bottom-10" name="code"
-                                                           type="text">
-                                                </div>
-
-                                                <div class="col-md-2" style="padding-left: 0px;">
-                                                    <button type="button" class="btn-u "><i class="fa fa-search"></i>
-                                                        <span data-i18n="catalog.search"></span></button>
+                            <li><a data-toggle="tab" href="#documentsReviews" ><i class="fa fa-star-o"></i>&nbsp;<span data-i18n="profile.reviews">Reviews</span> </a>
+                            </li>
 
 
-                                                </div>
-                                            </div-->
-                                            <!--div class="row search-block">
-                                                <form action="" class="sky-form page-search-form"
-                                                      style="margin-left: 15px;">
-                                                    <div class="inline-group">
-                                                        <label class="checkbox"><input type="checkbox"
-                                                                                       name="checkbox-inline"
-                                                                                       checked=""><i></i><span
-                                                                data-i18n="catalog.all"></span></label>
-                                                        <label class="checkbox"><input type="checkbox"
-                                                                                       name="checkbox-inline"><i></i><span
-                                                                data-i18n="catalog.incatalog"></span></label>
-                                                    </div>
-                                                </form>
-
-
-                                            </div-->
-                                        </li>
-
-                                    </ul>
-
-                                </div>
-
+                        </ul>
+                        <div class="tab-content" id="tabBodyContainer">
+                            <div id="responseBlock" class="alert alert-danger hidden"></div>
+                            <div id="profile" class="profile-edit tab-pane fade in active">
 
                             </div>
-                        </div>
-                        <div id="products_container" class="table-search-v2">
+                            <div id="catalogTab" class="profile-edit tab-pane fade">
+                                <div class="row well">
+                                    <!--div class="col-md-4"><h2 class="heading-xs pull-left"><i
+                                            class="fa fa-file fa-fw"></i> <span
+                                            data-i18n="catalog.catalog"></span></h2>
+                                    </div-->
+                                    <div class="col-md-8">
+
+                                        <!--.search-block form.page-search-form .checkbox  -->
+                                        <ul class="list-inline clear-both">
+
+                                            <li class="sort-list-btn">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control"
+                                                           data-i18n="[placeholder]catalog.placeholder"
+                                                           placeholder="">
+						<span class="input-group-btn">
+							<button class="btn-u" type="button"><i class="fa fa-search"></i> <span
+                                    data-i18n="catalog.search"></span></button>
+						</span>
+                                                </div>
+                                                <!--div class="btn-group row">
+                                                    <div class="col-md-10" style="padding-right: 0px;">
+                                                        <input class="form-control margin-bottom-10" name="code"
+                                                               type="text">
+                                                    </div>
+
+                                                    <div class="col-md-2" style="padding-left: 0px;">
+                                                        <button type="button" class="btn-u "><i class="fa fa-search"></i>
+                                                            <span data-i18n="catalog.search"></span></button>
+
+
+                                                    </div>
+                                                </div-->
+                                                <!--div class="row search-block">
+                                                    <form action="" class="sky-form page-search-form"
+                                                          style="margin-left: 15px;">
+                                                        <div class="inline-group">
+                                                            <label class="checkbox"><input type="checkbox"
+                                                                                           name="checkbox-inline"
+                                                                                           checked=""><i></i><span
+                                                                    data-i18n="catalog.all"></span></label>
+                                                            <label class="checkbox"><input type="checkbox"
+                                                                                           name="checkbox-inline"><i></i><span
+                                                                    data-i18n="catalog.incatalog"></span></label>
+                                                        </div>
+                                                    </form>
+
+
+                                                </div-->
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+                                    <!--Alert-->
+                                    <div class="sm-margin-bottom-30 col-md-8">
+                                        <div class="panel-heading-v2 overflow-h">
+
+                                        </div>
+                                        <div id="products_container" class="table-search-v2">
+
+                                        </div>
+
+                                        <div id="pagination_container" class="center-block">
+
+                                        </div>
+
+                                    </div>
+                                    <!--End Alert-->
+                                    <div id="files_container" class="col-md-4">
+
+
+                                    </div>
+
+                                </div><!--/end row-->
+
+                            </div>
+
+                            <div id="documentsReviews" class="profile-edit tab-pane fade">
+
+                            </div>
+
 
                         </div>
-
-                        <div id="pagination_container" class="center-block">
-
-                        </div>
-
                     </div>
-                    <!--End Alert-->
-                    <div id="files_container" class="col-md-4">
+                </div>
 
-
-                    </div>
-
-                </div><!--/end row-->
 
             </div>
             <!-- End Catalog Content -->
@@ -321,7 +357,9 @@
                             {{/each}}
                         </ul>
                         <ul class="list-inline pull-right">
-                           {{#if ../isSupplier}} <li><a href="#"><i class="  fa fa-edit"></i></a></li> {{/if}}
+                            {{#if ../isSupplier}}
+                            <li><a href="#"><i class="  fa fa-edit"></i></a></li>
+                            {{/if}}
                             <li><a href="#"><i class="expand-list rounded-x fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="expand-list rounded-x fa fa-photo"></i></a></li>
                             <li><a href="#"><i class="expand-list rounded-x fa fa-star"></i></a></li>
@@ -481,7 +519,7 @@
         var supId = getParameterByName("idSupplier"); //"57f5059fe8094b7137fa3efd";
         var getfilesURL = _brokerMsUrl + "users/attachment/" + supId;
         var getproductsURL = _brokerMsUrl + "products?supplierId=" + supId;
-        //getproductsURL = _brokerMsUrl + "products";
+     //   getproductsURL = _brokerMsUrl + "products";
 
         function getfiles(url, templateid, target) {
             $.get(url, function (data) {
@@ -595,14 +633,15 @@
 
             var logged = false;
             if (window.sessionStorage && sessionStorage.token)
-                    logged = true;
-            if (logged)
+                logged = true;
+            if (logged) {
                 $("#sidebar").show();
+            }
 
             if (window.sessionStorage && sessionStorage.type)
-                    userType = sessionStorage.type;
+                userType = sessionStorage.type;
 
-            if (userType == "supplier" && supId == window.sessionStorage.userId){
+            if (userType == "supplier" && supId == window.sessionStorage.userId) {
                 currentSupplier = true;
             }
             getfiles(getfilesURL, "filetable", '#files_container');

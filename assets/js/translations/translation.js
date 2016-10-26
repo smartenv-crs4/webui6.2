@@ -7,7 +7,9 @@ var translation = {
                 "about": "About",
                 "services": "Services",
                 "contacts": "Contacts",
-                "help": "Help"
+                "help": "Help",
+                "logout" : "Logout",
+                "lang" : "Language"
             },
             "error": {
                 "invalid_email": "Your email address is not valid",
@@ -19,15 +21,15 @@ var translation = {
                 "password_differs": "Passwords must be equals",
                 "unknown_user_type": "Select a valid user type",
                 "invalid_pdf": "You can upload only pdf files",
-                "disk_quota_exceeded" : "Disk quota exceeded",
-                "request_rejected":"The request has bee rejected"
+                "disk_quota_exceeded": "Disk quota exceeded",
+                "request_rejected": "The request has bee rejected"
             },
-            "warning":{
-                "warning":"Warning!",
-                "emptyResult":"No result to show"
+            "warning": {
+                "warning": "Warning!",
+                "emptyResult": "No result to show"
             },
-            "buttons":{
-                "send":"Send",
+            "buttons": {
+                "send": "Send",
             },
             "login": {
                 "signUp": "Sign Up",
@@ -53,6 +55,8 @@ var translation = {
                 "web": "Web site",
                 "categories": "Categories",
                 "pIva": "VATIN",
+                "reviews" : "Reviews",
+                "profile" : "Profile",
 
                 "documents": "Documents",
                 "documentsTitle": "Manage your public documents",
@@ -160,7 +164,8 @@ var translation = {
                 "files": "Attached Files",
                 "more": "More",
                 "less": "Less",
-                "pdf" : "Pdf file"
+                "pdf": "Pdf file",
+                "placeholder": "Search in catalog..."
             },
             "pagination": {
                 "next": "Next",
@@ -178,7 +183,9 @@ var translation = {
                 "about": "Chi siamo",
                 "services": "Servizi",
                 "contacts": "Contatti",
-                "help": "Aiuto"
+                "help": "Aiuto",
+                "logout" : "Esci",
+                "lang" : "Lingua"
             },
             "error": {
                 "invalid_email": "L'indirizzo email inserito non &egrave; valido",
@@ -190,15 +197,15 @@ var translation = {
                 "password_differs": "Le password differiscono",
                 "unknown_user_type": "Seleziona il tipo di account che vuoi creare",
                 "invalid_pdf": "Puoi caricare soltanto file pdf",
-                "disk_quota_exceeded" : "La quota disco a tua disposizione è stata superata",
-                "request_rejected":"La richiesta non può essere accolta"
+                "disk_quota_exceeded": "La quota disco a tua disposizione è stata superata",
+                "request_rejected": "La richiesta non può essere accolta"
             },
-            "warning":{
-                "warning":"Attenzione!",
-                "emptyResult":"Nessun risultato da mostrare"
+            "warning": {
+                "warning": "Attenzione!",
+                "emptyResult": "Nessun risultato da mostrare"
             },
-            "buttons":{
-                "send":"Invia"
+            "buttons": {
+                "send": "Invia"
             },
             "login": {
                 "signUp": "Registrati",
@@ -225,6 +232,8 @@ var translation = {
                 "web": "Sito web",
                 "categories": "Categorie",
                 "pIva": "Partita IVA",
+                "reviews" : "Recensioni",
+                "profile" : "Profilo",
 
 
                 "documents": "Documenti",
@@ -288,7 +297,7 @@ var translation = {
                 "requestCancel": "Cancella",
                 "requestConfirm": "Conferma",
                 "requestGiveup": "Annulla",
-                "pending":"In corso...",
+                "pending": "In corso...",
                 "rejectedByC": "Annullata dal Customer",
                 "rejectedByS": "Rifiutata dal Supplier",
                 "acceptedByS": "Accettata dal Supplier",
@@ -319,6 +328,7 @@ var translation = {
                 "expiredate":"Fine validità",
                 "chooseSupplier":"Scegli tra i preferiti qui sopra o seleziona un fornitore da lista di ricerca"
 
+
             },
             "catalog": {
                 "catalog": "Catalogo",
@@ -329,7 +339,8 @@ var translation = {
                 "files": "File Caricati",
                 "more": "Leggi tutto",
                 "less": "Meno",
-                "pdf" : "File pdf"
+                "pdf": "File pdf",
+                "placeholder": "Cerca nel catalogo..."
             },
             "pagination": {
                 "next": "Prossima",
@@ -338,7 +349,6 @@ var translation = {
                 "first": "Prima"
 
             }
-
 
         }
     }
