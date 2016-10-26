@@ -83,7 +83,7 @@ var translation = {
 
                 "certifications": "Certifications",
                 "certificationsTitle": "Mange your certifications",
-                "certificationsTitle2": "Below you can show your certifications",                             
+                "certificationsTitle2": "Below you can show your certifications",
 
                 "title": "Manage your profile information",
                 "edit": "Edit profile",
@@ -143,7 +143,12 @@ var translation = {
                 "fot":"Fot",
                 "lbr":"Lbr",
                 "g":"g",
-                "--":"--"
+                "--":"--",
+                "newrfq":"New RFQ",
+                "choose":"Choose",
+                "expiredate":"Expiration date",
+                "chooseSupplier":"Choose a favorite above or select a vendor from the search list"
+
 
             },
             "catalog": {
@@ -250,7 +255,7 @@ var translation = {
 
                 "certifications": "Certificazioni",
                 "certificationsTitle": "Gestisci le tue certificazioni",
-                "certificationsTitle2": "Qui puoi visualizzare le certificazioni associate al tuo account",  
+                "certificationsTitle2": "Qui puoi visualizzare le certificazioni associate al tuo account",
                 "title": "Gestisci le informazioni del tuo profilo",
                 "edit": "Modifica il profilo",
                 "saved": "Il tuo profilo è stato aggiornato correttamente",
@@ -308,9 +313,12 @@ var translation = {
                 "fot":"Fot",
                 "lbr":"Lbr",
                 "g":"g",
-                "--":"--"
+                "--":"--",
+                "newrfq":"Nuova RFQ",
+                "choose":"Scegli",
+                "expiredate":"Fine validità",
+                "chooseSupplier":"Scegli tra i preferiti qui sopra o seleziona un fornitore da lista di ricerca"
 
-            }
             },
             "catalog": {
                 "catalog": "Catalogo",
@@ -329,7 +337,7 @@ var translation = {
                 "last": "Ultima",
                 "first": "Prima"
 
-
+            }
 
 
         }

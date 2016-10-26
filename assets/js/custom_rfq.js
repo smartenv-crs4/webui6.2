@@ -693,6 +693,83 @@ function openRequest(id){
     $("#collapse-"+id).collapse("show");
 }
 
+function openNewRfq(supplier){
+
+
+    var source = $("#rfq_new_rfq_template").html();
+   /* Handlebars.registerPartial("request", $("#request-partial").html());*/
+
+    var theTemplate = Handlebars.compile(source);
+
+    // Pass our data to the template
+    var userType =sessionStorage.type;
+    //
+    //console.log(data);
+    var data = {};
+    data.currentuser = userType;
+    data.munits = ['--','unty', 'ltr', 'kg','g','mtr', 'fot','lbr'];
+
+    var favorites = {};
+    data.supplier = supplier;
+    var theCompiledHtml = theTemplate(data);
+    // Add the compiled html to the page
+    $("#inbox-rfqs-container").html(theCompiledHtml);
+
+    $('#expired-date').datepicker({
+        dateFormat: 'dd.mm.yy',
+        prevText: '<i class="icon-chevron-left"></i>',
+        nextText: '<i class="icon-chevron-right"></i>',
+        onSelect: function( selectedDate )
+        {
+          //  $('#finish').datepicker('option', 'minDate', selectedDate);
+        }
+    });
+
+    $("body").localize();
+
+
+
+
+
+}
+
+function searchProducts(supId, cb){
+
+        jQuery.ajax({
+            url: _brokerMsUrl + "products?supplierId=" + supId,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            success: function(dataResp, textStatus, xhr)
+            {
+
+                return dataResp;
+
+            },
+            error: function(xhr, status)
+            {
+                var msg;
+                try
+                {
+                    msg = xhr.responseJSON.message;
+                }
+                catch(err)
+                {
+                    msg = i18next.t("error.internal_server_error");
+                }
+
+                jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+
+                return;
+            },
+            beforeSend: function(xhr, settings)
+            {
+                xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+            }
+        });
+
+
+}
+
 function viewError(error){
 
     switch(error)
