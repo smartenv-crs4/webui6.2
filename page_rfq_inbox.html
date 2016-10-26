@@ -317,13 +317,6 @@
 
 
             </div>
-            {{#if_eq currentUser 'customer'}}
-            <hr>
-            <div class="input-group button-new-rfq">
-                <button type="button" class="btn-u" data-i18n="rfq.newrfq" onclick="openNewRfq()">New RFQ</button>
-            </div>
-
-            {{/if_eq}}
 </script>
 <!--End Template RFQ Inbox -->
 <!--Template RFQ Requests and Messages -->
@@ -525,8 +518,20 @@
                 <small id="unsaved_{{inc @index}}" class="hidden">Change Unsaved</small>
             </div>
         </div>
-    </div>
 
+
+    </div>
+    <!-- /.panel-body -->
+    <!-- <div class="panel-footer">
+       <div class="input-group">
+           <input id="rfq-input-msg" type="text" class="form-control input-sm" data-i18n="[placeholder]rfq.writeMessage">
+                   <span class="input-group-btn">
+                       <button class="btn btn-warning btn-sm" id="btn-chat" onclick="sendMessage('{{_id}}')" data-i18n="buttons.send">
+                       </button>
+                   </span>
+       </div>
+   </div>
+  /.panel-footer -->
 
 
 
@@ -569,111 +574,47 @@
 <!--Template RFQ New Request-->
 
 <script id="rfq_new_request_template" type="text/x-handlebars-template">
-    <div class="rfq-notify alert alert-warning fade in alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <a class="alert-link" href="#accordion-{{link}}" onclick="openRequest({{link}})"><strong type="text" data-i18n="warning"></strong>
-            <span type="text" data-i18n="{{text}}">{{text}} </span> {{link}}</a>
-    </div>
 
+<section>
+    <label class="select">
+        <select id="product-list-rfq" name="product">
+            {{#each products}}
+            <option  value={{this._id}}>{{this.name}}</option>
+            {{/each}}
+        </select>
+        <i></i>
+    </label>
+</section>
+<!--  </div>-->
+
+<div class="row">
+    <section class="col col-4">
+        <label class="input">
+            <i class="icon-append fa  fa-briefcase"></i>
+            <input type="text" name="quantity" id="new-qnty" data-i18n="[placeholder]rfq.requestQuantity">
+        </label>
+    </section>
+    <section class="col col-2">
+        <label class="select">
+            <select id="new-qnty-unity" name="measurement" disabled>
+                {{#each munits}}
+                <option value={{this}} data-i18n="rfq.{{this}}"></option>
+                {{/each}}
+
+            </select>
+            <i></i>
+        </label>
+    </section>
+    <section class="col col-6">
+        <label class="input">
+            <i class="icon-append fa fa-eur"></i>
+            <input type="text" name="quote" id="new-quote" data-i18n="[placeholder]rfq.requestQuote">
+        </label>
+    </section>
+
+</div>
 </script>
 <!--End Template RFQ New Request-->
-
-
-<!--Template RFQ New-->
-
-<script id="rfq_new_rfq_template" type="text/x-handlebars-template">
-    <form action="" class="sky-form">
-        <header class="header-new-rfq">New RFQ</header>
-
-        <fieldset>
-            <div class="row">
-
-                <section class="col col-6">
-                    <label class="label" data-i18n="login.supplier"></label>
-                    <label class="input">
-                        <i class="icon-append icon-user"></i>
-                        <input type="text" disabled name="username">
-                    </label>
-                </section>
-
-                <section class="col col-6">
-                    <label class="label" data-i18n="rfq.expiredate"></label>
-                    <label class="input">
-                        <i class="icon-append fa fa-calendar"></i>
-                        <input type="text" name="finish" id="expired-date" data-i18n="[placeholder]rfq.choose">
-                    </label>
-                </section>
-
-            </div>
-
-            <section>
-                <label class="label" data-i18n="rfq.requestSubject"></label>
-                <label class="input" >
-                    <i class="icon-append fa fa-bullseye"></i>
-                    <input type="text" name="description">
-                </label>
-            </section>
-
-
-
-            <header class="header-new-rfq">First Request</header>
-
-
-            <!--     <div class="row">
-                  <!-- <section class="col col-6">
-                       <label class="select">
-                           <select name="categories">
-                               <option value="none" selected disabled data-i18n="profile.categories"></option>
-                           </select>
-                           <i></i>
-                       </label>
-                   </section>-->
-                <section>
-                    <label class="select">
-                        <select name="product">
-                            <option value="0" selected disabled data-i18n="catalog.products"></option>
-                        </select>
-                        <i></i>
-                    </label>
-                </section>
-          <!--  </div>-->
-
-            <div class="row">
-                <section class="col col-4">
-                    <label class="input">
-                        <i class="icon-append fa  fa-briefcase"></i>
-                        <input type="text" name="qunatity" id="new-qnty" data-i18n="[placeholder]rfq.requestQuantity">
-                    </label>
-                </section>
-                <section class="col col-2">
-                    <label class="select">
-                        <select name="measurement">
-                            {{#each munits}}
-                            <option {{#if_eq this  '--'}} disabled  {{/if_eq}} value={{this}} data-i18n="rfq.{{this}}"></option>
-                            {{/each}}
-
-                        </select>
-                        <i></i>
-                    </label>
-                </section>
-                <section class="col col-6">
-                    <label class="input">
-                        <i class="icon-append fa fa-eur"></i>
-                        <input type="text" name="quote" id="new-quote" data-i18n="[placeholder]rfq.requestQuote">
-                    </label>
-                </section>
-
-            </div>
-
-        </fieldset>
-        <hr>
-        <div class="input-group button-new-rfq">
-            <button type="button" class="btn-u" data-i18n="profile.save" onclick="saveNewRfq()"></button>
-        </div>
-
-       </form>
-</script>
-<!--End Template RFQ New-->
 
 <!--Template No RFQ -->
 <script id="inbox_rfq_empty_template" type="text/x-handlebars-template">

@@ -167,7 +167,8 @@ function getConversations()
         },
         error: function(xhr, status)
         {
-            viewError(xhr.status)
+            console.log(xhr);
+            viewError(xhr.responseJSON.statusCode)
         },
         beforeSend: function(xhr, settings)
         {
@@ -277,7 +278,7 @@ function getConversationRequestsAndMessages(id_conv)
         {
             console.log(xhr.responseJSON.error);
 
-            viewError(xhr.status)
+            viewError(xhr.responseJSON.statusCode)
         },
         beforeSend: function(xhr, settings)
         {
@@ -453,7 +454,7 @@ function acceptByCustomer(id_conv, id_req, num_req, name) {
         {
             //console.log(xhr.responseJSON.error);
 
-            viewError(xhr.status)
+            viewError(xhr.responseJSON.statusCode)
         },
         beforeSend: function(xhr, settings)
         {
@@ -505,7 +506,7 @@ function modifyByCustomer(id_conv, id_req, num_req, name) {
         {
             console.log(xhr.responseJSON.error);
 
-            viewError(xhr.status)
+            viewError(xhr.responseJSON.statusCode)
         },
         beforeSend: function(xhr, settings)
         {
@@ -556,7 +557,7 @@ function acceptBySupplier(id_conv, id_req, num_req, old_quote, old_quantity, nam
         {
             console.log(xhr.responseJSON.error);
 
-            viewError(xhr.status)
+            viewError(xhr.responseJSON.statusCode)
         },
         beforeSend: function(xhr, settings)
         {
@@ -593,7 +594,7 @@ function rejectedBySupplier(id_conv, id_req, num_req, name) {
         {
             console.log(xhr.responseJSON.error);
 
-            viewError(xhr.status)
+            viewError(xhr.responseJSON.statusCode)
         },
         beforeSend: function(xhr, settings)
         {
@@ -629,7 +630,7 @@ function rejectedByCustomer(id_conv, id_req, num_req, name) {
         error: function(xhr, status)
         {
             console.log(xhr.responseJSON.error);
-            viewError(xhr.error);
+            viewError(xhr.responseJSON.statusCode);
         },
         beforeSend: function(xhr, settings)
         {
@@ -676,7 +677,7 @@ function sendMessage(id_conv, automatic, txt, lnk) {
         {
             console.log(xhr.responseJSON.error);
 
-            viewError(xhr.status)
+            viewError(xhr.responseJSON.statusCode)
 
         },
         beforeSend: function(xhr, settings)
@@ -689,94 +690,258 @@ function sendMessage(id_conv, automatic, txt, lnk) {
 }
 
 
+/**
+ * Pesca un parametro dalla query string dell'URL
+ * @param whichOne il parametro
+ * @return il valore associato al parametro
+ */
+function getParameter(whichOne) {
+    var pairs = location.search.substring(1).split('&');
+    var r = "";
+    var tp = new Array();
+    for (var i = 0; i < pairs.length; i ++) {
+        tp = pairs[i].split('=');
+        if (whichOne == tp[0])
+            r = unescape(tp[1].replace(/\+/g, " "));
+    }
+    return r;
+}
+
+function hasParameter(whichOne) {
+    var pairs = location.search.substring(1).split('&');
+    var r = "";
+    var tp = new Array();
+    for (var i = 0; i < pairs.length; i ++) {
+        tp = pairs[i].split('=');
+        if (whichOne == tp[0])
+            r = unescape(tp[1].replace(/\+/g, " "));
+    }
+    if(r){
+        return true;
+    }  else{
+        return false;
+    }
+}
+
+
+function getParameterNames() {
+    var ar = location.search.substring(1).split('&');
+    for (var i = 0; i < ar.length; i++) {
+        ar[i] = ar[i].substring(0, ar[i].indexOf('='));
+    }
+    return ar;
+}
+
 function openRequest(id){
     $("#collapse-"+id).collapse("show");
 }
 
-function openNewRfq(supplier){
+function openNewRfq(){
+    if(hasParameter("supplierId") && hasParameter("supplierName")){
 
-
-    var source = $("#rfq_new_rfq_template").html();
-   /* Handlebars.registerPartial("request", $("#request-partial").html());*/
-
-    var theTemplate = Handlebars.compile(source);
-
-    // Pass our data to the template
-    var userType =sessionStorage.type;
-    //
-    //console.log(data);
-    var data = {};
-    data.currentuser = userType;
-    data.munits = ['--','unty', 'ltr', 'kg','g','mtr', 'fot','lbr'];
-
-    var favorites = {};
-    data.supplier = supplier;
-    var theCompiledHtml = theTemplate(data);
-    // Add the compiled html to the page
-    $("#inbox-rfqs-container").html(theCompiledHtml);
-
-    $('#expired-date').datepicker({
-        dateFormat: 'dd.mm.yy',
-        prevText: '<i class="icon-chevron-left"></i>',
-        nextText: '<i class="icon-chevron-right"></i>',
-        onSelect: function( selectedDate )
-        {
-          //  $('#finish').datepicker('option', 'minDate', selectedDate);
+        var supplierInfos = getParameterNames();
+        var idS, nameS;
+        if(supplierInfos){
+            idS = getParameter("supplierId");
+            nameS = getParameter("supplierName");
         }
-    });
 
-    $("body").localize();
+        var source = $("#rfq_new_rfq_template").html();
+        /* Handlebars.registerPartial("request", $("#request-partial").html());*/
 
+        var theTemplate = Handlebars.compile(source);
 
+        // Pass our data to the template
+        var userType =sessionStorage.type;
+        //
+        //console.log(data);
+        var data = {};
+        data.currentuser = userType;
+        data.munits = ['unty', 'ltr', 'kg','g','mtr', 'fot','lbr'];
 
-
-
-}
-
-function searchProducts(supId, cb){
+        data.idS = idS;
+        data.nameS = nameS;
 
         jQuery.ajax({
-            url: _brokerMsUrl + "products?supplierId=" + supId,
+            url: _localServiceUrl + "products?supplierId=" + idS,
             type: "GET",
-            contentType: "application/json; charset=utf-8",
-            success: function(dataResp, textStatus, xhr)
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(resp, textStatus, xhr)
             {
+                console.log(data);
+                console.log("Products supplier found");
 
-                return dataResp;
+                data.products = resp.docs;
+                var theCompiledHtml = theTemplate(data);
+
+                // Add the compiled html to the page
+                $("#inbox-rfqs-container").html(theCompiledHtml);
+
+
+                $('#expiredate').datepicker({
+                    dateFormat: 'dd.mm.yy',
+                    prevText: '<i class="icon-chevron-left"></i>',
+                    nextText: '<i class="icon-chevron-right"></i>',
+                    onSelect: function( selectedDate )
+                    {
+                        //  $('#finish').datepicker('option', 'minDate', selectedDate);
+                    }
+                });
+                initFormNewRfq();
+
+                $("body").localize();
 
             },
             error: function(xhr, status)
             {
-                var msg;
-                try
-                {
-                    msg = xhr.responseJSON.message;
-                }
-                catch(err)
-                {
-                    msg = i18next.t("error.internal_server_error");
-                }
-
-                jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
-
-                return;
+                console.log(xhr.responseJSON.error);
+                viewError(xhr.responseJSON.statusCode);
             },
             beforeSend: function(xhr, settings)
             {
                 xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
             }
         });
+    }
+    else {
+        console.log("No parameter");
+    }
+}
+
+function initFormNewRfq(){
+    // Validation
+    $("#form-new-rfq").validate({
+        // Rules for form validation
+        rules:
+        {
+            expiredate:
+            {
+                required: true
+            }
+        },
+
+        // Messages for form validation
+        messages:
+        {
+            expiredate:
+            {
+                required: 'Please enter a validity date'
+            }
+        },
+
+        // Ajax form submition
+        submitHandler: function(form)
+        {
+
+        console.log(form);
+            /*$(form).ajaxSubmit(
+                {
+                    beforeSend: function()
+                    {
+                        $('#sky-form1 button[type="submit"]').addClass('button-uploading').attr('disabled', true);
+                    },
+                    uploadProgress: function(event, position, total, percentComplete)
+                    {
+                       // $("#sky-form1 .progress").text(percentComplete + '%');
+                    },
+                    success: function()
+                    {
+                        $("#sky-form1").addClass('submited');
+                       // $('#sky-form1 button[type="submit"]').removeClass('button-uploading').attr('disabled', false);
+                    }
+                });*/
+            var idR;
+            var conversation = {
+                "customer": sessionStorage.userId,
+                "supplier": $("#supplierinfo").attr("data-prop"),
+                "dateIn": new Date(),
+                "dateValidity": new Date($("#expiredate").val()),
+                "completed": false,
+                "subject": $("#request-subject").val(),
+
+            };
+
+            var request = {
+                "product": $("#product-list-rfq").val(),
+                "status":"pending"
+            }
+
+            if($("#new-qnty").val()) request.quantity = {"number":$("#new-qnty").val(),"unity": $("#new-qnty-unity").val()};
+            if($("#new-quote").val()) request.quote = $("#new-quote").val();
+
+                jQuery.ajax({
+                url: _localServiceUrl + "conversations",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(conversation),
+                dataType: 'json',
+                success: function(resp, textStatus, xhr)
+                {
+
+                createRequest(resp._id, request,function(){
+                    jQuery.jGrowl(i18next.t("rfq.newrfqcreated"), {theme:'bg-color-red', life: 5000});
+                    window.location.href="page_rfq_inbox.html";
+
+                });
+
+
+                },
+                error: function(xhr, status)
+                {
+                    console.log(xhr.responseJSON.error);
+                    viewError(xhr.responseJSON.statusCode);
+                },
+                beforeSend: function(xhr, settings)
+                {
+                    xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+                }
+            });
+    },
+
+        // Do not change code below
+        errorPlacement: function(error, element)
+        {
+            error.insertAfter(element.parent());
+        }
+    });
+}
+
+
+function createRequest(id_conv, request, cb){
+    jQuery.ajax({
+        url: _localServiceUrl + "conversations/"+id_conv+"/requests",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(request),
+        dataType: 'json',
+        success: function(resp, textStatus, xhr)
+        {
+        if(cb) cb();
+
+
+        },
+        error: function(xhr, status)
+        {
+            console.log(xhr.responseJSON.error);
+            viewError(xhr.responseJSON.statusCode);
+        },
+        beforeSend: function(xhr, settings)
+        {
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+        }
+    });
 
 
 }
 
 function viewError(error){
-
+console.log(error);
     switch(error)
     {
 
         case 404:
-            $("#inbox-rfqs-container").html(Handlebars.compile(inbox_rfq_empty_template));
+            $("#inbox-rfqs-container").html(Handlebars.compile($("#inbox_rfq_empty_template").html()));
             jQuery.jGrowl(i18next.t("warning.emptyResult"), {theme:'bg-color-yellow', life: 5000});
             break;
         case 410:

@@ -151,7 +151,8 @@ var translation = {
                 "newrfq":"New RFQ",
                 "choose":"Choose",
                 "expiredate":"Expiration date",
-                "chooseSupplier":"Choose a favorite above or select a vendor from the search list"
+                "chooseSupplier":"Choose a favorite above or select a vendor from the search list",
+                "newrfqcreated":"RFQ created with success!"
 
 
             },
@@ -326,7 +327,8 @@ var translation = {
                 "newrfq":"Nuova RFQ",
                 "choose":"Scegli",
                 "expiredate":"Fine validità",
-                "chooseSupplier":"Scegli tra i preferiti qui sopra o seleziona un fornitore da lista di ricerca"
+                "chooseSupplier":"Scegli tra i preferiti qui sopra o seleziona un fornitore da lista di ricerca",
+                "newrfqcreated":"RFQ Creata con successo!"
 
 
             },
