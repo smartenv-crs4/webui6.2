@@ -29,7 +29,7 @@ var translation = {
                     "emptyResult": "No result to show"
                 },
                 "buttons": {
-                    "send": "Send",
+                    "send": "Send"
                 },
                 "login": {
                     "signUp": "Sign Up",
@@ -77,7 +77,6 @@ var translation = {
                     "newPassword2Placeholder": "Retype the new password",
                     "passwordSaved": "Your password has been updated successfully",
 
-                    "favoriteSuppliers": "Favorite suppliers",
                     "favoriteTitle": "Mange your favorite suppliers' list",
                     "favoriteTitle2": "Below you can show your favorite suppliers",
                     "documentsInputLabel": "Choose a pdf document",
@@ -151,7 +150,8 @@ var translation = {
                     "choose": "Choose",
                     "expiredate": "Expiration date",
                     "chooseSupplier": "Choose a favorite above or select a vendor from the search list",
-                    "newrfqcreated": "RFQ created with success!"
+                    "newrfqcreated": "RFQ created with success!",
+                    "sendRFQ": "Send RFQ"
 
 
                 },
@@ -173,185 +173,183 @@ var translation = {
                     "last": "Last",
                     "first": "First"
                 }
+            }
+        },
+        it: {
+            translation: {
+                "nav": {
+                    "home": "Home",
+                    "about": "Chi siamo",
+                    "services": "Servizi",
+                    "contacts": "Contatti",
+                    "help": "Aiuto",
+                    "logout": "Esci",
+                    "lang": "Lingua"
+                },
+                "error": {
+                    "invalid_email": "L'indirizzo email inserito non &egrave; valido",
+                    "bad_request": "Richiesta non valida",
+                    "missing_user_or_password": "Nome utente o password mancanti",
+                    "unauthorized": "Non sei autorizzato ad accedere a questa funzione",
+                    "internal_server_error": "Errore interno del server",
+                    "invalid_auth": "Email e/o password errati",
+                    "password_differs": "Le password differiscono",
+                    "unknown_user_type": "Seleziona il tipo di account che vuoi creare",
+                    "invalid_pdf": "Puoi caricare soltanto file pdf",
+                    "disk_quota_exceeded": "La quota disco a tua disposizione è stata superata",
+                    "request_rejected": "La richiesta non può essere accolta"
+                },
+                "warning": {
+                    "warning": "Attenzione!",
+                    "emptyResult": "Nessun risultato da mostrare"
+                },
+                "buttons": {
+                    "send": "Invia"
+                },
+                "login": {
+                    "signUp": "Registrati",
+                    "signIn": "Accedi",
+                    "yourEmail": "Il tuo indirizzo email",
+                    "yourName": "Il tuo nome",
+                    "password": "Password",
+                    "choosePassword": "Scegli una password",
+                    "retypePassword": "Conferma password",
+                    "userType": "Sei un ...",
+                    "customer": "Cliente",
+                    "supplier": "Fornitore"
 
-            },
-            it: {
-                translation: {
-                    "nav": {
-                        "home": "Home",
-                        "about": "Chi siamo",
-                        "services": "Servizi",
-                        "contacts": "Contatti",
-                        "help": "Aiuto",
-                        "logout": "Esci",
-                        "lang": "Lingua"
-                    },
-                    "error": {
-                        "invalid_email": "L'indirizzo email inserito non &egrave; valido",
-                        "bad_request": "Richiesta non valida",
-                        "missing_user_or_password": "Nome utente o password mancanti",
-                        "unauthorized": "Non sei autorizzato ad accedere a questa funzione",
-                        "internal_server_error": "Errore interno del server",
-                        "invalid_auth": "Email e/o password errati",
-                        "password_differs": "Le password differiscono",
-                        "unknown_user_type": "Seleziona il tipo di account che vuoi creare",
-                        "invalid_pdf": "Puoi caricare soltanto file pdf",
-                        "disk_quota_exceeded": "La quota disco a tua disposizione è stata superata",
-                        "request_rejected": "La richiesta non può essere accolta"
-                    },
-                    "warning": {
-                        "warning": "Attenzione!",
-                        "emptyResult": "Nessun risultato da mostrare"
-                    },
-                    "buttons": {
-                        "send": "Invia"
-                    },
-                    "login": {
-                        "signUp": "Registrati",
-                        "signIn": "Accedi",
-                        "yourEmail": "Il tuo indirizzo email",
-                        "yourName": "Il tuo nome",
-                        "password": "Password",
-                        "choosePassword": "Scegli una password",
-                        "retypePassword": "Conferma password",
-                        "userType": "Sei un ...",
-                        "customer": "Cliente",
-                        "supplier": "Fornitore"
-
-                    },
-                    "profile": {
-                        "email": "Email",
-                        "type": "Tipo di account",
-                        "name": "Nome",
-                        "address": "Indirizzo",
-                        "phone": "Numero di telefono",
-                        "favoriteSuppliers": "Fornitori preferiti",
-                        "logo": "Logo",
-                        "description": "Descrizione",
-                        "web": "Sito web",
-                        "categories": "Categorie",
-                        "pIva": "Partita IVA",
-                        "reviews": "Recensioni",
-                        "profile": "Profilo",
+                },
+                "profile": {
+                    "email": "Email",
+                    "type": "Tipo di account",
+                    "name": "Nome",
+                    "address": "Indirizzo",
+                    "phone": "Numero di telefono",
+                    "favoriteSuppliers": "Fornitori preferiti",
+                    "logo": "Logo",
+                    "description": "Descrizione",
+                    "web": "Sito web",
+                    "categories": "Categorie",
+                    "pIva": "Partita IVA",
+                    "reviews": "Recensioni",
+                    "profile": "Profilo",
 
 
-                        "documents": "Documenti",
-                        "documentsTitle": "Gestisci i tuoi documenti pubblici",
-                        "documentsTitle2": "Qui puoi aggiungere o rimuovere documenti",
-                        "documentsInputLabel": "Scegli un documento pdf",
-                        "uploadDocument": "Upload",
-                        "documentSaved": "Documento salvato",
-                        "documentDeleted": "Il documento  stato cancellato correttamente",
+                    "documents": "Documenti",
+                    "documentsTitle": "Gestisci i tuoi documenti pubblici",
+                    "documentsTitle2": "Qui puoi aggiungere o rimuovere documenti",
+                    "documentsInputLabel": "Scegli un documento pdf",
+                    "uploadDocument": "Upload",
+                    "documentSaved": "Documento salvato",
+                    "documentDeleted": "Il documento  stato cancellato correttamente",
 
-                        "areYouSure": "Confermi ?",
-                        "confirmDeleteDocument": "Vuoi rimuovere questo documento ?",
+                    "areYouSure": "Confermi ?",
+                    "confirmDeleteDocument": "Vuoi rimuovere questo documento ?",
 
-                        "customer": "cliente",
-                        "supplier": "fornitore",
+                    "customer": "cliente",
+                    "supplier": "fornitore",
 
-                        "passwordTitle": "Gestisci la tua password",
-                        "passwordTitle2": "Qui puoi cambiare la tua password",
-                        "editPassword": "Cambia la password",
-                        "oldPasswordPlaceholder": "La tua password attuale",
-                        "newPasswordPlaceholder": "Inserisci la nuova password",
-                        "newPassword2Placeholder": "Conferma la nuova password",
-                        "passwordSaved": "La tua password è stata aggiornata correttamente",
+                    "passwordTitle": "Gestisci la tua password",
+                    "passwordTitle2": "Qui puoi cambiare la tua password",
+                    "editPassword": "Cambia la password",
+                    "oldPasswordPlaceholder": "La tua password attuale",
+                    "newPasswordPlaceholder": "Inserisci la nuova password",
+                    "newPassword2Placeholder": "Conferma la nuova password",
+                    "passwordSaved": "La tua password è stata aggiornata correttamente",
 
-                        "favoriteSuppliers": "Fornitori preferiti",
-                        "favoriteTitle": "Gestisci la tua lista dei fornitori preferiti",
-                        "favoriteTitle2": "Qui puoi visualizzare i fornitori salvati nella tua lista dei preferiti",
+                    "favoriteTitle": "Gestisci la tua lista dei fornitori preferiti",
+                    "favoriteTitle2": "Qui puoi visualizzare i fornitori salvati nella tua lista dei preferiti",
 
-                        "certifications": "Certificazioni",
-                        "certificationsTitle": "Gestisci le tue certificazioni",
-                        "certificationsTitle2": "Qui puoi visualizzare le certificazioni associate al tuo account",
-                        "title": "Gestisci le informazioni del tuo profilo",
-                        "edit": "Modifica il profilo",
-                        "saved": "Il tuo profilo è stato aggiornato correttamente",
-                        "emptyText": "Vuoto",
-                        "cancel": "Annulla",
+                    "certifications": "Certificazioni",
+                    "certificationsTitle": "Gestisci le tue certificazioni",
+                    "certificationsTitle2": "Qui puoi visualizzare le certificazioni associate al tuo account",
+                    "title": "Gestisci le informazioni del tuo profilo",
+                    "edit": "Modifica il profilo",
+                    "saved": "Il tuo profilo è stato aggiornato correttamente",
+                    "emptyText": "Vuoto",
+                    "cancel": "Annulla",
 
-                        "save": "Salva",
-                        "yes": "Si",
-                        "no": "No"
+                    "save": "Salva",
+                    "yes": "Si",
+                    "no": "No"
 
-                    },
-                    "publicProfile": {
-                        "web": "Sito web:",
-                        "address": "Indirizzo:",
-                        "noSupplier": "Codice fornitore mancante",
-                        "addSupplier": "Aggiungi ai preferiti"
-                    },
-                    "rfq": {
-                        "requests": "Richieste",
-                        "requestSubject": "Oggetto",
-                        "requestQuantity": "Quantità",
-                        "requestQuote": "Costo",
-                        "requestStatus": "Stato",
-                        "requestLastModification": "Ultima Modifica ",
-                        "messages": "Messaggi",
-                        "requestAccept": "Accetta",
-                        "requestSaveAccept": "Salva&Accetta",
-                        "requestReject": "Rifiuta",
-                        "requestSave": "Salva",
-                        "requestCancel": "Cancella",
-                        "requestConfirm": "Conferma",
-                        "requestGiveup": "Annulla",
-                        "pending": "In corso...",
-                        "rejectedByC": "Annullata dal Customer",
-                        "rejectedByS": "Rifiutata dal Supplier",
-                        "acceptedByS": "Accettata dal Supplier",
-                        "acceptedByC": "Confermata dal Customer",
-                        "modifyByC": "Modificata dal Customer",
-                        "close": "Completata",
-                        "expired": "Scaduta",
-                        "writeMessage": "Scrivi il tuo messaggio qui...",
-                        "confirmedRequestMsg": "Il cliente ha confermato la Richiesta",
-                        "acceptedRequestMsg": "Il fornitore ha accettato la Richiesta",
-                        "rejectedRequestMsg": "Il fornitore ha rifiutato la Richiesta",
-                        "gaveupRequestMsg": "Il cliente ha annullato la Richiesta",
-                        "modifiedRequestMsg": "Il cliente ha modificato la Richiesta",
-                        "warning": "Attenzione!",
-                        "updateDone": "La tua Richiesta è stata aggiornata!",
-                        "rfqExpired": "L'RFQ è scaduta!",
-                        "NaN": "E' richiesto un numero!",
-                        "unty": "Unità",
-                        "kg": "Kg",
-                        "mtr": "Mtr",
-                        "ltr": "Ltr",
-                        "fot": "Fot",
-                        "lbr": "Lbr",
-                        "g": "g",
-                        "--": "--",
-                        "newrfq": "Nuova RFQ",
-                        "choose": "Scegli",
-                        "expiredate": "Fine validità",
-                        "chooseSupplier": "Scegli tra i preferiti qui sopra o seleziona un fornitore da lista di ricerca",
-                        "newrfqcreated": "RFQ Creata con successo!"
+                },
+                "publicProfile": {
+                    "web": "Sito web:",
+                    "address": "Indirizzo:",
+                    "noSupplier": "Codice fornitore mancante",
+                    "addSupplier": "Aggiungi ai preferiti"
+                },
+                "rfq": {
+                    "requests": "Richieste",
+                    "requestSubject": "Oggetto",
+                    "requestQuantity": "Quantità",
+                    "requestQuote": "Costo",
+                    "requestStatus": "Stato",
+                    "requestLastModification": "Ultima Modifica ",
+                    "messages": "Messaggi",
+                    "requestAccept": "Accetta",
+                    "requestSaveAccept": "Salva&Accetta",
+                    "requestReject": "Rifiuta",
+                    "requestSave": "Salva",
+                    "requestCancel": "Cancella",
+                    "requestConfirm": "Conferma",
+                    "requestGiveup": "Annulla",
+                    "pending": "In corso...",
+                    "rejectedByC": "Annullata dal Customer",
+                    "rejectedByS": "Rifiutata dal Supplier",
+                    "acceptedByS": "Accettata dal Supplier",
+                    "acceptedByC": "Confermata dal Customer",
+                    "modifyByC": "Modificata dal Customer",
+                    "close": "Completata",
+                    "expired": "Scaduta",
+                    "writeMessage": "Scrivi il tuo messaggio qui...",
+                    "confirmedRequestMsg": "Il cliente ha confermato la Richiesta",
+                    "acceptedRequestMsg": "Il fornitore ha accettato la Richiesta",
+                    "rejectedRequestMsg": "Il fornitore ha rifiutato la Richiesta",
+                    "gaveupRequestMsg": "Il cliente ha annullato la Richiesta",
+                    "modifiedRequestMsg": "Il cliente ha modificato la Richiesta",
+                    "warning": "Attenzione!",
+                    "updateDone": "La tua Richiesta è stata aggiornata!",
+                    "rfqExpired": "L'RFQ è scaduta!",
+                    "NaN": "E' richiesto un numero!",
+                    "unty": "Unità",
+                    "kg": "Kg",
+                    "mtr": "Mtr",
+                    "ltr": "Ltr",
+                    "fot": "Fot",
+                    "lbr": "Lbr",
+                    "g": "g",
+                    "--": "--",
+                    "newrfq": "Nuova RFQ",
+                    "choose": "Scegli",
+                    "expiredate": "Fine validità",
+                    "chooseSupplier": "Scegli tra i preferiti qui sopra o seleziona un fornitore da lista di ricerca",
+                    "newrfqcreated": "RFQ Creata con successo!",
+                    "sendRFQ": "Invia RFQ"
 
-                    },
-                    "catalog": {
-                        "catalog": "Catalogo",
-                        "search": "Cerca",
-                        "all": "Tutto",
-                        "incatalog": "Solo catalogo",
-                        "products": "Prodotti",
-                        "files": "File Caricati",
-                        "more": "Leggi tutto",
-                        "less": "Meno",
-                        "pdf": "File pdf",
-                        "placeholder": "Cerca nel catalogo..."
-                    }
-                    ,
-                    "pagination": {
-                        "next": "Prossima",
-                        "prev": "Precedente",
-                        "last": "Ultima",
-                        "first": "Prima"
-
-                    }
+                },
+                "catalog": {
+                    "catalog": "Catalogo",
+                    "search": "Cerca",
+                    "all": "Tutto",
+                    "incatalog": "Solo catalogo",
+                    "products": "Prodotti",
+                    "files": "File Caricati",
+                    "more": "Leggi tutto",
+                    "less": "Meno",
+                    "pdf": "File pdf",
+                    "placeholder": "Cerca nel catalogo..."
+                },
+                "pagination": {
+                    "next": "Prossima",
+                    "prev": "Precedente",
+                    "last": "Ultima",
+                    "first": "Prima"
 
                 }
+
             }
         }
-}
-    ;
+
+    };
