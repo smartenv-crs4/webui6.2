@@ -49,3 +49,38 @@
 .rfq-notify{
     padding:5px;
 }
+
+.rfq-select{
+    border-width:0px!important;
+
+}
+
+.rfq-select-label i{
+
+   right:0px!important;
+    margin-right:1px!important;
+
+}
+.rfq-select-label{
+    width:75px!important;
+    float:right;
+}
+
+.rfq-select-form{
+    margin-left:3px;
+    float:right;
+}
+.cont-list-messages, #accordion-panel{
+    max-height: 550px!important;
+
+}
+
+.button-new-rfq{
+    margin: 15px;
+    padding-bottom:15px;
+}
+
+.header-new-rfq{
+    font-size:15px!important;
+    margin-bottom:15px;
+}
