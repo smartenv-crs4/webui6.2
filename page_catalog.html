@@ -39,6 +39,8 @@
 
     <!-- CSS Page Style -->
     <link rel="stylesheet" href="assets/css/pages/profile.css">
+    <link rel="stylesheet" href="assets/css/pages/page_misc_sticky_footer.css">
+
 
     <!-- CSS Theme -->
     <link rel="stylesheet" href="assets/css/theme-skins/dark.css" id="style_color">
@@ -229,8 +231,8 @@
         </div>
     </div><!--/wrapper-->
     <!--=== Footer Version 1 ===-->
-    <div class="footer-v1">
-        <div class="footer">
+    <div class="footer-v1 sticky-footer">
+        <div class="footer ">
             <div class="container">
                 <div class="row">
                     <!-- About -->
@@ -488,10 +490,12 @@
 
     <script type="text/x-handlebars-template" id="supplier-info_template">
         <div class="blog-author " style="min-height: 110px;">
+           {{#if logged}}
             <button class="btn-u " id="btn_rfq" type="button" style="float: right;"><i
                     class="fa fa-paper-plane"></i> <span
                     onclick="javascript:window.location.href='page_rfq_new.html?supplierId={{_id}}&supplierName={{plusname}}'"
                     data-i18n="rfq.sendRFQ"></span></button>
+            {{/if}}
             <img onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'" src="{{logo}}" alt="">
             <div class="blog-author-desc">
                 <div class="overflow-h">
@@ -688,7 +692,8 @@
                 console.log(data);
                 var values =  data[0];
                 var plusname = values.name.split(" ").join("+");
-                values['plusname']=plusname;
+                values['plusname'] = plusname;
+                values['logged'] = logged && (userType == "customer");
                 var compiled = cacheCompile(templateid, values);
 
                 $(target).empty();
@@ -733,7 +738,7 @@
     <script type="text/javascript">
         var userType = "customer";
         var currentSupplier = false;
-
+        var logged = false;
         jQuery(document).ready(function () {
 
 
@@ -747,7 +752,7 @@
             //   getConversations();
 
 
-            var logged = false;
+
             if (window.sessionStorage && sessionStorage.token)
                 logged = true;
             if (logged) {
