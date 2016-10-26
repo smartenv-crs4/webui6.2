@@ -139,7 +139,8 @@ var translation = {
                 "warning": "Warning!",
                 "updateDone": "The Request is updated!",
                 "rfqExpired": "RFQ is expired",
-                "NaN": "Is required a number!"
+                "NaN": "Is required a number!",
+                "sendRFQ" : "Send RFQ"
 
             },
             "catalog": {
@@ -301,7 +302,8 @@ var translation = {
                 "warning": "Attenzione!",
                 "updateDone": "La tua Richiesta è stata aggiornata!",
                 "rfqExpired": "L'RFQ è scaduta!",
-                "NaN": "E' richiesto un numero!"
+                "NaN": "E' richiesto un numero!",
+                "sendRFQ" : "Invia RFQ"
 
 
             },
