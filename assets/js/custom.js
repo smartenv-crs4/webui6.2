@@ -37,9 +37,10 @@ jQuery(document).ready(function(){
   
   jQuery('body').localize();
   jQuery('#header_p').html(header_template);
-  if (lng != undefined)
+  
+  if(lng)
   {
-    var l = jQuery(".languages a[data-lng='" + lng +"']");
+    var l = jQuery(".languages a[data-lng='" + lng +"']");    
     if(l.length > 0)
     {
       if(lng != jQuery(".languages .active a").first().attr("data-lng"))
@@ -50,10 +51,17 @@ jQuery(document).ready(function(){
         var c = document.createElement("i");
         c.className = "fa fa-check";
         lngSel.find("a").first().append(c);
-        i18next.changeLanguage(lng, function(){});
-        jQuery('body').localize();
+        i18next.changeLanguage(lng, function(){});        
       }
+      jQuery('body').localize();
     }
+  }
+  else
+  {
+    localStorage.lng = jQuery(".languages .active a").first().data("lng");
+    lng = localStorage.lng;
+    
+    jQuery('body').localize();
   }
 
   jQuery(".languages a").click(function(){    
@@ -209,7 +217,6 @@ function getProfileInfo(async)
     async = true;
   
   
-  //console.log(sessionStorage.token);
   jQuery.ajax({
     url: _userMsUrl + "users/" + sessionStorage.userId,
     type: "GET",
@@ -249,6 +256,66 @@ function getUrlParameter(sParam)
       return sParameterName[1] === undefined ? true : sParameterName[1];
     }
   }
+}
+
+
+function autoCompleteCat(tagId)
+{
+  var acCategories = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    identify: function(datum){
+      console.log(datum);
+      return datum.id;
+      
+    },
+    //prefetch: '../data/films/post_1960.json',
+    remote: {
+      url: _brokerMsUrl + "categories/drop?",
+      transform: function(response){      
+        var ret = [];
+        
+        if(response.statusCode == 404)
+        {
+          return ret;
+        }
+        
+        for(var i in response)
+        {        
+          ret.push({"name": response[i].name[localStorage.lng], 
+                    "id": response[i]._id});
+        }      
+        return ret;            
+      },
+      prepare: function(query, settings){
+        settings.url = settings.url + "name=" + query + "&lang=" + localStorage.lng;      
+        return settings;      
+      },
+      transport(opts, onSuccess, onError){      
+        jQuery.ajax({
+          url: opts.url,
+          type: "GET",
+          success: onSuccess,
+          error: function(xhr)
+          {
+            onSuccess(xhr.responseJSON);
+          }        
+        });            
+      }
+    }
+  });
+
+  jQuery('#' + tagId).typeahead(null, {
+    name: 'categories',
+    display: 'name',
+    source: acCategories
+  });
+
+  jQuery('#' + tagId).bind('typeahead:selected', function(obj, datum, name){            
+    jQuery('#' + tagId).data("cat-id", datum.id);
+    jQuery('#' + tagId).data("cat-name", datum.name);
+  });
+                 
 }
 
 

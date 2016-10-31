@@ -157,16 +157,6 @@ var supplierProfileTemplate = `
     </span -->
   </dd>
   <hr>
-  <dt><strong data-i18n="profile.categories"></strong></dt>
-  <dd>
-    <a class="editable editable-click" data-name="categories" data-i18n="[data-emptytext]profile.emptyText" id="ed-categories" data-type="text" href="#">{{categories}}</a>
-    <!-- span>
-      <a class="pull-right" href="#">
-        <i class="fa fa-pencil"></i>
-      </a>
-    </span -->
-  </dd>
-  <hr>
   <dt><strong data-i18n="profile.pIva"></strong></dt>
   <dd>
     <a class="editable editable-click" data-name="pIva" data-i18n="[data-emptytext]profile.emptyText" id="ed-piva" data-type="text" href="#">{{pIva}}</a>
@@ -299,10 +289,6 @@ var documentsTableTemplate = `
 </div>
 `;
 
-
-
-
-
 var certificationsTabTemplate = `
 <li><a data-toggle="tab" href="#certificationsTab" data-i18n="profile.certifications"></a></li>
 `;
@@ -332,6 +318,59 @@ var certificationsTableTemplate = `
   </div>
 </div>
 `;
+
+
+
+var categoriesTabTemplate = `
+<li><a data-toggle="tab" href="#categoriesTab" data-i18n="profile.categories"></a></li>
+`;
+
+var categoriesTemplate = `
+<div id="categoriesTab" class="profile-edit tab-pane fade">									
+  <h2 class="heading-md" data-i18n="profile.categoriesTitle"></h2>
+  <p data-i18n="profile.categoriesTitle2"></p>
+  <br>
+  <div class="row">
+    <div class="col-xs-10">
+      <input id="acCat" class="form-control rounded tt-input" data-i18n="[placeholder]profile.categories" type="text">
+    </div>
+    <button type="button" class="btn-u" data-i18n="profile.addCategory" onclick="addUserCategory()"></button>
+  </div>
+
+  <div id="categoriesList"></div>
+  </div>
+</div>
+`;
+
+var categoriesTableTemplate = `
+<div class="table-search-v1 margin-bottom-30">
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th data-i18n="profile.categories"></th>								
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this}}               
+          <tr>
+            <td>
+              <span data-id="{{id}}" > {{name}} </span>
+              <span>                
+                <a class="pull-right"
+                   data-placement="top" href="#" data-catid="{{id}}" onclick="removeUserCategory('{{id}}')">
+                  <i class="fa fa-remove"></i>
+               </a>
+             </span>
+            </td>                  
+          </tr>
+        {{/each}}							
+      </tbody>
+    </table>
+  </div>
+</div>
+`;
+
 
 
 
