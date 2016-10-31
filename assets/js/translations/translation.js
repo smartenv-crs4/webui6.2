@@ -22,14 +22,18 @@ var translation = {
                     "unknown_user_type": "Select a valid user type",
                     "invalid_pdf": "You can upload only pdf files",
                     "disk_quota_exceeded": "Disk quota exceeded",
-                    "request_rejected": "The request has bee rejected"
+                    "request_rejected": "The request has bee rejected",
+                    "missing_date": "Please enter a validity date",
+                    "invalid_number":"Please enter only digits",
+                    "noparameter":"Wrang parameter"
                 },
                 "warning": {
                     "warning": "Warning!",
                     "emptyResult": "No result to show"
                 },
                 "buttons": {
-                    "send": "Send"
+                    "send": "Send",
+                    "add":"Add"
                 },
                 "login": {
                     "signUp": "Sign Up",
@@ -128,7 +132,7 @@ var translation = {
                     "modifyAndAcceptedByS": "Accepted By Supplier",
                     "acceptedByC": "Confirmed By Customer",
                     "modifyByC": "Modified By Customer",
-                    "close": "Close",
+                    "close": "Completed",
                     "expired": "Expired",
                     "writeMessage": "Type your message here...",
                     "confirmedRequestMsg": "The customer has confirmed the Request",
@@ -140,7 +144,7 @@ var translation = {
                     "updateDone": "The Request is updated!",
                     "rfqExpired": "RFQ is expired",
                     "NaN": "Is required a number!",
-                    "unty": "Unity",
+                    "unty": "Unit",
                     "kg": "Kg",
                     "mtr": "Mtr",
                     "ltr": "Ltr",
@@ -199,14 +203,18 @@ var translation = {
                     "unknown_user_type": "Seleziona il tipo di account che vuoi creare",
                     "invalid_pdf": "Puoi caricare soltanto file pdf",
                     "disk_quota_exceeded": "La quota disco a tua disposizione è stata superata",
-                    "request_rejected": "La richiesta non può essere accolta"
+                    "request_rejected": "La richiesta non può essere accolta",
+                    "missing_date":"Devi inserire una data",
+                    "invalid_number":"Puoi inserire solo un numero",
+                    "noparameter":"Parametri non corretti"
                 },
                 "warning": {
                     "warning": "Attenzione!",
                     "emptyResult": "Nessun risultato da mostrare"
                 },
                 "buttons": {
-                    "send": "Invia"
+                    "send": "Invia",
+                    "add":"Aggiungi"
                 },
                 "login": {
                     "signUp": "Registrati",

@@ -51,8 +51,6 @@
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/custom_rfq.css">
 
-
-    >
 </head>
 
 <body>
@@ -83,7 +81,8 @@
                                     <div class="inbox-rfq-header" style="display: inline-block;">
                                         <strong id="inbox-rfq-header-name" class="" style=""></strong>
                                     </div>
-                                    <a href="#"><i class="fa fa-cog pull-right"></i></a>
+                                    <span id="rfq-status-header" class="pull-right"></span>
+                                    <a id="rfq-settings-header" href="#"><i class="fa fa-cog pull-right"></i></a>
                                 </div>
 
                             </div>
@@ -281,15 +280,15 @@
 <script id="inbox_rfq_template" type="text/x-handlebars-template">
     <div id="inbox-rfqs" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
         {{#each docs}}
-        {{#if_eq expired 'false'}}
-        {{#if_eq completed 'false'}}
-        <div class="alert-blocks alert-blocks-success alert-dismissable">
-            {{else}}
-            <div class="alert-blocks alert-blocks-pending alert-dismissable">
-                {{/if_eq}}
-                {{else}}
-                <div class="alert-blocks alert-blocks-pending alert-dismissable">
+                {{#if_eq expired 'false'}}
+                     {{#if_eq completed 'false'}}
+                    <div class="alert-blocks alert-blocks-success alert-dismissable">
+                    {{else}}
+                    <div class="alert-blocks alert-blocks-pending alert-dismissable">
                     {{/if_eq}}
+                {{else}}
+                    <div class="alert-blocks alert-blocks-pending alert-dismissable">
+                {{/if_eq}}
                     <a style="cursor: pointer;" onclick="getConversationRequestsAndMessages('{{{_id}}}')">
                         <!--<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>-->
                         <img class="rounded-x" src={{userLogo customer supplier}} alt="">
@@ -298,12 +297,12 @@
                             <span><strong class="color-dark">{{#if_eq ../currentUser 'customer'}}{{supplier.name}}{{else}}{{customer.name}}{{/if_eq}}</strong></span>
                             <small class="pull-right"><em class="color-grey">{{formatDate dateIn}}</em></small>
                             <p> {{#if completed}}
-                                <small class="color-red" style="float: right; " data-i18n="rfq.close"></small>
+                                <small class="color-green" style="float: right; " data-i18n="rfq.close"></small>
                                 {{else}}
                                 {{#if expired}}
                                 <small class="color-red" style="float: right; " data-i18n="rfq.expired"></small>
                                 {{else}}
-                                <small class="color-green" style="float: right; "  data-i18n="rfq.pending"></small>
+                                <small class="color-info" style="float: right; "  data-i18n="rfq.pending"></small>
                                 {{/if}}{{/if}}
 
                                 <strong> <span data-i18n="rfq.requestSubject"></span>:
@@ -321,19 +320,19 @@
 <!--End Template RFQ Inbox -->
 <!--Template RFQ Requests and Messages -->
 <script id="inbox_rfq_requests_messages" type="text/x-handlebars-template">
-    <div class="col-lg-6 panel panel-default	">
+    <div class="col-sm-6 chat-panel panel panel-default	">
         <div class="panel-heading overflow-h">
             <i class="fa fa-tasks fa-fw"></i>
             <span data-i18n="rfq.requests"></span>
         </div>
-        <div class="panel-group acc-v1" id="accordion-panel">
+        <div class="panel-group acc-v1" style="min-height:461px" id="accordion-panel">
             {{#each requests}}
             {{> request completed=../completed expired=../expired currentUser=../currentUser customer=../customer supplier=../supplier _id_c=../_id munits=../measureunits}}
 
         {{/each}}
     </div>
     </div>
-    <div class="col-lg-6 chat-panel panel panel-default">
+    <div class="col-sm-6 chat-panel panel panel-default">
         <div class="panel-heading overflow-h">
             <i class="fa fa-comments fa-fw"></i> <span data-i18n="rfq.messages"></span>
 
@@ -452,7 +451,8 @@
                                  <label class="select rfq-select-label">
                                      <select id="selectqnty-{{inc @index}}" {{#unless  quantity}} disabled {{/unless}} class="rfq-select" >
                                      {{#each munits}}
-                                         <option {{#if_eq this  ../quantity.unity}}  selected="" {{/if_eq}} {{#if_eq this  '--'}} {{#unless  ../quantity}} selected="" {{/unless}} disabled  {{/if_eq}} value={{this}} data-i18n="rfq.{{this}}"></option>
+                                         <option  {{#if_eq this  '--'}} {{#unless  ../quantity}} selected="" {{/unless}} disabled {{/if_eq}}
+                                     {{#if_eq this  ../quantity.unity}}  selected="" {{/if_eq}} value={{this}} data-i18n="rfq.{{this}}"></option>
                                      {{/each}}
                                  </select>
                                      <i></i>
