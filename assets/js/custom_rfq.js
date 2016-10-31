@@ -3,10 +3,10 @@
  */
 var _authMsUrl  = "http://seidue.crs4.it:3007/";
 var _userMsUrl  = "http://seidue.crs4.it:3008/";
-var _localServiceUrl  = "http://localhost:3000/api/v1/";
-//var _localServiceUrl  = _brokerMsUrl;
-//var _serviceUrl =  "http://seidue.crs4.it:3009";
-var _serviceUrl =  "http://localhost:3000";
+//var _localServiceUrl  = "http://localhost:3000/api/v1/";
+var _localServiceUrl  = _brokerMsUrl;
+var _serviceUrl =  "http://seidue.crs4.it:3009";
+//var _serviceUrl =  "http://localhost:3000";
 
 
 _access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzg1NTc1MjQ3NTY4fQ.Du2bFjd0jB--geRhnNtbiHxcjQHr5AyzIFmTr3NFDcM";
