@@ -33,7 +33,8 @@ var translation = {
                 },
                 "buttons": {
                     "send": "Send",
-                    "add":"Add"
+                    "add":"Add",
+                    "details": "Details"
                 },
                 "login": {
                     "signUp": "Sign Up",
@@ -178,6 +179,20 @@ var translation = {
                     "prev": "Prev",
                     "last": "Last",
                     "first": "First"
+                },
+"product":
+                {
+                    "searchTitle": "Discover new suppliers",
+                    "searchLabelCategories": "Categories...",
+                    "searchLabelProducts": "Search products...",
+                    "searchTagMessage": "Use product tags for your search", 
+                    "thLogo": "Logo",
+                    "thAbout": "About",
+                    "thRates": "Rates",
+                    "thAction": "Action",
+                    "tabLabelRegistration": "Rigistered ",
+                    "tabLabelRegistration": "Rigistered ",
+                    "tabMsgProduct": "See products match" 
                 }
             }
         },
@@ -214,7 +229,8 @@ var translation = {
                 },
                 "buttons": {
                     "send": "Invia",
-                    "add":"Aggiungi"
+                    "add":"Aggiungi",
+                    "details": "Dettagli"
                 },
                 "login": {
                     "signUp": "Registrati",
@@ -359,6 +375,19 @@ var translation = {
                     "last": "Ultima",
                     "first": "Prima"
 
+                },
+		 "product":
+                {
+                    "searchTitle": "Cerca nuovi suppliers",
+                    "searchLabelCategories": "Categories...",
+                    "searchLabelProducts": "Cerca prodotti...",
+                    "searchTagMessage": "Usa i tag dei prodotti per la ricerca", 
+                    "thLogo": "Logo",
+                    "thAbout": "Info",
+                    "thRates": "Giudizi",
+                    "thAction": "Azioni",
+                    "tabLabelRegistration": "Registrato il ",
+                    "tabMsgProduct": "Vedi i prodotti associati" 
                 }
 
             }

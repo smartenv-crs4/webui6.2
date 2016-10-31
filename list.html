@@ -61,14 +61,31 @@
 		<div class=" parallaxBg">
 			<div class="container">
 				<div class="col-md-6 col-md-offset-3">
-					<h1>Discover <span class="color-green">new</span> suppliers</h1>
+					<h1 data-i18n="product.searchTitle"></h1>
 
 					<div class="input-group">
-						<input type="text" id="product" class="form-control" placeholder="Search products ...">
-						<span class="input-group-btn">
-							<button class="btn-u btn-u-lg" id="btn_search" type="button"><i class="fa fa-search"></i></button>
-						</span>
-					</div>
+                        <div class="col-md-11" style="padding-right: 0px;">
+                            <div class="row">
+                                <div class="col-md-5" style="padding-left: 0px; padding-right: 2px;" >
+                                <input type="text" id="category" class="form-control" data-i18n="[placeholder]product.searchLabelCategories">
+                                </div>
+                                <div class="col-md-7" style="padding-left: 0px">
+                                <input type="text" id="product" class="form-control" data-i18n="[placeholder]product.searchLabelProducts">
+                                </div>
+                            </div>
+                            <div data-i18n="product.searchTagMessage"></div>
+                            
+                        
+                        </div>
+                    
+                        <div class="col-md-1" style="padding-left: 0px;">
+                            <span class="input-group-btn">
+                                    <button class="btn-u btn-u-lg" id="btn_search" type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                        </div>
+                    
+                    
+                    </div>
 
 					
 				</div>
@@ -80,11 +97,11 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 					<tr>
-						<th>Supplier Image</th>
-						<th class="hidden-sm">About</th>
-						<th>Contacts</th>
-						<th>Action</th>
-					</tr>
+                        <th style="width: 10%" data-i18n="product.thLogo"></th>
+                        <th class="hidden-sm" style="width: 70%" data-i18n="product.thAbout"></th>
+                        <th style="width: 10%" data-i18n="product.thRates"></th>
+                        <th style="width: 10%" data-i18n="product.thAction"></th>
+                    </tr>
 					</thead>
 					<tbody id="t_list">
 					
@@ -281,30 +298,12 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 	<script type="text/javascript" src="assets/js/custom.js"></script>
 	<script type="text/javascript" src="js/page_list.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/blockUI.js"></script>
     <script type="text/javascript">
 		
         jQuery(document).ready(function() {
 			App.init();
-			//App.initCounter();
-		//	App.initParallaxBg();
-			//OwlCarousel.initOwlCarousel();
-			$('#header_p').html(header_template);
-
-			i18next.init({
-					lng: 'en', // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
-					resources:  translation
-			}, function (err, t) {
-
-					jqueryI18next.init(i18next, $ );
-					$('body').localize();
-
-					$('.lang-select').click(function() {
-							i18next.changeLanguage($(this).data('lang'));
-							$('body').localize();
-					});
-
-
-			});
+			
 
 			$(".search-block").backstretch([
 				"assets/img/port/login_1.jpg",

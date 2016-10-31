@@ -1,11 +1,25 @@
 // var api_url = "http://156.148.37.167:3010/api/v1/";
  var api_url = _brokerMsUrl;
 
+ 
+ 
+ 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+
+function getDateFromObjectId(objectId)
+{
+ var d = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+    
+ var datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
+    d.getFullYear();
+ 
+    return datestring;
 }
 
 var limit;
@@ -33,6 +47,7 @@ $( document).ready(function() {
     $('#product').val(var_name);
     get_list(var_par);
     
+    
 });
 
 
@@ -42,7 +57,9 @@ $( document).ready(function() {
 
 $( "#btn_search" ).click(function(e) {
       
-      $('#product').val();
+    block('Please wait');  
+    
+    $('#product').val();
        var str_param  = '?';
        if ($('#product').val())
             str_param = str_param + 'name=' + ($('#product').val()).trim();
@@ -51,7 +68,13 @@ $( "#btn_search" ).click(function(e) {
        if ($('#tags').val())
             str_param = str_param + 'tags=' + ($('#tags').val()).trim();  
       str_param = str_param.replace("?&", "?");
-      get_list(str_param);  
+       
+      get_list(str_param);
+      //$(document).ajaxStop($.unblockUI);
+      //setTimeout(alert(10), 1000);
+      
+      
+  
       
     });
     
@@ -70,13 +93,15 @@ function render_row(data, var_par)
 {
     $('#divNoResult').css('display', 'none');
     
+    
     var link = '';
     
     var tab = '';
                                     for (var i = 0; i < data.docs.length; i++) {
+                                    
                                             tab += '<tr>'
                                     + '<td>'
-                                    + '    <img class="rounded-x" src="'; 
+                                    + '    <img class="rounded-x" style="width: 80%; height: 80%" src="'; 
                                     if (data.docs[i].logo) 
                                         tab = tab +  data.docs[i].logo; 
                                     else 
@@ -86,46 +111,32 @@ function render_row(data, var_par)
                                     + '<td>'
                                     + '    <h3><a href="#">' + data.docs[i].name + '</a></h3>'
                                     + '    <p>Descr</p>'
-                                    + '    <small class="hex">Joined March 4, 2014</small>'
+                                    + '    <small class="hex"><span data-i18n="product.tabLabelRegistration"></span>'+ getDateFromObjectId(data.docs[i]._id) +'</small>'
+                                    + '<div><br><a class="a_productList" data-id="' + data.docs[i]._id + '" style="cursor: pointer" data-i18n="product.tabMsgProduct"></a></div>'
+                                    + '<div id="divListProducts' + data.docs[i]._id + '" style="display: none"></div><br>'
                                     + '</td>'
-                                    + '<td>'
-                                    + ' <!--   <ul class="list-inline s-icons">'
-                                    + '        <li>'
-                                    + '            <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Facebook" href="#">'
-                                    + '                <i class="fa fa-facebook"></i>'
-                                    + '            </a>'
-                                    + '        </li>'
-                                    + '        <li>'
-                                    + '            <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Twitter" href="#">'
-                                    + '                <i class="fa fa-twitter"></i>'
-                                    + '            </a>'
-                                    + '        </li>'
-                                    + '        <li>'
-                                    + '            <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Dropbox" href="#">'
-                                    + '                <i class="fa fa-dropbox"></i>'
-                                    + '            </a>'
-                                    + '        </li>'
-                                    + '        <li>'
-                                    + '            <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Linkedin" href="#">'
-                                    + '                <i class="fa fa-linkedin"></i>'
-                                    + '            </a>'
-                                    + '        </li>'
-                                    + '    </ul>  -->'
-                                    + '    <span><a href="#">' + data.docs[i].email + '</a></span>';
+                                     
+                                    + '  <!--  <span><a href="#">' + data.docs[i].email + '</a></span>';
                                     if (data.docs[i].website) tab = tab + '<span><a href="#">'+ data.docs[i].website +'</a></span>';
                                     if (data.docs[i].phone) tab = tab + '<span>'+ data.docs[i].phone +'</span>';
-                                    tab = tab + '</td>'
+                                    tab = tab + '</td> -->'
                                     + '<td>'
-                                    + '<button class="btn-u btn-block rounded sDetails" type="button" data-par="'+var_par+'" data-id="'+ data.docs[i]._id +'"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>Details</button>';
-                                    if (data.docs[i].rates)
+                                    // if (data.docs[i].rates)
                                     tab = tab +  '    <ul class="list-inline star-vote" style="display: inline-flex">'
                                     + '        <li><i class="color-green fa fa-star"></i></li>'
                                     + '        <li><i class="color-green fa fa-star"></i></li>'
                                     + '        <li><i class="color-green fa fa-star"></i></li>'
                                     + '        <li><i class="color-green fa fa-star-half-o"></i></li>'
                                     + '        <li><i class="color-green fa fa-star-o"></i></li>'
-                                    + '    </ul>'
-                                    + '</td>'
+                                    + '    </ul>';
+                                    
+                                    
+                                    tab = tab +   '</td>'
+                                    
+                                    + '<td>'
+                                    + '<button class="btn-u btn-block rounded sDetails" type="button" data-par="'+var_par+'" data-id="'+ data.docs[i]._id +'"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>';
+                                    
+                                    + '</td>' 
                                 + '</tr>';
                                           
                                       
@@ -143,6 +154,31 @@ function render_row(data, var_par)
                                       link = ('page_catalog.html?'+par+'&idSupplier='+id).replace("??", "?").replace("?&", "?");
                                       window.location.href = link;
                                         
+                                });
+                                
+                                
+                                $('.a_productList').click(function(){
+                                      var id = ($(this).attr('data-id'));
+                                      
+                                      var str_par = '?supplierId=' + $(this).attr('data-id') + '&limit=3';
+                                      
+                                      if (var_name)     str_par =   str_par + '&name=' + var_name;
+                                      if (var_category) str_par =   str_par + '&categories=' + var_category;
+                                      if (var_tag)      str_par =   str_par + '&tag=' + var_tag;
+
+                                      
+                                          
+                                      if($('#divListProducts' + id).css('display') == 'block')
+                                      {
+                                          $('#divListProducts' + id).css('display', 'none');
+                                          $('#divListProducts' + id).empty();
+                                      }
+                                      else
+                                      {
+                                          getProductsSupplier(id, str_par);
+                                      }
+                                      
+                                      
                                 });
                                 
                                 
@@ -285,9 +321,12 @@ function get_list(var_par)
                                           render_row(data, var_par);
                                           if (pages > 1)
                                           {
-                                              console.log('asffggg');
                                               render_paginate(pages, page);
-                                          }  
+                                          }
+                                          
+                                          $("#divSearch_table").localize();
+                                          
+                                      setTimeout($.unblockUI, 1000);      
                                       }
                                       else
                                       {
@@ -302,4 +341,55 @@ function get_list(var_par)
                                     alert("Errore di caricamento");
                                   }
 });
+}
+
+function getProductsSupplier(id, var_par)
+{
+    $.ajax({
+                                  type: "GET",
+                                  url: api_url + "products" + var_par,
+                                  dataType: "json",
+                                  success: function(data)
+                                  {
+                                      $('#divListProducts' + id).empty();
+                                      $('#divListProducts' + id).css('display', 'block');
+                                      
+                                      var str_listProducts2 = '<table>';
+                                      
+                                      for (var c = 0; c < data.total; c++) {
+                                          str_listProducts2 = str_listProducts2 + '<tr>'
+                                        + '<td style="padding-top: 5px" ><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;'+ data.docs[c].name+'</td>'
+                                        + '</tr>';
+                                      } 
+                                      
+                                      str_listProducts2 = str_listProducts2 + '</table>';
+                                      
+                                      $('#divListProducts' + id).append(str_listProducts2); 
+                                  },
+                                  error: function()
+                                  {
+                                    alert("Errore di caricamento");
+                                  }
+});
+}
+
+
+
+/***********************************************/
+
+function block(msg)
+{
+    $.blockUI({ 
+        message: '<img src="assets/img/balls.gif"><span font-weight: bold">&nbsp;'+ msg +'</span>',
+            css: { 
+            border: 'none', 
+            padding: '15px', 
+            backgroundColor: '#000', 
+            '-webkit-border-radius': '10px', 
+            '-moz-border-radius': '10px', 
+            opacity: .5, 
+            color: '#fff' 
+        } });
+        
+        //setTimeout($.unblockUI, 8000);
 }
