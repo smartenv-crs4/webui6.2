@@ -3,9 +3,10 @@
  */
 var _authMsUrl  = "http://seidue.crs4.it:3007/";
 var _userMsUrl  = "http://seidue.crs4.it:3008/";
-//var _localServiceUrl  = "http://localhost:3000/api/v1/";
-var _localServiceUrl  = _brokerMsUrl;
-var _serviceUrl =  "http://seidue.crs4.it:3009";
+var _localServiceUrl  = "http://localhost:3000/api/v1/";
+//var _localServiceUrl  = _brokerMsUrl;
+//var _serviceUrl =  "http://seidue.crs4.it:3009";
+var _serviceUrl =  "http://localhost:3000";
 
 
 _access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzg1NTc1MjQ3NTY4fQ.Du2bFjd0jB--geRhnNtbiHxcjQHr5AyzIFmTr3NFDcM";
@@ -229,6 +230,9 @@ function getConversationRequestsAndMessages(id_conv)
                 // Add the compiled html to the page
                 $("#rfq-list-messages").append(theCompiledHtml);
 
+                var d = $('.cont-list-messages').first();
+                d.scrollTop(d.prop("scrollHeight"));
+
 
             });
 
@@ -291,6 +295,13 @@ function getConversationRequestsAndMessages(id_conv)
 
             }
 
+
+            $("#rfq-input-msg").bind('keypress', function(e) {
+                if(e.keyCode==13){
+                    $('#btn-chat').trigger('click');
+                }
+            });
+
         },
         error: function(xhr, status)
         {
@@ -305,7 +316,10 @@ function getConversationRequestsAndMessages(id_conv)
 }
 
 function setEditableField(field){
+    $(field).editable("option","placement","right");
     $(field).editable("enable");
+
+
     jQuery(document).on("translate", function(){
         jQuery(".editable").each(function(){
             jQuery(this).editable("option", "emptytext", jQuery(this).data("emptytext"));
@@ -320,17 +334,19 @@ function setEditableField(field){
 
 
     $(field).editable('option', 'validate', function(v) {
-            var id_field = $(".editable-open:first").attr("id");
-            id_field = id_field.split("-")[1];
-            if(!v){
+            var field = $(".editable-open:first").attr("id");
+            var id_field = field.split("-")[1];
+            var name_field = field.split("-")[0];
 
+            if(name_field== "quantity")
+            if(!v){
+                console.log("not v ");
                 $("#selectqnty-"+id_field).val('--');
                 $("#selectqnty-"+id_field).prop('disabled','disabled');
             }
-
             else{
-                console.log("entra e set");
-               $("#selectqnty-"+id_field).val('unty');
+                console.log("v ");
+                if (!$("#selectqnty-"+id_field).val() || $("#selectqnty-"+id_field).val() == '--'){ console.log("v --"); $("#selectqnty-"+id_field).val('unty');}
                 $("#selectqnty-"+id_field).prop('disabled',false);
             }
 
@@ -367,6 +383,8 @@ function onSaveEditableField(e, params){
     var id = (e.target.id);
     id = id.split("-")[1];
 
+
+
     $('#unsaved_'+ id).removeClass('hidden');
     $("#cancel-req-"+id).removeClass("hidden");
     $("#save-accept-req-"+id).removeClass("hidden");
@@ -391,20 +409,28 @@ function resetRequest(num_req, old_quote, old_quantity, old_unity){
 
 
 function updateRequest(rqs){
-
-    $("#rfq-panel-"+rqs._id+" .quote a").editable("setValue",rqs.quote);
-    $("#rfq-panel-"+rqs._id+" .quantity a").editable("setValue",rqs.quantity.number);
-
-
     var num_req = $("#rfq-panel-"+rqs._id).attr("data-value");
+    var quote  =  "";
+    var quantity =  "";
+    var unit = "--";
+    if(rqs.quote){
+        quote = rqs.quote;
+        $("#rfq-panel-"+rqs._id+" .quote a").editable("setValue",rqs.quote);
+    }
+    else $("#rfq-panel-"+rqs._id+" .quote a").editable("setValue","");
+    if(rqs.quantity){
+        quantity = rqs.quantity.number;
+        unit = rqs.quantity.unity;
+        $("#rfq-panel-"+rqs._id+" .quantity a").editable("setValue",rqs.quantity.number);
+        $("#selectqnty-"+num_req).val(rqs.quantity.unity);
+    }
+    else{
 
-    $("#selectqnty-"+num_req).val(rqs.quantity.unity);
-    console.log(rqs.quantity.unity);
-    if(!rqs.quantity){
-        console.log("empty");
-        console.log(num_req);
         $("#selectqnty-"+num_req).prop('disabled','disabled');
     }
+
+    $("#cancel-req-"+num_req).attr("onclick","resetRequest('"+num_req+"','"+quote+"','"+quantity+"','"+unit+"')");
+
 
     var s = formatStatus(rqs.status);
     var cuser = sessionStorage.type;
@@ -437,11 +463,25 @@ function updateRequest(rqs){
 
     }
 
-    if(rqs.status == 'acceptedByS' || rqs.status == 'pending')
+    var classNames = $("#status-"+num_req).attr('class').split(/\s+/);
+    var classcolor = "color-info";
+        $.each(classNames, function (i, className) {
+        if(className.split('-')[0] == "color") classcolor = className ;
+
+    });
+
+    if(rqs.status == 'pending'){
         iconPanelRqs =  "fa-exclamation-circle";
-    else if(rqs.status == 'acceptedByC')
+        $("#status-"+num_req).removeClass(classcolor).addClass("color-info");
+    }
+    else if(rqs.status == 'acceptedByC' || rqs.status == 'acceptedByS'){
         iconPanelRqs =  "fa-check-circle";
-    else iconPanelRqs =  "fa-times-circle";
+        $("#status-"+num_req).removeClass(classcolor).addClass("color-success");
+    }
+    else {
+        iconPanelRqs =  "fa-times-circle";
+        $("#status-"+num_req).removeClass(classcolor).addClass("color-danger");
+    }
 
     $("a[data-parent='#accordion-"+num_req+"'] i").
     replaceWith("<i class='fa "+iconPanelRqs+" fa-lg pull-right'></i>");
@@ -464,7 +504,7 @@ function acceptByCustomer(id_conv, id_req, num_req, name) {
         {
             console.log("Request modify correctly by customer");
              updateRequest(data);
-            sendMessage(data.conversation._id, true, "rfq.confirmedRequestMsg",+num_req);
+            sendMessage(data.conversation._id, true, "rfq.confirmedRequestMsg",num_req, "accepted");
             jQuery.jGrowl(i18next.t("rfq.updateDone"), {theme:'bg-color-green', life: 5000});
         },
         error: function(xhr, status)
@@ -494,10 +534,9 @@ function modifyByCustomer(id_conv, id_req, num_req, name) {
     var unity = $("#selectqnty-"+num_req).attr("value");
 
     var data = {'quantity' : {"number":quantity,"unity":unity}, 'quote' : quote};
-    console.log(data);
     for(var k in data){
         if($("#"+k+"-"+num_req).hasClass("editable-empty")){
-            if("k" == "quantity") data[k]={"number":"","unity":'void'}
+            if(k == "quantity") data[k]={"number":"","unity":'void'}
             else data[k]="";
         }
 
@@ -505,7 +544,6 @@ function modifyByCustomer(id_conv, id_req, num_req, name) {
     }
 
 
-    console.log(data);
     jQuery.ajax({
         url: _localServiceUrl + "conversations/"+ id_conv+"/requests/"+id_req+"/actions/custmodify",
         type: "POST",
@@ -518,7 +556,7 @@ function modifyByCustomer(id_conv, id_req, num_req, name) {
 
             updateRequest(data);
 
-            sendMessage(data.conversation._id, true,"rfq.modifiedRequestMsg",num_req);
+            sendMessage(data.conversation._id, true,"rfq.modifiedRequestMsg",num_req, "pending");
             jQuery.jGrowl(i18next.t("rfq.updateDone"), {theme:'bg-color-green', life: 5000});
         },
         error: function(xhr, status)
@@ -528,8 +566,6 @@ function modifyByCustomer(id_conv, id_req, num_req, name) {
         },
         beforeSend: function(xhr, settings)
         {
-            console.log(xhr);
-            console.log(sessionStorage.token);
             xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
         }
     });
@@ -549,11 +585,11 @@ function acceptBySupplier(id_conv, id_req, num_req, old_quote, old_quantity, nam
     var unity = $("#selectqnty-"+num_req).attr("value");
 
     var data = {'quantity' : {"number":quantity,"unity":unity}, 'quote' : quote};
-    console.log(data);
+
     for(var k in data){
         if($("#"+k+"-"+num_req).hasClass("editable-empty")){
-            if("k" == "quantity") data[k]={"number":"","unity":'void'}
-            else data[k]=undefined;
+            if(k == "quantity") data[k]={"number":"","unity":'void'};
+            else data[k]="";
         }
 
 
@@ -570,7 +606,7 @@ function acceptBySupplier(id_conv, id_req, num_req, old_quote, old_quantity, nam
 
             updateRequest(data);
 
-            sendMessage(data.conversation._id, true, "rfq.acceptedRequestMsg",num_req);
+            sendMessage(data.conversation._id, true, "rfq.acceptedRequestMsg",num_req, "accepted");
             jQuery.jGrowl(i18next.t("rfq.updateDone"), {theme:'bg-color-green', life: 5000});
         },
         error: function(xhr, status)
@@ -580,8 +616,6 @@ function acceptBySupplier(id_conv, id_req, num_req, old_quote, old_quantity, nam
         },
         beforeSend: function(xhr, settings)
         {
-            console.log(xhr);
-            console.log(sessionStorage.token);
             xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
         }
     });
@@ -606,7 +640,7 @@ function rejectedBySupplier(id_conv, id_req, num_req, name) {
 
             updateRequest(data);
 
-            sendMessage(data.conversation._id, true, "rfq.rejectedRequestMsg",num_req);
+            sendMessage(data.conversation._id, true, "rfq.rejectedRequestMsg",num_req, "rejected");
 
             jQuery.jGrowl(i18next.t("rfq.updateDone"), {theme:'bg-color-green', life: 5000});
 
@@ -646,7 +680,7 @@ function rejectedByCustomer(id_conv, id_req, num_req, name) {
 
             updateRequest(data);
 
-            sendMessage(data.conversation._id, true, "rfq.gaveupRequestMsg",num_req);
+            sendMessage(data.conversation._id, true, "rfq.gaveupRequestMsg",num_req, "rejected");
             jQuery.jGrowl(i18next.t("rfq.updateDone"), {theme:'bg-color-green', life: 5000});
 
         },
@@ -663,7 +697,7 @@ function rejectedByCustomer(id_conv, id_req, num_req, name) {
 
 }
 
-function sendMessage(id_conv, automatic, txt, lnk) {
+function sendMessage(id_conv, automatic, txt, lnk, status) {
 
     if(sessionStorage.userId == undefined)
     {
@@ -671,10 +705,11 @@ function sendMessage(id_conv, automatic, txt, lnk) {
     }
     var text = "";
     var auto = false;
-    var link= "#";
+    var link= {"url":"#"};
     if(automatic) auto = automatic;
     if(txt) text = txt; else text = $("#rfq-input-msg").val();
-    if(lnk) link = lnk;
+    if(lnk) link.url = lnk;
+    if(status)  link.info = status;
     var data = {
         sender: sessionStorage.userId,
         type: sessionStorage.type,
@@ -693,7 +728,9 @@ function sendMessage(id_conv, automatic, txt, lnk) {
         dataType: 'json',
         success: function(data, textStatus, xhr)
         {
-
+            var d = $('.cont-list-messages').first();
+            d.scrollTop(d.prop("scrollHeight"));
+            $('#rfq-input-msg').val("");
 
         },
         error: function(xhr, status)
@@ -777,7 +814,6 @@ function openNewRfq(){
         // Pass our data to the template
         var userType =sessionStorage.type;
         //
-        //console.log(data);
         var data = {};
         data.currentuser = userType;
         data.munits = ['unty', 'ltr', 'kg','g','mtr', 'fot','lbr'];
@@ -797,7 +833,6 @@ function openNewRfq(){
                 Handlebars.registerPartial("newrequest", $("#single_new_rfq_template").html());
                 var theTemplate = Handlebars.compile(source);
 
-                console.log(data);
                 console.log("Products supplier found");
 
                 data.products = resp.docs;
@@ -815,8 +850,6 @@ function openNewRfq(){
                     minDate: new Date(),
                     onSelect: function( selectedDate )
                     {
-
-                        console.log("selected date");
                         //  $('#finish').datepicker('option', 'minDate', selectedDate);
                     }
                 });

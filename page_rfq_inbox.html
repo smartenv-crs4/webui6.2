@@ -278,7 +278,7 @@
 
 <!--Template RFQ Inbox -->
 <script id="inbox_rfq_template" type="text/x-handlebars-template">
-    <div id="inbox-rfqs" class="panel-body no-padding mCustomScrollbar" data-mcs-theme="minimal-dark">
+    <div id="inbox-rfqs" class="panel-body no-padding" data-mcs-theme="minimal-dark">
         {{#each docs}}
                 {{#if_eq expired 'false'}}
                      {{#if_eq completed 'false'}}
@@ -325,7 +325,7 @@
             <i class="fa fa-tasks fa-fw"></i>
             <span data-i18n="rfq.requests"></span>
         </div>
-        <div class="panel-group acc-v1" style="min-height:461px" id="accordion-panel">
+        <div class="panel-group acc-v1" id="accordion-panel">
             {{#each requests}}
             {{> request completed=../completed expired=../expired currentUser=../currentUser customer=../customer supplier=../supplier _id_c=../_id munits=../measureunits}}
 
@@ -464,7 +464,10 @@
 
                 <div class="statistics">
 
-                    <h3 class="heading-xs"><span  data-i18n="rfq.requestStatus"></span> <span class="status-rfq pull-right" id="status-{{inc @index}}"
+                    <h3 class="heading-xs"><span  data-i18n="rfq.requestStatus"></span> <span class="status-rfq pull-right
+                     {{#if_eq status 'pending'}} color-info {{else}} {{#if_eq_or_eq status 'rejectedByC' status 'rejectedByS' }} color-danger {{ else }}
+                        color-success {{/if_eq_or_eq}} {{/if_eq}}
+                    " id="status-{{inc @index}}"
                                                                                               value={{status}} data-i18n="rfq.{{status}}"></span></h3>
 
                     <hr>
@@ -561,10 +564,11 @@
 <!--Template RFQ Message Auto-->
 
 <script id="rfq_new_message_auto_template" type="text/x-handlebars-template">
-    <div class="rfq-notify alert alert-warning fade in alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <a class="alert-link" href="#accordion-{{link}}" onclick="openRequest({{link}})"><strong type="text" data-i18n="warning"></strong>
-            <span type="text" data-i18n="{{text}}">{{text}} </span> {{link}}</a>
+    <div class="rfq-notify alert {{#if_eq link.info "accepted"}}  alert-success
+    {{else}} {{#if_eq link.info "pending"}} alert-info{{else}} alert-danger {{/if_eq}} {{/if_eq}} fade in alert-dismissable">
+        <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>-->
+        <a class="alert-link" href="#accordion-{{link.url}}" onclick="openRequest({{link.url}})"><strong type="text" data-i18n="warning"></strong>
+            <span type="text"  data-i18n="{{text}}">{{text}} </span> {{link.url}}</a>
     </div>
 
 </script>
