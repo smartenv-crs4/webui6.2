@@ -72,6 +72,8 @@ var translation = {
 
                     "customer": "customer",
                     "supplier": "supplier",
+                    
+                    "addCategory": "Add",
 
                     "passwordTitle": "Manage your password",
                     "passwordTitle2": "Below you can change your password",
@@ -256,6 +258,8 @@ var translation = {
 
                     "customer": "cliente",
                     "supplier": "fornitore",
+                    
+                    "addCategory": "Inserisci",
 
                     "passwordTitle": "Gestisci la tua password",
                     "passwordTitle2": "Qui puoi cambiare la tua password",

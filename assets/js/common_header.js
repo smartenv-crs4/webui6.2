@@ -54,9 +54,7 @@ var header_template = `	<div class="header">
            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" >
               RFQ
            </a>
-          </li>
-          
- 
+          </li>          
             
           <li>
             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-i18n="nav.about">
@@ -70,7 +68,7 @@ var header_template = `	<div class="header">
 								<div class="input-group animated fadeInDown">
 									<input type="text" class="form-control" placeholder="" id="smallSearch" >
 									<span class="input-group-btn">
-										<button class="btn-u" type="button" data-i18n="catalog.search" id="smallSearchButton" ></button>
+										<button class="btn-u" type="button" data-i18n="catalog.search" id="smallSearchButton" onclick="javascript:window.location = 'list.html?name=' + $('#smallSearch').val();" ></button>
 									</span>
 								</div>
 							</div>
