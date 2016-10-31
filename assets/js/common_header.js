@@ -54,9 +54,7 @@ var header_template = `	<div class="header">
            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" >
               RFQ
            </a>
-          </li>
-          
- 
+          </li>          
             
           <li>
             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-i18n="nav.about">
