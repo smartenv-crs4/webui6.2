@@ -3,7 +3,11 @@
  */
 var _authMsUrl  = "http://seidue.crs4.it:3007/";
 var _userMsUrl  = "http://seidue.crs4.it:3008/";
-var _localServiceUrl  = "http://localhost:3000/api/v1/";
+//var _localServiceUrl  = "http://localhost:3000/api/v1/";
+var _localServiceUrl  = _brokerMsUrl;
+var _serviceUrl =  "http://seidue.crs4.it:3009";
+
+
 _access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzg1NTc1MjQ3NTY4fQ.Du2bFjd0jB--geRhnNtbiHxcjQHr5AyzIFmTr3NFDcM";
 var defaultImg = "assets/img/team/img32-md.jpg";
 var defaultImgPr = "assets/img/port/no_image_available.png";
@@ -193,7 +197,7 @@ function getConversationRequestsAndMessages(id_conv)
         success: function(data, textStatus, xhr)
         {
 
-            var socket = io.connect('http://localhost:3000',{reconnection:true});
+            var socket = io.connect(_serviceUrl,{reconnection:true});
             socket.once('connect', function() {
                 socket.emit('join', data._id);
             });
