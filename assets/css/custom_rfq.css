@@ -1,3 +1,8 @@
+.color-info{
+    color:#5bc0de;
+}
+
+
 .rfq-container{
     padding:5px;
 }
@@ -46,6 +51,10 @@
     color: #585f69;
 }
 
+.rfq button{
+   color:#fff!important;
+}
+
 .rfq-notify{
     padding:5px;
 }
@@ -85,3 +94,5 @@
     font-size:15px!important;
     margin-bottom:15px;
 }
+
+

@@ -4,7 +4,7 @@
 <!--[if IE 9]>
 <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en"> <!--<![endif]-->
+<html lang="en" xmlns="http://www.w3.org/1999/html"> <!--<![endif]-->
 <head>
     <title>RFQs Page - Cagliari Port 2020</title>
 
@@ -51,8 +51,6 @@
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/custom_rfq.css">
 
-
-    >
 </head>
 
 <body>
@@ -249,6 +247,7 @@
 
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script type="text/javascript" src="assets/js/custom_rfq.js"></script>
+<script type="text/javascript" src="assets/js/plugins/async.js"></script>
 <script type="text/javascript" src="assets/js/utils.js"></script>
 
 
@@ -282,7 +281,7 @@
     <form action="" id="form-new-rfq" class="sky-form">
 
         <fieldset>
-            <div class="row">
+            <div class="row" >
 
                 <section class="col col-6">
                     <label class="label" data-i18n="login.supplier"></label>
@@ -296,7 +295,7 @@
                     <label class="label" data-i18n="rfq.expiredate"></label>
                     <label class="input">
                         <i class="icon-append fa fa-calendar"></i>
-                        <input type="text" name="dateValidity" id="expiredate" required data-i18n="[placeholder]rfq.choose">
+                        <input type="text" name="expiredate" id="expiredate" data-i18n="[placeholder]rfq.choose">
                     </label>
                 </section>
 
@@ -312,58 +311,16 @@
 
 
 
-            <header class="header-new-rfq">First Request</header>
+            <header class="header-new-rfq"><span data-i18n="rfq.requests"></span>
+                <a class="btn-u btn-u-xs btn-u rounded pull-right" href="#" data-i18n="buttons.add" onclick="addRowRequest()"></a>
+            </header>
+            <div id="requests-container">
 
-
-            <!--     <div class="row">
-                  <!-- <section class="col col-6">
-                       <label class="select">
-                           <select name="categories">
-                               <option value="none" selected disabled data-i18n="profile.categories"></option>
-                           </select>
-                           <i></i>
-                       </label>
-                   </section>-->
-            <section>
-                <label class="select">
-                    <select id="product-list-rfq" name="product">
-                        {{#each products}}
-                        <option  value={{this._id}}>{{this.name}}</option>
-                        {{/each}}
-                    </select>
-                    <i></i>
-                </label>
-            </section>
-            <!--  </div>-->
-
-            <div class="row">
-                <section class="col col-4">
-                    <label class="input">
-                        <i class="icon-append fa  fa-briefcase"></i>
-                        <input type="text" name="quantity" id="new-qnty" data-i18n="[placeholder]rfq.requestQuantity">
-                    </label>
-                </section>
-                <section class="col col-2">
-                    <label class="select">
-                        <select id="new-qnty-unity" name="measurement" disabled>
-                            {{#each munits}}
-                            <option value={{this}} data-i18n="rfq.{{this}}"></option>
-                            {{/each}}
-
-                        </select>
-                        <i></i>
-                    </label>
-                </section>
-                <section class="col col-6">
-                    <label class="input">
-                        <i class="icon-append fa fa-eur"></i>
-                        <input type="text" name="quote" id="new-quote" data-i18n="[placeholder]rfq.requestQuote">
-                    </label>
-                </section>
-
-            </div>
+                {{> newrequest}}
+                </div>
 
         </fieldset>
+
         <hr>
         <div class="input-group button-new-rfq">
             <button type="submit" class="btn-u" data-i18n="profile.save"></button>
@@ -373,7 +330,46 @@
 </script>
 <!--End Template RFQ New-->
 
+<!--Single new Request -->
+<script id="single_new_rfq_template" type="text/x-handlebars-template">
+<div class="row row-request" >
+    <section class="col col-4">
+        <label class="select">
+            <select class="product-list-rfq" name="product">
+                {{#each products}}
+                <option  value={{this._id}}>{{this.name}}</option>
+                {{/each}}
+            </select>
+            <i></i>
+        </label>
+    </section>
+    <section class="col col-3">
+        <label class="input">
+            <i class="icon-append fa fa-eur"></i>
+            <input type="text" name="quote" class="newquote" data-i18n="[placeholder]rfq.requestQuote">
+        </label>
+    </section>
+    <section class="col col-3">
+        <label class="input">
+            <i class="icon-append fa  fa-briefcase"></i>
+            <input type="text" name="quantity" class="newqnty" data-i18n="[placeholder]rfq.requestQuantity">
+        </label>
+    </section>
+    <section class="col col-2">
+        <label class="select">
+            <select class="new-qnty-unity" name="measurement">
+                {{#each munits}}
+                <option value={{this}} data-i18n="rfq.{{this}}"></option>
+                {{/each}}
 
+            </select>
+            <i></i>
+        </label>
+    </section>
+
+
+</div>
+</script>
 
 </body>
 </html>

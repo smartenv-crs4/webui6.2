@@ -8,7 +8,7 @@ _access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOi
 var defaultImg = "assets/img/team/img32-md.jpg";
 var defaultImgPr = "assets/img/port/no_image_available.png";
 
-
+var data_r;
 
 Handlebars.registerHelper('if_eq', function(a, b, opts) {
     if(a) a=a.toString();
@@ -168,7 +168,7 @@ function getConversations()
         error: function(xhr, status)
         {
             console.log(xhr);
-            viewError(xhr.responseJSON.statusCode)
+            viewError(xhr)
         },
         beforeSend: function(xhr, settings)
         {
@@ -265,6 +265,20 @@ function getConversationRequestsAndMessages(id_conv)
                 else
                     $("#inbox-rfq-header-name").text(data.customer.name);
 
+                if(data.expired){
+                    $("#rfq-status-header").text("Expired");
+                    $("#rfq-status-header").addClass("label label-danger");
+                }else if(data.completed){
+                    $("#rfq-status-header").text("Completed");
+                    $("#rfq-status-header").addClass("label label-success");
+                }
+                else{
+                    $("#rfq-status-header").text("Pending");
+                    $("#rfq-status-header").addClass("label label-info");
+                }
+
+                $("#rfq-settings-header").addClass("hidden");
+
                 $("body").localize();
                 setEditableField(".editable-field");
                 setEnableSelect();
@@ -276,9 +290,8 @@ function getConversationRequestsAndMessages(id_conv)
         },
         error: function(xhr, status)
         {
-            console.log(xhr.responseJSON.error);
 
-            viewError(xhr.responseJSON.statusCode)
+            viewError(xhr)
         },
         beforeSend: function(xhr, settings)
         {
@@ -446,7 +459,7 @@ function acceptByCustomer(id_conv, id_req, num_req, name) {
         success: function(data, textStatus, xhr)
         {
             console.log("Request modify correctly by customer");
-            /* updateRequest(data);*/
+             updateRequest(data);
             sendMessage(data.conversation._id, true, "rfq.confirmedRequestMsg",+num_req);
             jQuery.jGrowl(i18next.t("rfq.updateDone"), {theme:'bg-color-green', life: 5000});
         },
@@ -454,7 +467,7 @@ function acceptByCustomer(id_conv, id_req, num_req, name) {
         {
             //console.log(xhr.responseJSON.error);
 
-            viewError(xhr.responseJSON.statusCode)
+            viewError(xhr)
         },
         beforeSend: function(xhr, settings)
         {
@@ -480,7 +493,7 @@ function modifyByCustomer(id_conv, id_req, num_req, name) {
     console.log(data);
     for(var k in data){
         if($("#"+k+"-"+num_req).hasClass("editable-empty")){
-            if("k" == "quantity") data[k]={"number":"","unity":'--'}
+            if("k" == "quantity") data[k]={"number":"","unity":'void'}
             else data[k]="";
         }
 
@@ -498,15 +511,16 @@ function modifyByCustomer(id_conv, id_req, num_req, name) {
         success: function(data, textStatus, xhr)
         {
             console.log("Request modify correctly by customer");
-           /* updateRequest(data);*/
+
+            updateRequest(data);
+
             sendMessage(data.conversation._id, true,"rfq.modifiedRequestMsg",num_req);
             jQuery.jGrowl(i18next.t("rfq.updateDone"), {theme:'bg-color-green', life: 5000});
         },
         error: function(xhr, status)
         {
-            console.log(xhr.responseJSON.error);
 
-            viewError(xhr.responseJSON.statusCode)
+            viewError(xhr)
         },
         beforeSend: function(xhr, settings)
         {
@@ -534,7 +548,7 @@ function acceptBySupplier(id_conv, id_req, num_req, old_quote, old_quantity, nam
     console.log(data);
     for(var k in data){
         if($("#"+k+"-"+num_req).hasClass("editable-empty")){
-            if("k" == "quantity") data[k]={"number":undefined,"unity":'--'}
+            if("k" == "quantity") data[k]={"number":"","unity":'void'}
             else data[k]=undefined;
         }
 
@@ -549,15 +563,16 @@ function acceptBySupplier(id_conv, id_req, num_req, old_quote, old_quantity, nam
         success: function(data, textStatus, xhr)
         {
             console.log("Request accepted correctly by supplier");
-            /*updateRequest(data);*/
+
+            updateRequest(data);
+
             sendMessage(data.conversation._id, true, "rfq.acceptedRequestMsg",num_req);
             jQuery.jGrowl(i18next.t("rfq.updateDone"), {theme:'bg-color-green', life: 5000});
         },
         error: function(xhr, status)
         {
-            console.log(xhr.responseJSON.error);
 
-            viewError(xhr.responseJSON.statusCode)
+            viewError(xhr)
         },
         beforeSend: function(xhr, settings)
         {
@@ -584,7 +599,9 @@ function rejectedBySupplier(id_conv, id_req, num_req, name) {
         success: function(data, textStatus, xhr)
         {
             console.log("Request rejected correctly by supplier");
-           /*  updateRequest(data); */
+
+            updateRequest(data);
+
             sendMessage(data.conversation._id, true, "rfq.rejectedRequestMsg",num_req);
 
             jQuery.jGrowl(i18next.t("rfq.updateDone"), {theme:'bg-color-green', life: 5000});
@@ -622,7 +639,9 @@ function rejectedByCustomer(id_conv, id_req, num_req, name) {
         success: function(data, textStatus, xhr)
         {
             console.log("Request rejected correctly by customer");
-           /* updateRequest(data);*/
+
+            updateRequest(data);
+
             sendMessage(data.conversation._id, true, "rfq.gaveupRequestMsg",num_req);
             jQuery.jGrowl(i18next.t("rfq.updateDone"), {theme:'bg-color-green', life: 5000});
 
@@ -769,10 +788,16 @@ function openNewRfq(){
             dataType: 'json',
             success: function(resp, textStatus, xhr)
             {
+
+                var source = $("#rfq_new_rfq_template").html();
+                Handlebars.registerPartial("newrequest", $("#single_new_rfq_template").html());
+                var theTemplate = Handlebars.compile(source);
+
                 console.log(data);
                 console.log("Products supplier found");
 
                 data.products = resp.docs;
+                data_r = data;
                 var theCompiledHtml = theTemplate(data);
 
                 // Add the compiled html to the page
@@ -780,11 +805,14 @@ function openNewRfq(){
 
 
                 $('#expiredate').datepicker({
-                    dateFormat: 'dd.mm.yy',
+                    dateFormat: 'yy-mm-dd',
                     prevText: '<i class="icon-chevron-left"></i>',
                     nextText: '<i class="icon-chevron-right"></i>',
+                    minDate: new Date(),
                     onSelect: function( selectedDate )
                     {
+
+                        console.log("selected date");
                         //  $('#finish').datepicker('option', 'minDate', selectedDate);
                     }
                 });
@@ -806,6 +834,9 @@ function openNewRfq(){
     }
     else {
         console.log("No parameter");
+        jQuery.jGrowl(i18next.t("error.noparameter"), {theme:'bg-color-red', life: 5000});
+
+        redirectToPrevPage();
     }
 }
 
@@ -818,96 +849,129 @@ function initFormNewRfq(){
             expiredate:
             {
                 required: true
+            },
+            quote:
+            {
+                digits:true
+            },
+            quantity:{
+                digits:true
             }
         },
-
         // Messages for form validation
         messages:
         {
             expiredate:
             {
-                required: 'Please enter a validity date'
+                required: i18next.t("error.missing_date")
+            },
+            quote:
+            {
+                digits: i18next.t("error.invalid_number")
+            },
+            quantity:{
+                digits: i18next.t("error.invalid_number")
             }
         },
 
         // Ajax form submition
         submitHandler: function(form)
         {
-
-        console.log(form);
-            /*$(form).ajaxSubmit(
-                {
-                    beforeSend: function()
-                    {
-                        $('#sky-form1 button[type="submit"]').addClass('button-uploading').attr('disabled', true);
-                    },
-                    uploadProgress: function(event, position, total, percentComplete)
-                    {
-                       // $("#sky-form1 .progress").text(percentComplete + '%');
-                    },
-                    success: function()
-                    {
-                        $("#sky-form1").addClass('submited');
-                       // $('#sky-form1 button[type="submit"]').removeClass('button-uploading').attr('disabled', false);
-                    }
-                });*/
-            var idR;
-            var conversation = {
-                "customer": sessionStorage.userId,
-                "supplier": $("#supplierinfo").attr("data-prop"),
-                "dateIn": new Date(),
-                "dateValidity": new Date($("#expiredate").val()),
-                "completed": false,
-                "subject": $("#request-subject").val(),
-
-            };
-
-            var request = {
-                "product": $("#product-list-rfq").val(),
-                "status":"pending"
-            }
-
-            if($("#new-qnty").val()) request.quantity = {"number":$("#new-qnty").val(),"unity": $("#new-qnty-unity").val()};
-            if($("#new-quote").val()) request.quote = $("#new-quote").val();
-
-                jQuery.ajax({
-                url: _localServiceUrl + "conversations",
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(conversation),
-                dataType: 'json',
-                success: function(resp, textStatus, xhr)
-                {
-
-                createRequest(resp._id, request,function(){
-                    jQuery.jGrowl(i18next.t("rfq.newrfqcreated"), {theme:'bg-color-red', life: 5000});
-                    window.location.href="page_rfq_inbox.html";
-
-                });
-
-
-                },
-                error: function(xhr, status)
-                {
-                    console.log(xhr.responseJSON.error);
-                    viewError(xhr.responseJSON.statusCode);
-                },
-                beforeSend: function(xhr, settings)
-                {
-                    xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
-                }
-            });
-    },
-
+            saveConversation();
+        },
         // Do not change code below
         errorPlacement: function(error, element)
         {
+
             error.insertAfter(element.parent());
+            $("body").localize();
         }
     });
+
+
 }
 
 
+function saveConversation(){
+    var mydate = $("#expiredate").val();
+    var subj = $("#request-subject").val();
+    var conversation = {
+        "customer": sessionStorage.userId,
+        "supplier": $("#supplierinfo").attr("data-prop"),
+        "dateIn": new Date(),
+        "dateValidity": new Date(mydate),
+        "completed": false
+    };
+
+    if(subj)  conversation.subject = subj;
+
+    jQuery.ajax({
+        url: _localServiceUrl + "conversations",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(conversation),
+        dataType: 'json',
+        success: function(resp, textStatus, xhr)
+        {
+
+            var requests =[];
+            $(".row-request").each(function(i){
+                var select =  $(this).find(".product-list-rfq:eq(0)").val();
+                var rqnty =$(this).find(".newqnty:eq(0)").val();
+                var runity = $(this).find(".new-qnty-unity:eq(0)").val();
+                var rquote = $(this).find(".newquote:eq(0)").val();
+
+                var request = {
+                    "product":select,
+                    "status":"pending"
+                };
+
+                if(rqnty) request.quantity = {"number":rqnty,
+                    "unity":runity};
+                if(rquote) request.quote = rquote;
+                requests.push(request);
+
+            });
+
+            async.map(requests,function(r, cb){
+                createRequest(resp._id, r, cb);
+            }, function(err, results) {
+                // results is now an array of stats for each file
+                console.log("Fine creazione conv");
+                jQuery.jGrowl(i18next.t("rfq.newrfqcreated"), {theme:'bg-color-green', life: 5000});
+                window.location.href="page_rfq_inbox.html";
+
+            });
+
+        },
+        error: function(xhr, status)
+        {
+            console.log(xhr.responseJSON.error);
+            viewError(xhr);
+        },
+        beforeSend: function(xhr, settings)
+        {
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+        }
+    });
+
+}
+
+
+function addRowRequest(){
+
+    var source = $("#single_new_rfq_template").html();
+    var theTemplate = Handlebars.compile(source);
+
+    var theCompiledHtml = theTemplate(data_r);
+
+    // Add the compiled html to the page
+
+    $("#requests-container").append(theCompiledHtml);
+
+    $("body").localize();
+
+}
 function createRequest(id_conv, request, cb){
     jQuery.ajax({
         url: _localServiceUrl + "conversations/"+id_conv+"/requests",
@@ -917,14 +981,15 @@ function createRequest(id_conv, request, cb){
         dataType: 'json',
         success: function(resp, textStatus, xhr)
         {
-        if(cb) cb();
+        if(cb) cb(null, "Request created");
 
 
         },
         error: function(xhr, status)
         {
+            if(cb) cb(null, "Request not created");
             console.log(xhr.responseJSON.error);
-            viewError(xhr.responseJSON.statusCode);
+            viewError(xhr);
         },
         beforeSend: function(xhr, settings)
         {
@@ -937,9 +1002,14 @@ function createRequest(id_conv, request, cb){
 
 function viewError(error){
 console.log(error);
-    switch(error)
-    {
 
+    var err;
+    if(error.responseJSON) err = error.responseJSON.statusCode;
+    else err = error.status;
+    switch(err)
+    {
+        case 401:
+            window.location.replace("page_login_and_registration.html");
         case 404:
             $("#inbox-rfqs-container").html(Handlebars.compile($("#inbox_rfq_empty_template").html()));
             jQuery.jGrowl(i18next.t("warning.emptyResult"), {theme:'bg-color-yellow', life: 5000});
