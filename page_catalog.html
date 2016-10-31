@@ -355,12 +355,12 @@
                     <div class="media-body">
                         <h4 class="media-heading">
                             <strong><a href="#">{{name}}</a></strong>
-                            <small>{{#each categories_2}}
+                            {{#each categories}}
                                 {{#if @last}}
-                                {{name.ita }}
+                            <small data-i18n="categories.{{_id}}"></small>
                                 {{/if}}
                                 {{/each}}
-                            </small>
+
                         </h4>
                         <p>
                         <div class="giveMeEllipsis blog-author-desc">{{description}}</div>
@@ -670,6 +670,35 @@
                         pageCount: data.pages
                     }
                 });
+
+
+       //         console.dir(data.docs);
+                var prods = data.docs;
+
+                var categories = [];
+                for (var i=0;i<prods.length;++i){
+                    var cat = prods[i].categories;
+                    if (cat)
+                        for (var j=0;j<cat.length;++j){
+                            var c = cat[j];
+                            if (c.level.liv == 3){
+                                categories.push( {
+                                 id :c._id,
+                                    name : c.name
+                                });
+                            }
+                        }
+                }
+             //   console.log(categories);
+                for (var c=0;c<categories.length;++c){
+                    var cat = categories[c];
+                    for (var l in cat.name){
+                        if (!translation[l].translation["categories"])
+                            translation[l].translation["categories"] = {};
+                        translation[l].translation["categories"][cat.id] = cat.name[l];
+                    }
+                }
+
 
                 $("#pagination_container").empty();
                 if (data.pages > 1)

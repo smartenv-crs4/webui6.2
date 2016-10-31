@@ -68,9 +68,9 @@ var header_template = `	<div class="header">
 							<i class="search fa fa-search search-btn"></i>
 							<div class="search-open">
 								<div class="input-group animated fadeInDown">
-									<input type="text" class="form-control" placeholder="">
+									<input type="text" class="form-control" placeholder="" id="smallSearch" >
 									<span class="input-group-btn">
-										<button class="btn-u" type="button" data-i18n="catalog.search" ></button>
+										<button class="btn-u" type="button" data-i18n="catalog.search" id="smallSearchButton" ></button>
 									</span>
 								</div>
 							</div>

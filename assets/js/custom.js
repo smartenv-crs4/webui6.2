@@ -252,3 +252,13 @@ function getUrlParameter(sParam)
 }
 
 
+function smallSearch(){
+  "use strict";
+  window.location = "list.html?name=" + $("#smallSearch").val();
+
+}
+
+$(document).ready(function () {
+  $("#smallSearchButton").click(smallSearch);
+});
+
