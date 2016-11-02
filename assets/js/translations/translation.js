@@ -11,6 +11,13 @@ var translation = {
                     "logout": "Logout",
                     "lang": "Language"
                 },
+
+                "cookieLaw": {                  
+                  "message": "This website uses session storage, local storage and cookie to store on your browser your preferences and your account information",
+                  "accept": "I understand",
+                  "decline": "I refuse it"                  
+                },
+
                 "error": {
                     "invalid_email": "Your email address is not valid",
                     "bad_request": "Bad request",
@@ -207,6 +214,13 @@ var translation = {
                     "logout": "Esci",
                     "lang": "Lingua"
                 },
+
+                "cookieLaw": {
+                  "message": "Questo sito utilizza il session storage, il local storage e i cookie per salvare sul tuo browser le tue preferenze e le informazioni del tuo account",
+                  "accept": "Ho capito",
+                  "decline": "Rifiuto"                  
+                },
+
                 "error": {
                     "invalid_email": "L'indirizzo email inserito non &egrave; valido",
                     "bad_request": "Richiesta non valida",
