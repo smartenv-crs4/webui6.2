@@ -12,7 +12,11 @@ jQuery(document).ready(function(){
   
   if(sb.length > 0)
   {
-    var sbT = Handlebars.compile(sidebarTemplate);      
+    var isSupplier = sessionStorage.type && sessionStorage.type == "supplier";
+    var sbT = Handlebars.compile(sidebarTemplate,{
+      isSupplier : isSupplier,
+      idSupplier : isSupplier ? sessionStorage.userId : ""
+    });
     jQuery("#sidebar").html(sbT);
     jQuery("#sidebar").localize();
     

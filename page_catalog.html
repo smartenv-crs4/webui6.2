@@ -368,9 +368,9 @@
                         <a class="less" style="display:none" data-i18n="catalog.less"></a>
                         </p>
 
-                        <ul class="list-inline results-list pull-left">
+                        <ul class=" tags-v4 results-list pull-left">
                             {{#each tags}}
-                            <li><a href="#">{{this}}</a></li>
+                            <li><a href="list.html?tags={{this}}">{{this}}</a></li>
                             {{/each}}
                         </ul>
                         <ul class="list-inline pull-right">
@@ -388,7 +388,7 @@
 
             </div>
         </div>
-
+        <script language="JavaScript">$(document).ready(function(){ $(".giveMeEllipsis:truncated").siblings("a.more").show();})</script>
     </script>
 
 
@@ -614,7 +614,7 @@
         var getfilesURL = _brokerMsUrl + "users/attachment/" + supId;
         var getsupplierURL = _brokerMsUrl + "users/supplier/" + supId;
         var getproductsURL = _brokerMsUrl + "products?supplierId=" + supId;
-        //   getproductsURL = _brokerMsUrl + "products";
+         //  getproductsURL = _brokerMsUrl + "products";
 
 
         function cacheCompile(templateid, data) {
@@ -672,7 +672,7 @@
                 });
 
 
-       //         console.dir(data.docs);
+
                 var prods = data.docs;
 
                 var categories = [];
@@ -689,7 +689,6 @@
                             }
                         }
                 }
-             //   console.log(categories);
                 for (var c=0;c<categories.length;++c){
                     var cat = categories[c];
                     for (var l in cat.name){
@@ -705,13 +704,24 @@
                     $("#pagination_container").html(pagination);
                 $(target).localize();
                 $("ul.pagination").localize();
-                $(".giveMeEllipsis:truncated").siblings("a.more").show();
-                $(".more").click(showMore);
-                $(".less").click(showLess);
+                $(target).trigger('onload');
 
             });
         }
 
+        $('#products_container').bind("onload",function () {
+            setTimeout(function () {
+                $(".giveMeEllipsis:truncated").siblings("a.more").show();
+                $(".more").click(showMore);
+                $(".less").click(showLess);
+            },200)
+
+        });
+
+        $("a[href=#catalogTab]").click(function () {
+            getproducts(getproductsURL, 'productstable', '#products_container');
+
+        });
 
         function getsupplierinfo(url, templateid, target) {
 
@@ -798,7 +808,7 @@
 
             getsupplierinfo(getsupplierURL, "supplier-info_template", "#supplier-info")
             getfiles(getfilesURL, "filetable", '#files_container');
-            getproducts(getproductsURL, 'productstable', '#products_container');
+
             $("body").localize();
 
         });
