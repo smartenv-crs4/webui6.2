@@ -11,8 +11,7 @@ function getUserProfile()
   var templatePassword = Handlebars.compile(changePasswordTemplate); 
   jQuery('#passwordTab').html(templatePassword());
   jQuery('#passwordTab').localize();  
-  
-  
+    
   //console.log(sessionStorage.token);
   jQuery.ajax({
     url: _userMsUrl + "users/" + sessionStorage.userId,
@@ -56,24 +55,36 @@ function getUserProfile()
         
         var tDoc = Handlebars.compile(documentsTemplate); 
         jQuery("#tabBodyContainer").append(tDoc());
-        jQuery("#tabBodyContainer").localize();   
+        //jQuery("#tabBodyContainer").localize();   
         
         //jQuery("#documentInput").filestyle();          
         jQuery("#documentInput").filestyle({buttonText: i18next.t("profile.documentsInputLabel"),
             buttonBefore: true});
-            
-      }
+    /*        
+        var tCertTab = Handlebars.compile(certificationsTabTemplate); 
+        jQuery("#tabContainer").append(tCertTab());
+        jQuery("#tabContainer").localize();
+        
+        var tCert = Handlebars.compile(certificationsTemplate); 
+        jQuery("#tabBodyContainer").append(tCert());
+        jQuery("#tabBodyContainer").localize();  
+  */  
+        var tCatTab = Handlebars.compile(categoriesTabTemplate); 
+        jQuery("#tabContainer").append(tCatTab());
+        jQuery("#tabContainer").localize();
+    
+        var tCat = Handlebars.compile(categoriesTemplate); 
+        jQuery("#tabBodyContainer").append(tCat());
+        jQuery("#tabBodyContainer").localize();  
+        
+        autoCompleteCat("acCat");
+        
+        
+        getUserCategoryList();
+       
+      }  
       
-      /*
-      if(data.logo)
-      {
-        jQuery("#imgBox").attr("src", data.logo);                
-      }
-      else
-      {
-        jQuery("#imgBox").attr("src", defaultImg);      
-      }
-      */
+ 
       
       jQuery(".editable").editable();
       jQuery(".editable").css("color", "black");
@@ -111,8 +122,7 @@ function getUserProfile()
           title: i18next.t("profile.areYouSure")      
         });
       });
-      
-                      
+                            
     },     
     error: function(xhr, status)
     {      
@@ -147,8 +157,6 @@ function getUserProfile()
     }                    
   });        
 }
-
-
 
 function updateProfile()
 {
@@ -228,7 +236,6 @@ function changePassword()
   var newPassword = jQuery("#newPassword1").val();
   var newPassword2 = jQuery("#newPassword2").val();
   
-
   if(newPassword !== newPassword2 || newPassword === "")
   {
     jQuery.jGrowl(i18next.t("error.password_differs"), {theme:'bg-color-red', life: 5000});    
@@ -280,13 +287,6 @@ function changePassword()
     }                    
   });  
 }
-
-
-
-
-
-
-
 
 function getFavoriteSuppliers()
 {
@@ -508,7 +508,6 @@ function deleteDocument(name)
 }
 
 
-
 function removeFavoriteSupplier(sid)
 {
   jQuery.ajax({
@@ -541,4 +540,145 @@ function removeFavoriteSupplier(sid)
   });
   
 }
+
+
+function removeUserCategory(cid)
+{
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/actions/categories/" + cid,
+    type: "DELETE",
+    contentType: "application/json; charset=utf-8",
+    success: function(data, textStatus, xhr)
+    {      
+      //getFavoriteSuppliers();  
+      //console.log(data);
+      getUserCategoryList();
+    },
+    error: function(xhr, status)
+    {
+      var msg;
+
+      try
+      {        
+        msg = xhr.responseJSON.message;
+      }
+      catch(err)
+      {
+        msg = i18next.t("error.internal_server_error");
+      }      
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    } 
+  });
+}
+
+function addUserCategory()
+{
+  if(sessionStorage.userId == undefined)
+  {      
+    redirectToLogin();
+  }
+  
+  var category = jQuery("#acCat").data("cat-id");
+  
+  
+  if(category == "" || category == undefined)
+  {
+    //
+    return;
+  }
+  
+  var data = new Object();
+  data.category = category;
+  
+  
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/actions/categories",
+    type: "POST",
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify(data),
+    dataType: "json",
+    success: function(dataResp, textStatus, xhr)
+    {        
+      getUserCategoryList();
+      //console.log(dataResp);
+    },     
+    error: function(xhr, status)
+    {
+      var msg;
+
+      try
+      {        
+        msg = xhr.responseJSON.message;
+      }
+      catch(err)
+      {
+        msg = i18next.t("error.internal_server_error");
+      }      
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    }           
+  });  
+}
+
+function getUserCategoryList()
+{
+  if(sessionStorage.userId == undefined)
+  {      
+    redirectToLogin();
+    return; 
+  }
+  
+  var ret;
+  
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/categories/",
+    type: "GET",    
+    contentType: "application/json; charset=utf-8",
+    success: function(dataResp, textStatus, xhr)
+    {        
+      var data = [];
+      
+      for(var i in dataResp)
+      {
+        data.push({"id": dataResp[i]._id, "name": dataResp[i].name[localStorage.lng]});
+      }
+      
+      jQuery("#categoriesList").empty();
+      var tCatTable = Handlebars.compile(categoriesTableTemplate);      
+      jQuery("#categoriesList").html(tCatTable(data));
+      jQuery("#categoriesList").localize();
+    },     
+    error: function(xhr, status)
+    {
+      var msg;
+      try
+      {        
+        msg = xhr.responseJSON.message;
+      }
+      catch(err)
+      {
+        msg = i18next.t("error.internal_server_error");
+      }
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+            
+      return;    
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    }                    
+  });  
+  
+}
+
 

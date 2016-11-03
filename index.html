@@ -61,22 +61,19 @@
 		<div class="search-block parallaxBg">
 			<div class="container">
 				<div class="col-md-6 col-md-offset-3">
-					<h1>Discover <span class="color-red">new</span> suppliers</h1>
+					<h1>Discover <span class="color-green">new</span> suppliers</h1>
 
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search suppliers ...">
-						<span class="input-group-btn">
-							<button class="btn-u btn-u-lg" type="button"><i class="fa fa-search"></i></button>
-						</span>
-					</div>
+					
 
-					<form action="" class="sky-form page-search-form">
-						<div class="inline-group">
-							<label class="checkbox"><input type="checkbox" name="checkbox-inline" checked><i></i>Recent</label>
-							<label class="checkbox"><input type="checkbox" name="checkbox-inline"><i></i>Related</label>
-							<label class="checkbox"><input type="checkbox" name="checkbox-inline"><i></i>Popular</label>
-							<label class="checkbox"><input type="checkbox" name="checkbox-inline"><i></i>Most Common</label>
-						</div>
+					
+                    <div class="input-group">
+                        <input type="text" id="product" class="form-control" placeholder="Search peoducts ...">
+                        <span class="input-group-btn">
+                            <button class="btn-u btn-u-lg" id="btn_search" type="button"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                    <form action="list" id="form" class="sky-form page-search-form">
+                    	
 					</form>
 				</div>
 			</div>
@@ -273,7 +270,7 @@
 		//	App.initParallaxBg();
 			//OwlCarousel.initOwlCarousel();
 			//$('#header_p').html(header_template);
-/*
+
 			i18next.init({
 					lng: 'en', // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
 					resources:  translation
@@ -286,7 +283,7 @@
 							i18next.changeLanguage($(this).data('lang'));
 							$('body').localize();
 					});
-*/
+
 
 			});
 
@@ -310,5 +307,11 @@
 	<script src="assets/plugins/html5shiv.js"></script>
 	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
-</body>
+
+    
+    <script src="js/page_index.js"></script>
+    
+    
+    
+    </body>
 </html>

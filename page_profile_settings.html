@@ -49,10 +49,47 @@
 
   <!-- link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.5/jquery.jgrowl.min.css" -->
   <link rel="stylesheet" href="assets/css/jquery.jgrowl.min.css">
+  
+  <link rel="stylesheet" href="assets/css/typeaheadjs.css">  
 
 
 	<!-- CSS Page Style Import-->
 	<link rel="stylesheet" href="assets/css/pages/page_log_reg_v3.css">
+  
+  <style type="text/css">
+        .giveMeEllipsis {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 5; /* number of lines to show */
+            /*  line-height: 1;  fallback */
+            max-height: 5; /* fallback */
+        }
+
+        .sidebar-showhide {
+            max-width: 25%;
+            float: left;
+            display: flex;
+            padding: 15px;
+            padding-top: 0;
+        }
+
+        .autoexpand {
+            width: auto;
+            display: flex;
+        }
+
+        #pagination_container {
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            max-width: 530px;
+            width: 530px;
+        }
+    </style>
+  
+  
 </head>
 
 <body >
@@ -65,7 +102,7 @@
 		<div class="container content profile">
 			<div class="row">
 				<!--Left Sidebar-->
-				<div id="sidebar"></div>
+				<div id="sidebar" class="sidebar-showhide"></div>
 				<!--End Left Sidebar-->
 
 				<!-- Profile Content -->
@@ -229,6 +266,7 @@
   <script type="text/javascript" src="assets/js/plugins/bootstrap-confirmation.min.js"></script>
 
   <script type="text/javascript" src="assets/js/plugins/bootstrap-filestyle.min.js"></script>
+  <script type="text/javascript" src="assets/js/plugins/typeahead.bundle.js"></script>
 
 	<script type="text/javascript" src="assets/js/custom.js"></script>
   <script type="text/javascript" src="assets/js/sidebar.js"></script>

@@ -1,3 +1,79 @@
+/* RFQ    === Start === */
+.chat {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.chat li {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #999999;
+}
+.chat li.left .chat-body {
+    margin-left: 60px;
+}
+.chat li.right .chat-body {
+    margin-right: 60px;
+}
+.chat li .chat-body p {
+    margin: 0;
+}
+.panel .slidedown .glyphicon,
+.chat .glyphicon {
+    margin-right: 5px;
+}
+.chat-panel .panel-body {
+    max-height: 750px;
+    overflow-y: scroll;
+}
+
+.chat-panel {
+    padding:0px;
+
+}
+
+.chat-panel .panel-footer{
+    margin-top:30px;
+
+}
+
+.rfq .service-block-u {
+    background-color: #fff ;
+}
+
+.rfq .panel-heading{
+    background-color: #005493 ;
+}
+.rfq  .panel-heading a{
+    background-color: #005493 ;
+    color:#fff!important;
+}
+
+.rfq  .panel-heading i{
+    background-color: #005493 ;
+    color:#fff!important;
+}
+
+
+.rfq *{
+    color: #005493!important;
+
+}
+
+
+
+.color-success{
+    color:#72c02c!important;
+}
+.color-danger{
+    color:#d40000!important;
+}
+
+.color-info{
+    color:#5bc0de!important;
+}
+
+
 .rfq-container{
     padding:5px;
 }
@@ -13,8 +89,6 @@
     margin-right: 15px;
 
 }
-
-
 
 .rfq .statistics small{
     float:right;
@@ -36,6 +110,73 @@
 
 }
 
-.rfq .glyphicon-ok{
+.rfq .glyphicon-ok, .accordion-toggle span{
     color:#fff!important;
 }
+
+.request_buttons{
+    margin-top:2em;
+}
+
+.inbox-rfq-header strong{
+    color: #585f69;
+}
+
+.rfq button{
+   color:#fff!important;
+}
+
+.rfq-notify{
+    padding:5px;
+}
+
+.rfq-select{
+    border-width:0px!important;
+
+}
+
+.rfq-select-label i{
+
+   right:0px!important;
+    margin-right:1px!important;
+
+}
+.rfq-select-label{
+    width:75px!important;
+    float:right;
+}
+
+.rfq-select-form{
+    margin-left:3px;
+    float:right;
+}
+.cont-list-messages, #accordion-panel{
+    max-height: 550px!important;
+    min-height: 400px;
+
+}
+
+.button-new-rfq{
+    margin: 15px;
+    padding-bottom:15px;
+}
+
+.header-new-rfq{
+    font-size:15px!important;
+    margin-bottom:15px;
+}
+
+#inbox-rfqs-container .acc-v1{
+    min-height: 461px;
+    overflow-y: scroll;
+
+
+}
+
+
+#inbox-rfqs{
+    min-height: 800px;
+    overflow-y: scroll;
+
+}
+/* RFQ    === End === */

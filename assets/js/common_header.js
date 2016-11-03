@@ -11,7 +11,7 @@ var header_template = `	<div class="header">
         <ul class="loginbar pull-right">
           <li class="hoverSelector">    
             <i class="fa fa-globe"></i>
-            <a>Languages</a>
+            <a data-i18n="nav.lang"></a>
             <ul class="languages hoverSelectorBlock">
               <li class="active ">
                 <a class="" data-lng="en" href="#">English <i class="fa fa-check"></i></a>
@@ -24,7 +24,7 @@ var header_template = `	<div class="header">
           <li><a href="page_faq.html" data-i18n="nav.help">Help</a></li>
           <li class="topbar-devider"></li>
           <li id="h_login"><a href="page_login_and_registration.html">Login</a></li>          
-          <li id="h_logout"><a href="#" onclick="logout()">Logout</a></li>   
+          <li id="h_logout"><a href="#" onclick="logout()" data-i18n="nav.logout"></a></li>   
                                            
           <li style="padding-left:20px" id="h_user"><a href="page_profile_settings.html" ><strong></strong></a></li>
         </ul>
@@ -44,14 +44,35 @@ var header_template = `	<div class="header">
       <div class="container">
         <ul class="nav navbar-nav">
           <!-- Home -->
-          <li class="dropdown active">
-            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" >
+          <li class="active">
+            <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown" >
               Home
             </a>
-            <ul class="dropdown-menu">
-
-            </ul>
           </li>
+            
+          <li class="logged supplier hidden">
+           <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" >
+              RFQ
+           </a>
+          </li>          
+            
+          <li>
+            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-i18n="nav.about">
+              
+            </a>
+          </li>
+          </li>
+          <li>
+							<i class="search fa fa-search search-btn"></i>
+							<div class="search-open">
+								<div class="input-group animated fadeInDown">
+									<input type="text" class="form-control" placeholder="" id="smallSearch" >
+									<span class="input-group-btn">
+										<button class="btn-u" type="button" data-i18n="catalog.search" id="smallSearchButton" onclick="javascript:window.location = 'list.html?name=' + $('#smallSearch').val();" ></button>
+									</span>
+								</div>
+							</div>
+						</li>
 
         </ul>
       </div><!--/end container-->
