@@ -1,42 +1,18 @@
+//* Link api ******************************************/
 // var api_url = "http://156.148.37.167:3010/api/v1/";
  var api_url = _brokerMsUrl;
 
- 
- 
- 
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+ var limit;
+ var page;
+ var pages;
+ var total;
 
 
-function getDateFromObjectId(objectId)
-{
- var d = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
-    
- var datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
-    d.getFullYear();
- 
-    return datestring;
-}
 
-var limit;
-var page;
-var pages;
-var total;
-
-var var_par        = '?';
-var var_name       = getParameterByName('name');
-var var_category   = getParameterByName('category');
-var var_tag        = getParameterByName('tag');
+// inizializzo i parametri di ricerca dalla url
+var arr_par = get_par('url');
 
 
-if (var_name) var_par = var_par + '&name=' + var_name;
-if (var_category) var_par = var_par + '&category=' + var_category;
-if (var_tag) var_par = var_par + '&tag=' + var_tag;
-var_par = var_par.replace("?&", "?");
 
 
 /******************************************************/
@@ -44,53 +20,49 @@ var_par = var_par.replace("?&", "?");
 
 $( document).ready(function() {
     
-    $('#product').val(var_name);
-    get_list(var_par);
+    autoCompleteCat("categories");
+    
+    // set degli input della pagina
+    $('#product').val(arr_par[0].name);
+    $('#categories').attr("cat-id", arr_par[0].categories);
+    $('#categories').attr("cat-name", arr_par[0].cat_name);
+    
+    // creazione della lista dei supplier
+    get_list(arr_par);
     
     
 });
 
 
 
-/******************************************************************/
-/* Actions */
+//******************************************************************/
+//* Actions -> azioni presenti nella pagina */
 
 $( "#btn_search" ).click(function(e) {
       
     block('Please wait');  
     
-    $('#product').val();
-       var str_param  = '?';
-       if ($('#product').val())
-            str_param = str_param + 'name=' + ($('#product').val()).trim();
-       if ($('#category').val())
-            str_param = str_param + 'category=' + ($('#category').val()).trim();
-       if ($('#tags').val())
-            str_param = str_param + 'tags=' + ($('#tags').val()).trim();  
-      str_param = str_param.replace("?&", "?");
-       
-      get_list(str_param);
-      //$(document).ajaxStop($.unblockUI);
-      //setTimeout(alert(10), 1000);
-      
-      
-  
+    get_list(get_par('page'));
       
     });
     
     
     
-    
+$('#divSearchMsg').click(function(e){
+    render_searchInput();
+});    
 
 
     
 
     
-/***************************************************************/    
-/* render widget */
+//***************************************************************/    
+//* render widget -> crea gli elementi dinamici presenti nella pagina */
 
-function render_row(data, var_par)
+function render_row(data, arr_par)
 {
+    var_par = get_par_string(arr_par);
+    
     $('#divNoResult').css('display', 'none');
     
     
@@ -159,14 +131,6 @@ function render_row(data, var_par)
                                 
                                 $('.a_productList').click(function(){
                                       var id = ($(this).attr('data-id'));
-                                      
-                                      var str_par = '?supplierId=' + $(this).attr('data-id') + '&limit=3';
-                                      
-                                      if (var_name)     str_par =   str_par + '&name=' + var_name;
-                                      if (var_category) str_par =   str_par + '&categories=' + var_category;
-                                      if (var_tag)      str_par =   str_par + '&tag=' + var_tag;
-
-                                      
                                           
                                       if($('#divListProducts' + id).css('display') == 'block')
                                       {
@@ -175,7 +139,7 @@ function render_row(data, var_par)
                                       }
                                       else
                                       {
-                                          getProductsSupplier(id, str_par);
+                                          getProductsSupplier(id, arr_par);
                                       }
                                       
                                       
@@ -185,11 +149,10 @@ function render_row(data, var_par)
 }
 
 
-function render_paginate(tot_page, act_page, var_par)
+function render_paginate(tot_page, act_page, arr_par)
 {
-   if (!var_par)
-        var_par = '';
-        
+   var_par = get_par_string(arr_par);
+    
     $('#divSearch_table').css('display', 'block');
                                           
     
@@ -277,24 +240,40 @@ function render_paginate(tot_page, act_page, var_par)
     
     $('.p_link').click(function(){
         
-        var page = ($(this).attr('data-page'));
-        var par = ($(this).attr('data-par'));
-          
-          var str_prm = par + '?page='+page;
+        arr_par[0].page = $(this).attr('data-page');
+        
+        console.log(arr_par);
           
           $('#divPagination').remove();
           
-          get_list(str_prm);                            
+          get_list(arr_par);                            
                                         
     });
 }
 
-
-
-/**************************************************************/
-/* proxy data */
-function get_list(var_par)
+function render_searchInput()
 {
+    if ($("#divSearch1").css("display") == 'none')
+    {
+        $("#divSearch1").css("display", "block");
+        $("#divSearch2").css("display", "none");
+    }
+    else if ($("#divSearch2").css("display") == 'none')
+    {
+        $("#divSearch1").css("display", "none");
+        $("#divSearch2").css("display", "block");
+    }     
+}
+
+//**************************************************************/
+//* proxy -> chaimate ajax alle api data*/
+
+
+// estrae tutti i supplier associati ai prodotti cercati
+function get_list(arr_par)
+{
+    var_par =get_par_string(arr_par);
+    
     $.ajax({
                                   type: "GET",
                                   url: api_url + "products/supplier" + var_par,
@@ -318,10 +297,10 @@ function get_list(var_par)
                                       
                                       if (data.total > 0)
                                       {
-                                          render_row(data, var_par);
+                                          render_row(data, arr_par);
                                           if (pages > 1)
                                           {
-                                              render_paginate(pages, page);
+                                              render_paginate(pages, page, arr_par);
                                           }
                                           
                                           $("#divSearch_table").localize();
@@ -343,11 +322,17 @@ function get_list(var_par)
 });
 }
 
-function getProductsSupplier(id, var_par)
+
+// estrae tutti i prodotti associati al dato supplier in relazione ai parametri di ricerca effettuata
+function getProductsSupplier(id, arr_par)
 {
+    arr_par[0].cat_name= '';
+    arr_par[0].page= '';
+    var_par =get_par_string(arr_par);
+    
     $.ajax({
                                   type: "GET",
-                                  url: api_url + "products" + var_par,
+                                  url: api_url + "products" + var_par + '&supplierId=' + id,
                                   dataType: "json",
                                   success: function(data)
                                   {
@@ -357,6 +342,7 @@ function getProductsSupplier(id, var_par)
                                       var str_listProducts2 = '<table>';
                                       
                                       for (var c = 0; c < data.total; c++) {
+                                         
                                           str_listProducts2 = str_listProducts2 + '<tr>'
                                         + '<td style="padding-top: 5px" ><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;'+ data.docs[c].name+'</td>'
                                         + '</tr>';
@@ -375,7 +361,78 @@ function getProductsSupplier(id, var_par)
 
 
 
-/***********************************************/
+
+//************************************************/
+//* page function 
+
+// crea array con i filtri di ricerca dalla url o dagli input di pagina
+function get_par(_from)
+{
+    var array_par = [];
+    
+    if (_from == 'url')
+    {
+    array_par.push({"name": getParameterByName('name')
+        , "cat_name": getParameterByName('cat_name')
+        , "categories": getParameterByName('categories')
+        , "tag": getParameterByName('tag')
+        , "page": getParameterByName('page')});
+    }
+    else if (_from == 'page')
+    {
+    array_par.push({"name": $('#product').val()
+        , "cat_name": $('#categories').data("cat-name")
+        , "categories": $('#categories').data("cat-id")
+        , "tag": $('#tags').val()
+        , "page": ''});
+    }
+   
+    return array_par;
+}
+
+// crea la get dei parametri
+function get_par_string(array_par)
+{
+    var var_par        = '?';
+    if (array_par[0].name)          var_par = var_par + '&name=' + array_par[0].name;
+    if (array_par[0].cat_name)      var_par = var_par + '&cat_name=' + array_par[0].cat_name;
+    if (array_par[0].categories)    var_par = var_par + '&categories=' + array_par[0].categories;
+    if (array_par[0].tag)           var_par = var_par + '&tag=' + array_par[0].tag;
+    if (array_par[0].page)          var_par = var_par + '&page=' + array_par[0].page;
+
+    var_par = var_par.replace("?&", "?");
+    
+    return var_par;
+}
+
+
+
+//************************************************/
+//* common function 
+
+
+// preleva un dato parametro dalla url 
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+// estrae la data da una variabile di tipo ObjectId
+function getDateFromObjectId(objectId)
+{
+ var d = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
+    
+ var datestring = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
+    d.getFullYear();
+ 
+    return datestring;
+}
+
+
+
+//***********************************************/
 
 function block(msg)
 {
