@@ -12,10 +12,10 @@ var translation = {
                     "lang": "Language"
                 },
 
-                "cookieLaw": {                  
+                "cookieLaw": {
                   "message": "This website uses session storage, local storage and cookie to store on your browser your preferences and your account information",
                   "accept": "I understand",
-                  "decline": "I refuse it"                  
+                  "decline": "I refuse it"
                 },
 
                 "error": {
@@ -80,7 +80,7 @@ var translation = {
 
                     "customer": "customer",
                     "supplier": "supplier",
-                    
+
                     "addCategory": "Add",
 
                     "passwordTitle": "Manage your password",
@@ -166,9 +166,8 @@ var translation = {
                     "chooseSupplier": "Choose a favorite above or select a vendor from the search list",
                     "newrfqcreated": "RFQ created with success!",
                     "sendRFQ": "Send RFQ",
+                    "noDeleteRfq":"You must have at least one request!",
                     "myrfqs" : "My RFQs"
-
-
                 },
                 "catalog": {
                     "catalog": "Catalog",
@@ -189,19 +188,19 @@ var translation = {
                     "last": "Last",
                     "first": "First"
                 },
-"product":
+                "product":
                 {
                     "searchTitle": "Discover new suppliers",
                     "searchLabelCategories": "Categories...",
                     "searchLabelProducts": "Search products...",
-                    "searchTagMessage": "Use product tags for your search", 
+                    "searchTagMessage": "Use product tags for your search",
                     "thLogo": "Logo",
                     "thAbout": "About",
                     "thRates": "Rates",
                     "thAction": "Action",
                     "tabLabelRegistration": "Rigistered ",
                     "tabLabelRegistration": "Rigistered ",
-                    "tabMsgProduct": "See products match" 
+                    "tabMsgProduct": "See products match"
                 }
             }
         },
@@ -220,7 +219,7 @@ var translation = {
                 "cookieLaw": {
                   "message": "Questo sito utilizza il session storage, il local storage e i cookie per salvare sul tuo browser le tue preferenze e le informazioni del tuo account",
                   "accept": "Ho capito",
-                  "decline": "Rifiuto"                  
+                  "decline": "Rifiuto"
                 },
 
                 "error": {
@@ -290,7 +289,7 @@ var translation = {
 
                     "customer": "cliente",
                     "supplier": "fornitore",
-                    
+
                     "addCategory": "Inserisci",
 
                     "passwordTitle": "Gestisci la tua password",
@@ -371,8 +370,8 @@ var translation = {
                     "chooseSupplier": "Scegli tra i preferiti qui sopra o seleziona un fornitore da lista di ricerca",
                     "newrfqcreated": "RFQ Creata con successo!",
                     "sendRFQ": "Invia RFQ",
+                    "noDeleteRfq":"Devi avere almeno una richiesta!",
                     "myrfqs" : "Le mie RFQ"
-
                 },
                 "catalog": {
                     "catalog": "Catalogo",
@@ -399,13 +398,13 @@ var translation = {
                     "searchTitle": "Cerca nuovi suppliers",
                     "searchLabelCategories": "Categories...",
                     "searchLabelProducts": "Cerca prodotti...",
-                    "searchTagMessage": "Usa i tag dei prodotti per la ricerca", 
+                    "searchTagMessage": "Usa i tag dei prodotti per la ricerca",
                     "thLogo": "Logo",
                     "thAbout": "Info",
                     "thRates": "Giudizi",
                     "thAction": "Azioni",
                     "tabLabelRegistration": "Registrato il ",
-                    "tabMsgProduct": "Vedi i prodotti associati" 
+                    "tabMsgProduct": "Vedi i prodotti associati"
                 }
 
             }

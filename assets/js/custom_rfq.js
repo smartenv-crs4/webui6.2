@@ -166,9 +166,6 @@ function getConversations()
                 $("body").localize();
             }
 
-
-
-
         },
         error: function(xhr, status)
         {
@@ -183,140 +180,154 @@ function getConversations()
 }
 
 
-function getConversationRequestsAndMessages(id_conv)
+function getConversationRequestsAndMessages()
 {
     if(sessionStorage.userId == undefined)
     {
         window.location.replace("page_login_and_registration.html");
     }
-    console.log("getConversationRequestsAndMessages");
-    jQuery.ajax({
-        url: _localServiceUrl + "conversations/"+ id_conv,
-        type: "GET",
-        contentType: "application/json",
-        dataType: 'json',
-        success: function(data, textStatus, xhr)
-        {
+    var id_conv;
+    if(hasParameter("convId"))
+        id_conv = getParameter("convId");
 
-            var socket = io.connect(_serviceUrl,{reconnection:true});
-            socket.once('connect', function() {
-                socket.emit('join', data._id);
-            });
+    if(id_conv){
+        console.log("getConversationRequestsAndMessages");
+        jQuery.ajax({
+            url: _localServiceUrl + "conversations/"+ id_conv,
+            type: "GET",
+            contentType: "application/json",
+            dataType: 'json',
+            success: function(data, textStatus, xhr)
+            {
 
+                if(data){
+                    // Compile the template
 
-
-
-            socket.on('message', function(msg){
-                var source;
-                var theTemplate;
-                var theCompiledHtml;
-                if(msg.automatic){
-                     msg.text = i18next.t(msg.text);
-                    source = $("#rfq_new_message_auto_template").html();
-                    theTemplate = Handlebars.compile(source);
+                    var source = $("#inbox_rfq_requests_messages").html();
+                    Handlebars.registerPartial("request", $("#request-partial").html());
+                    Handlebars.registerPartial("message", $("#rfq_new_message_template").html());
+                    Handlebars.registerPartial("message-auto", $("#rfq_new_message_auto_template").html());
+                    var theTemplate = Handlebars.compile(source);
 
                     // Pass our data to the template
-                    theCompiledHtml = theTemplate(msg);
+                    var userType =sessionStorage.type;
+                    data.currentUser = userType;
+
+                    data.measureunits = ['--','unty', 'ltr', 'kg','g','mtr', 'fot','lbr'];
+                    console.log(data);
+                    var theCompiledHtml = theTemplate(data);
+
+                    // Add the compiled html to the page
+                    $("#inbox-rfqs-container").html(theCompiledHtml);
+
+                    if(sessionStorage.type =="customer")
+                        $("#inbox-rfq-header-name").text(data.supplier.name);
+                    else
+                        $("#inbox-rfq-header-name").text(data.customer.name);
+
+                    if(data.expired){
+                        $("#rfq-status-header").text("Expired");
+                        $("#rfq-status-header").addClass("label label-danger");
+                    }else if(data.completed){
+                        $("#rfq-status-header").text("Completed");
+                        $("#rfq-status-header").addClass("label label-success");
+                    }
+                    else{
+                        $("#rfq-status-header").text("Pending");
+                        $("#rfq-status-header").addClass("label label-info");
+                    }
+
+                    $("#rfq-settings-header").addClass("hidden");
+
+                    $("body").localize();
+                    setEditableField(".editable-field");
+                    setEnableSelect();
+
+                    $("body").localize();
+
+
+
+
+                    var socket = io.connect(_serviceUrl,{reconnection:true});
+                    socket.once('connect', function() {
+                        socket.emit('join', data._id);
+                    });
+
+                    socket.on('message', function(msg){
+                        var source;
+                        var theTemplate;
+                        var theCompiledHtml;
+                        if(msg.automatic){
+                            msg.text = i18next.t(msg.text);
+                            source = $("#rfq_new_message_auto_template").html();
+                            theTemplate = Handlebars.compile(source);
+
+                            // Pass our data to the template
+                            theCompiledHtml = theTemplate(msg);
+                        }
+                        else{
+                            source = $("#rfq_new_message_template").html();
+                            theTemplate = Handlebars.compile(source);
+
+                            // Pass our data to the template
+                            theCompiledHtml = theTemplate(msg);
+                        }
+
+
+                        // Add the compiled html to the page
+                        $("#rfq-list-messages").append(theCompiledHtml);
+
+                        var d = $('.cont-list-messages').first();
+                        d.scrollTop(d.prop("scrollHeight"));
+
+
+                    });
+
+                    socket.on('request', function(rqs){
+
+                        // Pass our data to the template
+                        updateRequest(rqs);
+
+                    });
+
+                    socket.on('error', function(msg){
+                        console.log(msg);
+                    });
+
                 }
-                else{
-                     source = $("#rfq_new_message_template").html();
-                     theTemplate = Handlebars.compile(source);
-
-                    // Pass our data to the template
-                     theCompiledHtml = theTemplate(msg);
-                }
 
 
-                // Add the compiled html to the page
-                $("#rfq-list-messages").append(theCompiledHtml);
+                $("#rfq-input-msg").bind('keypress', function(e) {
+                    if(e.keyCode==13){
+                        $('#btn-chat').trigger('click');
+                    }
+                });
 
-                var d = $('.cont-list-messages').first();
-                d.scrollTop(d.prop("scrollHeight"));
+            },
+            error: function(xhr, status)
+            {
 
-
-            });
-
-            socket.on('request', function(rqs){
-
-                // Pass our data to the template
-                updateRequest(rqs);
-
-            });
-
-            socket.on('error', function(msg){
-                console.log(msg);
-            });
-
-
-            if(data){
-                // Compile the template
-
-                var source = $("#inbox_rfq_requests_messages").html();
-                Handlebars.registerPartial("request", $("#request-partial").html());
-                Handlebars.registerPartial("message", $("#rfq_new_message_template").html());
-                Handlebars.registerPartial("message-auto", $("#rfq_new_message_auto_template").html());
-                var theTemplate = Handlebars.compile(source);
-
-                // Pass our data to the template
-                var userType =sessionStorage.type;
-                data.currentUser = userType;
-
-                data.measureunits = ['--','unty', 'ltr', 'kg','g','mtr', 'fot','lbr'];
-                console.log(data);
-                var theCompiledHtml = theTemplate(data);
-
-                // Add the compiled html to the page
-                $("#inbox-rfqs-container").html(theCompiledHtml);
-
-                if(sessionStorage.type =="customer")
-                    $("#inbox-rfq-header-name").text(data.supplier.name);
-                else
-                    $("#inbox-rfq-header-name").text(data.customer.name);
-
-                if(data.expired){
-                    $("#rfq-status-header").text("Expired");
-                    $("#rfq-status-header").addClass("label label-danger");
-                }else if(data.completed){
-                    $("#rfq-status-header").text("Completed");
-                    $("#rfq-status-header").addClass("label label-success");
-                }
-                else{
-                    $("#rfq-status-header").text("Pending");
-                    $("#rfq-status-header").addClass("label label-info");
-                }
-
-                $("#rfq-settings-header").addClass("hidden");
-
-                $("body").localize();
-                setEditableField(".editable-field");
-                setEnableSelect();
-
-                $("body").localize();
-
+                viewError(xhr)
+            },
+            beforeSend: function(xhr, settings)
+            {
+                xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
             }
+        });
+    }
 
 
-            $("#rfq-input-msg").bind('keypress', function(e) {
-                if(e.keyCode==13){
-                    $('#btn-chat').trigger('click');
-                }
-            });
-
-        },
-        error: function(xhr, status)
-        {
-
-            viewError(xhr)
-        },
-        beforeSend: function(xhr, settings)
-        {
-            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
-        }
-    });
 }
 
 function setEditableField(field){
-    $(field).editable("option","placement","right");
+    $(field).each(function(){
+        var name_field = $(this).attr("id").split("-")[0];
+
+        if(name_field == "quote")
+            $(this).editable("option","placement","right");
+    });
+
+
     $(field).editable("enable");
 
 
@@ -334,19 +345,18 @@ function setEditableField(field){
 
 
     $(field).editable('option', 'validate', function(v) {
-            var field = $(".editable-open:first").attr("id");
-            var id_field = field.split("-")[1];
-            var name_field = field.split("-")[0];
+            var f = $(".editable-open:first").attr("id");
+            var id_field = f.split("-")[1];
+            var name_field = f.split("-")[0];
 
             if(name_field== "quantity")
             if(!v){
-                console.log("not v ");
                 $("#selectqnty-"+id_field).val('--');
                 $("#selectqnty-"+id_field).prop('disabled','disabled');
             }
             else{
-                console.log("v ");
-                if (!$("#selectqnty-"+id_field).val() || $("#selectqnty-"+id_field).val() == '--'){ console.log("v --"); $("#selectqnty-"+id_field).val('unty');}
+                if (!$("#selectqnty-"+id_field).val() || $("#selectqnty-"+id_field).val() == '--')
+                    $("#selectqnty-"+id_field).val('unty');
                 $("#selectqnty-"+id_field).prop('disabled',false);
             }
 
@@ -418,6 +428,7 @@ function updateRequest(rqs){
         $("#rfq-panel-"+rqs._id+" .quote a").editable("setValue",rqs.quote);
     }
     else $("#rfq-panel-"+rqs._id+" .quote a").editable("setValue","");
+
     if(rqs.quantity){
         quantity = rqs.quantity.number;
         unit = rqs.quantity.unity;
@@ -793,8 +804,15 @@ function getParameterNames() {
 }
 
 function openRequest(id){
+
+    $(".acc-v1:eq(0)").scrollTo($("#collapse-"+id).parent());
     $("#collapse-"+id).collapse("show");
+
+
 }
+
+
+
 
 function openNewRfq(){
     if(hasParameter("supplierId") && hasParameter("supplierName")){
@@ -837,6 +855,7 @@ function openNewRfq(){
 
                 data.products = resp.docs;
                 data_r = data;
+                data_r.totalrequests = 0;
                 var theCompiledHtml = theTemplate(data);
 
                 // Add the compiled html to the page
@@ -854,6 +873,27 @@ function openNewRfq(){
                     }
                 });
                 initFormNewRfq();
+
+
+        /*        $('.product-list-rfq').each(function () {
+                    $(this).change(function () {
+                        var textval = $(this).filter(":selected").text();
+                        var ddlval = $(this).val();
+                        console.log(textval);
+                        if (textval.length > 19) {
+                            console.log("maggiore");
+                            $(this).filter(":selected").text(textval.substr(0, 19) + '…');
+                        }
+
+                        var $options = $(this).filter("option:not(:selected)");
+                        $options.each(function () {
+                            $(this).text($(this).attr('data-text'));
+
+                        });
+
+                    });
+                });
+*/
 
                 $("body").localize();
 
@@ -876,6 +916,15 @@ function openNewRfq(){
         redirectToPrevPage();
     }
 }
+
+function shorten(text, maxLength) {
+    var ret = text;
+    if (ret.length > maxLength) {
+        ret = ret.substr(0,maxLength-3) + "...";
+    }
+    return ret;
+}
+
 
 function initFormNewRfq(){
     // Validation
@@ -983,7 +1032,7 @@ function saveConversation(){
         },
         error: function(xhr, status)
         {
-            console.log(xhr.responseJSON.error);
+          //  console.log(xhr.responseJSON.error);
             viewError(xhr);
         },
         beforeSend: function(xhr, settings)
@@ -999,7 +1048,7 @@ function addRowRequest(){
 
     var source = $("#single_new_rfq_template").html();
     var theTemplate = Handlebars.compile(source);
-
+    data_r.totalrequests = data_r.totalrequests +1;
     var theCompiledHtml = theTemplate(data_r);
 
     // Add the compiled html to the page
@@ -1009,6 +1058,16 @@ function addRowRequest(){
     $("body").localize();
 
 }
+
+
+function deleteRowRequest(id_row){
+    if($(".row-request").length > 1)
+        $("#"+id_row).remove();
+    else
+        jQuery.jGrowl(i18next.t("rfq.noDeleteRfq"), {theme:'bg-color-red', life: 5000});
+
+}
+
 function createRequest(id_conv, request, cb){
     jQuery.ajax({
         url: _localServiceUrl + "conversations/"+id_conv+"/requests",

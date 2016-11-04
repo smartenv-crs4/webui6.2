@@ -245,8 +245,10 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 <script type="text/javascript" src="assets/js/plugins/jquery.jgrowl.min.js"></script>
 
+
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script type="text/javascript" src="assets/js/custom_rfq.js"></script>
+
 <script type="text/javascript" src="assets/js/plugins/async.js"></script>
 <script type="text/javascript" src="assets/js/utils.js"></script>
 
@@ -332,10 +334,11 @@
 
 <!--Single new Request -->
 <script id="single_new_rfq_template" type="text/x-handlebars-template">
-<div class="row row-request" >
-    <section class="col col-4">
+<div id="rfq_new_{{totalrequests}}" class="row row-request" >
+    <section class="col col-3">
+        <label class="label" data-i18n="catalog.products"></label>
         <label class="select">
-            <select class="product-list-rfq" name="product">
+            <select class="product-list-rfq " name="product">
                 {{#each products}}
                 <option  value={{this._id}}>{{this.name}}</option>
                 {{/each}}
@@ -344,18 +347,22 @@
         </label>
     </section>
     <section class="col col-3">
+        <label class="label" data-i18n="rfq.requestQuote"></label>
         <label class="input">
             <i class="icon-append fa fa-eur"></i>
             <input type="text" name="quote" class="newquote" data-i18n="[placeholder]rfq.requestQuote">
         </label>
     </section>
+
     <section class="col col-3">
+        <label class="label label-new-quantity" data-i18n="rfq.requestQuantity"></label>
         <label class="input">
             <i class="icon-append fa  fa-briefcase"></i>
             <input type="text" name="quantity" class="newqnty" data-i18n="[placeholder]rfq.requestQuantity">
         </label>
     </section>
     <section class="col col-2">
+        <label class="label invisible" data-i18n="rfq.requestQuantity"></label>
         <label class="select">
             <select class="new-qnty-unity" name="measurement">
                 {{#each munits}}
@@ -366,7 +373,8 @@
             <i></i>
         </label>
     </section>
-
+    <label class="label invisible" data-i18n="rfq.requestQuantity"></label>
+ <button aria-hidden="true" data-dismiss="alert" class="close col col-1" type="button" onclick="deleteRowRequest('rfq_new_{{totalrequests}}')">×</button>
 
 </div>
 </script>
