@@ -13,11 +13,11 @@ jQuery(document).ready(function(){
   if(sb.length > 0)
   {
     var isSupplier = sessionStorage.type && sessionStorage.type == "supplier";
-    var sbT = Handlebars.compile(sidebarTemplate,{
+    var sbT = Handlebars.compile(sidebarTemplate);
+    jQuery("#sidebar").html(sbT({
       isSupplier : isSupplier,
       idSupplier : isSupplier ? sessionStorage.userId : ""
-    });
-    jQuery("#sidebar").html(sbT);
+    }));
     jQuery("#sidebar").localize();
     
     

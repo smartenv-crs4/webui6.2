@@ -165,12 +165,14 @@ var translation = {
                     "expiredate": "Expiration date",
                     "chooseSupplier": "Choose a favorite above or select a vendor from the search list",
                     "newrfqcreated": "RFQ created with success!",
-                    "sendRFQ": "Send RFQ"
+                    "sendRFQ": "Send RFQ",
+                    "myrfqs" : "My RFQs"
 
 
                 },
                 "catalog": {
                     "catalog": "Catalog",
+                    "mycatalog": "My Catalog",
                     "search": "Search",
                     "all": "All",
                     "incatalog": "In catalog",
@@ -368,11 +370,13 @@ var translation = {
                     "expiredate": "Fine validità",
                     "chooseSupplier": "Scegli tra i preferiti qui sopra o seleziona un fornitore da lista di ricerca",
                     "newrfqcreated": "RFQ Creata con successo!",
-                    "sendRFQ": "Invia RFQ"
+                    "sendRFQ": "Invia RFQ",
+                    "myrfqs" : "Le mie RFQ"
 
                 },
                 "catalog": {
                     "catalog": "Catalogo",
+                    "mycatalog": "Il mio Catalogo",
                     "search": "Cerca",
                     "all": "Tutto",
                     "incatalog": "Solo catalogo",
