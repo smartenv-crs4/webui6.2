@@ -508,7 +508,6 @@ function deleteDocument(name)
 }
 
 
-
 function removeFavoriteSupplier(sid)
 {
   jQuery.ajax({
@@ -657,8 +656,6 @@ function getUserCategoryList()
       var tCatTable = Handlebars.compile(categoriesTableTemplate);      
       jQuery("#categoriesList").html(tCatTable(data));
       jQuery("#categoriesList").localize();
-      
-              
     },     
     error: function(xhr, status)
     {
@@ -683,8 +680,5 @@ function getUserCategoryList()
   });  
   
 }
-
-
-
 
 

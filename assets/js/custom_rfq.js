@@ -200,53 +200,6 @@ function getConversationRequestsAndMessages()
             success: function(data, textStatus, xhr)
             {
 
-                var socket = io.connect(_serviceUrl,{reconnection:true});
-                socket.once('connect', function() {
-                    socket.emit('join', data._id);
-                });
-
-                socket.on('message', function(msg){
-                    var source;
-                    var theTemplate;
-                    var theCompiledHtml;
-                    if(msg.automatic){
-                        msg.text = i18next.t(msg.text);
-                        source = $("#rfq_new_message_auto_template").html();
-                        theTemplate = Handlebars.compile(source);
-
-                        // Pass our data to the template
-                        theCompiledHtml = theTemplate(msg);
-                    }
-                    else{
-                        source = $("#rfq_new_message_template").html();
-                        theTemplate = Handlebars.compile(source);
-
-                        // Pass our data to the template
-                        theCompiledHtml = theTemplate(msg);
-                    }
-
-
-                    // Add the compiled html to the page
-                    $("#rfq-list-messages").append(theCompiledHtml);
-
-                    var d = $('.cont-list-messages').first();
-                    d.scrollTop(d.prop("scrollHeight"));
-
-
-                });
-
-                socket.on('request', function(rqs){
-
-                    // Pass our data to the template
-                    updateRequest(rqs);
-
-                });
-
-                socket.on('error', function(msg){
-                    console.log(msg);
-                });
-
-
                 if(data){
                     // Compile the template
 
@@ -291,6 +244,55 @@ function getConversationRequestsAndMessages()
                     setEnableSelect();
 
                     $("body").localize();
+
+
+
+
+                    var socket = io.connect(_serviceUrl,{reconnection:true});
+                    socket.once('connect', function() {
+                        socket.emit('join', data._id);
+                    });
+
+                    socket.on('message', function(msg){
+                        var source;
+                        var theTemplate;
+                        var theCompiledHtml;
+                        if(msg.automatic){
+                            msg.text = i18next.t(msg.text);
+                            source = $("#rfq_new_message_auto_template").html();
+                            theTemplate = Handlebars.compile(source);
+
+                            // Pass our data to the template
+                            theCompiledHtml = theTemplate(msg);
+                        }
+                        else{
+                            source = $("#rfq_new_message_template").html();
+                            theTemplate = Handlebars.compile(source);
+
+                            // Pass our data to the template
+                            theCompiledHtml = theTemplate(msg);
+                        }
+
+
+                        // Add the compiled html to the page
+                        $("#rfq-list-messages").append(theCompiledHtml);
+
+                        var d = $('.cont-list-messages').first();
+                        d.scrollTop(d.prop("scrollHeight"));
+
+
+                    });
+
+                    socket.on('request', function(rqs){
+
+                        // Pass our data to the template
+                        updateRequest(rqs);
+
+                    });
+
+                    socket.on('error', function(msg){
+                        console.log(msg);
+                    });
 
                 }
 
@@ -426,6 +428,7 @@ function updateRequest(rqs){
         $("#rfq-panel-"+rqs._id+" .quote a").editable("setValue",rqs.quote);
     }
     else $("#rfq-panel-"+rqs._id+" .quote a").editable("setValue","");
+
     if(rqs.quantity){
         quantity = rqs.quantity.number;
         unit = rqs.quantity.unity;

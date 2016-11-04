@@ -49,7 +49,20 @@
 
 	<!-- CSS Page Style Import-->
 	<link rel="stylesheet" href="assets/css/pages/page_log_reg_v3.css">
-</head>
+    
+    <link rel="stylesheet" href="assets/css/typeaheadjs.css">  
+
+
+    <style type="text/css">
+    .input_custom
+    {
+        font-size: 16px; 
+        font-weight: 200; 
+        height: 48px;
+    }
+    </style>
+    
+    </head>
 
 <body>
 	<div  class="wrapper">
@@ -58,40 +71,58 @@
 		<!--=== End Header ===-->
 
 		<!--=== Search Block ===-->
-		<div class=" parallaxBg">
+		
+        
+        
+        <div class=" parallaxBg">
 			<div class="container">
-				<div class="col-md-6 col-md-offset-3">
-					<h1 data-i18n="product.searchTitle"></h1>
+				<div class="col-md-8 col-md-offset-2">
+					
+                    
+                    <h1 data-i18n="product.searchTitle"></h1>
 
-					<div class="input-group">
-                        <div class="col-md-11" style="padding-right: 0px;">
-                            <div class="row">
-                                <div class="col-md-5" style="padding-left: 0px; padding-right: 2px;" >
-                                <input type="text" id="category" class="form-control" data-i18n="[placeholder]product.searchLabelCategories">
+					    <div class="col-md-11" style="padding-right: 0px;">
+                            
+                            <div class="row" id="divSearch1">
+                                <div class="col-md-6" style="padding-left: 0px; padding-right: 2px;" >
+                                <input type="text" id="categories" class="form-control input_custom" data-i18n="[placeholder]product.searchLabelCategories">
                                 </div>
-                                <div class="col-md-7" style="padding-left: 0px">
-                                <input type="text" id="product" class="form-control" data-i18n="[placeholder]product.searchLabelProducts">
+                                <div class="col-md-6" style="padding-left: 0px">
+                                <input type="text" id="product" class="form-control input_custom" data-i18n="[placeholder]product.searchLabelProducts">
                                 </div>
                             </div>
-                            <div data-i18n="product.searchTagMessage"></div>
+                            
+                            <div class="row" id="divSearch2" style="display: none">
+                                <div class="col-md-12" style="padding-left: 0px;">
+                                <input type="text" id="tags" class="form-control input_custom" data-i18n="[placeholder]product.tags">
+                                </div>
+                            </div>
+                            
+                            
+                            
                             
                         
                         </div>
                     
                         <div class="col-md-1" style="padding-left: 0px;">
-                            <span class="input-group-btn">
-                                    <button class="btn-u btn-u-lg" id="btn_search" type="button"><i class="fa fa-search"></i></button>
-                                </span>
+                            <span class="input-group-btn" >
+                                    <button class="btn-u btn-u-lg" id="btn_search" type="button" ><i class="fa fa-search"></i></button>
+                            </span>
                         </div>
                     
                     
-                    </div>
-
+                            
 					
 				</div>
-			</div>
-		</div><!--/container-->
-		<div class="container content-sm">
+                
+                <div class="col-md-8 col-md-offset-2" data-i18n="product.searchTagMessage" id="divSearchMsg" style="cursor: pointer; display: none"></div>
+                    
+        	</div>
+		
+        </div><!--/container-->
+		
+        
+        <div class="container content-sm">
 		<div class="table-search-v2" id="divSearch_table">
 			<div class="table-responsive">
 				<table class="table table-bordered table-striped">
@@ -296,9 +327,12 @@
 	<script src="assets/plugins/backstretch/jquery.backstretch.min.js"></script>
 	<script type="text/javascript" src="assets/js/common_header.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-	<script type="text/javascript" src="assets/js/custom.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/typeahead.bundle.js"></script>
+
+    <script type="text/javascript" src="assets/js/custom.js"></script>
 	<script type="text/javascript" src="js/page_list.js"></script>
     <script type="text/javascript" src="assets/js/plugins/blockUI.js"></script>
+    
     <script type="text/javascript">
 		
         jQuery(document).ready(function() {

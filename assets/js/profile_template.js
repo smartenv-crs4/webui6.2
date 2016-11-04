@@ -209,7 +209,6 @@ var favoriteTemplate = `
 </div>
 `;
 
-
 var favoriteTableTemplate = `
 <div class="table-search-v1 margin-bottom-30">
   <div class="table-responsive">

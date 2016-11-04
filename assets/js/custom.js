@@ -12,8 +12,12 @@ jQuery(document).ready(function(){
   
   if(sb.length > 0)
   {
-    var sbT = Handlebars.compile(sidebarTemplate);      
-    jQuery("#sidebar").html(sbT);
+    var isSupplier = sessionStorage.type && sessionStorage.type == "supplier";
+    var sbT = Handlebars.compile(sidebarTemplate);
+    jQuery("#sidebar").html(sbT({
+      isSupplier : isSupplier,
+      idSupplier : isSupplier ? sessionStorage.userId : ""
+    }));
     jQuery("#sidebar").localize();
     
     
@@ -111,6 +115,8 @@ jQuery(document).ready(function(){
     jQuery("#h_logout").hide();
     jQuery("#h_user").hide();
   }
+
+  loadCookieLawBar();
 
 
 });
@@ -318,4 +324,67 @@ function autoCompleteCat(tagId)
                  
 }
 
+function loadCookieLawBar()
+{
+  var links = document.getElementsByTagName('link');
+  var needCSS = true;
+  
+  for ( var i = 0; i < links.length; i++ )
+  {
+    if ( links[i].href == "assets/css/jquery.cookiebar.css" ) 
+    needCSS = false;
+  }
+   
+  if ( needCSS )
+  {
+    var ls = document.createElement('link');
+    ls.rel="stylesheet";
+    ls.href="assets/css/jquery.cookiebar.css";
+    document.getElementsByTagName('head')[0].appendChild(ls);   
+  }
+  
+  if(jQuery.cookieBar != "function")
+  {
+    var j = document.createElement('script');
+    j.type = 'text/javascript';
+    document.getElementsByTagName('head')[0].appendChild(j);
+    j.src = 'assets/js/plugins/jquery.cookiebar.js';      
+    
+    j.onload = function() 
+    {    
+      initCookieBar();
+    }              
+  }
+  else
+  {
+    initCookieBar();
+  }
+  
+  
+  jQuery(document).on("translate", function(){
+    var button = jQuery("#cookie-bar .cb-enable").first()[0].cloneNode(true);
+    jQuery("#cookie-bar p").html(jQuery.i18n.t("cookieLaw.message"));
+    button.innerHTML = jQuery.i18n.t("cookieLaw.accept");
+    jQuery("#cookie-bar p").append(button);
+    
+  })        
+}
+
+function initCookieBar()
+{
+  jQuery.cookieBar({
+    message: jQuery.i18n.t("cookieLaw.message"),
+    //declineButton: true,
+    acceptText: jQuery.i18n.t("cookieLaw.accept"),
+    declineText: jQuery.i18n.t("cookieLaw.decline"),
+    declineFunction: function() {
+        window.location.href = "http://www.crs4.it";
+    },
+    //renewOnVisit: true,
+    expireDays: 90,
+    //autoEnable: false,          
+  });    
+  
+  jQuery("#cookie-bar p").css("color", "#FFFFFF");                
+}
 

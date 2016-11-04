@@ -55,7 +55,6 @@ function sendEvaluation()
     dataType: "json",
     success: function(evaluation, textStatus, xhr)
     {
-      // success
       console.log('inside success, textStatus is ' + textStatus);
       console.log('inside success, xhr is ' + xhr);
       console.log('inside success, xhr staus is ' + xhr.status);
@@ -66,7 +65,6 @@ function sendEvaluation()
 	console.log('success!');
         return;
       }
-      // error
       else
       {
         respBlock.html(xhr.responseJSON.message);
@@ -78,10 +76,13 @@ function sendEvaluation()
     error: function(xhr, status)
     {
       console.log('inside error, status is ' + status);
+      //console.log('inside error, xhr status is ' + xhr.status);
+      //console.log('inside error, sessionStorage userId ' + sessionStorage.userId);
+      //console.log('inside error, sessionStorage token ' + sessionStorage.token);
       console.log(xhr);
       //console.log('xhr responseJSON is ' + xhr.responseJSON);
       //console.log('xhr responseJSON error_message is ' + xhr.responseJSON.message);
-      switch(xhr.statusCode)
+      switch(xhr.status)
       { 
         case 400:
           if(xhr.responseJSON.error == "invalid_token")
@@ -91,6 +92,10 @@ function sendEvaluation()
           else
             respBlock.html(xhr.responseJSON.message);
           break;
+	case 401: 
+	  respBlock.html(i18next.t("case error missing token (401) in post evaluation"));
+	  break;
+	  break;
         case 500:
           respBlock.html(i18next.t("error.internal_server_error"));
           break;
@@ -98,12 +103,16 @@ function sendEvaluation()
           respBlock.html(i18next.t("error.invalid_auth"));
           break;
         default:
-	  console.log('default case error');
+	  console.log('default case error!');
           //respBlock.html(xhr.responseJSON.message);
           respBlock.html(xhr.status);
       }
       respBlock.removeClass("invisible");
       return;
+    },
+    beforeSend: function(xhr, settings)
+    {
+	    xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
     }
   });
 ///

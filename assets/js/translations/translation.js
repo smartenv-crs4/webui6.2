@@ -11,6 +11,13 @@ var translation = {
                     "logout": "Logout",
                     "lang": "Language"
                 },
+
+                "cookieLaw": {
+                  "message": "This website uses session storage, local storage and cookie to store on your browser your preferences and your account information",
+                  "accept": "I understand",
+                  "decline": "I refuse it"
+                },
+
                 "error": {
                     "invalid_email": "Your email address is not valid",
                     "bad_request": "Bad request",
@@ -159,12 +166,12 @@ var translation = {
                     "chooseSupplier": "Choose a favorite above or select a vendor from the search list",
                     "newrfqcreated": "RFQ created with success!",
                     "sendRFQ": "Send RFQ",
-                    "noDeleteRfq":"You must have at least one request!"
-
-
+                    "noDeleteRfq":"You must have at least one request!",
+                    "myrfqs" : "My RFQs"
                 },
                 "catalog": {
                     "catalog": "Catalog",
+                    "mycatalog": "My Catalog",
                     "search": "Search",
                     "all": "All",
                     "incatalog": "In catalog",
@@ -181,7 +188,7 @@ var translation = {
                     "last": "Last",
                     "first": "First"
                 },
-"product":
+                "product":
                 {
                     "searchTitle": "Discover new suppliers",
                     "searchLabelCategories": "Categories...",
@@ -208,6 +215,13 @@ var translation = {
                     "logout": "Esci",
                     "lang": "Lingua"
                 },
+
+                "cookieLaw": {
+                  "message": "Questo sito utilizza il session storage, il local storage e i cookie per salvare sul tuo browser le tue preferenze e le informazioni del tuo account",
+                  "accept": "Ho capito",
+                  "decline": "Rifiuto"
+                },
+
                 "error": {
                     "invalid_email": "L'indirizzo email inserito non &egrave; valido",
                     "bad_request": "Richiesta non valida",
@@ -356,11 +370,12 @@ var translation = {
                     "chooseSupplier": "Scegli tra i preferiti qui sopra o seleziona un fornitore da lista di ricerca",
                     "newrfqcreated": "RFQ Creata con successo!",
                     "sendRFQ": "Invia RFQ",
-                    "noDeleteRfq":"Devi avere almeno una richiesta!"
-
+                    "noDeleteRfq":"Devi avere almeno una richiesta!",
+                    "myrfqs" : "Le mie RFQ"
                 },
                 "catalog": {
                     "catalog": "Catalogo",
+                    "mycatalog": "Il mio Catalogo",
                     "search": "Cerca",
                     "all": "Tutto",
                     "incatalog": "Solo catalogo",
