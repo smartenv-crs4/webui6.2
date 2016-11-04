@@ -73,7 +73,7 @@ var translation = {
 
                     "customer": "customer",
                     "supplier": "supplier",
-                    
+
                     "addCategory": "Add",
 
                     "passwordTitle": "Manage your password",
@@ -158,7 +158,8 @@ var translation = {
                     "expiredate": "Expiration date",
                     "chooseSupplier": "Choose a favorite above or select a vendor from the search list",
                     "newrfqcreated": "RFQ created with success!",
-                    "sendRFQ": "Send RFQ"
+                    "sendRFQ": "Send RFQ",
+                    "noDeleteRfq":"You must have at least one request!"
 
 
                 },
@@ -185,14 +186,14 @@ var translation = {
                     "searchTitle": "Discover new suppliers",
                     "searchLabelCategories": "Categories...",
                     "searchLabelProducts": "Search products...",
-                    "searchTagMessage": "Use product tags for your search", 
+                    "searchTagMessage": "Use product tags for your search",
                     "thLogo": "Logo",
                     "thAbout": "About",
                     "thRates": "Rates",
                     "thAction": "Action",
                     "tabLabelRegistration": "Rigistered ",
                     "tabLabelRegistration": "Rigistered ",
-                    "tabMsgProduct": "See products match" 
+                    "tabMsgProduct": "See products match"
                 }
             }
         },
@@ -274,7 +275,7 @@ var translation = {
 
                     "customer": "cliente",
                     "supplier": "fornitore",
-                    
+
                     "addCategory": "Inserisci",
 
                     "passwordTitle": "Gestisci la tua password",
@@ -354,7 +355,8 @@ var translation = {
                     "expiredate": "Fine validità",
                     "chooseSupplier": "Scegli tra i preferiti qui sopra o seleziona un fornitore da lista di ricerca",
                     "newrfqcreated": "RFQ Creata con successo!",
-                    "sendRFQ": "Invia RFQ"
+                    "sendRFQ": "Invia RFQ",
+                    "noDeleteRfq":"Devi avere almeno una richiesta!"
 
                 },
                 "catalog": {
@@ -381,13 +383,13 @@ var translation = {
                     "searchTitle": "Cerca nuovi suppliers",
                     "searchLabelCategories": "Categories...",
                     "searchLabelProducts": "Cerca prodotti...",
-                    "searchTagMessage": "Usa i tag dei prodotti per la ricerca", 
+                    "searchTagMessage": "Usa i tag dei prodotti per la ricerca",
                     "thLogo": "Logo",
                     "thAbout": "Info",
                     "thRates": "Giudizi",
                     "thAction": "Azioni",
                     "tabLabelRegistration": "Registrato il ",
-                    "tabMsgProduct": "Vedi i prodotti associati" 
+                    "tabMsgProduct": "Vedi i prodotti associati"
                 }
 
             }
