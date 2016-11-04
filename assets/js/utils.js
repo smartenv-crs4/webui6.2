@@ -11,3 +11,38 @@ function formatDate(date) {
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
 }
+
+function cacheCompile(templateid, data) {
+    if (!window[templateid + "_template"]) {
+        window[templateid + "_template"] = Handlebars.compile($('#' + templateid).html());
+    }
+    return window[templateid + "_template"](data);
+}
+
+function isSupplier() {
+    if (userType() == "supplier" ) {
+        return true;
+    }
+    else return false;
+}
+
+function userType() {
+    if (window.sessionStorage && sessionStorage.type)
+        return sessionStorage.type;
+    else
+        return "customer";
+}
+
+function userId() {
+
+    if (window.sessionStorage.userId)
+        return window.sessionStorage.userId;
+    else return null;
+}
+
+function isLogged() {
+    if (window.sessionStorage.token)
+        return true;
+    else
+        return false;
+}

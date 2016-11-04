@@ -609,7 +609,7 @@
 
     <!-- JS Customization -->
     <script type="text/javascript" src="assets/js/sidebar.js"></script>
-    <script type="text/javascript" src="assets/js/custom.js"></script>
+
     <!-- JS Page Level -->
     <script type="text/javascript" src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/plugins/datepicker.js"></script>
@@ -620,6 +620,7 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
     <script type="text/javascript" src="assets/js/utils.js"></script>
+    <script type="text/javascript" src="assets/js/custom.js"></script>
     <script type="text/javascript" src="assets/js/handlebars-paginate.js"></script>
 
 
@@ -644,12 +645,6 @@
          //  getproductsURL = _brokerMsUrl + "products";
 
 
-        function cacheCompile(templateid, data) {
-            if (!window[templateid + "_template"]) {
-                window[templateid + "_template"] = Handlebars.compile($('#' + templateid).html());
-            }
-            return window[templateid + "_template"](data);
-        }
 
 
         function getfiles(url, templateid, target) {
@@ -798,7 +793,7 @@
                 var values =  data[0];
                 var plusname = values.name.split(" ").join("+");
                 values['plusname'] = plusname;
-                values['logged'] = logged && (userType == "customer");
+                values['logged'] = logged && (userType() == "customer");
                 var compiled = cacheCompile(templateid, values);
 
                 $(target).empty();
@@ -841,8 +836,8 @@
     </script>
 
     <script type="text/javascript">
-        var userType = "customer";
-        var currentSupplier = false;
+
+        var currentSupplier = isSupplier() && supId == userId();
         var logged = false;
         jQuery(document).ready(function () {
 
@@ -864,13 +859,9 @@
                 $("#sidebar").show();
             }
 
-            if (window.sessionStorage && sessionStorage.type)
-                userType = sessionStorage.type;
 
-            if (userType == "supplier" && supId == window.sessionStorage.userId) {
-                currentSupplier = true;
 
-            }
+
 
             getsupplierinfo(getsupplierURL, "supplier-info_template", "#supplier-info")
             setsupplierfavoritestatus(getcutomerfavoritesURL, "supplier_favorite_template", "#starBlock");
