@@ -41,7 +41,10 @@ jQuery(document).ready(function(){
   var headerCompiled = Handlebars.compile(header_template);
 
   var headerHTML = headerCompiled({
-    isLogged: isLogged()
+    isLogged: isLogged(),
+    showSearch : isSearchVisible(),
+    isHome : window['isHome'] || false,
+    isRFQ : window['isRFQ'] || false
   });
   
   jQuery('body').localize();

@@ -8,6 +8,7 @@ var _localServiceUrl  = _brokerMsUrl;
 var _serviceUrl =  "http://seidue.crs4.it:3009";
 //var _serviceUrl =  "http://localhost:3000";
 
+window.isRFQ = true;
 
 _access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzg1NTc1MjQ3NTY4fQ.Du2bFjd0jB--geRhnNtbiHxcjQHr5AyzIFmTr3NFDcM";
 var defaultImg = "assets/img/team/img32-md.jpg";
@@ -128,7 +129,6 @@ Handlebars.registerHelper("lastModification", function(status, customer, supplie
 jQuery(document).ready(function() {
     $('#inbox-rfqs-container').html("<div>Loading data ... </div>");
   //  $("body").localize();
-
 
 
 

@@ -80,6 +80,12 @@
             max-width: 530px;
             width: 530px;
         }
+
+        .media-s100 {
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
     </style>
 
 </head>
@@ -348,20 +354,23 @@
                 {{#each products}}
                 <div class="media media-v2">
                     <a class="pull-left" href="#">
-                        <img class="media-object img-circle" src="http://seidue.crs4.it:3015/{{_id}}/{{images.[0].name}}_o.jpg"
+                        <img class="media-s100 img-circle"
+                             src="http://seidue.crs4.it:3015/{{_id}}/{{images.[0].name}}_o.jpg"
                              onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'"
                              alt="">
                     </a>
                     <div class="media-body">
+                        <div class="clearfix" style="overflow:hidden; ">
                         <h4 class="media-heading">
-                            <strong><a href="#">{{name}}</a></strong>
+                            <strong style="display:block;"><a href="#">{{name}}</a></strong>
                             {{#each categories}}
-                                {{#if @last}}
-                            <small data-i18n="categories.{{_id}}"></small>
-                                {{/if}}
-                                {{/each}}
+                            {{#if @last}}
+                            <small data-i18n="categories.{{_id}}" style="display:block; max-width:50%;"></small>
+                            {{/if}}
+                            {{/each}}
 
                         </h4>
+                        </div>
                         <p>
                         <div class="giveMeEllipsis blog-author-desc">{{description}}</div>
                         <a class="more" style="display:none" data-i18n="catalog.more"></a>
@@ -388,7 +397,9 @@
 
             </div>
         </div>
-        <script language="JavaScript">$(document).ready(function(){ $(".giveMeEllipsis:truncated").siblings("a.more").show();})</script>
+        <script language="JavaScript">$(document).ready(function(){
+            $(".giveMeEllipsis:truncated").siblings("a.more").show();})
+        </script>
     </script>
 
 
@@ -490,11 +501,11 @@
 
     <script type="text/x-handlebars-template" id="supplier-info_template">
         <div class="blog-author " style="min-height: 110px;">
-           {{#if logged}}
-            <button class="btn-u " id="btn_rfq" type="button" style="float: right;"><i
-                    class="fa fa-paper-plane"></i> <span
-                    onclick="javascript:window.location.href='page_rfq_new.html?supplierId={{_id}}&supplierName={{plusname}}'"
-                    data-i18n="rfq.sendRFQ"></span></button>
+            {{#if logged}}
+            <button class="btn-u " id="btn_rfq" type="button" style="float: right;"
+                    onclick="javascript:window.location='page_rfq_new.html?supplierId={{_id}}&supplierName={{plusname}}'">
+                <i class="fa fa-paper-plane"></i> <span data-i18n="rfq.sendRFQ"></span>
+            </button>
             {{/if}}
             <img onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'" src="{{logo}}" alt="">
             <div class="blog-author-desc">
@@ -502,36 +513,37 @@
                     <h4>{{name}}</h4>
 
                 </div>
-                <p> {{address}}</p>
+                <p>{{address}}</p>
             </div>
-            
+
             <div id="starBlock" style="position:absolute; top:0; left:0; margin:5px">
             </div>
-            
+
         </div>
     </script>
-    
-    
+
+
     <script type="text/x-handlebars-template" id="supplier_favorite_template">
-      {{#if isCustomer}}      
-          {{#if noFavorite}} 
-            <span style="cursor:pointer" data-toggle="tooltip" data-i18n="[title]publicProfile.addSupplier" onclick="addToFavorite()">
+        {{#if isCustomer}}
+        {{#if noFavorite}}
+            <span style="cursor:pointer" data-toggle="tooltip" data-i18n="[title]publicProfile.addSupplier"
+                  onclick="addToFavorite()">
               <span style="" class="yellow glyphicon glyphicon-star-empty" aria-hidden="true"></span>
             </span>
-          {{else}}
+        {{else}}
             <span>
               <span style="" class="yellow glyphicon glyphicon-star" aria-hidden="true"></span>
             </span>
-          {{/if}}        
-      {{/if}}          
+        {{/if}}
+        {{/if}}
     </script>
-    
+
     <script type="text/x-handlebars-template" id="full-star_template">    
-      <span  class="pull-right" aria-label="Left Align">
+      <span class="pull-right" aria-label="Left Align">
         <span style="" class="yellow glyphicon glyphicon-star" aria-hidden="true"></span>
       </span>
     </script>
-    
+
 
     <script type="text/x-handlebars-template" id="supplier-profile_template">
         <div class="profile-bio">
@@ -605,7 +617,8 @@
     <!-- JS Translation -->
     <script src="assets/js/translations/translation.js"></script>
     <script type="text/javascript" src="assets/js/plugins/i18next.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.1.0/jquery-i18next.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.1.0/jquery-i18next.js"></script>
 
     <!-- JS Customization -->
     <script type="text/javascript" src="assets/js/sidebar.js"></script>
@@ -640,11 +653,9 @@
         var supId = getParameterByName("idSupplier"); //"57f5059fe8094b7137fa3efd";
         var getfilesURL = _brokerMsUrl + "users/attachment/" + supId;
         var getsupplierURL = _brokerMsUrl + "users/supplier/" + supId;
-        var getproductsURL = _brokerMsUrl + "products?supplierId=" + supId;     
-        var getcutomerfavoritesURL = _brokerMsUrl + "users/favorites";   
-         //  getproductsURL = _brokerMsUrl + "products";
-
-
+        var getproductsURL = _brokerMsUrl + "products?supplierId=" + supId;
+        var getcutomerfavoritesURL = _brokerMsUrl + "users/favorites";
+        //  getproductsURL = _brokerMsUrl + "products";
 
 
         function getfiles(url, templateid, target) {
@@ -694,26 +705,25 @@
                 });
 
 
-
                 var prods = data.docs;
 
                 var categories = [];
-                for (var i=0;i<prods.length;++i){
+                for (var i = 0; i < prods.length; ++i) {
                     var cat = prods[i].categories;
                     if (cat)
-                        for (var j=0;j<cat.length;++j){
+                        for (var j = 0; j < cat.length; ++j) {
                             var c = cat[j];
-                            if (c.level.liv == 3){
-                                categories.push( {
-                                 id :c._id,
-                                    name : c.name
+                            if (c.level.liv == 3) {
+                                categories.push({
+                                    id: c._id,
+                                    name: c.name
                                 });
                             }
                         }
                 }
-                for (var c=0;c<categories.length;++c){
+                for (var c = 0; c < categories.length; ++c) {
                     var cat = categories[c];
-                    for (var l in cat.name){
+                    for (var l in cat.name) {
                         if (!translation[l].translation["categories"])
                             translation[l].translation["categories"] = {};
                         translation[l].translation["categories"][cat.id] = cat.name[l];
@@ -731,12 +741,12 @@
             });
         }
 
-        $('#products_container').bind("onload",function () {
+        $('#products_container').bind("onload", function () {
             setTimeout(function () {
                 $(".giveMeEllipsis:truncated").siblings("a.more").show();
                 $(".more").click(showMore);
                 $(".less").click(showLess);
-            },200)
+            }, 200)
 
         });
 
@@ -744,45 +754,43 @@
             getproducts(getproductsURL, 'productstable', '#products_container');
 
         });
-        
-        function setsupplierfavoritestatus(url, templateid, target){          
-          var obj = {};
-          obj.isCustomer = false;            
-          
-          if(sessionStorage.type == "customer") {       
-            obj.isCustomer = true;        
-            obj.noFavorite = true;
-        
-            var supList = [];
-                          
-            jQuery.ajax({
-              url: url,
-              type: "GET",    
-              contentType: "application/json; charset=utf-8",
-              async: false,
-              success: function(dataResp, textStatus, xhr){        
-                supList = dataResp;                              
-              },     
-              error: function(xhr, status){
-              },
-              beforeSend: function(xhr, settings) 
-              { 
-                xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
-              }                    
-            });
-            
-            for(var i in supList) {
-              if(supList[i]["_id"] == supId)
-              {
-                obj.noFavorite = false;
-                break;
-              }
+
+        function setsupplierfavoritestatus(url, templateid, target) {
+            var obj = {};
+            obj.isCustomer = false;
+
+            if (sessionStorage.type == "customer") {
+                obj.isCustomer = true;
+                obj.noFavorite = true;
+
+                var supList = [];
+
+                jQuery.ajax({
+                    url: url,
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    async: false,
+                    success: function (dataResp, textStatus, xhr) {
+                        supList = dataResp;
+                    },
+                    error: function (xhr, status) {
+                    },
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.token);
+                    }
+                });
+
+                for (var i in supList) {
+                    if (supList[i]["_id"] == supId) {
+                        obj.noFavorite = false;
+                        break;
+                    }
+                }
+                var compiled = cacheCompile(templateid, obj);
+                $(target).html(compiled);
+                $(target).localize();
             }
-            var compiled = cacheCompile(templateid, obj);              
-            $(target).html(compiled);            
-            $(target).localize();                    
-          }                              
-        }        
+        }
 
         function getsupplierinfo(url, templateid, target) {
 
@@ -790,7 +798,7 @@
 
 
                 console.log(data);
-                var values =  data[0];
+                var values = data[0];
                 var plusname = values.name.split(" ").join("+");
                 values['plusname'] = plusname;
                 values['logged'] = logged && (userType() == "customer");
@@ -852,15 +860,11 @@
             //   getConversations();
 
 
-
             if (window.sessionStorage && sessionStorage.token)
                 logged = true;
             if (logged) {
                 $("#sidebar").show();
             }
-
-
-
 
 
             getsupplierinfo(getsupplierURL, "supplier-info_template", "#supplier-info")
@@ -870,52 +874,44 @@
             $("body").localize();
 
         });
-                
-        function addToFavorite()
-        {
-          if(sessionStorage.token)
-          {
-            var data = {};
-            data.supplier = supId;
-            
-            jQuery.ajax({
-              url: _brokerMsUrl + "users/actions/favorites",           
-              type: "POST",
-              data: JSON.stringify(data),
-              dataType: "json",
-              contentType: "application/json; charset=utf-8",
-              success: function(dataResp, textStatus, xhr)
-              {      
-                var compiled = cacheCompile("full-star_template");                                               
-                jQuery("#starBlock").empty();
-                jQuery("#starBlock").append(compiled);        
-                jQuery("#starBlock").localize(); 
-                //jQuery.jGrowl("OK", {theme:'bg-color-green', life: 5000});                            
-              },
-              error: function(xhr, status)
-              {
-                var msg;
-                
-                try
-                {        
-                  msg = xhr.responseJSON.message;
-                }
-                catch(err)
-                {
-                  msg = i18next.t("error.internal_server_error");
-                }
-                
-                console.log(msg)
-              },
-              beforeSend: function(xhr, settings) 
-              { 
-                xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
-              } 
-            });                      
-          }
+
+        function addToFavorite() {
+            if (sessionStorage.token) {
+                var data = {};
+                data.supplier = supId;
+
+                jQuery.ajax({
+                    url: _brokerMsUrl + "users/actions/favorites",
+                    type: "POST",
+                    data: JSON.stringify(data),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (dataResp, textStatus, xhr) {
+                        var compiled = cacheCompile("full-star_template");
+                        jQuery("#starBlock").empty();
+                        jQuery("#starBlock").append(compiled);
+                        jQuery("#starBlock").localize();
+                        //jQuery.jGrowl("OK", {theme:'bg-color-green', life: 5000});
+                    },
+                    error: function (xhr, status) {
+                        var msg;
+
+                        try {
+                            msg = xhr.responseJSON.message;
+                        }
+                        catch (err) {
+                            msg = i18next.t("error.internal_server_error");
+                        }
+
+                        console.log(msg)
+                    },
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.token);
+                    }
+                });
+            }
         }
-        
-        
+
 
     </script>
     <!--[if lt IE 9]>
