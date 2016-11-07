@@ -50,12 +50,11 @@
 </head>
 
 <body>
-<!-- first of all check if user is logged in -->
-<script type="text/javascript">
+<!-- first of all check if user is logged in 
   if(sessionStorage.userId == undefined)
   {
-    window.location.replace("page_login_and_registration2.html");
-  }
+    redirectToLogin();
+    }-->
 </script>
 	<!--=== Content Part ===-->
     <div>
@@ -239,6 +238,7 @@
     <!-- end of lines required by review block -->
 
     <!-- JS Customization -->
+    <script src="assets/js/custom.js"></script>
     <script src="assets/js/custom_evaluation.js"></script>
 
     <!-- JS Page Level -->
