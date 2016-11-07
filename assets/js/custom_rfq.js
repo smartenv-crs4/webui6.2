@@ -242,7 +242,7 @@ function getConversationRequestsAndMessages()
                     $("body").localize();
                     setEditableField(".editable-field");
                     setEnableSelect();
-
+                    addTooltipField();
                     $("body").localize();
 
 
@@ -374,14 +374,17 @@ function setEditableField(field){
 
 function setEnableSelect(){
 
-    $( ".editable-disabled").nextAll("form").find("select:first").each(function(index){
+    $( ".editable-disabled").prevAll("form").find("select:first").each(function(index){
         $(this).prop('disabled', 'disabled');
+
+
     });
-    $( ".editable:not('.editable-disabled')").nextAll("form").find("select:first").each(function(index){
+    $( ".editable:not('.editable-disabled')").prevAll("form").find("select:first").each(function(index){
         $(this).prop('disabled', false);
     });
-    $( ".editable-empty").nextAll("form").find("select:first").each(function(index){
+    $( ".editable-empty").prevAll("form").find("select:first").each(function(index){
         $(this).prop('disabled', 'disabled');
+
     });
 
     $(".rfq-select").change(onSaveEditableField);
@@ -402,6 +405,23 @@ function onSaveEditableField(e, params){
 
 }
 
+function getValueTooltipField(node){
+        return "666666666666";
+
+}
+
+function addTooltipField(){
+
+    $('.counter a:not([class])').each(function(){  $(this).tooltip({'title': $(this).text() }) });
+    $('.editable').not('.editable-disabled').each(function(){ $(this).tooltip('hide')
+        .attr('data-original-title', ' ')
+        .tooltip('destroy')});
+    $('.editable-disabled').each(function(){ $(this).tooltip('hide')
+        .attr('data-original-title', $(this).text())
+        .tooltip('show')});
+
+}
+
 function resetRequest(num_req, old_quote, old_quantity, old_unity){
 
     $('#unsaved_'+ num_req).addClass('hidden');
@@ -411,6 +431,7 @@ function resetRequest(num_req, old_quote, old_quantity, old_unity){
     $('#quantity-'+num_req).editable("setValue",old_quantity);
     $('#selectqnty-'+num_req).val(i18next.t("rfq."+old_unity)); //TO_CHANGE
     $('#selectqnty-'+num_req).attr("value",old_unity); //TO_CHANGE
+    if(old_unity == '--') $('#selectqnty-'+num_req).prop("disabled","disabled");
 
     $("#accept-"+num_req).removeClass("hidden");
     $("#reject-"+num_req).removeClass("hidden");
@@ -430,7 +451,7 @@ function updateRequest(rqs){
     else $("#rfq-panel-"+rqs._id+" .quote a").editable("setValue","");
 
     if(rqs.quantity){
-        quantity = rqs.quantity.number;
+        if(rqs.quantity.number) quantity = rqs.quantity.number;
         unit = rqs.quantity.unity;
         $("#rfq-panel-"+rqs._id+" .quantity a").editable("setValue",rqs.quantity.number);
         $("#selectqnty-"+num_req).val(rqs.quantity.unity);
@@ -464,13 +485,18 @@ function updateRequest(rqs){
         $("#save-accept-req-"+num_req).addClass("hidden");
         $("#quote-"+num_req).editable('disable');
         $("#quantity-"+num_req).editable('disable');
+      //  addTooltipField("#quote-"+num_req);
+      //  addTooltipField("#quantity-"+num_req);
     }
     else if((rqs.status == 'pending'&& cuser == 'supplier' )||
         (rqs.status == 'acceptedByS'&& cuser == 'customer' )){
         //$("#req-buttons-"+num_req).removeClass("hidden");
+
+        $("#req-buttons-"+num_req+" .default-button").removeClass("hidden");
+     //  removeTooltipField("#quote-"+num_req);
+     //   removeTooltipField("#quantity-"+num_req);
         setEditableField("#quote-"+num_req);
         setEditableField("#quantity-"+num_req);
-        $("#req-buttons-"+num_req+" .default-button").removeClass("hidden");
 
     }
 
@@ -498,7 +524,7 @@ function updateRequest(rqs){
     replaceWith("<i class='fa "+iconPanelRqs+" fa-lg pull-right'></i>");
     setEnableSelect();
 
-
+    addTooltipField();
 }
 
 function acceptByCustomer(id_conv, id_req, num_req, name) {
@@ -874,26 +900,6 @@ function openNewRfq(){
                 });
                 initFormNewRfq();
 
-
-        /*        $('.product-list-rfq').each(function () {
-                    $(this).change(function () {
-                        var textval = $(this).filter(":selected").text();
-                        var ddlval = $(this).val();
-                        console.log(textval);
-                        if (textval.length > 19) {
-                            console.log("maggiore");
-                            $(this).filter(":selected").text(textval.substr(0, 19) + '…');
-                        }
-
-                        var $options = $(this).filter("option:not(:selected)");
-                        $options.each(function () {
-                            $(this).text($(this).attr('data-text'));
-
-                        });
-
-                    });
-                });
-*/
 
                 $("body").localize();
 

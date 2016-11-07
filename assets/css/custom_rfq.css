@@ -172,21 +172,47 @@
 
 
 }
-.editable-field{
-    max-width: 10em;
-
-}
 
 #inbox-rfqs{
-    min-height: 800px;
-    overflow-y: scroll;
+ min-height: 800px;
+ overflow-y: scroll;
 
 }
 .row-request button{
-    padding: 4px;
+ padding: 4px;
 }
 
 .label-new-quantity{
 margin-left: 1em;
 }
+
+.quantity a:not(.editable-empty) {
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    float:right;
+    /* -webkit-box-orient: vertical;
+     -webkit-line-clamp: 1;*/
+    max-width: 100px;
+    cursor: pointer; cursor: hand;
+}
+
+.quote a:not(.editable-empty) {
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    float:left;
+    /* -webkit-box-orient: vertical;
+     -webkit-line-clamp: 1;*/
+    max-width: 62px;
+    cursor: pointer; cursor: hand;
+}
+
+.tooltip{
+    color:#fff!important;
+
+}
+
 /* RFQ    === End === */

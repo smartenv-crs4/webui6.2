@@ -363,62 +363,36 @@
                 <div class="clearfix margin-bottom-10"></div>
 
                 <div class="row margin-bottom-20">
-                    <div class="col-xs-6 service-in">
+                    <div class="col-xs-4 service-in">
                         <strong data-i18n="rfq.requestQuote">Quote</strong>
                         <h4 class="counter quote">
                             {{#if_eq_or_eq completed 'true' expired 'true'}}
-                            <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quote}}</a>
+                            <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text" >{{quote}}</a>
                             {{else}}
                             {{#if_eq_or_eq status 'acceptedByC' status 'rejectedByC'}}
-                            <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quote}}</a>
+                            <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text" >{{quote}}</a>
                             {{/if_eq_or_eq}}
                             {{#if_eq status 'pending'}}
                             <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq
                                currentUser
-                            'supplier'}}class="editable-field"{{/if_eq}} data-type="text">{{quote}}</a>
+                            'supplier'}}class="editable-field" {{/if_eq}} data-type="text">{{quote}}</a>
                             {{/if_eq}}
                             {{#if_eq status 'acceptedByS'}}
                             <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq
                                currentUser
-                            'customer'}}class="editable-field"{{/if_eq}} data-type="text">{{quote}}</a>
+                            'customer'}}class="editable-field" {{/if_eq}} data-type="text">{{quote}}</a>
                             {{/if_eq}}
                             {{#if_eq status 'rejectedByS'}}
-                            <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text">{{quote}}</a>
+                            <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text" >{{quote}}</a>
                             {{/if_eq}}
                             {{/if_eq_or_eq}}
                             <span>€</span>
 
                         </h4>
                     </div>
-                    <div class="col-xs-6 text-right service-in">
+                    <div class="col-xs-8 text-right service-in">
                         <strong data-i18n="rfq.requestQuantity">Quantity</strong>
                         <h4 class="counter quantity">
-
-                            {{#if_eq_or_eq completed 'true' expired 'true'}}
-                            <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText"
-                               data-type="text">{{quantity.number}}</a>
-
-                            {{else}}
-                            {{#if_eq_or_eq status 'acceptedByC' status 'rejectedByC'}}
-                            <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText"
-                               data-type="text">{{quantity.number}}</a>
-                            {{/if_eq_or_eq}}
-                            {{#if_eq status 'pending'}}
-                            <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq
-                               currentUser
-                            'supplier'}}class="editable-field"{{/if_eq}}" data-type="text">{{quantity.number}}</a>
-                            {{/if_eq}}
-                            {{#if_eq status 'acceptedByS'}}
-                            <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq
-                               currentUser
-                            'customer'}}class="editable-field"{{/if_eq}} data-type="text">{{quantity.number}}</a>
-                            {{/if_eq}}
-                            {{#if_eq status 'rejectedByS'}}
-                            <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText"
-                               data-type="text">{{quantity.number}}</a>
-                            {{/if_eq}}
-                            {{/if_eq_or_eq}}
-
                             <form class="sky-form rfq-select-form">
                                 <label class="select rfq-select-label">
                                     <select id="selectqnty-{{inc @index}}" disabled class="rfq-select">
@@ -432,6 +406,35 @@
                                     <i></i>
                                 </label>
                             </form>
+
+                            {{#if_eq_or_eq completed 'true' expired 'true'}}
+                            <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText"
+                               data-type="text">{{quantity.number}}</a>
+
+                            {{else}}
+                            {{#if_eq_or_eq status 'acceptedByC' status 'rejectedByC'}}
+                            <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText"
+                               data-type="text" ">{{quantity.number}}</a>
+                            {{/if_eq_or_eq}}
+                            {{#if_eq status 'pending'}}
+                            <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq
+                               currentUser
+                            'supplier'}}class="editable-field"
+                            {{/if_eq}}" data-type="text">{{quantity.number}}</a>
+                            {{/if_eq}}
+                            {{#if_eq status 'acceptedByS'}}
+                            <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq
+                               currentUser
+                            'customer'}}class="editable-field"
+                            {{/if_eq}} data-type="text">{{quantity.number}}</a>
+                            {{/if_eq}}
+                            {{#if_eq status 'rejectedByS'}}
+                            <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText"
+                               data-type="text">{{quantity.number}}</a>
+                            {{/if_eq}}
+                            {{/if_eq_or_eq}}
+
+
                         </h4>
                     </div>
                 </div>
