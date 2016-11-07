@@ -187,7 +187,7 @@ var translation = {
                     "last": "Last",
                     "first": "First"
                 },
-"product":
+                "product":
                 {
                     "searchTitle": "Discover new suppliers",
                     "searchLabelCategories": "Categories...",
@@ -200,7 +200,13 @@ var translation = {
                     "tabLabelRegistration": "Rigistered ",
                     "tabLabelRegistration": "Rigistered ",
                     "tabMsgProduct": "See products match" 
-                }
+                },
+		"evaluation":
+		{
+		"thank_you": "Thank you for your evaluation!",
+		"invalid_evaluation": "incomplete evaluation"
+		}
+
             }
         },
         it: {
@@ -402,7 +408,12 @@ var translation = {
                     "thAction": "Azioni",
                     "tabLabelRegistration": "Registrato il ",
                     "tabMsgProduct": "Vedi i prodotti associati" 
-                }
+                },
+		"evaluation":
+		{
+		"thank_you": "Grazie per avere lasciato la tua opinione!",
+		"invalid_evaluation": "Valutazione incompleta"
+		}
 
             }
         }
