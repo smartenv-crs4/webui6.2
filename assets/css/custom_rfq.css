@@ -172,11 +172,21 @@
 
 
 }
+.editable-field{
+    max-width: 10em;
 
+}
 
 #inbox-rfqs{
     min-height: 800px;
     overflow-y: scroll;
 
+}
+.row-request button{
+    padding: 4px;
+}
+
+.label-new-quantity{
+margin-left: 1em;
 }
 /* RFQ    === End === */

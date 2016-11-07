@@ -12,10 +12,10 @@ var translation = {
                     "lang": "Language"
                 },
 
-                "cookieLaw": {                  
+                "cookieLaw": {
                   "message": "This website uses session storage, local storage and cookie to store on your browser your preferences and your account information",
                   "accept": "I understand",
-                  "decline": "I refuse it"                  
+                  "decline": "I refuse it"
                 },
 
                 "error": {
@@ -80,7 +80,7 @@ var translation = {
 
                     "customer": "customer",
                     "supplier": "supplier",
-                    
+
                     "addCategory": "Add",
 
                     "passwordTitle": "Manage your password",
@@ -165,12 +165,13 @@ var translation = {
                     "expiredate": "Expiration date",
                     "chooseSupplier": "Choose a favorite above or select a vendor from the search list",
                     "newrfqcreated": "RFQ created with success!",
-                    "sendRFQ": "Send RFQ"
-
-
+                    "sendRFQ": "Send RFQ",
+                    "noDeleteRfq":"You must have at least one request!",
+                    "myrfqs" : "My RFQs"
                 },
                 "catalog": {
                     "catalog": "Catalog",
+                    "mycatalog": "My Catalog",
                     "search": "Search",
                     "all": "All",
                     "incatalog": "In catalog",
@@ -192,7 +193,7 @@ var translation = {
                     "searchTitle": "Discover new suppliers",
                     "searchLabelCategories": "Categories...",
                     "searchLabelProducts": "Search products...",
-                    "searchTagMessage": "Use product tags for your search", 
+                    "searchTagMessage": "Use product tags for your search",
                     "thLogo": "Logo",
                     "thAbout": "About",
                     "thRates": "Rates",
@@ -206,7 +207,6 @@ var translation = {
 		"thank_you": "Thank you for your evaluation!",
 		"invalid_evaluation": "incomplete evaluation"
 		}
-
             }
         },
         it: {
@@ -224,7 +224,7 @@ var translation = {
                 "cookieLaw": {
                   "message": "Questo sito utilizza il session storage, il local storage e i cookie per salvare sul tuo browser le tue preferenze e le informazioni del tuo account",
                   "accept": "Ho capito",
-                  "decline": "Rifiuto"                  
+                  "decline": "Rifiuto"
                 },
 
                 "error": {
@@ -294,7 +294,7 @@ var translation = {
 
                     "customer": "cliente",
                     "supplier": "fornitore",
-                    
+
                     "addCategory": "Inserisci",
 
                     "passwordTitle": "Gestisci la tua password",
@@ -374,11 +374,13 @@ var translation = {
                     "expiredate": "Fine validità",
                     "chooseSupplier": "Scegli tra i preferiti qui sopra o seleziona un fornitore da lista di ricerca",
                     "newrfqcreated": "RFQ Creata con successo!",
-                    "sendRFQ": "Invia RFQ"
-
+                    "sendRFQ": "Invia RFQ",
+                    "noDeleteRfq":"Devi avere almeno una richiesta!",
+                    "myrfqs" : "Le mie RFQ"
                 },
                 "catalog": {
                     "catalog": "Catalogo",
+                    "mycatalog": "Il mio Catalogo",
                     "search": "Cerca",
                     "all": "Tutto",
                     "incatalog": "Solo catalogo",
@@ -401,7 +403,7 @@ var translation = {
                     "searchTitle": "Cerca nuovi suppliers",
                     "searchLabelCategories": "Categories...",
                     "searchLabelProducts": "Cerca prodotti...",
-                    "searchTagMessage": "Usa i tag dei prodotti per la ricerca", 
+                    "searchTagMessage": "Usa i tag dei prodotti per la ricerca",
                     "thLogo": "Logo",
                     "thAbout": "Info",
                     "thRates": "Giudizi",
@@ -414,7 +416,6 @@ var translation = {
 		"thank_you": "Grazie per avere lasciato la tua opinione!",
 		"invalid_evaluation": "Valutazione incompleta"
 		}
-
             }
         }
 

@@ -12,12 +12,12 @@ jQuery(document).ready(function(){
   
   if(sb.length > 0)
   {
-    var isSupplier = sessionStorage.type && sessionStorage.type == "supplier";
-    var sbT = Handlebars.compile(sidebarTemplate,{
-      isSupplier : isSupplier,
-      idSupplier : isSupplier ? sessionStorage.userId : ""
-    });
-    jQuery("#sidebar").html(sbT);
+    //var isSupplier = sessionStorage.type && sessionStorage.type == "supplier";
+    var sbT = Handlebars.compile(sidebarTemplate);
+    jQuery("#sidebar").html(sbT({
+      isSupplier : isSupplier(),
+      idSupplier : isSupplier() ? sessionStorage.userId : ""
+    }));
     jQuery("#sidebar").localize();
     
     
@@ -38,9 +38,14 @@ jQuery(document).ready(function(){
     
   }
   
+  var headerCompiled = Handlebars.compile(header_template);
+
+  var headerHTML = headerCompiled({
+    isLogged: isLogged()
+  });
   
   jQuery('body').localize();
-  jQuery('#header_p').html(header_template);
+  jQuery('#header_p').html(headerHTML);
   
   if(lng)
   {

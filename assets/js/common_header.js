@@ -49,13 +49,13 @@ var header_template = `	<div class="header">
               Home
             </a>
           </li>
-            
-          <li class="logged supplier hidden">
-           <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" >
+            {{#if isLogged}}
+          <li class="logged ">
+           <a href="./page_rfq_inbox.html"  >
               RFQ
            </a>
           </li>          
-            
+            {{/if}}
           <li>
             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-i18n="nav.about">
               

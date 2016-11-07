@@ -104,7 +104,7 @@
             <div class="autoexpand">
 
                 <div class="profile-body margin-bottom-20">
-                    <div id="supplier-info">
+                    <div id="supplier-info" style="position:relative">
 
                     </div>
                     <div class="tab-v1">
@@ -348,7 +348,7 @@
                 {{#each products}}
                 <div class="media media-v2">
                     <a class="pull-left" href="#">
-                        <img class="media-object img-circle" src="{{images.[0]}}"
+                        <img class="media-object img-circle" src="http://seidue.crs4.it:3015/{{_id}}/{{images.[0].name}}_o.jpg"
                              onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'"
                              alt="">
                     </a>
@@ -504,8 +504,34 @@
                 </div>
                 <p> {{address}}</p>
             </div>
+            
+            <div id="starBlock" style="position:absolute; top:0; left:0; margin:5px">
+            </div>
+            
         </div>
     </script>
+    
+    
+    <script type="text/x-handlebars-template" id="supplier_favorite_template">
+      {{#if isCustomer}}      
+          {{#if noFavorite}} 
+            <span style="cursor:pointer" data-toggle="tooltip" data-i18n="[title]publicProfile.addSupplier" onclick="addToFavorite()">
+              <span style="" class="yellow glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+            </span>
+          {{else}}
+            <span>
+              <span style="" class="yellow glyphicon glyphicon-star" aria-hidden="true"></span>
+            </span>
+          {{/if}}        
+      {{/if}}          
+    </script>
+    
+    <script type="text/x-handlebars-template" id="full-star_template">    
+      <span  class="pull-right" aria-label="Left Align">
+        <span style="" class="yellow glyphicon glyphicon-star" aria-hidden="true"></span>
+      </span>
+    </script>
+    
 
     <script type="text/x-handlebars-template" id="supplier-profile_template">
         <div class="profile-bio">
@@ -583,7 +609,7 @@
 
     <!-- JS Customization -->
     <script type="text/javascript" src="assets/js/sidebar.js"></script>
-    <script type="text/javascript" src="assets/js/custom.js"></script>
+
     <!-- JS Page Level -->
     <script type="text/javascript" src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/plugins/datepicker.js"></script>
@@ -594,6 +620,7 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
     <script type="text/javascript" src="assets/js/utils.js"></script>
+    <script type="text/javascript" src="assets/js/custom.js"></script>
     <script type="text/javascript" src="assets/js/handlebars-paginate.js"></script>
 
 
@@ -613,16 +640,11 @@
         var supId = getParameterByName("idSupplier"); //"57f5059fe8094b7137fa3efd";
         var getfilesURL = _brokerMsUrl + "users/attachment/" + supId;
         var getsupplierURL = _brokerMsUrl + "users/supplier/" + supId;
-        var getproductsURL = _brokerMsUrl + "products?supplierId=" + supId;
+        var getproductsURL = _brokerMsUrl + "products?supplierId=" + supId;     
+        var getcutomerfavoritesURL = _brokerMsUrl + "users/favorites";   
          //  getproductsURL = _brokerMsUrl + "products";
 
 
-        function cacheCompile(templateid, data) {
-            if (!window[templateid + "_template"]) {
-                window[templateid + "_template"] = Handlebars.compile($('#' + templateid).html());
-            }
-            return window[templateid + "_template"](data);
-        }
 
 
         function getfiles(url, templateid, target) {
@@ -722,6 +744,45 @@
             getproducts(getproductsURL, 'productstable', '#products_container');
 
         });
+        
+        function setsupplierfavoritestatus(url, templateid, target){          
+          var obj = {};
+          obj.isCustomer = false;            
+          
+          if(sessionStorage.type == "customer") {       
+            obj.isCustomer = true;        
+            obj.noFavorite = true;
+        
+            var supList = [];
+                          
+            jQuery.ajax({
+              url: url,
+              type: "GET",    
+              contentType: "application/json; charset=utf-8",
+              async: false,
+              success: function(dataResp, textStatus, xhr){        
+                supList = dataResp;                              
+              },     
+              error: function(xhr, status){
+              },
+              beforeSend: function(xhr, settings) 
+              { 
+                xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+              }                    
+            });
+            
+            for(var i in supList) {
+              if(supList[i]["_id"] == supId)
+              {
+                obj.noFavorite = false;
+                break;
+              }
+            }
+            var compiled = cacheCompile(templateid, obj);              
+            $(target).html(compiled);            
+            $(target).localize();                    
+          }                              
+        }        
 
         function getsupplierinfo(url, templateid, target) {
 
@@ -732,7 +793,7 @@
                 var values =  data[0];
                 var plusname = values.name.split(" ").join("+");
                 values['plusname'] = plusname;
-                values['logged'] = logged && (userType == "customer");
+                values['logged'] = logged && (userType() == "customer");
                 var compiled = cacheCompile(templateid, values);
 
                 $(target).empty();
@@ -775,8 +836,8 @@
     </script>
 
     <script type="text/javascript">
-        var userType = "customer";
-        var currentSupplier = false;
+
+        var currentSupplier = isSupplier() && supId == userId();
         var logged = false;
         jQuery(document).ready(function () {
 
@@ -798,20 +859,63 @@
                 $("#sidebar").show();
             }
 
-            if (window.sessionStorage && sessionStorage.type)
-                userType = sessionStorage.type;
 
-            if (userType == "supplier" && supId == window.sessionStorage.userId) {
-                currentSupplier = true;
 
-            }
+
 
             getsupplierinfo(getsupplierURL, "supplier-info_template", "#supplier-info")
+            setsupplierfavoritestatus(getcutomerfavoritesURL, "supplier_favorite_template", "#starBlock");
             getfiles(getfilesURL, "filetable", '#files_container');
 
             $("body").localize();
 
         });
+                
+        function addToFavorite()
+        {
+          if(sessionStorage.token)
+          {
+            var data = {};
+            data.supplier = supId;
+            
+            jQuery.ajax({
+              url: _brokerMsUrl + "users/actions/favorites",           
+              type: "POST",
+              data: JSON.stringify(data),
+              dataType: "json",
+              contentType: "application/json; charset=utf-8",
+              success: function(dataResp, textStatus, xhr)
+              {      
+                var compiled = cacheCompile("full-star_template");                                               
+                jQuery("#starBlock").empty();
+                jQuery("#starBlock").append(compiled);        
+                jQuery("#starBlock").localize(); 
+                //jQuery.jGrowl("OK", {theme:'bg-color-green', life: 5000});                            
+              },
+              error: function(xhr, status)
+              {
+                var msg;
+                
+                try
+                {        
+                  msg = xhr.responseJSON.message;
+                }
+                catch(err)
+                {
+                  msg = i18next.t("error.internal_server_error");
+                }
+                
+                console.log(msg)
+              },
+              beforeSend: function(xhr, settings) 
+              { 
+                xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+              } 
+            });                      
+          }
+        }
+        
+        
 
     </script>
     <!--[if lt IE 9]>
