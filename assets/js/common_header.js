@@ -44,35 +44,40 @@ var header_template = `	<div class="header">
       <div class="container">
         <ul class="nav navbar-nav">
           <!-- Home -->
-          <li class="active">
-            <a href="javascript:void(0);" class="dropdown-toggle " data-toggle="dropdown" >
+          <li {{#if isHome}}class="active"{{/if}} >
+            <a href="index.html"  >
               Home
             </a>
           </li>
             {{#if isLogged}}
-          <li class="logged ">
+          <li class="logged {{#if isRFQ}}active{{/if}}">
            <a href="./page_rfq_inbox.html"  >
               RFQ
            </a>
           </li>          
             {{/if}}
           <li>
-            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-i18n="nav.about">
+            <a href="javascript:void(0);"  data-i18n="nav.about">
               
             </a>
           </li>
           </li>
+          {{#if showSearch}}
           <li>
-							<i class="search fa fa-search search-btn"></i>
-							<div class="search-open">
-								<div class="input-group animated fadeInDown">
-									<input type="text" class="form-control" placeholder="" id="smallSearch" >
-									<span class="input-group-btn">
-										<button class="btn-u" type="button" data-i18n="catalog.search" id="smallSearchButton" onclick="javascript:window.location = 'list.html?name=' + $('#smallSearch').val();" ></button>
-									</span>
-								</div>
-							</div>
-						</li>
+            <i class="search fa fa-search search-btn"></i>
+            <div class="search-open">
+                <div class="input-group animated fadeInDown">
+                    <input type="text" class="form-control" placeholder="" id="smallSearch" >
+                    <span class="input-group-btn">
+                        <button class="btn-u" type="button"  id="smallSearchButton" onclick="javascript:window.location = 'list.html?name=' + $('#smallSearch').val();" >
+                       <i class="fa fa-search"></i>
+                       <span data-i18n="catalog.search"></span>
+                       </button>
+                    </span>
+                </div>
+            </div>
+          </li>
+		 {{/if}}
 
         </ul>
       </div><!--/end container-->

@@ -46,3 +46,12 @@ function isLogged() {
     else
         return false;
 }
+
+function isSearchVisible() {
+    "use strict";
+    if (window.isHome)
+        return false;
+    if (window.isList)
+        return false;
+    return true;
+}
