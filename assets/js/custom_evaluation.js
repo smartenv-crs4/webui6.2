@@ -8,9 +8,18 @@ _access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOi
  /*******************************************
  ************* EVALUATION START *************
  *******************************************/
+jQuery(document).ready(function(){
+
+    if(sessionStorage.userId == undefined)
+    {      
+       redirectToLogin();
+    };
+});
+
 
 function getStarRating(stars)
 {
+
 	var rate = 0;
 	for (var i = 0; i < stars.length; i++) {
 		if (stars[i].checked === true) {
@@ -22,6 +31,10 @@ function getStarRating(stars)
 
 function sendEvaluation()
 {
+  if(sessionStorage.userId == undefined)
+  {      
+      redirectToLogin();
+  }
   var evaluation = new Object();
   var overall = jQuery("input[name='overall']");
   evaluation["overall_rate"] = getStarRating(overall);
@@ -35,8 +48,7 @@ function sendEvaluation()
   console.log('delivery rate: ' + evaluation["delivery_rate"]);
   console.log('review: ' + evaluation["overall_review"]);
   evaluation["from"] = sessionStorage.userId;
-  evaluation["to"] = sessionStorage.userId; // to be changed
-  evaluation["conversationId"]= "57f4a3da85490ce1186feb7e";
+  evaluation["conversationId"]= "5816fe1c747418055f9e921d"; //will be get from link to evaluation page in email or from a closed conversation
   var respBlock = jQuery("#evaluationResponse");
 
   if(respBlock.is(":visible"))
@@ -59,19 +71,26 @@ function sendEvaluation()
       console.log('inside success, xhr is ' + xhr);
       console.log('inside success, xhr staus is ' + xhr.status);
       console.log('inside success, evaluation is ' + evaluation);
+       if(respBlock.is(":visible"))
+        {
+		respBlock.addClass("invisible");
+	}
+
       if(xhr.status == 201)
       {
-	// tbdone replace the form in html with Thank you message
+	// Show thank you message
 	console.log('success!');
-        return;
-      }
-      else
-      {
-        respBlock.html(xhr.responseJSON.message);
-        respBlock.removeClass("invisible");
-	console.log('error!');
-        return;
-      }
+        //respBlock.html(i18next.t("evaluation.thank_you"));
+	jQuery("#evaluationResponse").html(i18next.t("evaluation.thank_you"));
+	respBlock.removeClass("invisible");
+	return;
+        }
+	else {
+        //respBlock.html(i18next.t("evaluation.invalid_evaluation"));
+	jQuery("#evaluationResponse").html(i18next.t("evaluation.invalid_evaluatoin"));
+	respBlock.removeClass("invisible");
+	console.log('uffa!');
+	}
     },
     error: function(xhr, status)
     {
@@ -115,7 +134,6 @@ function sendEvaluation()
 	    xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
     }
   });
-///
 };
  /*******************************************
  ************* EVALUATION END ***************
