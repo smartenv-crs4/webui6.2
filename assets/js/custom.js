@@ -45,6 +45,17 @@ jQuery(document).ready(function(){
 
   jQuery('#header_p').html(headerHTML);
   
+  
+  if(jQuery("#smallSearch").length > 0)
+  {
+    document.getElementById("smallSearch").onkeydown = function(e){
+      if(e.keyCode == 13)
+      {
+        window.location = 'list.html?name=' + jQuery('#smallSearch').val();
+      }      
+    };    
+  }
+  
   if(jQuery('#footer_p').length > 0)
   {
     var footerCompiled = Handlebars.compile(footer_template);        
@@ -304,18 +315,6 @@ function autoCompleteCat(tagId)
     jQuery('#' + tagId).data("cat-id", datum.id);
     jQuery('#' + tagId).data("cat-name", datum.name);
   });
-
-  /*
-   $('#' + tagId).on('keyup', function(event) {
-   e = jQuery.Event("keydown")
-   e.keyCode = e.which = 40
-   if (event.which == 13)
-   event.stopPropagation()
-   $('.typeahead').triggerHandler(e)
-   e.keyCode = e.which = 9
-   $('.typeahead').triggerHandler(e)
-   });
-   */
 
   jQuery('#' + tagId).data("cat-id", "");
   jQuery('#' + tagId).data("cat-name", "");
