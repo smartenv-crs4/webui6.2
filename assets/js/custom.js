@@ -44,11 +44,13 @@ jQuery(document).ready(function(){
   });
 
   jQuery('#header_p').html(headerHTML);
-  var footerCompiled = Handlebars.compile(footer_template);
-
-
-  jQuery('body').localize();
-  jQuery('#footer_p').html(footerCompiled);
+  
+  if(jQuery('#footer_p').length > 0)
+  {
+    var footerCompiled = Handlebars.compile(footer_template);        
+    jQuery('#footer_p').html(footerCompiled);    
+  }
+  
   jQuery('body').localize();
 
   if(localStorage.lng)
