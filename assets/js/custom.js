@@ -5,7 +5,6 @@ var _brokerMsUrl  = "http://seidue.crs4.it:3009/api/v1/";
 _access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzg1NTc1MjQ3NTY4fQ.Du2bFjd0jB--geRhnNtbiHxcjQHr5AyzIFmTr3NFDcM";
 var defaultImg = "assets/img/team/img32-md.jpg";
 
-var lng = localStorage.lng;
 
 jQuery(document).ready(function(){  
   var sb = jQuery("#sidebar");
@@ -46,68 +45,68 @@ jQuery(document).ready(function(){
     isHome : window['isHome'] || false,
     isRFQ : window['isRFQ'] || false
   });
-  
-  jQuery('body').localize();
+    
   jQuery('#header_p').html(headerHTML);
+  jQuery('body').localize();
   
-  if(lng)
+  if(localStorage.lng)
   {
-    var l = jQuery(".languages a[data-lng='" + lng +"']");    
+    var l = jQuery(".languages a[data-lng='" + localStorage.lng +"']");    
     if(l.length > 0)
-    {
-      if(lng != jQuery(".languages .active a").first().attr("data-lng"))
-      {
-        var lngSel = jQuery(".languages .active").first();
+    {      
+      if(localStorage.lng != jQuery(".languages .active a").first().attr("data-lng"))
+      {        
+        var lngSel = jQuery(".languages .active").first()        
         lngSel.empty();
-        lngSel.append(l[0].cloneNode(true));
+        lngSel.append(l[0].cloneNode(true));        
         var c = document.createElement("i");
         c.className = "fa fa-check";
         lngSel.find("a").first().append(c);
-        i18next.changeLanguage(lng, function(){});        
+        i18next.changeLanguage(localStorage.lng, function(){});        
       }
+      i18next.changeLanguage(localStorage.lng, function(){});             
       jQuery('body').localize();
     }
   }
   else
   {
     localStorage.lng = jQuery(".languages .active a").first().data("lng");
-    lng = localStorage.lng;
     
+    i18next.changeLanguage(localStorage.lng, function(){});
     jQuery('body').localize();
   }
 
   jQuery(".languages a").click(function(){    
     if(jQuery(this).attr("data-lng"))
     {
-      lng = jQuery(this).attr("data-lng");
-      localStorage.lng = lng;
+      localStorage.lng = jQuery(this).attr("data-lng");
       var lngSel = jQuery(".languages .active").first();
       lngSel.empty();
       lngSel.append(this.cloneNode(true));
       var c = document.createElement("i");
       c.className = "fa fa-check";
       lngSel.find("a").first().append(c);
-      i18next.changeLanguage(lng, function(){});
+      i18next.changeLanguage(localStorage.lng, function(){});
       jQuery('body').localize();
-      jQuery(document).trigger('translate');
+      jQuery(document).trigger('translate');      
     }
 
   });
   
   if(jQuery(".footer-language").length > 0)
-  {
+  {    
     var fl = jQuery(".footer-language select").first();
     
-    if (lng != undefined)
+    if (localStorage.lng != undefined)
     {
-      fl.val(lng);
+      fl.val(localStorage.lng);
     }
     
     fl.change(function(){
       var lng = jQuery(this).val();
       localStorage.lng = lng;
-      i18next.changeLanguage(lng, function(){});
-      jQuery('body').localize();
+      i18next.changeLanguage(localStorage.lng, function(){});
+      jQuery('body').localize();      
       jQuery(document).trigger('translate');
       
     });
@@ -132,7 +131,7 @@ jQuery(document).ready(function(){
 
 //i18next.use(i18nextXHRBackend);
 i18next.init({
-  lng: lng, // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
+  lng: localStorage.lng, // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
   fallbackLng: "en",
   resources:  translation
 }, function (err, t) {
@@ -329,6 +328,23 @@ function autoCompleteCat(tagId)
     jQuery('#' + tagId).data("cat-id", datum.id);
     jQuery('#' + tagId).data("cat-name", datum.name);
   });
+  
+  /*
+  $('#' + tagId).on('keyup', function(event) {
+        e = jQuery.Event("keydown")
+    e.keyCode = e.which = 40
+
+    if (event.which == 13)
+        event.stopPropagation()
+        $('.typeahead').triggerHandler(e)
+        e.keyCode = e.which = 9             
+        $('.typeahead').triggerHandler(e)
+  });
+  */
+
+    
+  jQuery('#' + tagId).data("cat-id", "");
+  jQuery('#' + tagId).data("cat-name", "");
                  
 }
 
@@ -370,11 +386,13 @@ function loadCookieLawBar()
   
   
   jQuery(document).on("translate", function(){
-    var button = jQuery("#cookie-bar .cb-enable").first()[0].cloneNode(true);
-    jQuery("#cookie-bar p").html(jQuery.i18n.t("cookieLaw.message"));
-    button.innerHTML = jQuery.i18n.t("cookieLaw.accept");
-    jQuery("#cookie-bar p").append(button);
-    
+    if(jQuery("#cookie-bar .cb-enable").length > 0)
+    {
+      var button = jQuery("#cookie-bar .cb-enable").first()[0].cloneNode(true);
+      jQuery("#cookie-bar p").html(jQuery.i18n.t("cookieLaw.message"));
+      button.innerHTML = jQuery.i18n.t("cookieLaw.accept");
+      jQuery("#cookie-bar p").append(button);
+    }      
   })        
 }
 

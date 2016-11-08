@@ -275,22 +275,6 @@
 			//OwlCarousel.initOwlCarousel();
 			//$('#header_p').html(header_template);
 
-			i18next.init({
-					lng: 'en', // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
-					resources:  translation
-			}, function (err, t) {
-
-					jqueryI18next.init(i18next, $ );
-					$('body').localize();
-
-					$('.lang-select').click(function() {
-							i18next.changeLanguage($(this).data('lang'));
-							$('body').localize();
-					});
-
-
-			});
-
 			$(".search-block").backstretch([
 				"assets/img/port/login_1.jpg",
 				"assets/img/port/login_2.jpg",
