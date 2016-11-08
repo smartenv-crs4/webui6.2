@@ -4,9 +4,6 @@ var _userMsUrl  = "http://seidue.crs4.it:3008/";
 var _brokerMsUrl  = "http://seidue.crs4.it:3009/api/v1/";
 _access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzg1NTc1MjQ3NTY4fQ.Du2bFjd0jB--geRhnNtbiHxcjQHr5AyzIFmTr3NFDcM";
 var defaultImg = "assets/img/team/img32-md.jpg";
-
-var lng = localStorage.lng;
-
 jQuery(document).ready(function(){
   var sb = jQuery("#sidebar");
 
@@ -39,7 +36,6 @@ jQuery(document).ready(function(){
   }
 
   var headerCompiled = Handlebars.compile(header_template);
-
   var headerHTML = headerCompiled({
     isLogged: isLogged(),
     showSearch : isSearchVisible(),
@@ -48,70 +44,68 @@ jQuery(document).ready(function(){
   });
 
   jQuery('#header_p').html(headerHTML);
-
   var footerCompiled = Handlebars.compile(footer_template);
 
 
   jQuery('body').localize();
   jQuery('#footer_p').html(footerCompiled);
+  jQuery('body').localize();
 
-  if(lng)
+  if(localStorage.lng)
   {
-    var l = jQuery(".languages a[data-lng='" + lng +"']");
+    var l = jQuery(".languages a[data-lng='" + localStorage.lng +"']");
     if(l.length > 0)
     {
-      if(lng != jQuery(".languages .active a").first().attr("data-lng"))
+      if(localStorage.lng != jQuery(".languages .active a").first().attr("data-lng"))
       {
-        var lngSel = jQuery(".languages .active").first();
+        var lngSel = jQuery(".languages .active").first()
         lngSel.empty();
         lngSel.append(l[0].cloneNode(true));
         var c = document.createElement("i");
         c.className = "fa fa-check";
         lngSel.find("a").first().append(c);
-        i18next.changeLanguage(lng, function(){});
+        i18next.changeLanguage(localStorage.lng, function(){});
       }
+      i18next.changeLanguage(localStorage.lng, function(){});
       jQuery('body').localize();
     }
   }
   else
   {
     localStorage.lng = jQuery(".languages .active a").first().data("lng");
-    lng = localStorage.lng;
 
+    i18next.changeLanguage(localStorage.lng, function(){});
     jQuery('body').localize();
   }
-
   jQuery(".languages a").click(function(){
     if(jQuery(this).attr("data-lng"))
     {
-      lng = jQuery(this).attr("data-lng");
-      localStorage.lng = lng;
+      localStorage.lng = jQuery(this).attr("data-lng");
       var lngSel = jQuery(".languages .active").first();
       lngSel.empty();
       lngSel.append(this.cloneNode(true));
       var c = document.createElement("i");
       c.className = "fa fa-check";
       lngSel.find("a").first().append(c);
-      i18next.changeLanguage(lng, function(){});
+      i18next.changeLanguage(localStorage.lng, function(){});
       jQuery('body').localize();
       jQuery(document).trigger('translate');
     }
-
   });
 
   if(jQuery(".footer-language").length > 0)
   {
     var fl = jQuery(".footer-language select").first();
 
-    if (lng != undefined)
+    if (localStorage.lng != undefined)
     {
-      fl.val(lng);
+      fl.val(localStorage.lng);
     }
 
     fl.change(function(){
       var lng = jQuery(this).val();
       localStorage.lng = lng;
-      i18next.changeLanguage(lng, function(){});
+      i18next.changeLanguage(localStorage.lng, function(){});
       jQuery('body').localize();
       jQuery(document).trigger('translate');
 
@@ -128,55 +122,45 @@ jQuery(document).ready(function(){
     jQuery("#h_logout").hide();
     jQuery("#h_user").hide();
   }
-
   loadCookieLawBar();
-
-
 });
-
-
 //i18next.use(i18nextXHRBackend);
 i18next.init({
-  lng: lng, // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
+  lng: localStorage.lng, // evtl. use language-detector https://github.com/i18next/i18next-browser-languageDetector
   fallbackLng: "en",
   resources:  translation
 }, function (err, t) {
   jqueryI18next.init(i18next, jQuery,
-  {
-    tName: 't', // --> appends $.t = i18next.t
-    i18nName: 'i18n', // --> appends $.i18n = i18next
-    handleName: 'localize', // --> appends $(selector).localize(opts);
-    selectorAttr: 'data-i18n', // selector for translating elements
-    targetAttr: 'i18n-target', // data-() attribute to grab target element to translate (if diffrent then itself)
-    optionsAttr: 'i18n-options', // data-() attribute that contains options, will load/set if useOptionsAttr = true
-    useOptionsAttr: false, // see optionsAttr
-    parseDefaultValueFromContent: true // parses default values from content ele.val or ele.text
-  });
-
+      {
+        tName: 't', // --> appends $.t = i18next.t
+        i18nName: 'i18n', // --> appends $.i18n = i18next
+        handleName: 'localize', // --> appends $(selector).localize(opts);
+        selectorAttr: 'data-i18n', // selector for translating elements
+        targetAttr: 'i18n-target', // data-() attribute to grab target element to translate (if diffrent then itself)
+        optionsAttr: 'i18n-options', // data-() attribute that contains options, will load/set if useOptionsAttr = true
+        useOptionsAttr: false, // see optionsAttr
+        parseDefaultValueFromContent: true // parses default values from content ele.val or ele.text
+      });
 });
-
 /*
-jqueryI18next.init(i18next, jQuery,
-{
-  tName: 't', // --> appends $.t = i18next.t
-  i18nName: 'i18n', // --> appends $.i18n = i18next
-  handleName: 'localize', // --> appends $(selector).localize(opts);
-  selectorAttr: 'data-i18n', // selector for translating elements
-  targetAttr: 'i18n-target', // data-() attribute to grab target element to translate (if diffrent then itself)
-  optionsAttr: 'i18n-options', // data-() attribute that contains options, will load/set if useOptionsAttr = true
-  useOptionsAttr: false, // see optionsAttr
-  parseDefaultValueFromContent: true // parses default values from content ele.val or ele.text
-});
-*/
+ jqueryI18next.init(i18next, jQuery,
+ {
+ tName: 't', // --> appends $.t = i18next.t
+ i18nName: 'i18n', // --> appends $.i18n = i18next
+ handleName: 'localize', // --> appends $(selector).localize(opts);
+ selectorAttr: 'data-i18n', // selector for translating elements
+ targetAttr: 'i18n-target', // data-() attribute to grab target element to translate (if diffrent then itself)
+ optionsAttr: 'i18n-options', // data-() attribute that contains options, will load/set if useOptionsAttr = true
+ useOptionsAttr: false, // see optionsAttr
+ parseDefaultValueFromContent: true // parses default values from content ele.val or ele.text
+ });
+ */
 /*
-jQuery(document).ready(function(){
-  console.log(jQuery.i18n.language)
-  console.log(jQuery.i18n.t("error.invalid_email"))
-});
-*/
-
-
-
+ jQuery(document).ready(function(){
+ console.log(jQuery.i18n.language)
+ console.log(jQuery.i18n.t("error.invalid_email"))
+ });
+ */
 /*******************************************
  ****************** UTILS ******************
  *******************************************/
@@ -185,11 +169,8 @@ function isValidEmailAddress(emailAddress)
   var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
   return pattern.test(emailAddress);
 };
-
-
- /*******************************************
+/*******************************************
  *******************************************/
-
 function logout()
 {
   //sessionStorage.token = undefined;
@@ -197,19 +178,15 @@ function logout()
   sessionStorage.clear();
   window.location.replace("page_login_and_registration2.html");
 }
-
-
 function redirectToLogin()
 {
   sessionStorage.prevPage = window.location.href;
   window.location.href = "page_login_and_registration2.html";
 }
-
 function redirectToHome()
 {
   window.location.href = "index.html";
 }
-
 function redirectToPrevPage()
 {
   if(sessionStorage.prevPage != undefined)
@@ -223,8 +200,6 @@ function redirectToPrevPage()
     redirectToHome();
   }
 }
-
-
 function getProfileInfo(async)
 {
   if(sessionStorage.userId == undefined)
@@ -258,26 +233,21 @@ function getProfileInfo(async)
     }
   });
 }
-
 function getUrlParameter(sParam)
 {
   var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-    sURLVariables = sPageURL.split('&'),
-    sParameterName,
-    i;
-
+      sURLVariables = sPageURL.split('&'),
+      sParameterName,
+      i;
   for (i = 0; i < sURLVariables.length; i++)
   {
     sParameterName = sURLVariables[i].split('=');
-
     if (sParameterName[0] === sParam)
     {
       return sParameterName[1] === undefined ? true : sParameterName[1];
     }
   }
 }
-
-
 function autoCompleteCat(tagId)
 {
   var acCategories = new Bloodhound({
@@ -302,7 +272,7 @@ function autoCompleteCat(tagId)
         for(var i in response)
         {
           ret.push({"name": response[i].name[localStorage.lng],
-                    "id": response[i]._id});
+            "id": response[i]._id});
         }
         return ret;
       },
@@ -323,20 +293,32 @@ function autoCompleteCat(tagId)
       }
     }
   });
-
   jQuery('#' + tagId).typeahead(null, {
     name: 'categories',
     display: 'name',
     source: acCategories
   });
-
   jQuery('#' + tagId).bind('typeahead:selected', function(obj, datum, name){
     jQuery('#' + tagId).data("cat-id", datum.id);
     jQuery('#' + tagId).data("cat-name", datum.name);
   });
 
-}
+  /*
+   $('#' + tagId).on('keyup', function(event) {
+   e = jQuery.Event("keydown")
+   e.keyCode = e.which = 40
+   if (event.which == 13)
+   event.stopPropagation()
+   $('.typeahead').triggerHandler(e)
+   e.keyCode = e.which = 9
+   $('.typeahead').triggerHandler(e)
+   });
+   */
 
+  jQuery('#' + tagId).data("cat-id", "");
+  jQuery('#' + tagId).data("cat-name", "");
+
+}
 function loadCookieLawBar()
 {
   var links = document.getElementsByTagName('link');
@@ -345,7 +327,7 @@ function loadCookieLawBar()
   for ( var i = 0; i < links.length; i++ )
   {
     if ( links[i].href == "assets/css/jquery.cookiebar.css" )
-    needCSS = false;
+      needCSS = false;
   }
 
   if ( needCSS )
@@ -375,14 +357,15 @@ function loadCookieLawBar()
 
 
   jQuery(document).on("translate", function(){
-    var button = jQuery("#cookie-bar .cb-enable").first()[0].cloneNode(true);
-    jQuery("#cookie-bar p").html(jQuery.i18n.t("cookieLaw.message"));
-    button.innerHTML = jQuery.i18n.t("cookieLaw.accept");
-    jQuery("#cookie-bar p").append(button);
-
+    if(jQuery("#cookie-bar .cb-enable").length > 0)
+    {
+      var button = jQuery("#cookie-bar .cb-enable").first()[0].cloneNode(true);
+      jQuery("#cookie-bar p").html(jQuery.i18n.t("cookieLaw.message"));
+      button.innerHTML = jQuery.i18n.t("cookieLaw.accept");
+      jQuery("#cookie-bar p").append(button);
+    }
   })
 }
-
 function initCookieBar()
 {
   jQuery.cookieBar({
@@ -391,7 +374,7 @@ function initCookieBar()
     acceptText: jQuery.i18n.t("cookieLaw.accept"),
     declineText: jQuery.i18n.t("cookieLaw.decline"),
     declineFunction: function() {
-        window.location.href = "http://www.crs4.it";
+      window.location.href = "http://www.crs4.it";
     },
     //renewOnVisit: true,
     expireDays: 90,
@@ -400,4 +383,3 @@ function initCookieBar()
 
   jQuery("#cookie-bar p").css("color", "#FFFFFF");
 }
-
