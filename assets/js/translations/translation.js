@@ -167,7 +167,8 @@ var translation = {
                     "newrfqcreated": "RFQ created with success!",
                     "sendRFQ": "Send RFQ",
                     "noDeleteRfq":"You must have at least one request!",
-                    "myrfqs" : "My RFQs"
+                    "myrfqs" : "My RFQs",
+                    "sendeval":"Write a review to the supplier"
                 },
                 "catalog": {
                     "catalog": "Catalog",
@@ -211,10 +212,10 @@ var translation = {
                     "discoversuppliers":"Discover",
                     "new":"new",
                     "suppliers":"suppliers",
-                    "simplesearch":"Simple search",
+                    "simplesearch":"Quick search",
                     "smartrfq":"Smart RFQ",
                     "typicalproducts":"Typical products",
-                    "des_simplesearch":"Quick search of suppliers who have a given product or category of goods.",
+                    "des_simplesearch":"Search for a supplier in Sardinia either by product or by category.",
                     "des_smartrfq":"Requests smart compilation with direct negotiation and messaging.",
                     "des_typicalproducts":"Many typical products made available from our suppliers.",
                     "des_crs4":"CRS4 is a private interdisciplinary research center, founded by the Sardinia Autonomous Region.",
@@ -392,7 +393,8 @@ var translation = {
                     "newrfqcreated": "RFQ Creata con successo!",
                     "sendRFQ": "Invia RFQ",
                     "noDeleteRfq":"Devi avere almeno una richiesta!",
-                    "myrfqs" : "Le mie RFQ"
+                    "myrfqs" : "Le mie RFQ",
+                    "sendeval":"Scrivi una recensione al fornitore"
                 },
                 "catalog": {
                     "catalog": "Catalogo",
@@ -437,7 +439,7 @@ var translation = {
                     "new":"nuovi",
                     "suppliers":"fornitori",
                     "simplesearch":"Ricerca veloce",
-                    "smartrfq":"Rapide RFQ",
+                    "smartrfq":"RFQ rapide",
                     "typicalproducts":"Prodotti tipici",
                     "des_simplesearch":"Ricerca veloce dei fornitori che dispongono di un dato prodotto o che appartengono ad una data categoria merceologica.",
                     "des_smartrfq":"Compilazione rapida delle richieste al fornitore con possibilità di trattativa e messaggistica diretta.",
