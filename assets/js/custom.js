@@ -7,9 +7,9 @@ var defaultImg = "assets/img/team/img32-md.jpg";
 
 var lng = localStorage.lng;
 
-jQuery(document).ready(function(){  
+jQuery(document).ready(function(){
   var sb = jQuery("#sidebar");
-  
+
   if(sb.length > 0)
   {
     //var isSupplier = sessionStorage.type && sessionStorage.type == "supplier";
@@ -19,25 +19,25 @@ jQuery(document).ready(function(){
       idSupplier : isSupplier() ? sessionStorage.userId : ""
     }));
     jQuery("#sidebar").localize();
-    
-    
+
+
     if(sessionStorage.logo && sessionStorage.logo.trim() != "")
     {
-      jQuery("#imgBox").attr("src", sessionStorage.logo);                
+      jQuery("#imgBox").attr("src", sessionStorage.logo);
     }
     else
     {
       jQuery("#imgBox").attr("src", defaultImg);
     }
-    
+
     if(sessionStorage.token)
     {
       sb.show();
     }
-    
-    
+
+
   }
-  
+
   var headerCompiled = Handlebars.compile(header_template);
 
   var headerHTML = headerCompiled({
@@ -46,13 +46,18 @@ jQuery(document).ready(function(){
     isHome : window['isHome'] || false,
     isRFQ : window['isRFQ'] || false
   });
-  
-  jQuery('body').localize();
+
   jQuery('#header_p').html(headerHTML);
-  
+
+  var footerCompiled = Handlebars.compile(footer_template);
+
+
+  jQuery('body').localize();
+  jQuery('#footer_p').html(footerCompiled);
+
   if(lng)
   {
-    var l = jQuery(".languages a[data-lng='" + lng +"']");    
+    var l = jQuery(".languages a[data-lng='" + lng +"']");
     if(l.length > 0)
     {
       if(lng != jQuery(".languages .active a").first().attr("data-lng"))
@@ -63,7 +68,7 @@ jQuery(document).ready(function(){
         var c = document.createElement("i");
         c.className = "fa fa-check";
         lngSel.find("a").first().append(c);
-        i18next.changeLanguage(lng, function(){});        
+        i18next.changeLanguage(lng, function(){});
       }
       jQuery('body').localize();
     }
@@ -72,11 +77,11 @@ jQuery(document).ready(function(){
   {
     localStorage.lng = jQuery(".languages .active a").first().data("lng");
     lng = localStorage.lng;
-    
+
     jQuery('body').localize();
   }
 
-  jQuery(".languages a").click(function(){    
+  jQuery(".languages a").click(function(){
     if(jQuery(this).attr("data-lng"))
     {
       lng = jQuery(this).attr("data-lng");
@@ -93,33 +98,33 @@ jQuery(document).ready(function(){
     }
 
   });
-  
+
   if(jQuery(".footer-language").length > 0)
   {
     var fl = jQuery(".footer-language select").first();
-    
+
     if (lng != undefined)
     {
       fl.val(lng);
     }
-    
+
     fl.change(function(){
       var lng = jQuery(this).val();
       localStorage.lng = lng;
       i18next.changeLanguage(lng, function(){});
       jQuery('body').localize();
       jQuery(document).trigger('translate');
-      
+
     });
   }
-    
+
   if(sessionStorage.token)
-  {    
+  {
     jQuery("#h_login").hide();
     jQuery("#h_user strong").html(sessionStorage.email);
   }
   else
-  {    
+  {
     jQuery("#h_logout").hide();
     jQuery("#h_user").hide();
   }
@@ -190,7 +195,7 @@ function logout()
   //sessionStorage.token = undefined;
   //sessionStorage.userId = undefined;
   sessionStorage.clear();
-  window.location.replace("page_login_and_registration2.html");  
+  window.location.replace("page_login_and_registration2.html");
 }
 
 
@@ -210,7 +215,7 @@ function redirectToPrevPage()
   if(sessionStorage.prevPage != undefined)
   {
     var p = sessionStorage.prevPage;
-    sessionStorage.prevPage = undefined;    
+    sessionStorage.prevPage = undefined;
     window.location.href = p;
   }
   else
@@ -221,51 +226,51 @@ function redirectToPrevPage()
 
 
 function getProfileInfo(async)
-{      
+{
   if(sessionStorage.userId == undefined)
-  {      
+  {
     return;
   }
-  
+
   if(async == undefined)
     async = true;
-  
-  
+
+
   jQuery.ajax({
     url: _userMsUrl + "users/" + sessionStorage.userId,
     type: "GET",
     async: async,
     contentType: "application/json; charset=utf-8",
     success: function(data, textStatus, xhr)
-    { 
-      sessionStorage.type = data.type;      
+    {
+      sessionStorage.type = data.type;
       sessionStorage.name = data.name;
       sessionStorage.logo = data.logo;
-      
-                      
-    },     
-    error: function(xhr, status)
-    {      
+
+
     },
-    beforeSend: function(xhr, settings) 
-    { 
-      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
-    }                    
-  });        
+    error: function(xhr, status)
+    {
+    },
+    beforeSend: function(xhr, settings)
+    {
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+    }
+  });
 }
 
-function getUrlParameter(sParam) 
+function getUrlParameter(sParam)
 {
   var sPageURL = decodeURIComponent(window.location.search.substring(1)),
     sURLVariables = sPageURL.split('&'),
     sParameterName,
     i;
 
-  for (i = 0; i < sURLVariables.length; i++) 
+  for (i = 0; i < sURLVariables.length; i++)
   {
     sParameterName = sURLVariables[i].split('=');
 
-    if (sParameterName[0] === sParam) 
+    if (sParameterName[0] === sParam)
     {
       return sParameterName[1] === undefined ? true : sParameterName[1];
     }
@@ -281,31 +286,31 @@ function autoCompleteCat(tagId)
     identify: function(datum){
       console.log(datum);
       return datum.id;
-      
+
     },
     //prefetch: '../data/films/post_1960.json',
     remote: {
       url: _brokerMsUrl + "categories/drop?",
-      transform: function(response){      
+      transform: function(response){
         var ret = [];
-        
+
         if(response.statusCode == 404)
         {
           return ret;
         }
-        
+
         for(var i in response)
-        {        
-          ret.push({"name": response[i].name[localStorage.lng], 
+        {
+          ret.push({"name": response[i].name[localStorage.lng],
                     "id": response[i]._id});
-        }      
-        return ret;            
+        }
+        return ret;
       },
       prepare: function(query, settings){
-        settings.url = settings.url + "name=" + query + "&lang=" + localStorage.lng;      
-        return settings;      
+        settings.url = settings.url + "name=" + query + "&lang=" + localStorage.lng;
+        return settings;
       },
-      transport(opts, onSuccess, onError){      
+      transport(opts, onSuccess, onError){
         jQuery.ajax({
           url: opts.url,
           type: "GET",
@@ -313,8 +318,8 @@ function autoCompleteCat(tagId)
           error: function(xhr)
           {
             onSuccess(xhr.responseJSON);
-          }        
-        });            
+          }
+        });
       }
     }
   });
@@ -325,57 +330,57 @@ function autoCompleteCat(tagId)
     source: acCategories
   });
 
-  jQuery('#' + tagId).bind('typeahead:selected', function(obj, datum, name){            
+  jQuery('#' + tagId).bind('typeahead:selected', function(obj, datum, name){
     jQuery('#' + tagId).data("cat-id", datum.id);
     jQuery('#' + tagId).data("cat-name", datum.name);
   });
-                 
+
 }
 
 function loadCookieLawBar()
 {
   var links = document.getElementsByTagName('link');
   var needCSS = true;
-  
+
   for ( var i = 0; i < links.length; i++ )
   {
-    if ( links[i].href == "assets/css/jquery.cookiebar.css" ) 
+    if ( links[i].href == "assets/css/jquery.cookiebar.css" )
     needCSS = false;
   }
-   
+
   if ( needCSS )
   {
     var ls = document.createElement('link');
     ls.rel="stylesheet";
     ls.href="assets/css/jquery.cookiebar.css";
-    document.getElementsByTagName('head')[0].appendChild(ls);   
+    document.getElementsByTagName('head')[0].appendChild(ls);
   }
-  
+
   if(jQuery.cookieBar != "function")
   {
     var j = document.createElement('script');
     j.type = 'text/javascript';
     document.getElementsByTagName('head')[0].appendChild(j);
-    j.src = 'assets/js/plugins/jquery.cookiebar.js';      
-    
-    j.onload = function() 
-    {    
+    j.src = 'assets/js/plugins/jquery.cookiebar.js';
+
+    j.onload = function()
+    {
       initCookieBar();
-    }              
+    }
   }
   else
   {
     initCookieBar();
   }
-  
-  
+
+
   jQuery(document).on("translate", function(){
     var button = jQuery("#cookie-bar .cb-enable").first()[0].cloneNode(true);
     jQuery("#cookie-bar p").html(jQuery.i18n.t("cookieLaw.message"));
     button.innerHTML = jQuery.i18n.t("cookieLaw.accept");
     jQuery("#cookie-bar p").append(button);
-    
-  })        
+
+  })
 }
 
 function initCookieBar()
@@ -390,9 +395,9 @@ function initCookieBar()
     },
     //renewOnVisit: true,
     expireDays: 90,
-    //autoEnable: false,          
-  });    
-  
-  jQuery("#cookie-bar p").css("color", "#FFFFFF");                
+    //autoEnable: false,
+  });
+
+  jQuery("#cookie-bar p").css("color", "#FFFFFF");
 }
 

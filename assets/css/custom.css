@@ -10,3 +10,11 @@
 .color-dark-red{
     color: #d40000;
 }
+
+.footer-v1 .footer, .footer-v1 .copyright{
+    background: #223539;
+}
+
+.footer-v1 .copyright {
+    opacity: .98;
+}

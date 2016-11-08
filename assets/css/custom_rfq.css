@@ -209,10 +209,11 @@ margin-left: 1em;
     max-width: 62px;
     cursor: pointer; cursor: hand;
 }
-
-.tooltip{
-    color:#fff!important;
-
+.rfq .tooltip{
+ color: #fff!important;
 }
+
+.tooltip-arrow,
+.counter a + .tooltip > .tooltip-inner { color: #fff!important;}
 
 /* RFQ    === End === */

@@ -200,13 +200,29 @@ var translation = {
                     "thAction": "Action",
                     "tabLabelRegistration": "Rigistered ",
                     "tabLabelRegistration": "Rigistered ",
-                    "tabMsgProduct": "See products match" 
+                    "tabMsgProduct": "See products match"
                 },
 		"evaluation":
 		{
 		"thank_you": "Thank you for your evaluation!",
 		"invalid_evaluation": "incomplete evaluation"
-		}
+		},
+                "homepage":{
+                    "discoversuppliers":"Discover",
+                    "new":"new",
+                    "suppliers":"suppliers",
+                    "simplesearch":"Simple search",
+                    "smartrfq":"Smart RFQ",
+                    "typicalproducts":"Typical products",
+                    "des_simplesearch":"Quick search of suppliers who have a given product or category of goods.",
+                    "des_smartrfq":"Requests smart compilation with direct negotiation and messaging.",
+                    "des_typicalproducts":"Many typical products made available from our suppliers.",
+                    "des_crs4":"CRS4 is a private interdisciplinary research center, founded by the Sardinia Autonomous Region.",
+                    "useflink":"Useful Links",
+                    "contactus":"Contact Us",
+                    "aboutus":"About us",
+                    "site":"Site",
+                }
             }
         },
         it: {
@@ -409,13 +425,30 @@ var translation = {
                     "thRates": "Giudizi",
                     "thAction": "Azioni",
                     "tabLabelRegistration": "Registrato il ",
-                    "tabMsgProduct": "Vedi i prodotti associati" 
+                    "tabMsgProduct": "Vedi i prodotti associati"
                 },
 		"evaluation":
 		{
 		"thank_you": "Grazie per avere lasciato la tua opinione!",
 		"invalid_evaluation": "Valutazione incompleta"
-		}
+		},
+                "homepage":{
+                    "discoversuppliers":"Scopri",
+                    "new":"nuovi",
+                    "suppliers":"fornitori",
+                    "simplesearch":"Ricerca veloce",
+                    "smartrfq":"Rapide RFQ",
+                    "typicalproducts":"Prodotti tipici",
+                    "des_simplesearch":"Ricerca veloce dei fornitori che dispongono di un dato prodotto o che appartengono ad una data categoria merceologica.",
+                    "des_smartrfq":"Compilazione rapida delle richieste al fornitore con possibilità di trattativa e messaggistica diretta.",
+                    "des_typicalproducts":"Tantissimi prodotti tipici messi a disposizione dai nostri fornitori. ",
+                    "des_crs4":"Il CRS4 è un centro di ricerca interdisciplinare privato fondato dalla Regione Autonoma della Sardegna.",
+                    "useflink":"Links utili",
+                    "contactus":"Contattaci",
+                    "aboutus":"Chi siamo",
+                    "site":"Sito",
+
+                }
             }
         }
 
