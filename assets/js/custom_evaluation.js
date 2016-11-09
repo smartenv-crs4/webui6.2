@@ -48,7 +48,8 @@ function sendEvaluation()
   console.log('delivery rate: ' + evaluation["delivery_rate"]);
   console.log('review: ' + evaluation["overall_review"]);
   evaluation["from"] = sessionStorage.userId;
-  evaluation["conversationId"]= "5816fe1c747418055f9e921d"; //will be get from link to evaluation page in email or from a closed conversation
+//  evaluation["conversationId"]= "5816fe1c747418055f9e921d"; //will be get from link to evaluation page in email or from a closed conversation
+  evaluation["conversationId"]= getParameter("convId");
   var respBlock = jQuery("#evaluationResponse");
 
   if(respBlock.is(":visible"))
