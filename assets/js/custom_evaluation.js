@@ -42,11 +42,19 @@ function sendEvaluation()
   evaluation["product_rate"] = getStarRating(quality);
   var delivery = jQuery("input[name='delivery']");
   evaluation["delivery_rate"] = getStarRating(delivery);
-  evaluation["overall_review"] = jQuery("textarea[name='review']").val();
+  var pricevalue = jQuery("input[name='pricevalue']");
+  evaluation["price_value_rate"] = getStarRating(pricevalue);
+  var customerservice = jQuery("input[name='customerservice']");
+  evaluation["customer_service_rate"] = getStarRating(customerservice);
+  evaluation["pros_review"] = jQuery("textarea[name='pros_review']").val();
+  evaluation["cons_review"] = jQuery("textarea[name='cons_review']").val();
   console.log('overall rate: ' + evaluation["overall_rate"]);
   console.log('product rate: ' + evaluation["product_rate"]);
   console.log('delivery rate: ' + evaluation["delivery_rate"]);
-  console.log('review: ' + evaluation["overall_review"]);
+  console.log('price value rate: ' + evaluation["price_value_rate"]);
+  console.log('customer service rate: ' + evaluation["customer_service_rate"]);
+  console.log('pros review: ' + evaluation["pros_review"]);
+  console.log('cons review: ' + evaluation["cons_review"]);
   evaluation["from"] = sessionStorage.userId;
 //  evaluation["conversationId"]= "5816fe1c747418055f9e921d"; //will be get from link to evaluation page in email or from a closed conversation
   evaluation["conversationId"]= getParameter("convId");
