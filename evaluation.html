@@ -98,6 +98,32 @@
 					<label for="quality-1"><i class="fa fa-star"></i></label>
 					Quality of the product
 				</div>
+				<div class="rating">
+					<input type="radio" name="pricevalue" id="pricevalue-5">
+					<label for="pricevalue-5"><i class="fa fa-star"></i></label>
+					<input type="radio" name="pricevalue" id="pricevalue-4">
+					<label for="pricevalue-4"><i class="fa fa-star"></i></label>
+					<input type="radio" name="pricevalue" id="pricevalue-3">
+					<label for="pricevalue-3"><i class="fa fa-star"></i></label>
+					<input type="radio" name="pricevalue" id="pricevalue-2">
+					<label for="pricevalue-2"><i class="fa fa-star"></i></label>
+					<input type="radio" name="pricevalue" id="pricevalue-1">
+					<label for="pricevalue-1"><i class="fa fa-star"></i></label>
+					Price/Value
+				</div>
+				<div class="rating">
+					<input type="radio" name="customerservice" id="customerservice-5">
+					<label for="customerservice-5"><i class="fa fa-star"></i></label>
+					<input type="radio" name="customerservice" id="customerservice-4">
+					<label for="customerservice-4"><i class="fa fa-star"></i></label>
+					<input type="radio" name="customerservice" id="customerservice-3">
+					<label for="customerservice-3"><i class="fa fa-star"></i></label>
+					<input type="radio" name="customerservice" id="customerservice-2">
+					<label for="customerservice-2"><i class="fa fa-star"></i></label>
+					<input type="radio" name="customerservice" id="customerservice-1">
+					<label for="customerservice-1"><i class="fa fa-star"></i></label>
+					Customer service
+				</div>
 
 				<div class="rating">
 					<input type="radio" name="delivery" id="delivery-5">
@@ -130,7 +156,14 @@
 				<label class="label"></label>
 				<label class="textarea">
 				    <i class="icon-append fa fa-comment"></i>
-	                   		    <textarea rows="3" name="review" id="review" placeholder="Write your comment here"></textarea>
+	                   		    <textarea rows="3" name="pros_review" id="pros_review" placeholder="Write your positive comment here"></textarea>
+				</label>
+
+
+				<label class="label"></label>
+				<label class="textarea">
+				    <i class="icon-append fa fa-comment"></i>
+	                   		    <textarea rows="3" name="cons_review" id="cons_review" placeholder="Write your negative comment here"></textarea>
 				</label>
 			</section>
 		</fieldset>
@@ -195,7 +228,6 @@
     <script type="text/javascript" src="assets/js/footer.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 	<script src="assets/js/utils.js"></script>
-
     <script type="text/javascript">
         jQuery(document).ready(function() {
             App.init();
