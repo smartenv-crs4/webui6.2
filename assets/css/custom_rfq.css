@@ -216,4 +216,9 @@ margin-left: 1em;
 .tooltip-arrow,
 .counter a + .tooltip > .tooltip-inner { color: #fff!important;}
 
+.writeval{
+    display:flex;
+
+}
+
 /* RFQ    === End === */

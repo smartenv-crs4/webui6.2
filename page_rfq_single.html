@@ -184,6 +184,13 @@
 <![endif]-->
 <!--Template RFQ Requests and Messages -->
 <script id="inbox_rfq_requests_messages" type="text/x-handlebars-template">
+    {{#if completed}}
+    {{#if_eq currentUser 'customer'}}
+    <div class="writeval alert alert-success fade in">
+        <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>-->
+        <strong>RFQ </strong>&nbsp; <strong data-i18n="rfq.close"></strong>!&nbsp; <a class="alert-link" href="javascript:window.location.href='evaluation.html?convId={{_id}}'" data-i18n="rfq.sendeval"></a>
+    </div>
+{{/if_eq}}{{/if}}
     <div class="col-sm-6 chat-panel panel panel-default	">
         <div class="panel-heading overflow-h">
             <i class="fa fa-tasks fa-fw"></i>
@@ -227,8 +234,15 @@
     </span>
             </div>
         </div>
+
+
+
+
         <!-- /.panel-footer -->
     </div>
+
+
+
 </script>
 
 <!--End Template RFQ Inbox -->
@@ -256,7 +270,9 @@
         </div>
         <div id="collapse-{{inc @index}}" class="panel-collapse collapse">
             <div class="alert-blocks service-block-u" id="request-{{_id}}">
-                <img class="rounded-x" src={{productLogo product}} alt="">
+                <img class="rounded-x" src="http://seidue.crs4.it:3015/{{product._id}}/{{product.images.[0].name}}_o.jpg"
+                onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'" alt="">
+             <!--   <img class="rounded-x" src={{productLogo product}} alt="">-->
                 <strong class="service-heading">{{product.name}}</strong>
                 <p>
                 <h3 class="heading-xs">{{formatDate dateIn}}</h3></p>

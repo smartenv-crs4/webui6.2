@@ -254,7 +254,7 @@
                 <div class="media media-v2">
                     <a class="pull-left" href="#">
                         <img class="media-s100 img-circle"
-                             src="http://seidue.crs4.it:3015/{{_id}}/{{images.[0].name}}_o.jpg"
+                             src="http://seidue.crs4.it:3015/{{trim _id}}/{{trim images.[0].name}}_o.jpg"
                              onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'"
                              alt="">
                     </a>
@@ -751,6 +751,14 @@
 
 
             Handlebars.registerHelper('paginate', paginate);
+            Handlebars.registerHelper('trim', function(s){
+              if(s == undefined)
+              {
+                s = "";
+              }              
+              
+              return new Handlebars.SafeString(s.trim());              
+            });
 
             App.init();
             //App.initCounter();
