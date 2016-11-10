@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-	<title>Your opinion is really important to us! | Cagliari Port 2020</title>
+	<title>Evaluation of the service</title>
 
 	<!-- Meta -->
 	<meta charset="utf-8">
@@ -68,7 +70,7 @@
 			<div class="row space-xlg-hor equal-height-columns">
 <!-- Evaluation Form-->
 <div action="#" id="my-sky-form2" class="sky-form">
-	<header>Your opinion is really important to us!</header>
+	<header data-i18n="evaluation.your_opinion"></header>
 		<fieldset>
 			<div class="alert alert-danger invisible margin-bottom-20" id="evaluationResponse"></div>
 			<!-- section>
@@ -96,7 +98,7 @@
 					<label for="quality-2"><i class="fa fa-star"></i></label>
 					<input type="radio" name="quality" id="quality-1">
 					<label for="quality-1"><i class="fa fa-star"></i></label>
-					Quality of the product
+					<h4 data-i18n="evaluation.quality"></h4>
 				</div>
 				<div class="rating">
 					<input type="radio" name="pricevalue" id="pricevalue-5">
@@ -109,7 +111,7 @@
 					<label for="pricevalue-2"><i class="fa fa-star"></i></label>
 					<input type="radio" name="pricevalue" id="pricevalue-1">
 					<label for="pricevalue-1"><i class="fa fa-star"></i></label>
-					Price/Value
+					<h4 data-i18n="evaluation.pricevalue"></h4>
 				</div>
 				<div class="rating">
 					<input type="radio" name="customerservice" id="customerservice-5">
@@ -122,7 +124,7 @@
 					<label for="customerservice-2"><i class="fa fa-star"></i></label>
 					<input type="radio" name="customerservice" id="customerservice-1">
 					<label for="customerservice-1"><i class="fa fa-star"></i></label>
-					Customer service
+					<h4 data-i18n="evaluation.customerservice"></h4>
 				</div>
 
 				<div class="rating">
@@ -136,7 +138,7 @@
 					<label for="delivery-2"><i class="fa fa-star"></i></label>
 					<input type="radio" name="delivery" id="delivery-1">
 					<label for="delivery-1"><i class="fa fa-star"></i></label>
-					Delivery
+					<h4 data-i18n="evaluation.delivery"></h4>
 				</div>
 				<div class="rating">
 					<input type="radio" name="overall" id="overall-5">
@@ -149,28 +151,28 @@
 					<label for="overall-2"><i class="fa fa-star"></i></label>
 					<input type="radio" name="overall" id="overall-1">
 					<label for="overall-1"><i class="fa fa-star"></i></label>
-					Overall rating
+					<h4 data-i18n="evaluation.overallrating"></h4>
 				</div>
 			</section>
 			<section>
 				<label class="label"></label>
-                Pros
+				<h4 data-i18n="evaluation.pros"></h4>
 				<label class="textarea">
 				    <i class="icon-append fa fa-comment"></i>
-	                   		    <textarea rows="3" name="pros_review" id="pros_review" placeholder="Write your positive comment here"></textarea>
+	                   		    <textarea rows="3" name="pros_review" id="pros_review" data-i18n="[placeholder]evaluation.pros_placeholder"></textarea>
 				</label>
 
 
 				<label class="label"></label>
-                Cons
+				<h4 data-i18n="evaluation.cons"></h4>
 				<label class="textarea">
 				    <i class="icon-append fa fa-comment"></i>
-	                   		    <textarea rows="3" name="cons_review" id="cons_review" placeholder="Write your negative comment here"></textarea>
+	                   		    <textarea rows="3" name="cons_review" id="cons_review" data-i18n="[placeholder]evaluation.cons_placeholder"></textarea>
 				</label>
 			</section>
 		</fieldset>
 		<footer>
-			<button class="btn-u" onclick="sendEvaluation()" >Submit</button>
+			<button class="btn-u" onclick="sendEvaluation()" data-i18n="evaluation.submit"></button>
 		</footer>
 	</div>
 <!-- End of Evaluation Form-->
@@ -202,12 +204,12 @@
 
 
     <script type="text/javascript" src="assets/js/plugins/bootstrap-select.min.js"></script>
+
+    <!-- JS Translation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/3.4.3/i18next.min.js"></script>
     <script src="assets/js/translations/translation.js"></script>
-    <!--script type="text/javascript" src="https://raw.githubusercontent.com/i18next/i18next-xhr-backend/master/i18nextXHRBackend.min.js"></script-->
-    <script type="text/javascript" src="assets/js/plugins/i18next.min.js"></script>
-    <!-- script type="text/javascript" src="https://raw.githubusercontent.com/i18next/i18next/master/i18next.min.js"></script -->
-    <script type="text/javascript" src="assets/js/plugins/jquery-i18next.min.js"></script>
-    <!-- script type="text/javascript" src="https://raw.githubusercontent.com/i18next/jquery-i18next/master/jquery-i18next.min.js"></script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.1.0/jquery-i18next.min.js"></script>
+
     <!-- start of lines required by review block -->
 	<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 	<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
@@ -218,7 +220,6 @@
 
     <!-- JS Customization -->
     <script src="assets/js/custom.js"></script>
-    <script src="assets/js/custom_rfq.js"></script>
     <script src="assets/js/custom_evaluation.js"></script>
 
     <!-- JS Page Level -->
@@ -230,6 +231,7 @@
     <script type="text/javascript" src="assets/js/footer.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 	<script src="assets/js/utils.js"></script>
+    <script src="assets/js/custom_rfq.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
             App.init();
