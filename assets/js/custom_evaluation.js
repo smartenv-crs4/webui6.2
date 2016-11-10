@@ -35,9 +35,19 @@ function sendEvaluation()
   {      
       redirectToLogin();
   }
+  var respBlock = jQuery("#evaluationResponse");
+  if(respBlock.is(":visible"))
+  {
+    respBlock.addClass("invisible");
+  }
   var evaluation = new Object();
   var overall = jQuery("input[name='overall']");
   evaluation["overall_rate"] = getStarRating(overall);
+  if (evaluation["overall_rate"] == 0) {
+	  respBlock.html(i18next.t("evaluation.missing_overall"));
+	  respBlock.removeClass("invisible");
+	  return;
+  }
   var quality = jQuery("input[name='quality']");
   evaluation["product_rate"] = getStarRating(quality);
   var delivery = jQuery("input[name='delivery']");
@@ -55,15 +65,21 @@ function sendEvaluation()
   console.log('customer service rate: ' + evaluation["customer_service_rate"]);
   console.log('pros review: ' + evaluation["pros_review"]);
   console.log('cons review: ' + evaluation["cons_review"]);
+  if (evaluation["pros_review"] == '')
+  {
+	  console.log('empty pros review');
+  } else {
+	  console.log('pros review is not empty:' + evaluation["pros_review"]);
+  }
+  if (evaluation["cons_review"] == '')
+  {
+	  console.log('empty cons review');
+  } else {
+	  console.log('cons review is not empty:' + evaluation["cons_review"]);
+  }
   evaluation["from"] = sessionStorage.userId;
 //  evaluation["conversationId"]= "5816fe1c747418055f9e921d"; //will be get from link to evaluation page in email or from a closed conversation
   evaluation["conversationId"]= getParameter("convId");
-  var respBlock = jQuery("#evaluationResponse");
-
-  if(respBlock.is(":visible"))
-  {
-    respBlock.addClass("invisible");
-  }
 
 
 ///
