@@ -209,7 +209,7 @@ var translation = {
 		"quality": "Quality of the product",
 		"pricevalue": "Price/Value",
 		"customerservice": "Customer service",
-		"delivery": "Devlivery",
+		"delivery": "Delivery",
 		"overallrating": "Overall rating",
 		"pros": "Pros",
 		"pros_placeholder": "Write your positive comments here",
