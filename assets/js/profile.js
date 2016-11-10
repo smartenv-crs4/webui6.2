@@ -173,7 +173,19 @@ function updateProfile()
     var value = jQuery(this).editable('getValue')[name];
     if(value || jQuery(this).hasClass("editable-unsaved"))
     {
-      data.user[name] = value;    
+      if(name.indexOf(".") >= 0)
+      {
+        var sName = name.split(".");
+        if(data.user[sName[0]] == undefined)
+        {
+          data.user[sName[0]] = {};          
+        }
+        data.user[sName[0]][sName[1]] = value;
+      }
+      else
+      {
+        data.user[name] = value;    
+      }
     }
   });
   
