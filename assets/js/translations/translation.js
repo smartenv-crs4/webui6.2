@@ -217,7 +217,8 @@ var translation = {
 		"cons_placeholder": "Write your negative comments here",
 		"submit": "Submit",
 		"thank_you": "Thank you for your evaluation!",
-		"invalid_evaluation": "incomplete evaluation"
+		"invalid_evaluation": "incomplete evaluation",
+		"missing_overall": "The overall rating is required."
 		},
                 "homepage":{
                     "discoversuppliers":"Discover",
@@ -454,7 +455,8 @@ var translation = {
 		"cons_placeholder": "Scrivi qui i tuoi commenti negativi",
 		"submit": "Invia",
 		"thank_you": "Grazie per avere lasciato la tua opinione!",
-		"invalid_evaluation": "Valutazione incompleta"
+		"invalid_evaluation": "Valutazione incompleta",
+		"missing_overall": "Manca il giudizio complessivo."
 		},
                 "homepage":{
                     "discoversuppliers":"Scopri",
