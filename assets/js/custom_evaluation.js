@@ -90,8 +90,9 @@ function sendEvaluation()
 	// Show thank you message
 	console.log('success!');
         //respBlock.html(i18next.t("evaluation.thank_you"));
-	jQuery("#evaluationResponse").html(i18next.t("evaluation.thank_you"));
-	respBlock.removeClass("invisible");
+	//jQuery("#evaluationResponse").html(i18next.t("evaluation.thank_you"));
+	window.location.replace("response_evaluation.html");
+	//respBlock.removeClass("invisible");
 	return;
         }
 	else {
