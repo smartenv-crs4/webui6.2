@@ -205,6 +205,17 @@ var translation = {
                 },
 		"evaluation":
 		{
+		"your_opinion": "Your opinion is really important to us!",
+		"quality": "Quality of the product",
+		"pricevalue": "Price/Value",
+		"customerservice": "Customer service",
+		"delivery": "Devlivery",
+		"overallrating": "Overall rating",
+		"pros": "Pros",
+		"pros_placeholder": "Write your positive comments here",
+		"cons": "Cons",
+		"cons_placeholder": "Write your negative comments here",
+		"submit": "Submit",
 		"thank_you": "Thank you for your evaluation!",
 		"invalid_evaluation": "incomplete evaluation"
 		},
@@ -431,6 +442,17 @@ var translation = {
                 },
 		"evaluation":
 		{
+		"your_opinion": "Il tuo parere conta molto per noi!",
+		"quality": "Qualità del prodotto",
+		"pricevalue": "Rapporto qualità/prezzo",
+		"delivery": "Consegna",
+		"overallrating": "Giudizio complessivo",
+		"customerservice": "Servizio clienti",
+		"pros": "Aspetti positivi",
+		"pros_placeholder": "Scrivi qui i tuoi commenti positivi",
+		"cons": "Aspetti negativi",
+		"cons_placeholder": "Scrivi qui i tuoi commenti negativi",
+		"submit": "Invia",
 		"thank_you": "Grazie per avere lasciato la tua opinione!",
 		"invalid_evaluation": "Valutazione incompleta"
 		},
