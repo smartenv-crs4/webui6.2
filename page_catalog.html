@@ -100,6 +100,13 @@
     <!--=== Profile ===-->
     <div class="container content profile">
         <div class="row">
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li><a href="#" id="searchResultsAnchor" data-i18n="catalog.searchResults"></a></li>
+                <li class="active" data-i18n="login.supplier"></li>
+            </ul>
+        </div>
+        <div class="row">
             <!--Left Sidebar-->
             <div id="sidebar" class="sidebar-showhide" style="display: none;">
 
@@ -796,8 +803,13 @@
             };
 
 
-            getsupplierinfo(getsupplierURL, "supplier-info_template", "#supplier-info", cbFav)            
+            getsupplierinfo(getsupplierURL, "supplier-info_template", "#supplier-info", cbFav);
             getfiles(getfilesURL, "filetable", '#files_container');
+            var name = getParameterByName("name");
+            var searchListURL = "list.html";
+            if (name && name != null)
+                    searchListURL += "?name="+name
+            $("#searchResultsAnchor").attr('href',searchListURL);
 
             $("body").localize();
 
