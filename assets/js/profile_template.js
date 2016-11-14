@@ -32,6 +32,16 @@ var customerProfileTemplate = `
     </span -->
   </dd>
   <hr>
+  <dt><strong data-i18n="profile.referenceName"></strong></dt>
+  <dd>
+    <a class="editable editable-click" data-name="references.name" data-i18n="[data-emptytext]profile.emptyText" id="ed-referencename" data-type="text" href="#">{{references.name}}</a>
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.referenceSurname"></strong></dt>
+  <dd>
+    <a class="editable editable-click" data-name="references.surname" data-i18n="[data-emptytext]profile.emptyText" id="ed-referencesurname" data-type="text" href="#">{{references.surname}}</a>    
+  </dd>
+  <hr>
   <dt><strong data-i18n="profile.address"></strong></dt>
   <dd>
     <a class="editable editable-click" data-name="address" data-i18n="[data-emptytext]profile.emptyText" id="ed-address" data-type="text" href="#">{{address}}</a>
@@ -106,6 +116,17 @@ var supplierProfileTemplate = `
       </a>
     </span -->
   </dd>
+  <dt><strong data-i18n="profile.referenceName"></strong></dt>
+  <dd>
+    <a class="editable editable-click" data-name="references.name" data-i18n="[data-emptytext]profile.emptyText" id="ed-referencename" data-type="text" href="#">{{references.name}}</a>
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.referenceSurname"></strong></dt>
+  <dd>
+    <a class="editable editable-click" data-name="references.surname" data-i18n="[data-emptytext]profile.emptyText" id="ed-referencesurname" data-type="text" href="#">{{references.surname}}</a>    
+  </dd>
+  <hr>
+  
   <hr>
   <dt><strong data-i18n="profile.address"></strong></dt>
   <dd contenteditable="true">
@@ -308,7 +329,7 @@ var certificationsTableTemplate = `
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Name</th>								
+          <th data-i18n="prifile.favoriteName">/th>								
         </tr>
       </thead>
       <tbody>              

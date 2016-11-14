@@ -59,6 +59,8 @@ var translation = {
                     "email": "Email",
                     "type": "Account type",
                     "name": "Name",
+                    "referenceName": "Reference name",
+                    "referenceSurname": "Reference surname",
                     "address": "Address",
                     "phone": "Telephone number",
                     "favoriteSuppliers": "Favorite suppliers",
@@ -209,8 +211,20 @@ var translation = {
                 },
 		"evaluation":
 		{
+		"your_opinion": "Your opinion is really important to us!",
+		"quality": "Quality of the product",
+		"pricevalue": "Price/Value",
+		"customerservice": "Customer service (promptness, support, and assistance)",
+		"delivery": "Delivery policy",
+		"overallrating": "Overall rating (required field)",
+		"pros": "Pros",
+		"pros_placeholder": "Write your positive comments here",
+		"cons": "Cons",
+		"cons_placeholder": "Write your negative comments here",
+		"submit": "Submit",
 		"thank_you": "Thank you for your evaluation!",
-		"invalid_evaluation": "incomplete evaluation"
+		"invalid_evaluation": "incomplete evaluation",
+		"missing_overall": "The overall rating is required."
 		},
                 "homepage":{
                     "discoversuppliers":"Discover",
@@ -290,6 +304,8 @@ var translation = {
                     "email": "Email",
                     "type": "Tipo di account",
                     "name": "Nome",
+                    "referenceName": "Nome referente",
+                    "referenceSurname": "Cognome referente",
                     "address": "Indirizzo",
                     "phone": "Numero di telefono",
                     "favoriteSuppliers": "Fornitori preferiti",
@@ -439,8 +455,20 @@ var translation = {
                 },
 		"evaluation":
 		{
+		"your_opinion": "Il tuo parere conta molto per noi!",
+		"quality": "Qualità del prodotto",
+		"pricevalue": "Rapporto qualità/prezzo",
+		"delivery": "Modalità e termini di consegna",
+		"overallrating": "Giudizio complessivo (campo obbligatorio)",
+		"customerservice": "Servizio clienti (tempi di risposta, supporto e assistenza)",
+		"pros": "Aspetti positivi",
+		"pros_placeholder": "Scrivi qui i tuoi commenti positivi",
+		"cons": "Aspetti negativi",
+		"cons_placeholder": "Scrivi qui i tuoi commenti negativi",
+		"submit": "Invia",
 		"thank_you": "Grazie per avere lasciato la tua opinione!",
-		"invalid_evaluation": "Valutazione incompleta"
+		"invalid_evaluation": "Valutazione incompleta",
+		"missing_overall": "Manca il giudizio complessivo."
 		},
                 "homepage":{
                     "discoversuppliers":"Scopri",

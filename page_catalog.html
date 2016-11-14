@@ -695,13 +695,16 @@
                         break;
                     }
                 }
+                
                 var compiled = cacheCompile(templateid, obj);
+                                                
                 $(target).html(compiled);
+                
                 $(target).localize();
             }
         }
 
-        function getsupplierinfo(url, templateid, target) {
+        function getsupplierinfo(url, templateid, target, cb) {
 
             $.get(url, function (data) {
 
@@ -727,6 +730,11 @@
                 $(target).html(compiled);
 
                 $(target).localize();
+                
+                if(cb !== undefined)
+                {
+                  cb();
+                }
 
             });
         }
@@ -782,10 +790,13 @@
             if (logged) {
                 $("#sidebar").show();
             }
+            
+            var cbFav = function(){
+              setsupplierfavoritestatus(getcutomerfavoritesURL, "supplier_favorite_template", "#starBlock");
+            };
 
 
-            getsupplierinfo(getsupplierURL, "supplier-info_template", "#supplier-info")
-            setsupplierfavoritestatus(getcutomerfavoritesURL, "supplier_favorite_template", "#starBlock");
+            getsupplierinfo(getsupplierURL, "supplier-info_template", "#supplier-info", cbFav)            
             getfiles(getfilesURL, "filetable", '#files_container');
 
             $("body").localize();
