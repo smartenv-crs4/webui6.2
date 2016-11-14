@@ -181,7 +181,11 @@ var translation = {
                     "more": "More",
                     "less": "Less",
                     "pdf": "Pdf file",
-                    "placeholder": "Search in catalog..."
+                    "placeholder": "Search in catalog...",
+                    "deliveryIn" : "Delivery in",
+                    "atleast" : "At least",
+                    "atmost" : "At most",
+                    "days" : "days"
                 },
                 "pagination": {
                     "next": "Next",
@@ -407,7 +411,11 @@ var translation = {
                     "more": "Leggi tutto",
                     "less": "Meno",
                     "pdf": "File pdf",
-                    "placeholder": "Cerca nel catalogo..."
+                    "placeholder": "Cerca nel catalogo...",
+                    "deliveryIn" : "Disponibile in",
+                    "atleast" : "Almeno",
+                    "atmost" : "Massimo",
+                    "days":"giorni"
                 },
                 "pagination": {
                     "next": "Prossima",

@@ -285,12 +285,21 @@
                             {{#if ../isSupplier}}
                             <li><a href="#"><i class="  fa fa-edit"></i></a></li>
                             {{/if}}
-                            <li><a href="#"><i class="expand-list rounded-x fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="expand-list rounded-x fa fa-globe"></i></a></li>
                             <li><a href="#"><i class="expand-list rounded-x fa fa-photo"></i></a></li>
                             <li><a href="#"><i class="expand-list rounded-x fa fa-star"></i></a></li>
                         </ul>
                     </div>
+
+
+
                 </div><!--/end media media v2-->
+                <ul class="list-inline share-list">
+                    <li><i class="fa fa-chevron-up"></i><span data-i18n="catalog.atleast"></span> {{minNum}} </li>
+                    <li><i class="fa fa-chevron-down"></i><span data-i18n="catalog.atmost"></span> {{maxNum}} </li>
+                    <li><i class="fa fa-calendar-o"></i><span data-i18n="catalog.deliveryIn"></span> {{availability}} <span data-i18n="catalog.days"></span> </li>
+                    <li><i class="fa fa-euro"></i><span> {{price}}€ per <span data-i18n="rfq.{{unit}}"></span></span></li>
+                </ul>
                 {{/each}}
 
 
