@@ -236,22 +236,15 @@
 <!--Single new Request -->
 <script id="single_new_rfq_template" type="text/x-handlebars-template">
 <div id="rfq_new_{{totalrequests}}" class="row row-request" >
-    <section class="col col-3">
+    <section class="col col-6">
         <label class="label" data-i18n="catalog.products"></label>
         <label class="select">
             <select class="product-list-rfq " name="product">
                 {{#each products}}
-                <option  value={{this._id}}>{{this.name}}</option>
+                <option  value={{this._id}}  data-unit="{{this.unit}}">{{this.name}}</option>
                 {{/each}}
             </select>
             <i></i>
-        </label>
-    </section>
-    <section class="col col-3">
-        <label class="label" data-i18n="rfq.requestQuote"></label>
-        <label class="input">
-            <i class="icon-append fa fa-eur"></i>
-            <input type="text" name="quote" class="newquote" data-i18n="[placeholder]rfq.requestQuote">
         </label>
     </section>
 
@@ -264,15 +257,8 @@
     </section>
     <section class="col col-2">
         <label class="label invisible" data-i18n="rfq.requestQuantity"></label>
-        <label class="select">
-            <select class="new-qnty-unity" name="measurement">
-                {{#each munits}}
-                <option value={{this}} data-i18n="rfq.{{this}}"></option>
-                {{/each}}
+        <span data-i18n="rfq.{{products.0.unit}}"></span>
 
-            </select>
-            <i></i>
-        </label>
     </section>
     <label class="label invisible" data-i18n="rfq.requestQuantity"></label>
  <button aria-hidden="true" data-dismiss="alert" class="close col col-1" type="button" onclick="deleteRowRequest('rfq_new_{{totalrequests}}')">×</button>

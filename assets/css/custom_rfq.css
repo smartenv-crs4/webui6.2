@@ -55,12 +55,12 @@
 }
 
 
-.rfq *{
+
+.header-info-rfq{
+
     color: #005493!important;
 
 }
-
-
 
 .color-success{
     color:#72c02c!important;
@@ -122,16 +122,13 @@
     color: #585f69;
 }
 
-.rfq button{
-   color:#fff!important;
-}
 
 .rfq-notify{
     padding:5px;
 }
 
 .rfq-select{
-    border-width:0px!important;
+    margin-left:1em;
 
 }
 
@@ -143,12 +140,14 @@
 }
 .rfq-select-label{
     width:75px!important;
-    float:right;
+   /* float:right;*/
+    float:left;
 }
 
 .rfq-select-form{
     margin-left:3px;
-    float:right;
+    /* float:right;*/
+    float:left;
 }
 .cont-list-messages, #accordion-panel{
     max-height: 550px!important;
@@ -156,6 +155,29 @@
 
 }
 
+.rfq a{
+   color: #555;
+}
+
+.rfq .share-list{
+    margin-top:1em;
+}
+
+.rfq .alert-blocks{
+     padding:0px;
+ }
+
+.rfq .list-inline{
+    margin-left:0px;
+}
+
+
+.rfq-info-product{
+    background-color: #eeeeee;
+    margin-top:.5em;
+    margin-bottom:.5em;
+    padding:.5em;
+}
 .button-new-rfq{
     margin: 15px;
     padding-bottom:15px;
@@ -191,9 +213,10 @@ margin-left: 1em;
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
-    float:right;
-    /* -webkit-box-orient: vertical;
-     -webkit-line-clamp: 1;*/
+    float:left;
+    /*   float:right;
+      /* -webkit-box-orient: vertical;
+       -webkit-line-clamp: 1;*/
     max-width: 100px;
     cursor: pointer; cursor: hand;
 }

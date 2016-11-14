@@ -199,7 +199,7 @@
         <div class="panel-group acc-v1" id="accordion-panel">
             {{#each requests}}
             {{> request completed=../completed expired=../expired currentUser=../currentUser customer=../customer
-            supplier=../supplier _id_c=../_id munits=../measureunits}}
+            supplier=../supplier _id_c=../_id}}
 
             {{/each}}
         </div>
@@ -254,7 +254,7 @@
             <h4 class="panel-title">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-panel"
                    href="#collapse-{{inc @index}}">
-                    {{inc @index}} - RFQ <span data-i18n="rfq.requestSubject"></span>: {{product.name}}
+                    {{inc @index}} - RFQ <span  data-i18n="rfq.requestSubject"></span>: {{product.name}}
                     {{#if_eq_or_eq status 'pending' status 'acceptedByS'}}
                     <i class="fa fa-exclamation-circle fa-lg pull-right"></i>
                     {{/if_eq_or_eq}}
@@ -273,84 +273,58 @@
                 <img class="rounded-x" src="http://seidue.crs4.it:3015/{{product._id}}/{{product.images.[0].name}}_o.jpg"
                 onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'" alt="">
              <!--   <img class="rounded-x" src={{productLogo product}} alt="">-->
-                <strong class="service-heading">{{product.name}}</strong>
+                <strong  class="header-info-rfq service-heading">{{product.name}}</strong>
                 <p>
                 <h3 class="heading-xs">{{formatDate dateIn}}</h3></p>
                 <hr>
+                <ul class="rfq-info-product list-inline share-list">
+                    <li><i class="header-info-rfq fa fa-chevron-up"></i><span data-i18n="catalog.atleast"></span> {{product.minNum}} </li>
+                    <li><i class="header-info-rfq fa fa-chevron-down"></i><span data-i18n="catalog.atmost"></span> {{product.maxNum}} </li>
+                </ul>
+
+               <!-- <ul class="list-inline news-v1-info">
+                    <li><span>By</span> <a href="#">Tina Kruiger</a></li>
+                    <li>|</li>
+                    <li><i class="fa fa-clock-o"></i> July 02, 2014</li>
+                    <li class="pull-right"><a href="#"><i class="fa fa-comments-o"></i> 22</a></li>
+                </ul>-->
                 <div class="clearfix margin-bottom-10"></div>
 
                 <div class="row margin-bottom-20">
-                    <div class="col-xs-4 service-in">
-                        <strong data-i18n="rfq.requestQuote">Quote</strong>
-                        <h4 class="counter quote">
-                            {{#if_eq_or_eq completed 'true' expired 'true'}}
-                            <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text" >{{quote}}</a>
-                            {{else}}
-                            {{#if_eq_or_eq status 'acceptedByC' status 'rejectedByC'}}
-                            <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text" >{{quote}}</a>
-                            {{/if_eq_or_eq}}
-                            {{#if_eq status 'pending'}}
-                            <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq
-                               currentUser
-                            'supplier'}}class="editable-field" {{/if_eq}} data-type="text">{{quote}}</a>
-                            {{/if_eq}}
-                            {{#if_eq status 'acceptedByS'}}
-                            <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq
-                               currentUser
-                            'customer'}}class="editable-field" {{/if_eq}} data-type="text">{{quote}}</a>
-                            {{/if_eq}}
-                            {{#if_eq status 'rejectedByS'}}
-                            <a id="quote-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" data-type="text" >{{quote}}</a>
-                            {{/if_eq}}
-                            {{/if_eq_or_eq}}
-                            <span>€</span>
 
-                        </h4>
-                    </div>
-                    <div class="col-xs-8 text-right service-in">
-                        <strong data-i18n="rfq.requestQuantity">Quantity</strong>
+                    <div class="col-xs-12 text-left service-in">
+                        <strong class="header-info-rfq" data-i18n="rfq.requestQuantity">Quantity</strong>
                         <h4 class="counter quantity">
-                            <form class="sky-form rfq-select-form">
-                                <label class="select rfq-select-label">
-                                    <select id="selectqnty-{{inc @index}}" disabled class="rfq-select">
-                                        {{#each munits}}
-                                        <option {{#if_eq this
-                                        '--'}} {{#unless ../quantity}} selected="" {{/unless}} disabled {{/if_eq}}
-                                        {{#if_eq this ../quantity.unity}} selected="" {{/if_eq}} value={{this}}
-                                        data-i18n="rfq.{{this}}"></option>
-                                        {{/each}}
-                                    </select>
-                                    <i></i>
-                                </label>
-                            </form>
+
 
                             {{#if_eq_or_eq completed 'true' expired 'true'}}
                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText"
-                               data-type="text">{{quantity.number}}</a>
+                               data-type="text"  data-min={{product.minNum}}  data-max={{product.maxNum}}>{{quantity}}</a>
 
                             {{else}}
                             {{#if_eq_or_eq status 'acceptedByC' status 'rejectedByC'}}
                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText"
-                               data-type="text" ">{{quantity.number}}</a>
+                               data-type="text"  data-min={{product.minNum}}  data-max={{product.maxNum}}>{{quantity}}</a>
                             {{/if_eq_or_eq}}
                             {{#if_eq status 'pending'}}
                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq
                                currentUser
                             'supplier'}}class="editable-field"
-                            {{/if_eq}}" data-type="text">{{quantity.number}}</a>
+                            {{/if_eq}}" data-type="text"  data-min={{product.minNum}}  data-max={{product.maxNum}}>{{quantity}}</a>
                             {{/if_eq}}
                             {{#if_eq status 'acceptedByS'}}
                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq
                                currentUser
                             'customer'}}class="editable-field"
-                            {{/if_eq}} data-type="text">{{quantity.number}}</a>
+                            {{/if_eq}} data-type="text"  data-min={{product.minNum}}  data-max={{product.maxNum}}>{{quantity}}</a>
                             {{/if_eq}}
                             {{#if_eq status 'rejectedByS'}}
                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText"
-                               data-type="text">{{quantity.number}}</a>
+                               data-type="text"  data-min={{product.minNum}}  data-max={{product.maxNum}}>{{quantity}}</a>
                             {{/if_eq}}
                             {{/if_eq_or_eq}}
 
+                            <span class="rfq-select" data-i18n="rfq.{{product.unit}}">  </span>
 
                         </h4>
                     </div>
@@ -358,7 +332,7 @@
 
                 <div class="statistics">
 
-                    <h3 class="heading-xs"><span data-i18n="rfq.requestStatus"></span> <span class="status-rfq pull-right
+                    <h3 class="heading-xs"><span class="header-info-rfq" data-i18n="rfq.requestStatus"></span> <span class="status-rfq pull-right
                 {{#if_eq status 'pending'}} color-info {{else}} {{#if_eq_or_eq status 'rejectedByC' status 'rejectedByS' }} color-danger {{ else }}
                 color-success {{/if_eq_or_eq}} {{/if_eq}}
                 " id="status-{{inc @index}}"
@@ -367,8 +341,8 @@
                     </h3>
 
                     <hr>
-                    <small><span data-i18n="rfq.requestLastModification"></span> <strong
-                            id="last-modify-{{inc @index}}"> {{lastModification status
+                    <small><span   data-i18n="rfq.requestLastModification"></span> <strong
+                            class="header-info-rfq" id="last-modify-{{inc @index}}"> {{lastModification status
                         customer supplier}}</strong></small>
 
 
@@ -378,13 +352,13 @@
 
                 <div id="req-buttons-{{inc @index}}" class="request_buttons">
                     <button id="cancel-req-{{inc @index}}" class="hidden btn-u btn-u-default"
-                            onclick="resetRequest('{{inc @index}}','{{quote}}','{{quantity.number}}','{{quantity.unity}}')"
+                            onclick="resetRequest('{{inc @index}}','{{quantity}}')"
                             type="button" data-i18n="rfq.requestCancel">
                     </button>
                     {{#if_eq currentUser 'supplier'}}
 
                     <button id="save-accept-req-{{inc @index}}" class="hidden btn-u btn-u-sea" type="button"
-                            onclick="acceptBySupplier('{{_id_c}}','{{_id}}','{{inc @index}}','{{quote}}','{{quantity}}','{{supplier.name}}')"
+                            onclick="acceptBySupplier('{{_id_c}}','{{_id}}','{{inc @index}}','{{quantity}}','{{supplier.name}}')"
                             data-i18n="rfq.requestSaveAccept">
 
                     </button>
@@ -392,7 +366,7 @@
                     <button id="accept-{{inc @index}}"
                             class="default-button {{#if_not_eq status 'pending'}} hidden {{/if_not_eq}} accept-rfq btn-u btn-u-green"
                             type="button"
-                            onclick="acceptBySupplier('{{_id_c}}','{{_id}}','{{inc @index}}','{{quote}}','{{quantity}}','{{supplier.name}}')"
+                            onclick="acceptBySupplier('{{_id_c}}','{{_id}}','{{inc @index}}','{{quantity}}','{{supplier.name}}')"
                             data-i18n="rfq.requestAccept">
                     </button>
                     <button id="reject-{{inc @index}}"
@@ -483,51 +457,6 @@
 </script>
 <!--End Template RFQ Message Auto-->
 
-
-<!--Template RFQ New Request-->
-
-<script id="rfq_new_request_template" type="text/x-handlebars-template">
-
-    <section>
-        <label class="select">
-            <select id="product-list-rfq" name="product">
-                {{#each products}}
-                <option value={{this._id}}>{{this.name}}</option>
-                {{/each}}
-            </select>
-            <i></i>
-        </label>
-    </section>
-    <!--  </div>-->
-
-    <div class="row">
-        <section class="col col-4">
-            <label class="input">
-                <i class="icon-append fa  fa-briefcase"></i>
-                <input type="text" name="quantity" id="new-qnty" data-i18n="[placeholder]rfq.requestQuantity">
-            </label>
-        </section>
-        <section class="col col-2">
-            <label class="select">
-                <select id="new-qnty-unity" name="measurement" disabled>
-                    {{#each munits}}
-                    <option value={{this}} data-i18n="rfq.{{this}}"></option>
-                    {{/each}}
-
-                </select>
-                <i></i>
-            </label>
-        </section>
-        <section class="col col-6">
-            <label class="input">
-                <i class="icon-append fa fa-eur"></i>
-                <input type="text" name="quote" id="new-quote" data-i18n="[placeholder]rfq.requestQuote">
-            </label>
-        </section>
-
-    </div>
-</script>
-<!--End Template RFQ New Request-->
 
 
 </body>

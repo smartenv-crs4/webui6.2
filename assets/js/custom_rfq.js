@@ -213,7 +213,6 @@ function getConversationRequestsAndMessages()
                     var userType =sessionStorage.type;
                     data.currentUser = userType;
 
-                    data.measureunits = ['--','unty', 'ltr', 'kg','g','mtr', 'fot','lbr'];
                     console.log(data);
                     var theCompiledHtml = theTemplate(data);
 
@@ -225,12 +224,13 @@ function getConversationRequestsAndMessages()
                     else
                         $("#inbox-rfq-header-name").text(data.customer.name);
 
-                    if(data.expired){
-                        $("#rfq-status-header").text("Expired");
-                        $("#rfq-status-header").addClass("label label-danger");
-                    }else if(data.completed){
+                    if(data.completed){
                         $("#rfq-status-header").text("Completed");
                         $("#rfq-status-header").addClass("label label-success");
+                    }
+                   else  if(data.expired){
+                        $("#rfq-status-header").text("Expired");
+                        $("#rfq-status-header").addClass("label label-danger");
                     }
                     else{
                         $("#rfq-status-header").text("Pending");
@@ -241,7 +241,7 @@ function getConversationRequestsAndMessages()
 
                     $("body").localize();
                     setEditableField(".editable-field");
-                    setEnableSelect();
+                   // setEnableSelect();
                     addTooltipField();
                     $("body").localize();
 
@@ -320,13 +320,8 @@ function getConversationRequestsAndMessages()
 }
 
 function setEditableField(field){
-    $(field).each(function(){
-        var name_field = $(this).attr("id").split("-")[0];
 
-        if(name_field == "quote")
-            $(this).editable("option","placement","right");
-    });
-
+    $(field).editable("option","placement","right");
 
     $(field).editable("enable");
 
@@ -345,11 +340,11 @@ function setEditableField(field){
 
 
     $(field).editable('option', 'validate', function(v) {
-            var f = $(".editable-open:first").attr("id");
+               var f = $(".editable-open:first").attr("id");
             var id_field = f.split("-")[1];
             var name_field = f.split("-")[0];
-
-            if(name_field== "quantity")
+            console.log(f);
+ /*          if(name_field== "quantity")
             if(!v){
                 $("#selectqnty-"+id_field).val('--');
                 $("#selectqnty-"+id_field).prop('disabled','disabled');
@@ -359,11 +354,13 @@ function setEditableField(field){
                     $("#selectqnty-"+id_field).val('unty');
                 $("#selectqnty-"+id_field).prop('disabled',false);
             }
+*/
 
-
-        if(v && (!$.isNumeric(v) || v < 0)){
+        if(v && (!$.isNumeric(v) || v < 0  )){
             jQuery.jGrowl(i18next.t("rfq.NaN"), {theme:'bg-color-red', life: 5000});
             return i18next.t("rfq.NaN");
+        }else if(!isValidQuantity(v,f)){
+            return i18next.t("rfq.NaVN");
         }
 
     });
@@ -372,31 +369,21 @@ function setEditableField(field){
 
 }
 
-function setEnableSelect(){
+function isValidQuantity(q, f){
+    var min = $("#"+f).data("min");
+    var max = $("#"+f).data("max");
 
-    $( ".editable-disabled").prevAll("form").find("select:first").each(function(index){
-        $(this).prop('disabled', 'disabled');
+    console.log(min);
+    console.log(max);
 
-
-    });
-    $( ".editable:not('.editable-disabled')").prevAll("form").find("select:first").each(function(index){
-        $(this).prop('disabled', false);
-    });
-    $( ".editable-empty").prevAll("form").find("select:first").each(function(index){
-        $(this).prop('disabled', 'disabled');
-
-    });
-
-    $(".rfq-select").change(onSaveEditableField);
-
+    if(q>=min && q<=max) return true;
+    else return false;
 }
 
 
 function onSaveEditableField(e, params){
     var id = (e.target.id);
     id = id.split("-")[1];
-
-
 
     $('#unsaved_'+ id).removeClass('hidden');
     $("#cancel-req-"+id).removeClass("hidden");
@@ -418,16 +405,16 @@ function addTooltipField(){
 
 }
 
-function resetRequest(num_req, old_quote, old_quantity, old_unity){
+function resetRequest(num_req, old_quantity){
 
     $('#unsaved_'+ num_req).addClass('hidden');
     $("#cancel-req-"+num_req).addClass("hidden");
     $("#save-accept-req-"+num_req).addClass("hidden");
-    $('#quote-'+num_req).editable("setValue",old_quote);
+   // $('#quote-'+num_req).editable("setValue",old_quote);
     $('#quantity-'+num_req).editable("setValue",old_quantity);
-    $('#selectqnty-'+num_req).val(i18next.t("rfq."+old_unity)); //TO_CHANGE
-    $('#selectqnty-'+num_req).attr("value",old_unity); //TO_CHANGE
-    if(old_unity == '--') $('#selectqnty-'+num_req).prop("disabled","disabled");
+   // $('#selectqnty-'+num_req).val(i18next.t("rfq."+old_unity)); //TO_CHANGE
+   // $('#selectqnty-'+num_req).attr("value",old_unity); //TO_CHANGE
+   // if(old_unity == '--') $('#selectqnty-'+num_req).prop("disabled","disabled");
 
     $("#accept-"+num_req).removeClass("hidden");
     $("#reject-"+num_req).removeClass("hidden");
@@ -437,27 +424,16 @@ function resetRequest(num_req, old_quote, old_quantity, old_unity){
 
 function updateRequest(rqs){
     var num_req = $("#rfq-panel-"+rqs._id).attr("data-value");
-    var quote  =  "";
+   // var quote  =  "";
     var quantity =  "";
-    var unit = "--";
-    if(rqs.quote){
-        quote = rqs.quote;
-        $("#rfq-panel-"+rqs._id+" .quote a").editable("setValue",rqs.quote);
-    }
-    else $("#rfq-panel-"+rqs._id+" .quote a").editable("setValue","");
+   $("#rfq-panel-"+rqs._id+" .quote a").editable("setValue","");
 
     if(rqs.quantity){
-        if(rqs.quantity.number) quantity = rqs.quantity.number;
-        unit = rqs.quantity.unity;
-        $("#rfq-panel-"+rqs._id+" .quantity a").editable("setValue",rqs.quantity.number);
-        $("#selectqnty-"+num_req).val(rqs.quantity.unity);
-    }
-    else{
-
-        $("#selectqnty-"+num_req).prop('disabled','disabled');
+        if(rqs.quantity) quantity = rqs.quantity;
+        $("#rfq-panel-"+rqs._id+" .quantity a").editable("setValue",rqs.quantity);
     }
 
-    $("#cancel-req-"+num_req).attr("onclick","resetRequest('"+num_req+"','"+quote+"','"+quantity+"','"+unit+"')");
+    $("#cancel-req-"+num_req).attr("onclick","resetRequest('"+num_req+"','"+quantity+"')");
 
 
     var s = formatStatus(rqs.status);
@@ -479,7 +455,6 @@ function updateRequest(rqs){
         $("#req-buttons-"+num_req+" .default-button").addClass("hidden");
         $("#cancel-req-"+num_req).addClass("hidden");
         $("#save-accept-req-"+num_req).addClass("hidden");
-        $("#quote-"+num_req).editable('disable');
         $("#quantity-"+num_req).editable('disable');
     }
     else if((rqs.status == 'pending'&& cuser == 'supplier' )||
@@ -487,8 +462,8 @@ function updateRequest(rqs){
         //$("#req-buttons-"+num_req).removeClass("hidden");
 
         $("#req-buttons-"+num_req+" .default-button").removeClass("hidden");
-        setEditableField("#quote-"+num_req);
         setEditableField("#quantity-"+num_req);
+
 
     }
 
@@ -514,7 +489,7 @@ function updateRequest(rqs){
 
     $("a[data-parent='#accordion-"+num_req+"'] i").
     replaceWith("<i class='fa "+iconPanelRqs+" fa-lg pull-right'></i>");
-    setEnableSelect();
+   // setEnableSelect();
 
     addTooltipField();
 }
@@ -558,14 +533,12 @@ function modifyByCustomer(id_conv, id_req, num_req, name) {
     {
         window.location.replace("page_login_and_registration.html");
     }
-    var quote = $("#quote-"+num_req).text();
     var quantity = $("#quantity-"+num_req).text();
-    var unity = $("#selectqnty-"+num_req).attr("value");
 
-    var data = {'quantity' : {"number":quantity,"unity":unity}, 'quote' : quote};
+    var data = {'quantity' :quantity};
     for(var k in data){
         if($("#"+k+"-"+num_req).hasClass("editable-empty")){
-            if(k == "quantity") data[k]={"number":"","unity":'void'}
+            if(k == "quantity") data[k]="";
             else data[k]="";
         }
 
@@ -603,21 +576,19 @@ function modifyByCustomer(id_conv, id_req, num_req, name) {
 
 }
 
-function acceptBySupplier(id_conv, id_req, num_req, old_quote, old_quantity, name) {
+function acceptBySupplier(id_conv, id_req, num_req, old_quantity, name) {
     var url = _localServiceUrl + "conversations/"+ id_conv+"/requests/"+id_req+"/actions/suppaccept";
     if(sessionStorage.userId == undefined)
     {
         window.location.replace("page_login_and_registration.html");
     }
-    var quote = $("#quote-"+num_req).text();
     var quantity = $("#quantity-"+num_req).text();
-    var unity = $("#selectqnty-"+num_req).attr("value");
 
-    var data = {'quantity' : {"number":quantity,"unity":unity}, 'quote' : quote};
 
+    var data = {'quantity' :quantity};
     for(var k in data){
         if($("#"+k+"-"+num_req).hasClass("editable-empty")){
-            if(k == "quantity") data[k]={"number":"","unity":'void'};
+            if(k == "quantity") data[k]="";
             else data[k]="";
         }
 
