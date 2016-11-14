@@ -261,7 +261,8 @@
                 <div class="media media-v2">
                     <a class="pull-left" href="#">
                         <img class="media-s100 img-circle"
-                             src="http://seidue.crs4.it:3015/{{trim _id}}/{{trim images.[0].name}}_o.jpg"
+                             data-oldsrc="http://seidue.crs4.it:3015/{{trim _id}}/{{trim images.[0].name}}_o.jpg" 
+                             src="http://seidue.crs4.it:3011/api/v1/file/{{trim images.[0].imageId}}?tag=t"
                              onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'"
                              alt="">
                     </a>
