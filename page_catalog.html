@@ -688,12 +688,9 @@
                 }
                 
                 var compiled = cacheCompile(templateid, obj);
-                
-                console.log(target)
-                console.log(jQuery(target).length)
-                console.log(jQuery(target).html())
+                                                
                 $(target).html(compiled);
-                console.log(jQuery(target).html())
+                
                 $(target).localize();
             }
         }
