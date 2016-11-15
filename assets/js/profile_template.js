@@ -116,6 +116,7 @@ var supplierProfileTemplate = `
       </a>
     </span -->
   </dd>
+  <hr>
   <dt><strong data-i18n="profile.referenceName"></strong></dt>
   <dd>
     <a class="editable editable-click" data-name="references.name" data-i18n="[data-emptytext]profile.emptyText" id="ed-referencename" data-type="text" href="#">{{references.name}}</a>
@@ -125,8 +126,6 @@ var supplierProfileTemplate = `
   <dd>
     <a class="editable editable-click" data-name="references.surname" data-i18n="[data-emptytext]profile.emptyText" id="ed-referencesurname" data-type="text" href="#">{{references.surname}}</a>    
   </dd>
-  <hr>
-  
   <hr>
   <dt><strong data-i18n="profile.address"></strong></dt>
   <dd contenteditable="true">
