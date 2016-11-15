@@ -239,9 +239,9 @@
     <section class="col col-6">
         <label class="label" data-i18n="catalog.products"></label>
         <label class="select">
-            <select class="product-list-rfq " name="product">
+            <select class="product-list-rfq " id="sel-new-{{totalrequests}}" name="product" onchange="changeUnit({{totalrequests}})">
                 {{#each products}}
-                <option  value={{this._id}}  data-unit="{{this.unit}}">{{this.name}}</option>
+                <option  value={{this._id}}  data-min="{{this.minNum}}"  data-max="{{this.maxNum}}" data-unit="{{this.unit}}">{{this.name}}</option>
                 {{/each}}
             </select>
             <i></i>
@@ -252,12 +252,12 @@
         <label class="label label-new-quantity" data-i18n="rfq.requestQuantity"></label>
         <label class="input">
             <i class="icon-append fa  icon-finance-076"></i>
-            <input type="text" name="quantity" class="newqnty" data-i18n="[placeholder]rfq.requestQuantity">
+            <input type="text" id="quantity-new-{{totalrequests}}" name="quantity" class="newqnty"  data-rule-min="{{products.0.minNum}}"  data-rule-max="{{products.0.maxNum}}" data-i18n="[placeholder]rfq.requestQuantity">
         </label>
     </section>
     <section class="col col-2">
         <label class="label invisible" data-i18n="rfq.requestQuantity"></label>
-        <span data-i18n="rfq.{{products.0.unit}}"></span>
+        <span class="unit-info" id="unity-new-{{totalrequests}}" data-i18n="rfq.{{products.0.unit}}"></span>
 
     </section>
     <label class="label invisible" data-i18n="rfq.requestQuantity"></label>

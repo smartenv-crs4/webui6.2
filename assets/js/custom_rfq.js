@@ -474,11 +474,11 @@ function updateRequest(rqs){
 
     });
 
-    if(rqs.status == 'pending'){
+    if(rqs.status == 'pending' || rqs.status == 'acceptedByS'){
         iconPanelRqs =  "fa-exclamation-circle";
         $("#status-"+num_req).removeClass(classcolor).addClass("color-info");
     }
-    else if(rqs.status == 'acceptedByC' || rqs.status == 'acceptedByS'){
+    else if(rqs.status == 'acceptedByC' ){
         iconPanelRqs =  "fa-check-circle";
         $("#status-"+num_req).removeClass(classcolor).addClass("color-success");
     }
@@ -487,7 +487,9 @@ function updateRequest(rqs){
         $("#status-"+num_req).removeClass(classcolor).addClass("color-danger");
     }
 
-    $("a[data-parent='#accordion-"+num_req+"'] i").
+    console.log(rqs.status);
+
+    $("a[href='#collapse-"+num_req+"'] i").
     replaceWith("<i class='fa "+iconPanelRqs+" fa-lg pull-right'></i>");
    // setEnableSelect();
 
@@ -823,7 +825,6 @@ function openNewRfq(){
         //
         var data = {};
         data.currentuser = userType;
-        data.munits = ['unty', 'ltr', 'kg','g','mtr', 'fot','lbr'];
 
         data.idS = idS;
         data.nameS = nameS;
@@ -895,6 +896,26 @@ function shorten(text, maxLength) {
 }
 
 
+function changeUnit(ele){
+    console.log($("#sel-new-"+ele+" option:selected"));
+    var ele_q ="#quantity-new-"+ele;
+    var min = $("#sel-new-"+ele+" option:selected").data('min');
+    console.log(min);
+    var max = $("#sel-new-"+ele+" option:selected" ).data('max');
+    var unit = $("#quantity-new-"+ele).data('unit');
+
+    $("#unity-new-"+ele).text(i18next.t("rfq."+unit));
+
+    $(ele_q).val("");
+
+    $(ele_q).data('rule-min',min);
+
+    $(ele_q).data('rule-max',max);
+
+
+    $('#form-new-rfq').valid();
+}
+
 function initFormNewRfq(){
     // Validation
     $("#form-new-rfq").validate({
@@ -905,12 +926,9 @@ function initFormNewRfq(){
             {
                 required: true
             },
-            quote:
-            {
-                digits:true
-            },
             quantity:{
-                digits:true
+                digits:true,
+             //   max: function(){ $('.row-request')  }
             }
         },
         // Messages for form validation
@@ -974,16 +992,13 @@ function saveConversation(){
                 var select =  $(this).find(".product-list-rfq:eq(0)").val();
                 var rqnty =$(this).find(".newqnty:eq(0)").val();
                 var runity = $(this).find(".new-qnty-unity:eq(0)").val();
-                var rquote = $(this).find(".newquote:eq(0)").val();
 
                 var request = {
                     "product":select,
                     "status":"pending"
                 };
 
-                if(rqnty) request.quantity = {"number":rqnty,
-                    "unity":runity};
-                if(rquote) request.quote = rquote;
+                if(rqnty) request.quantity =rqnty;
                 requests.push(request);
 
             });
