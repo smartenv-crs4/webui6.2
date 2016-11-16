@@ -15,17 +15,42 @@ var arr_par = get_par('url');
 
 
 
-/******************************************************/
-/* Document ready */
+//******************************************************/
+// Document ready */
 
 $( document).ready(function() {
     
     autoCompleteCat("categories");
+    $("#categories").typeahead('val', '');
     
-    // set degli input della pagina
-    $('#product').val(arr_par[0].name);
-    $('#categories').attr("cat-id", arr_par[0].categories);
-    $('#categories').attr("cat-name", arr_par[0].cat_name);
+    
+    // set degli input della pagina in caso di provvenienza da altre pagine
+    if (arr_par[0].name)  
+    {
+        $('#product').val(arr_par[0].name);
+    }
+    if (arr_par[0].categories)
+    {
+        $('#categories').data("cat-id", arr_par[0].categories);
+        
+    }
+    if (arr_par[0].cat_name)
+    {
+        $('#categories').data("cat-name", arr_par[0].cat_name);
+        $("#categories").typeahead('val',arr_par[0].cat_name);
+    }
+    
+    
+    // refresh della pagina 
+    
+    if ($('#product').val())
+        arr_par[0].name = $('#product').val();
+    
+    
+    if ($('#categories').attr('#cat-id'))
+        arr_par[0].categories = $('#categories').data('cat-id');
+    if ($('#categories').attr('#cat-name'))
+        arr_par[0].cat_name = $('#categories').data('cat-name');
     
     // creazione della lista dei supplier
     get_list(arr_par);
@@ -153,8 +178,6 @@ function render_paginate(tot_page, act_page, arr_par)
 {
    var_par = get_par_string(arr_par);
     
-    $('#divSearch_table').css('display', 'block');
-                                          
     
     var str = '<div class="text-left" id="divPagination">'
     + '<ul class="pagination"><li><a ';
@@ -272,6 +295,14 @@ function render_searchInput()
 // estrae tutti i supplier associati ai prodotti cercati
 function get_list(arr_par)
 {
+    //console.log($("#categories").typeahead('val'));
+                                              if ($("#categories").typeahead('val') == '')
+                                              {
+                                                  arr_par[0].cat_name = '';
+                                                 arr_par[0].categories = ''; 
+                                                 console.log(arr_par);
+                                              }
+    
     var_par =get_par_string(arr_par);
     
     $.ajax({
@@ -297,21 +328,29 @@ function get_list(arr_par)
                                       
                                       if (data.total > 0)
                                       {
+                                          $('#divSearch_table').css('display', 'block');
+                                          $('#divNoResult').css('display', 'none');
+                                          
+                                           
+                                          
                                           render_row(data, arr_par);
                                           if (pages > 1)
                                           {
+                                             
+                                              
                                               render_paginate(pages, page, arr_par);
                                           }
                                           
                                           $("#divSearch_table").localize();
                                           
-                                      setTimeout($.unblockUI, 1000);      
+                                            
                                       }
                                       else
                                       {
                                           $('#divSearch_table').css('display', 'none');
                                           $('#divNoResult').css('display', 'block');
                                       }
+                                      setTimeout($.unblockUI, 500);
                                       
                                                                               
                                   },
