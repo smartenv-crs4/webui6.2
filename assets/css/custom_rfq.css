@@ -221,17 +221,6 @@ margin-left: 1em;
     cursor: pointer; cursor: hand;
 }
 
-.quote a:not(.editable-empty) {
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-    float:left;
-    /* -webkit-box-orient: vertical;
-     -webkit-line-clamp: 1;*/
-    max-width: 62px;
-    cursor: pointer; cursor: hand;
-}
 .rfq .tooltip{
  color: #fff!important;
 }

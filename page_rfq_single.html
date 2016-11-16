@@ -254,7 +254,7 @@
             <h4 class="panel-title">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-panel"
                    href="#collapse-{{inc @index}}">
-                    {{inc @index}} - RFQ <span  data-i18n="rfq.requestSubject"></span>: {{product.name}}
+                    {{inc @index}} - RFQ: <span>{{product.name}}</span>
                     {{#if_eq_or_eq status 'pending' status 'acceptedByS'}}
                     <i class="fa fa-exclamation-circle fa-lg pull-right"></i>
                     {{/if_eq_or_eq}}
@@ -274,20 +274,14 @@
                 onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'" alt="">
              <!--   <img class="rounded-x" src={{productLogo product}} alt="">-->
                 <strong  class="header-info-rfq service-heading">{{product.name}}</strong>
-                <p>
-                <h3 class="heading-xs">{{formatDate dateIn}}</h3></p>
+
+                <h3 class="heading-xs">{{formatDate dateIn}}</h3>
+
                 <hr>
                 <ul class="rfq-info-product list-inline share-list">
                     <li><i class="header-info-rfq fa fa-chevron-up"></i><span data-i18n="catalog.atleast"></span> {{product.minNum}} </li>
                     <li><i class="header-info-rfq fa fa-chevron-down"></i><span data-i18n="catalog.atmost"></span> {{product.maxNum}} </li>
                 </ul>
-
-               <!-- <ul class="list-inline news-v1-info">
-                    <li><span>By</span> <a href="#">Tina Kruiger</a></li>
-                    <li>|</li>
-                    <li><i class="fa fa-clock-o"></i> July 02, 2014</li>
-                    <li class="pull-right"><a href="#"><i class="fa fa-comments-o"></i> 22</a></li>
-                </ul>-->
                 <div class="clearfix margin-bottom-10"></div>
 
                 <div class="row margin-bottom-20">
@@ -308,19 +302,18 @@
                             {{/if_eq_or_eq}}
                             {{#if_eq status 'pending'}}
                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq
-                               currentUser
-                            'supplier'}}class="editable-field"
-                            {{/if_eq}}" data-type="text"  data-min={{product.minNum}}  data-max={{product.maxNum}}>{{quantity}}</a>
+                               currentUser 'supplier'}}class="editable-field"
+                            {{/if_eq}} data-type="text"  data-min="{{product.minNum}}"  data-max="{{product.maxNum}}" > {{quantity}}</a>
                             {{/if_eq}}
                             {{#if_eq status 'acceptedByS'}}
                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText" {{#if_eq
                                currentUser
                             'customer'}}class="editable-field"
-                            {{/if_eq}} data-type="text"  data-min={{product.minNum}}  data-max={{product.maxNum}}>{{quantity}}</a>
+                            {{/if_eq}} data-type="text"  data-min="{{product.minNum}}"  data-max="{{product.maxNum}}" >{{quantity}}</a>
                             {{/if_eq}}
                             {{#if_eq status 'rejectedByS'}}
                             <a id="quantity-{{inc @index}}" data-i18n="[data-emptytext]profile.emptyText"
-                               data-type="text"  data-min={{product.minNum}}  data-max={{product.maxNum}}>{{quantity}}</a>
+                               data-type="text"  data-min=""{{product.minNum}}"  data-max="{{product.maxNum}}">{{quantity}}</a>
                             {{/if_eq}}
                             {{/if_eq_or_eq}}
 
@@ -332,12 +325,10 @@
 
                 <div class="statistics">
 
-                    <h3 class="heading-xs"><span class="header-info-rfq" data-i18n="rfq.requestStatus"></span> <span class="status-rfq pull-right
+                    <h3 class="heading-xs"><span class="header-info-rfq" data-i18n="rfq.requestStatus"></span>
+                        <span class="status-rfq pull-right"
                 {{#if_eq status 'pending'}} color-info {{else}} {{#if_eq_or_eq status 'rejectedByC' status 'rejectedByS' }} color-danger {{ else }}
-                color-success {{/if_eq_or_eq}} {{/if_eq}}
-                " id="status-{{inc @index}}"
-                                                                                             value={{status}}
-                                                                                             data-i18n="rfq.{{status}}"></span>
+                color-success {{/if_eq_or_eq}} {{/if_eq}} id="status-{{inc @index}}" value={{status}} data-i18n="rfq.{{status}}"></span>
                     </h3>
 
                     <hr>
@@ -347,10 +338,11 @@
 
 
                 </div>
+                <div id="req-buttons-{{inc @index}}" class="request_buttons">
                 {{#if_eq completed false}}
                 {{#if_eq expired false}}
 
-                <div id="req-buttons-{{inc @index}}" class="request_buttons">
+
                     <button id="cancel-req-{{inc @index}}" class="hidden btn-u btn-u-default"
                             onclick="resetRequest('{{inc @index}}','{{quantity}}')"
                             type="button" data-i18n="rfq.requestCancel">
@@ -396,10 +388,10 @@
                             data-i18n="rfq.requestGiveup">
                     </button>
                     {{/if_eq}}
-                </div>
-                {{/if_eq}}
-                {{/if_eq}}
 
+                {{/if_eq}}
+                {{/if_eq}}
+                </div>
                 <small id="unsaved_{{inc @index}}" class="hidden">Change Unsaved</small>
             </div>
         </div>
