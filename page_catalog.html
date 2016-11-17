@@ -262,7 +262,7 @@
                     <a class="pull-left" href="#">
                         <img class="media-s100 img-circle"
                              data-oldsrc="http://seidue.crs4.it:3015/{{trim _id}}/{{trim images.[0].name}}_o.jpg" 
-                             src="http://seidue.crs4.it:3011/api/v1/file/{{trim images.[0].imageId}}?tag=t"
+                             src="{{imgUrl}}"
                              onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'"
                              alt="">
                     </a>
@@ -606,6 +606,18 @@
             }
             $.get(url, function (data) {
                 console.log(data);
+                for(var i in data.docs)
+                {                  
+                  if(data.docs[i].images.length > 0 && data.docs[i].images[0].imageId != undefined)
+                  {
+                    data.docs[i].imgUrl = _uploadMsUrl + data.docs[i].images[0].imageId + "?tag=t"; 
+                  }
+                  else
+                  {
+                    data.docs[i].imgUrl = "assets/img/team/img1-md.jpg";
+                  }
+                }
+                
                 var compiled = cacheCompile(templateid, {
                     products: data.docs,
                     isSupplier: currentSupplier
