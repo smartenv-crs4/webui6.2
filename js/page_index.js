@@ -5,11 +5,7 @@
        
     autoCompleteCat("category");     
 
-    $("#tags").val('');
-       $("#category").typeahead('val', ''); 
-       $("#product").val('');
-       $(".search_select").attr("checked", false);
-       $("#ckProduct").attr("checked", "true");
+
     
     $( "#btn_search" ).click(function(e) {
         
