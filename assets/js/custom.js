@@ -234,7 +234,11 @@ function getProfileInfo(async)
     {
       sessionStorage.type = data.type;
       sessionStorage.name = data.name;
-      sessionStorage.logo = data.logo;
+      
+      if(data.logo != undefined)
+      {
+        sessionStorage.logo;
+      }
 
 
     },
