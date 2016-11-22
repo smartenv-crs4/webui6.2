@@ -429,7 +429,7 @@ var translation = {
                 "less": "Meno",
                 "pdf": "File pdf",
                 "placeholder": "Cerca nel catalogo...",
-                "deliveryIn": "Disponibile in",
+                "deliveryIn": "Consegna in",
                 "atleast": "Almeno",
                 "atmost": "Massimo",
                 "days": "giorni",
