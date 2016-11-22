@@ -244,7 +244,7 @@
         </div>
     </div><!--/wrapper-->
     <!--=== Footer Version 1 ===-->
-    <div id="footer_p" ></div>
+    <div id="footer_p"></div>
     <!--=== End Footer Version 1 ===-->
 
 
@@ -261,23 +261,23 @@
                 <div class="media media-v2">
                     <a class="pull-left" href="#">
                         <img class="media-s100 img-circle"
-                             data-oldsrc="http://seidue.crs4.it:3015/{{trim _id}}/{{trim images.[0].name}}_o.jpg" 
+                             data-oldsrc="http://seidue.crs4.it:3015/{{trim _id}}/{{trim images.[0].name}}_o.jpg"
                              src="{{imgUrl}}"
                              onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'"
                              alt="">
                     </a>
                     <div class="media-body">
                         <div class="clearfix" style="overflow:hidden; ">
-                        <h4 class="media-heading">
-                            <strong style="display:block;max-width:50%;"><a href="#">{{name}}</a></strong>
+                            <h4 class="media-heading">
+                                <strong style="display:block;"><a href="#">{{name}}</a></strong>
+                            </h4>
                             {{#each categories}}
-                            {{#if @last}}
-                            <small data-i18n="categories.{{_id}}" style="display:block; max-width:50%;"></small>
-                            {{/if}}
+                            <h4>
+                                <small data-i18n="categories.{{_id}}" style="display:block;"></small>
+                            </h4>
                             {{/each}}
-
-                        </h4>
                         </div>
+
                         <p>
                         <div class="giveMeEllipsis blog-author-desc">{{description}}</div>
                         <a class="more" style="display:none" data-i18n="catalog.more"></a>
@@ -300,13 +300,14 @@
                     </div>
 
 
-
                 </div><!--/end media media v2-->
                 <ul class="list-inline share-list">
-                    <li><i class="fa fa-chevron-up"></i><span data-i18n="catalog.atleast"></span> {{minNum}} </li>
-                    <li><i class="fa fa-chevron-down"></i><span data-i18n="catalog.atmost"></span> {{maxNum}} </li>
-                    <li><i class="fa fa-calendar-o"></i><span data-i18n="catalog.deliveryIn"></span> {{availability}} <span data-i18n="catalog.days"></span> </li>
-                    <li><i class="fa fa-euro"></i><span> {{price}}€ per <span data-i18n="rfq.{{unit}}"></span></span></li>
+                    <li><i class="fa fa-chevron-up"></i><span data-i18n="catalog.atleast"></span> {{minNum}}</li>
+                    <li><i class="fa fa-chevron-down"></i><span data-i18n="catalog.atmost"></span> {{maxNum}}</li>
+                    <li><i class="fa fa-calendar-o"></i><span data-i18n="catalog.deliveryIn"></span> {{availability}}
+                        <span data-i18n="catalog.days"></span></li>
+                    <li><i class="fa fa-euro"></i><span> {{price}}€ per <span data-i18n="rfq.{{unit}}"></span></span>
+                    </li>
                 </ul>
                 {{/each}}
 
@@ -574,6 +575,8 @@
         var getcutomerfavoritesURL = _brokerMsUrl + "users/favorites";
         //  getproductsURL = _brokerMsUrl + "products";
 
+        var name = getParameterByName("name");
+        var catName = decodeURI(getParameterByName("cat_name"));
 
         function getfiles(url, templateid, target) {
             $.get(url, function (data) {
@@ -597,7 +600,7 @@
             });
         }
 
-        function getproducts(url, templateid, target, page) {
+        function getproducts(url, templateid, target, page, name, catName) {
             if (page) {
                 if (url.indexOf("?") === -1)
                     url += "?page=" + page;
@@ -606,20 +609,31 @@
             }
             $.get(url, function (data) {
                 console.log(data);
-                for(var i in data.docs)
-                {                  
-                  if(data.docs[i].images.length > 0 && data.docs[i].images[0].imageId != undefined)
-                  {
-                    data.docs[i].imgUrl = _uploadMsUrl + data.docs[i].images[0].imageId + "?tag=t"; 
-                  }
-                  else
-                  {
-                    data.docs[i].imgUrl = "assets/img/team/img1-md.jpg";
-                  }
+
+                var prods = data.docs;
+
+                if (name && name != "null")
+                    prods = prods.filter(function (el) {
+                        return el.name.toLowerCase().indexOf(name.toLowerCase()) != -1;
+                    });
+
+//                if (catName && catName != "null")
+//                    prods = prods.filter(function (el) {
+//                        return el.name.toLowerCase().indexOf(name.toLowerCase()) != -1;
+//                    });
+
+                for (var i in prods) {
+                    if (prods[i].images.length > 0 && prods[i].images[0].imageId != undefined) {
+                        prods[i].imgUrl = _uploadMsUrl + prods[i].images[0].imageId + "?tag=t";
+                    }
+                    else {
+                        prods[i].imgUrl = "assets/img/team/img1-md.jpg";
+                    }
                 }
-                
+
+
                 var compiled = cacheCompile(templateid, {
-                    products: data.docs,
+                    products: prods,
                     isSupplier: currentSupplier
 
                 });
@@ -633,8 +647,6 @@
                     }
                 });
 
-
-                var prods = data.docs;
 
                 var categories = [];
                 for (var i = 0; i < prods.length; ++i) {
@@ -680,7 +692,7 @@
         });
 
         $("a[href=#catalogTab]").click(function () {
-            getproducts(getproductsURL, 'productstable', '#products_container');
+            getproducts(getproductsURL, 'productstable', '#products_container', null, name, catName);
 
         });
 
@@ -715,11 +727,11 @@
                         break;
                     }
                 }
-                
+
                 var compiled = cacheCompile(templateid, obj);
-                                                
+
                 $(target).html(compiled);
-                
+
                 $(target).localize();
             }
         }
@@ -750,10 +762,9 @@
                 $(target).html(compiled);
 
                 $(target).localize();
-                
-                if(cb !== undefined)
-                {
-                  cb();
+
+                if (cb !== undefined) {
+                    cb();
                 }
 
             });
@@ -788,13 +799,12 @@
 
 
             Handlebars.registerHelper('paginate', paginate);
-            Handlebars.registerHelper('trim', function(s){
-              if(s == undefined)
-              {
-                s = "";
-              }              
-              
-              return new Handlebars.SafeString(s.trim());              
+            Handlebars.registerHelper('trim', function (s) {
+                if (s == undefined) {
+                    s = "";
+                }
+
+                return new Handlebars.SafeString(s.trim());
             });
 
             App.init();
@@ -810,19 +820,25 @@
             if (logged) {
                 $("#sidebar").show();
             }
-            
-            var cbFav = function(){
-              setsupplierfavoritestatus(getcutomerfavoritesURL, "supplier_favorite_template", "#starBlock");
+
+            var cbFav = function () {
+                setsupplierfavoritestatus(getcutomerfavoritesURL, "supplier_favorite_template", "#starBlock");
             };
 
 
             getsupplierinfo(getsupplierURL, "supplier-info_template", "#supplier-info", cbFav);
             getfiles(getfilesURL, "filetable", '#files_container');
-            var name = getParameterByName("name");
+            var searchpage = getParameterByName('page')
+
             var searchListURL = "list.html";
-            if (name && name != null)
-                    searchListURL += "?name="+name
-            $("#searchResultsAnchor").attr('href',searchListURL);
+            if (name && name != "null") {
+                searchListURL += "?name=" + name;
+                if (searchpage && searchpage != "null")
+                    searchListURL += "&page=" + searchpage;
+            } else if (searchpage && searchpage != "null")
+                searchListURL += "?page=" + searchpage;
+
+            $("#searchResultsAnchor").attr('href', searchListURL);
 
             $("body").localize();
 
