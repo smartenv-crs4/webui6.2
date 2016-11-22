@@ -270,11 +270,9 @@ function autoCompleteCat(tagId)
 {
   var acCategories = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    identify: function(datum){
-      console.log(datum);
+    queryTokenizer: Bloodhound.tokenizers.whitespace,    
+    identify: function(datum){      
       return datum.id;
-
     },
     //prefetch: '../data/films/post_1960.json',
     remote: {
@@ -287,11 +285,13 @@ function autoCompleteCat(tagId)
           return ret;
         }
 
+        
         for(var i in response)
-        {
+        {          
           ret.push({"name": response[i].name[localStorage.lng],
             "id": response[i]._id});
         }
+        //console.log(JSON.stringify(ret));
         return ret;
       },
       prepare: function(query, settings){
@@ -311,11 +311,14 @@ function autoCompleteCat(tagId)
       }
     }
   });
+    
   jQuery('#' + tagId).typeahead(null, {
     name: 'categories',
     display: 'name',
-    source: acCategories
+    source: acCategories,
+    limit: 10
   });
+  
   jQuery('#' + tagId).bind('typeahead:selected', function(obj, datum, name){
     jQuery('#' + tagId).data("cat-id", datum.id);
     jQuery('#' + tagId).data("cat-name", datum.name);
