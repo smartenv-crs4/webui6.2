@@ -902,8 +902,8 @@ function changeUnit(ele){
     var min = $("#sel-new-"+ele+" option:selected").data('min');
     console.log(min);
     var max = $("#sel-new-"+ele+" option:selected" ).data('max');
-    var unit = $("#quantity-new-"+ele).data('unit');
-
+   // var unit = $("#quantity-new-"+ele).data('unit');
+    var unit = $("#sel-new-"+ele+" option:selected" ).data('unit');
     $("#unity-new-"+ele).text(i18next.t("rfq."+unit));
 
     $(ele_q).val("");
@@ -912,6 +912,8 @@ function changeUnit(ele){
 
     $(ele_q).data('rule-max',max);
 
+    $("#note-max-"+ele).text(max);
+    $("#note-min-"+ele).text(min);
 
     $('#form-new-rfq').valid();
 }

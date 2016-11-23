@@ -254,7 +254,7 @@
             <i class="icon-append fa  icon-finance-076"></i>
             <input type="text" id="quantity-new-{{totalrequests}}" name="quantity" class="newqnty"  data-rule-min="{{products.0.minNum}}"  data-rule-max="{{products.0.maxNum}}" data-i18n="[placeholder]rfq.requestQuantity">
         </label>
-        <!--<div class="note"><strong>Min:</strong>{{products.0.minNum}} <strong>Max:</strong>{{products.0.maxNum}}</div>-->
+       <div class="note"><strong>Min:</strong><span id="note-min-{{totalrequests}}">{{products.0.minNum}} </span> <strong>Max:</strong><span id="note-max-{{totalrequests}}">{{products.0.maxNum}}</span></div>
     </section>
     <section class="col col-2">
         <label class="label invisible" data-i18n="rfq.requestQuantity"></label>
