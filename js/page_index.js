@@ -5,7 +5,11 @@
        
     autoCompleteCat("category");     
 
-
+    $("#tags").val('');
+       $("#category").typeahead('val', ''); 
+       $("#product").val('');
+       $(".search_select").attr("checked", false);
+       $("#ckProduct").attr("checked", "true");
     
     $( "#btn_search" ).click(function(e) {
         
@@ -82,7 +86,11 @@
     });
     
     
-    
+   $(document).keypress(function(e){
+    if (e.which == 13){
+        $("#btn_search").click();
+    }
+}); 
     
     
     

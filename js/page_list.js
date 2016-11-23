@@ -19,10 +19,9 @@ var arr_par = get_par('url');
 // Document ready */
 
 $( document).ready(function() {
-    
+   
     autoCompleteCat("categories");
     $("#categories").typeahead('val', '');
-    
     
     // set degli input della pagina in caso di provvenienza da altre pagine
     if (arr_par[0].name)  
@@ -55,7 +54,11 @@ $( document).ready(function() {
     // creazione della lista dei supplier
     get_list(arr_par);
     
-    
+    $(document).keypress(function(e){
+    if (e.which == 13){
+        $("#btn_search").click();
+    }
+});
 });
 
 
@@ -96,9 +99,15 @@ function render_row(data, arr_par)
     var tab = '';
                                     for (var i = 0; i < data.docs.length; i++) {
                                     
+                                    //console.log(data.docs[i]);
+                                    
+                                    str_rates = render_rates(data.docs[i].rates.overall_rate);
+                                        
+                                        link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i]._id).replace("??", "?").replace("?&", "?");    
+                                        
                                             tab += '<tr>'
                                     + '<td>'
-                                    + '    <img class="rounded-x" style="width: 100px;" src="'; 
+                                    + '    <img class="rounded-x" style="width: 100px" src="'; 
                                     if (data.docs[i].logo) 
                                         tab = tab +  data.docs[i].logo; 
                                     else 
@@ -106,7 +115,7 @@ function render_row(data, arr_par)
                                     tab = tab +  '" alt="logo">'
                                     + '</td>'
                                     + '<td>'
-                                    + '    <h3><a href="page_catalog.html' + var_par + '&idSupplier=' + data.docs[i]._id + '" + >' + data.docs[i].name + '</a></h3>'
+                                    + '    <h3><a class="aName" href="page_catalog.html?'+link+'">' + data.docs[i].name + '</a></h3>'
                                     + '    <p>Descr</p>'
                                     + '    <small class="hex"><span data-i18n="product.tabLabelRegistration"></span>'+ getDateFromObjectId(data.docs[i]._id) +'</small>'
                                     + '<div><br><a class="a_productList" data-id="' + data.docs[i]._id + '" style="cursor: pointer" data-i18n="product.tabMsgProduct"></a></div>'
@@ -119,13 +128,7 @@ function render_row(data, arr_par)
                                     tab = tab + '</td> -->'
                                     + '<td>'
                                     // if (data.docs[i].rates)
-                                    tab = tab +  '    <ul class="list-inline star-vote" style="display: inline-flex">'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-half-o"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
-                                    + '    </ul>';
+                                    tab = tab +  str_rates;
                                     
                                     
                                     tab = tab +   '</td>'
@@ -152,6 +155,7 @@ function render_row(data, arr_par)
                                       window.location.href = link;
                                         
                                 });
+                                
                                 
                                 
                                 $('.a_productList').click(function(){
@@ -286,6 +290,67 @@ function render_searchInput()
         $("#divSearch1").css("display", "none");
         $("#divSearch2").css("display", "block");
     }     
+}
+
+
+function render_rates(_rates)
+{
+    
+    var tab = '<ul class="list-inline star-vote" style="display: inline-flex">';
+    
+    
+    
+    switch (_rates) {
+      case 1:
+            tab = tab +  '    <ul class="list-inline star-vote" style="display: inline-flex">'
+                                    + '        <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
+                                    + '    </ul>';
+      break;
+      case 2:
+            tab = tab +  '            <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>';
+                                    
+      break;
+      case 3:
+            tab = tab +  '    <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>';
+                                    
+      break;
+      case 4:
+            tab = tab +  '    <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>';
+                                    
+      break;
+      case 5:
+            tab = tab +  '    <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star"></i></li>';
+      break;
+      
+        
+        
+    }
+    
+    tab = tab +  '    </ul>';
+    
+    
+    return tab;
+    
 }
 
 //**************************************************************/
