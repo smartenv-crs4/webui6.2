@@ -316,7 +316,7 @@ function autoCompleteCat(tagId)
     name: 'categories',
     display: 'name',
     source: acCategories,
-    limit: 10
+    limit: Infinity
   });
   
   jQuery('#' + tagId).bind('typeahead:selected', function(obj, datum, name){

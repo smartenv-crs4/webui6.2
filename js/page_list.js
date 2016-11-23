@@ -106,7 +106,7 @@ function render_row(data, arr_par)
                                     tab = tab +  '" alt="logo">'
                                     + '</td>'
                                     + '<td>'
-                                    + '    <h3><a href="#">' + data.docs[i].name + '</a></h3>'
+                                    + '    <h3><a href="/page_catalog.html' + var_par + '&idSupplier=' + data.docs[i]._id + '" + >' + data.docs[i].name + '</a></h3>'
                                     + '    <p>Descr</p>'
                                     + '    <small class="hex"><span data-i18n="product.tabLabelRegistration"></span>'+ getDateFromObjectId(data.docs[i]._id) +'</small>'
                                     + '<div><br><a class="a_productList" data-id="' + data.docs[i]._id + '" style="cursor: pointer" data-i18n="product.tabMsgProduct"></a></div>'
