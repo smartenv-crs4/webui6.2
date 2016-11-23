@@ -132,7 +132,10 @@ function getUserProfile()
       {
         case 400: 
           if(xhr.responseJSON.error == "invalid_token")
-            respBlock.html(i18next.t("error.unauthorized"))
+          {
+            respBlock.html(i18next.t("error.unauthorized"));
+            redirectToLogin();
+          }
           else if(xhr.responseJSON.error == "BadRequest")
             respBlock.html(i18next.t("error.missing_user_or_password"));
           else
@@ -140,7 +143,7 @@ function getUserProfile()
           break;
         case 401:
           respBlock.html(i18next.t("error.unauthorized"));
-          break;
+          redirectToLogin();
           break;
         case 500:
           respBlock.html(i18next.t("error.internal_server_error"));
