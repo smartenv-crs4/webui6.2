@@ -51,6 +51,7 @@
     <!-- CSS Customization -->
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/custom_rfq.css">
+    <link rel="stylesheet" href="assets/css/typeaheadjs.css">
 
 </head>
 
@@ -77,10 +78,10 @@
                         <!--Alert-->
                         <div class="sm-margin-bottom-30 rfq-container">
                             <div class="panel-heading-v2 overflow-h">
-                                <h2 class="heading-xs pull-left"><i class="fa fa-paper-plane fa-fw"></i> New RFQs </h2>
+                                <h2 class="heading-xs pull-left"><i class="fa fa-paper-plane fa-fw"></i> <span data-i18n="product.newProduct"></span> </h2>
                                 <div style="text-align: center">
                                     <div class="inbox-rfq-header" style="display: inline-block;">
-                                        <strong id="inbox-rfq-header-name" class="" style=""></strong>
+                                        <strong id="new-product-header" class="" style=""></strong>
                                     </div>
                                     <a href="#"><i class="fa fa-cog pull-right"></i></a>
                                 </div>
@@ -90,7 +91,7 @@
                             <div class="panel panel-profile">
 
 
-                                <div id="inbox-rfqs-container">
+                                <div id="inbox-new-product-container">
 
                                 </div>
                             </div>
@@ -152,7 +153,7 @@
 <script type="text/javascript" src="assets/js/footer.js"></script>
 <script type="text/javascript" src="assets/js/plugins/async.js"></script>
 <script type="text/javascript" src="assets/js/utils.js"></script>
-
+<script type="text/javascript" src="assets/js/plugins/typeahead.bundle.js"></script>
 
 <script type="text/javascript">
 
@@ -164,7 +165,18 @@
         //Datepicker.initDatepicker();
         //StyleSwitcher.initStyleSwitcher();
         $("#sidebar").show();
-        openNewRfq();
+
+        var source = $("#rfq_new_prod_template").html();
+        var theTemplate = Handlebars.compile(source);
+
+        var theCompiledHtml = theTemplate();
+
+        // Add the compiled html to the page
+        $("#inbox-new-product-container").html(theCompiledHtml);
+
+        $("body").localize();
+
+        autoCompleteCat("categoryField");
 
     });
 </script>
@@ -173,6 +185,7 @@
 <script src="assets/plugins/html5shiv.js"></script>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <script src="assets/plugins/sky-forms-pro/skyforms/js/sky-forms-ie8.js"></script>
+
 <![endif]-->
 
 <!--[if lt IE 10]>
@@ -180,47 +193,76 @@
 <![endif]-->
 <!--Template RFQ New-->
 
-<script id="rfq_new_rfq_template" type="text/x-handlebars-template">
-    <form action="" id="form-new-rfq" class="sky-form">
+<script id="rfq_new_prod_template" type="text/x-handlebars-template">
+    <form action="" class="sky-form">
 
         <fieldset>
-            <div class="row" >
 
+            <div class="row">
                 <section class="col col-6">
-                    <label class="label" data-i18n="login.supplier"></label>
+                    <label class="label" data-i18n="profile.name"></label>
                     <label class="input">
-                        <i class="icon-append icon-user"></i>
-                        <input type="text" id="supplierinfo" disabled data-prop="{{idS}}" value="{{nameS}}" name="supplier">
+                        <i class="icon-append  icon-target"></i>
+                        <input type="text" name="name" id="name">
                     </label>
                 </section>
-
                 <section class="col col-6">
-                    <label class="label" data-i18n="rfq.expiredate"></label>
+                    <label class="label" data-i18n="product.category"></label>
                     <label class="input">
-                        <i class="icon-append fa fa-calendar"></i>
-                        <input type="text" name="expiredate" id="expiredate" data-i18n="[placeholder]rfq.choose">
+                      <!--  <select name="gender">
+                            <option value="0" selected="" disabled="">Pasta fresca</option>
+                            <option value="1">Pesce</option>
+                            <option value="2">Formaggio</option>
+                            <option value="3">Dolci</option>
+                        </select>-->
+                        <input type="text" name="name" id="categoryField">
+
                     </label>
                 </section>
-
             </div>
 
+
             <section>
-                <label class="label" data-i18n="rfq.requestSubject"></label>
-                <label class="input" >
-                    <i class="icon-append fa fa-bullseye"></i>
-                    <input id="request-subject" type="text" name="subject">
+                <label class="label" data-i18n="profile.description"></label>
+                <label class="textarea">
+                    <textarea rows="3"></textarea>
                 </label>
+                <div class="note"><strong>Note:</strong> massimo 500 caratteri.</div>
             </section>
+            <div class="row" >
+
+                <section class="col col-3">
+                    <label class="label" data-i18n="catalog.atleast"></label>
+                    <label class="input">
+                        <i class="icon-append   icon-arrow-down"></i>
+                        <input type="text" placeholder="Quantità minima" name="product">
+                    </label>
+                </section>
+
+                <section class="col col-3">
+                    <label class="label" data-i18n="catalog.atmost"></label>
+                    <label class="input">
+                        <i class="icon-append   icon-arrow-up"></i>
+                        <input type="text"  placeholder="Quantità massima" name="product">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    <label class="label" data-i18n="catalog.deliveryIn"></label>
+                    <label class="input">
+                        <i class="icon-append  icon-calendar"></i>
+                        <input type="text" placeholder="Numero giorni" name="product">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    <label class="label" data-i18n="catalog.price"></label>
+                    <label class="input">
+                        <i class="icon-append   icon-finance-246"></i>
+                        <input type="text"  name="product">
+                    </label>
+                </section>
 
 
-
-            <header class="header-new-rfq"><span data-i18n="rfq.requests"></span>
-                <a class="btn-u btn-u-xs btn-u rounded pull-right" href="#" data-i18n="buttons.add" onclick="addRowRequest()"></a>
-            </header>
-            <div id="requests-container">
-
-                {{> newrequest}}
-                </div>
+            </div>
 
         </fieldset>
 
@@ -233,39 +275,7 @@
 </script>
 <!--End Template RFQ New-->
 
-<!--Single new Request -->
-<script id="single_new_rfq_template" type="text/x-handlebars-template">
-<div id="rfq_new_{{totalrequests}}" class="row row-request" >
-    <section class="col col-6">
-        <label class="label" data-i18n="catalog.products"></label>
-        <label class="select">
-            <select class="product-list-rfq " id="sel-new-{{totalrequests}}" name="product" onchange="changeUnit({{totalrequests}})">
-                {{#each products}}
-                <option  value={{this._id}}  data-min="{{this.minNum}}"  data-max="{{this.maxNum}}" data-unit="{{this.unit}}">{{this.name}}</option>
-                {{/each}}
-            </select>
-            <i></i>
-        </label>
-    </section>
-
-    <section class="col col-3">
-        <label class="label label-new-quantity" data-i18n="rfq.requestQuantity"></label>
-        <label class="input">
-            <i class="icon-append fa  icon-finance-076"></i>
-            <input type="text" id="quantity-new-{{totalrequests}}" name="quantity" class="newqnty"  data-rule-min="{{products.0.minNum}}"  data-rule-max="{{products.0.maxNum}}" data-i18n="[placeholder]rfq.requestQuantity">
-        </label>
-        <!--<div class="note"><strong>Min:</strong>{{products.0.minNum}} <strong>Max:</strong>{{products.0.maxNum}}</div>-->
-    </section>
-    <section class="col col-2">
-        <label class="label invisible" data-i18n="rfq.requestQuantity"></label>
-        <span class="unit-info" id="unity-new-{{totalrequests}}" data-i18n="rfq.{{products.0.unit}}"></span>
-
-    </section>
-    <label class="label invisible" data-i18n="rfq.requestQuantity"></label>
- <button aria-hidden="true" data-dismiss="alert" class="close col col-1" type="button" onclick="deleteRowRequest('rfq_new_{{totalrequests}}')">×</button>
-
-</div>
-</script>
 
 </body>
 </html>
+
