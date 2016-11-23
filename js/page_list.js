@@ -98,7 +98,7 @@ function render_row(data, arr_par)
                                     
                                             tab += '<tr>'
                                     + '<td>'
-                                    + '    <img class="rounded-x" style="width: 80%; height: 80%" src="'; 
+                                    + '    <img class="rounded-x" style="width: 100px;" src="'; 
                                     if (data.docs[i].logo) 
                                         tab = tab +  data.docs[i].logo; 
                                     else 
