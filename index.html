@@ -78,7 +78,7 @@
                         <input type="text" id="product" class="form-control" data-i18n="[placeholder]product.searchLabelProducts">
                         </span>
                         <span id="spanTags" class="spanSearch" style="display: none">
-                        <input type="text" id="tags" class="form-control" placeholder="Cerca con i tags...">
+                        <input type="text" id="tags" class="form-control" data-i18n="[placeholder]product.searchTagMessage">
                         </span>
                         <span class="input-group-btn">
                             <button class="btn-u btn-u-lg" id="btn_search" type="button"><i class="fa fa-search"></i></button>
@@ -86,9 +86,9 @@
                     </div>
                     <form action="list" id="form" class="sky-form page-search-form">
                             <div class="inline-group">
-                            <label class="checkbox"><input id="ckProduct" class="search_select" name="checkbox-inline" checked="" type="checkbox" value="p"><i></i>Products</label>
-                            <label  class="checkbox "><input id="ckCategory" name="checkbox-inline" class="search_select" type="checkbox" value="c"><i></i>Categories</label>
-                            <label  class="checkbox"><input id="ckTags" name="checkbox-inline" class="search_select" type="checkbox" value="t"><i></i>Tags</label>
+                            <label class="checkbox"><input id="ckProduct" class="search_select" name="checkbox-inline" checked="" type="checkbox" value="p"><i ></i><span data-i18n="catalog.products"></span></label>
+                            <label  class="checkbox "><input id="ckCategory" name="checkbox-inline" class="search_select" type="checkbox" value="c"><i></i><span data-i18n="profile.categories"></span></label>
+                            <label  class="checkbox"><input id="ckTags" name="checkbox-inline" class="search_select" type="checkbox" value="t"><i></i><span></span>Tags</label>
                     </div>
 					</form>
 				</div>
@@ -169,10 +169,9 @@
 
 
 	<!-- JS Global Compulsory -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+	<script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Translation -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/3.4.3/i18next.min.js"></script>
 	<script src="assets/js/translations/translation.js"></script>
