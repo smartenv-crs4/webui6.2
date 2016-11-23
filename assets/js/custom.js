@@ -237,7 +237,7 @@ function getProfileInfo(async)
       
       if(data.logo != undefined)
       {
-        sessionStorage.logo;
+        sessionStorage.logo = data.logo;
       }
 
 
@@ -316,7 +316,7 @@ function autoCompleteCat(tagId)
     name: 'categories',
     display: 'name',
     source: acCategories,
-    limit: Infinity
+    limit: 8
   });
   
   jQuery('#' + tagId).bind('typeahead:selected', function(obj, datum, name){
