@@ -189,7 +189,8 @@ var translation = {
                 "atleast": "At least",
                 "atmost": "At most",
                 "days": "days",
-                "searchResults":"Search results"
+                "searchResults":"Search results",
+                "price":"Price"
             },
             "pagination": {
                 "next": "Next",
@@ -208,7 +209,9 @@ var translation = {
                 "thAction": "Action",
                 "tabLabelRegistration": "Rigistered ",
                 "tabLabelRegistration": "Rigistered ",
-                "tabMsgProduct": "See products match"
+                "tabMsgProduct": "See products match",
+                "category":"Category",
+                "newProduct":"New product"
             },
             "evaluation": {
                 "your_opinion": "Your opinion is really important to us!",
@@ -430,10 +433,11 @@ var translation = {
                 "pdf": "File pdf",
                 "placeholder": "Cerca nel catalogo...",
                 "deliveryIn": "Consegna in",
-                "atleast": "Almeno",
-                "atmost": "Massimo",
+                "atleast": "Min",
+                "atmost": "Max",
                 "days": "giorni",
-                "searchResults":"Risultati ricerca"
+                "searchResults":"Risultati ricerca",
+                "price":"Prezzo"
             },
             "pagination": {
                 "next": "Prossima",
@@ -452,7 +456,9 @@ var translation = {
                 "thRates": "Giudizi",
                 "thAction": "Azioni",
                 "tabLabelRegistration": "Registrato il ",
-                "tabMsgProduct": "Vedi i prodotti associati"
+                "tabMsgProduct": "Vedi i prodotti associati",
+                "category":"Categoria",
+                "newProduct":"Nuovo prodotto"
             },
             "evaluation": {
                 "your_opinion": "Il tuo parere conta molto per noi!",
