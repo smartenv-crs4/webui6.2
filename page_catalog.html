@@ -255,10 +255,16 @@
             <div class="panel-heading overflow-h">
                 <h2 class="panel-title heading-sm pull-left"><i class="fa fa-shopping-bag"></i><span
                         data-i18n="catalog.products"></span>
+
+                    {{#if isSupplier}}
                <span class="input-group-btn" style="margin-left: 20px;float:right">
-                                                        <button class="btn-u btn-u-xs btn-u rounded pull-right" type="button" onclick="window.location='page_product_new.html'"><i class="fa fa-plus-circle"></i> <span
+                                                        <button class="btn-u btn-u-xs btn-u rounded pull-right"
+                                                                type="button"
+                                                                onclick="window.location='page_product_new.html'"><i
+                                                                class="fa fa-plus-circle"></i> <span
                                                                 data-i18n="buttons.add"></span></button>
                                                     </span>
+                    {{/if}}
                 </h2>
 
 
