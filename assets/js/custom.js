@@ -265,7 +265,10 @@ function getUrlParameter(sParam)
       return sParameterName[1] === undefined ? true : sParameterName[1];
     }
   }
+  
+  return undefined;
 }
+
 function autoCompleteCat(tagId)
 {
   var acCategories = new Bloodhound({
@@ -316,7 +319,7 @@ function autoCompleteCat(tagId)
     name: 'categories',
     display: 'name',
     source: acCategories,
-    limit: 8
+    limit: 10
   });
   
   jQuery('#' + tagId).bind('typeahead:selected', function(obj, datum, name){

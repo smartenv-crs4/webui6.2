@@ -13,7 +13,7 @@ var sidebarTemplate = `
       </li>
       {{else}}
       <li class="list-group-item">
-          <a href="list.html?favourites="><i class="fa fa-star"></i> <span data-i18n="profile.favoriteSuppliers"></span></a>
+          <a href="page_profile_settings.html?tab=favoriteTab"><i class="fa fa-star"></i> <span data-i18n="profile.favoriteSuppliers"></span></a>
       </li>      
       {{/if}}
 

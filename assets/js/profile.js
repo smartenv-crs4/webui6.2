@@ -34,10 +34,21 @@ function getUserProfile()
         var tFavTab = Handlebars.compile(favoriteTabTemplate); 
         jQuery("#tabContainer").append(tFavTab());
         jQuery("#tabContainer").localize();
+                        
         
         var tFav = Handlebars.compile(favoriteTemplate); 
         jQuery("#tabBodyContainer").append(tFav());
         jQuery("#tabBodyContainer").localize();                           
+        
+        if(getUrlParameter("tab") == "favoriteTab")
+        {           
+          jQuery("#tabContainer li.active").removeClass("active");                             
+          jQuery("[href='#favoriteTab'").parent().addClass("active");
+          
+          jQuery("#tabBodyContainer div.active").removeClass("in active"); 
+          jQuery("#favoriteTab").addClass("in active");
+          
+        }
         
       }
       else if(data.type == "supplier")

@@ -242,7 +242,7 @@ var favoriteTableTemplate = `
         {{#each this}}               
           <tr data-supplier-id="{{_id}}">
             <td>
-              {{name}}		
+              <a href="page_catalog.html?idSupplier={{_id}}">{{name}}</a>
               <span class="pull-right"  style="cursor:pointer"onclick="removeFavoriteSupplier('{{_id}}')">
                 <i class="fa fa-remove"></i>
               </span>
