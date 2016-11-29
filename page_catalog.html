@@ -138,6 +138,15 @@
       .neim > span{
         text-align: right;        
       }
+      
+      .th-gallery{
+        float: left; 
+        width:25px; 
+        cursor:pointer; 
+        height:25px; 
+        margin:3px; 
+        border: solid 1px #eeeeee";
+      }
 
 
         
@@ -184,12 +193,9 @@
                             ><i class="fa fa-user"></i>&nbsp;<span data-i18n="profile.profile">Profile</span></a></li>
                             <li><a data-toggle="tab" href="#catalogTab"><i class="fa fa-book"></i>&nbsp;<span
                                     data-i18n="catalog.catalog">Catalog</span></a></li>
-
                             <li><a data-toggle="tab" href="#documentsReviews"><i class="fa fa-star-o"></i>&nbsp;<span
                                     data-i18n="profile.reviews">Reviews</span> </a>
                             </li>
-
-
                         </ul>
 
                         <div class="tab-content" id="tabBodyContainer">
@@ -259,7 +265,6 @@
 
                                     </div>
 
-
                                 </div>
                                 <div class="row">
                                     <!--Alert-->
@@ -319,7 +324,7 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>              
             </div>
             <div class="modal-body imgcon" >
-              <div style="overflow:auto;"; id="galleryContainer">
+              <div style="overflow:auto; text-align: center;" id="galleryContainer">
                 <img src="#" id="galleryImg" style="max-width:100%; max-height:100%">
                 
                 <div class="imnav">
@@ -328,8 +333,7 @@
                       <span class="imcontr glyphicon glyphicon-chevron-left"></span>
                     </div>
                   </span>
-            
-            
+                        
                   <span onclick="slidePic('next')">
                     <div class="neim control glyphicon .glyphicon-chevron-right">
                       <span class="right glyphicon glyphicon-chevron-right"></span>                
@@ -345,8 +349,7 @@
           </div>
           
         </div>
-      </div>
-      
+      </div>      
       
         <div class="panel panel-profile">
             <div class="panel-heading overflow-h">
@@ -380,7 +383,7 @@
                              style="cursor:pointer" >
                              <div class="center-block">
                                {{#each imgUrl}}
-                                 <div style="float:left; width:25px; cursor:pointer; height:25px; margin:3px; border: solid 1px #eeeeee" 
+                                 <div class="th-gallery"  
                                        onclick="updateImgThumb(this)">
                                    <img src="{{this}}" style="max-width:100%; max-height:100%" >
                                  </div>
@@ -873,6 +876,22 @@
         function openGallery(node)
         {
           var src = jQuery(node).attr("src").replace("tag=t", "tag=o");
+          jQuery("#galleryImg").hide();
+          var spinner = document.createElement("span");
+          spinner.className = "fa fa-spinner fa-spin";
+          spinner.style.fontSize = "50pt";
+          spinner.id = "gallerySpinner";
+          jQuery("#galleryContainer").prepend(spinner);
+                    
+          jQuery("#galleryImg").off("load")
+            .on("load", function(){
+              jQuery("#galleryImg").show();
+              jQuery("#gallerySpinner").remove();                            
+            });
+          
+          
+          
+          
           jQuery("#galleryImg").attr("src", src);
           //jQuery("galleryContainer").css("max-width", jQuery("#galleryImg").width() );
           //jQuery("galleryContainer").css("max-height", jQuery("#galleryImg").height());                  
@@ -906,6 +925,16 @@
             x = -1;          
           var idx = (window.gallery.index + x) % window.gallery.images.length;
           if(idx < 0) idx = window.gallery.images.length - 1;
+          
+          jQuery("#galleryImg").hide();
+          var spinner = document.createElement("span");
+          spinner.className = "fa fa-spinner fa-spin";
+          spinner.style.fontSize = "50pt";
+          spinner.id = "gallerySpinner";
+          jQuery("#galleryContainer").append(spinner);
+          
+          
+          
           jQuery("#galleryImg").attr("src", window.gallery.images[idx]);
           window.gallery.index = idx;          
         }
