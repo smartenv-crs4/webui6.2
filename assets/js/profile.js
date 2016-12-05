@@ -79,7 +79,8 @@ function getUserProfile()
         var tCert = Handlebars.compile(certificationsTemplate); 
         jQuery("#tabBodyContainer").append(tCert());
         jQuery("#tabBodyContainer").localize();  
-  */  
+        
+    */  
         var tCatTab = Handlebars.compile(categoriesTabTemplate); 
         jQuery("#tabContainer").append(tCatTab());
         jQuery("#tabContainer").localize();
@@ -89,10 +90,17 @@ function getUserProfile()
         jQuery("#tabBodyContainer").localize();  
         
         autoCompleteCat("acCat");
-        
-        
         getUserCategoryList();
-       
+        
+        var tCertTab = Handlebars.compile(certificationsTabTemplate); 
+        jQuery("#tabContainer").append(tCertTab());
+        jQuery("#tabContainer").localize();
+    
+        var tCert = Handlebars.compile(certificationsTemplate); 
+        jQuery("#tabBodyContainer").append(tCert());
+        jQuery("#tabBodyContainer").localize();     
+        
+        getCertificationsList();                         
       }  
       
  
@@ -332,8 +340,7 @@ function getFavoriteSuppliers()
       var tFavTab = Handlebars.compile(favoriteTableTemplate); 
       jQuery("#favoriteSuppliersList").empty();
       jQuery("#favoriteSuppliersList").append(tFavTab(dataResp));        
-      //console.log(dataResp);                  
-        
+      //console.log(dataResp);               
     },     
     error: function(xhr, status)
     {
@@ -358,6 +365,56 @@ function getFavoriteSuppliers()
   });  
   
 }
+
+function getCertificationsList()
+{
+  if(sessionStorage.userId == undefined)
+  {      
+    redirectToLogin(); 
+  }
+  
+  var ret;
+  
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/certifications",
+    type: "GET",    
+    contentType: "application/json; charset=utf-8",
+    success: function(dataResp, textStatus, xhr)
+    {        
+      var tCertTab = Handlebars.compile(certificationsTableTemplate); 
+      jQuery("#certificationsList").empty();
+      jQuery("#certificationsList").append(tCertTab(dataResp)); 
+      
+      jQuery("#certificationsList").localize();            
+      //console.log(dataResp);               
+    },     
+    error: function(xhr, status)
+    {
+      var msg;
+      try
+      {        
+        msg = xhr.responseJSON.message;
+      }
+      catch(err)
+      {
+        msg = i18next.t("error.internal_server_error");
+      }
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+            
+      return;    
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    }                    
+  });  
+  
+}
+
+
+
+
 
 
 function uploadDocument()
@@ -654,6 +711,94 @@ function addUserCategory()
     }           
   });  
 }
+
+
+function addCertification()
+{
+  if(sessionStorage.userId == undefined)
+  {      
+    redirectToLogin();
+  }
+  
+  var name = jQuery("#iCertName").val();
+  var date = jQuery("#iCertDate").val();
+  var desc = jQuery("#iCertDescription").val();
+  
+  
+  var data = new Object();
+  data.certification = {};
+  data.certification.name = name;
+  data.certification.date = date;
+  data.certification.description = desc;
+  
+  
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/actions/certifications",
+    type: "POST",
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify(data),
+    dataType: "json",
+    success: function(dataResp, textStatus, xhr)
+    {     
+      getCertificationsList();               
+    },     
+    error: function(xhr, status)
+    {
+      var msg;
+
+      try
+      {        
+        msg = xhr.responseJSON.message;
+      }
+      catch(err)
+      {
+        msg = i18next.t("error.internal_server_error");
+      }      
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    }           
+  });  
+}
+
+
+function removeCertification(name)
+{
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/actions/certifications/" + name,
+    type: "DELETE",
+    contentType: "application/json; charset=utf-8",
+    success: function(data, textStatus, xhr)
+    {            
+      getCertificationsList();
+    },
+    error: function(xhr, status)
+    {
+      var msg;
+
+      try
+      {        
+        msg = xhr.responseJSON.message;
+      }
+      catch(err)
+      {
+        msg = i18next.t("error.internal_server_error");
+      }      
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    } 
+  });
+  
+}
+
+
 
 function getUserCategoryList()
 {

@@ -139,6 +139,10 @@
         text-align: right;        
       }
       
+      .prim > span{
+        text-align: left;        
+      }
+      
       .th-gallery{
         float: left; 
         width:25px; 
@@ -887,14 +891,9 @@
             .on("load", function(){
               jQuery("#galleryImg").show();
               jQuery("#gallerySpinner").remove();                            
-            });
+            });                              
           
-          
-          
-          
-          jQuery("#galleryImg").attr("src", src);
-          //jQuery("galleryContainer").css("max-width", jQuery("#galleryImg").width() );
-          //jQuery("galleryContainer").css("max-height", jQuery("#galleryImg").height());                  
+          jQuery("#galleryImg").attr("src", src);          
           
           if(!window.gallery) window.gallery = {};
           
@@ -931,9 +930,7 @@
           spinner.className = "fa fa-spinner fa-spin";
           spinner.style.fontSize = "50pt";
           spinner.id = "gallerySpinner";
-          jQuery("#galleryContainer").append(spinner);
-          
-          
+          jQuery("#galleryContainer").append(spinner);                    
           
           jQuery("#galleryImg").attr("src", window.gallery.images[idx]);
           window.gallery.index = idx;          
@@ -943,8 +940,7 @@
 
             $.get(url, function (data) {
 
-
-                console.log(data);
+                //console.log(data);
                 var values = data[0];
                 var plusname = values.name.split(" ").join("+");
                 values['plusname'] = plusname;

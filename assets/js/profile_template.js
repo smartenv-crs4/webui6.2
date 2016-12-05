@@ -317,6 +317,22 @@ var certificationsTemplate = `
   <h2 class="heading-md" data-i18n="profile.certificationsTitle"></h2>
   <p data-i18n="profile.certificationsTitle2"></p>
   <br>
+<div id="certificationsAdd" style="border: solid 1px #ccc; padding: 8px;" class="margin-bottom-20">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <input id="iCertName" class="form-control rounded tt-input" data-i18n="[placeholder]profile.certifications" type="text">
+      </div>
+      <div class="form-group col-xs-6">
+        <input id="iCertDate" class="form-control rounded tt-input" data-i18n="[placeholder]profile.certificationsDate" type="text">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <textarea id="iCertDescription" class="form-control rounded tt-input" data-i18n="[placeholder]profile.certificationsDescription"></textarea>
+    </div>
+    <button type="button" class="btn-u" data-i18n="profile.addCertification" onclick="addCertification()"></button>
+  </div>
+  <div id="certificationsList">     
   </div>
 </div>
 `;
@@ -328,10 +344,39 @@ var certificationsTableTemplate = `
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th data-i18n="prifile.favoriteName">/th>								
+          <th data-i18n="profile.certifications"></th>								
+          <th data-i18n="profile.certificationsDate"></th>
+          <th data-i18n="profile.certificationsDescription"></th>
+          <th data-i18n="profile.certificationsActions"></th>
         </tr>
       </thead>
       <tbody>              
+        {{#each this}}                         
+          <tr data-id="{{name}}">
+            <td>
+              {{name}}
+            </td>
+            
+            <td>
+              {{date}}
+            </td>
+            
+            <td>
+              {{description}}
+            </td>
+            
+            <td>
+              <span data-id="{{name}}" >{{name}}</span>
+              <span>                
+                <a class="pull-right"
+                   data-placement="top" href="#" data-catid="{{id}}" onclick="removeCertification('{{name}}')">
+                  <i class="fa fa-remove"></i>
+               </a>
+             </span>
+            </td>                  
+          </tr>
+        {{/each}}						
+      
       </tbody>
     </table>
   </div>
