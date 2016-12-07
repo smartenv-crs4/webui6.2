@@ -365,13 +365,11 @@ var certificationsTableTemplate = `
               {{description}}
             </td>
             
-            <td>
-              <span data-id="{{name}}" >{{name}}</span>
-              <span>                
-                <a class="pull-right"
-                   data-placement="top" href="#" data-catid="{{id}}" onclick="removeCertification('{{name}}')">
+            <td>              
+              <span style="cursor:pointer"                
+                 onclick="removeCertification('{{name}}')">
                   <i class="fa fa-remove"></i>
-               </a>
+               </span>
              </span>
             </td>                  
           </tr>

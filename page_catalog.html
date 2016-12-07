@@ -611,38 +611,17 @@
             </div>
             <div class="panel-body margin-bottom-40">
                 <ul class="timeline-v2 timeline-me">
+                  {{#each certifications}}
                     <li>
-                        <time datetime="" class="cbp_tmtime"><span>ISO 9001</span> <span>2012 - Current</span>
+                        <time datetime="" class="cbp_tmtime"><span>{{name}}</span> <span>{{date}}</span>
                         </time>
                         <i class="cbp_tmicon rounded-x hidden-xs"></i>
                         <div class="cbp_tmlabel">
-                            <h2>BFC NYC Partners</h2>
-                            <p>Winter purslane courgette pumpkin quandong komatsuna fennel
-                                green bean cucumber watercress. Peasprouts wattle seed
-                                rutabaga okra yarrow cress avocado grape.</p>
+                            <!-- h2></h2 -->
+                            <p>{{description}}</p>
                         </div>
                     </li>
-                    <li>
-                        <time datetime="" class="cbp_tmtime"><span>ISO 14001</span> <span>2007 - 2012</span>
-                        </time>
-                        <i class="cbp_tmicon rounded-x hidden-xs"></i>
-                        <div class="cbp_tmlabel">
-                            <h2>Freelance</h2>
-                            <p>Caulie dandelion maize lentil collard greens radish arugula
-                                sweet pepper water spinach kombu courgette lettuce.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <time datetime="" class="cbp_tmtime"><span>ISO 22000</span> <span>2003 - 2007</span>
-                        </time>
-                        <i class="cbp_tmicon rounded-x hidden-xs"></i>
-                        <div class="cbp_tmlabel">
-                            <h2>Toren Condo</h2>
-                            <p>Caulie dandelion maize lentil collard greens radish arugula
-                                sweet pepper water spinach kombu courgette lettuce. Celery
-                                coriander bitterleaf epazote radicchio shallot.</p>
-                        </div>
-                    </li>
+                    {{/each}}                    
                 </ul>
             </div>
         </div>
