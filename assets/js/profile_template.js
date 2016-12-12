@@ -216,7 +216,7 @@ var changePasswordTemplate = `
 `;
 
 var favoriteTabTemplate = `
-<li><a data-toggle="tab" href="#favoriteTab" data-i18n="profile.favoriteSuppliers"></a></li>
+<li class="tab-bar"><a data-toggle="tab" href="#favoriteTab" data-i18n="profile.favoriteSuppliers"></a></li>
 `;
 
 var favoriteTemplate = `
@@ -257,7 +257,7 @@ var favoriteTableTemplate = `
 
 
 var documentsTabTemplate = `
-<li><a data-toggle="tab" href="#documentsTab" data-i18n="profile.documents"></a></li>
+<li class="tab-bar"><a data-toggle="tab" href="#documentsTab" data-i18n="profile.documents"></a></li>
 `;
 
 var documentsTemplate = `
@@ -309,7 +309,7 @@ var documentsTableTemplate = `
 `;
 
 var certificationsTabTemplate = `
-<li><a data-toggle="tab" href="#certificationsTab" data-i18n="profile.certifications"></a></li>
+<li class="tab-bar"><a data-toggle="tab" href="#certificationsTab" data-i18n="profile.certifications"></a></li>
 `;
 
 var certificationsTemplate = `
@@ -384,7 +384,7 @@ var certificationsTableTemplate = `
 
 
 var categoriesTabTemplate = `
-<li><a data-toggle="tab" href="#categoriesTab" data-i18n="profile.categories"></a></li>
+<li class="tab-bar"><a data-toggle="tab" href="#categoriesTab" data-i18n="profile.categories"></a></li>
 `;
 
 var categoriesTemplate = `

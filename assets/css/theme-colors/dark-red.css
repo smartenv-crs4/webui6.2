@@ -67,6 +67,13 @@ a.read-more:hover {
   color: #d40000;
 }
 
+li.active.tab-bar,
+li.tab-bar:hover,
+li.tab-bar:hover a  {
+  background: #d40000;
+  color: #fff !important;
+}
+
 /* Design for max-width: 991px */
 @media (max-width: 991px) {
 	.header .navbar-nav > .active > a,
