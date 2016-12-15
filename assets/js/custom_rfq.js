@@ -212,8 +212,26 @@ function getConversationRequestsAndMessages()
                     // Pass our data to the template
                     var userType =sessionStorage.type;
                     data.currentUser = userType;
+                    //console.log(data);
+                    
+                    for(var i in data.requests)
+                    {
+                      data.requests[i].product.imgUrl = [];
+                      
+                      if (data.requests[i].product.images.length > 0 && data.requests[i].product.images[0].imageId != undefined)
+                      {
+                          data.requests[i].product.imgUrl.push(_uploadMsUrl + data.requests[i].product.images[0].imageId + "?tag=t");
 
-                    console.log(data);
+                          for(var j = 1; j < data.requests[i].product.images.length; j++)
+                          {
+                            data.requests[i].product.imgUrl.push(_uploadMsUrl + data.requests[i].product.images[j].imageId + "?tag=t");                          
+                          }                        
+                      }
+                      else {
+                          data.requests[i].product.imgUrl.push("assets/img/team/img1-md.jpg");
+                      }     
+                    }
+                    
                     var theCompiledHtml = theTemplate(data);
 
                     // Add the compiled html to the page

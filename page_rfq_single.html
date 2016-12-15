@@ -269,8 +269,8 @@
             </h4>
         </div>
         <div id="collapse-{{inc @index}}" class="panel-collapse collapse">
-            <div class="alert-blocks service-block-u" id="request-{{_id}}">
-                <img class="rounded-x" src="http://seidue.crs4.it:3015/{{product._id}}/{{product.images.[0].name}}_o.jpg"
+            <div class="alert-blocks service-block-u" id="request-{{_id}}">              
+                <img class="rounded-x" src="{{product.imgUrl.[0]}}" data-oldsrc="http://seidue.crs4.it:3015/{{product._id}}/{{product.images.[0].name}}_o.jpg"
                 onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'" alt="">
              <!--   <img class="rounded-x" src={{productLogo product}} alt="">-->
                 <strong  class="header-info-rfq service-heading">{{product.name}}</strong>
