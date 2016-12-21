@@ -32,7 +32,11 @@ var translation = {
                 "request_rejected": "The request has bee rejected",
                 "missing_date": "Please enter a validity date",
                 "invalid_number": "Please enter only digits",
-                "noparameter": "Wrang parameter"
+                "noparameter": "Wrong parameter",
+                "void_name": "Name cannot be void",
+                "void_category": "Category cannot be void",
+                "void_desc": "Description cannot be void",
+                "void_unit": "Unit cannot be void"
             },
             "warning": {
                 "warning": "Warning!",
@@ -192,9 +196,11 @@ var translation = {
                 "deliveryIn": "Delivery in",
                 "atleast": "At least",
                 "atmost": "At most",
+                "unit": "Unity",
                 "days": "days",
                 "searchResults":"Search results",
-                "price":"Price"
+                "price":"Price",
+                "availability": "Availability"
             },
             "pagination": {
                 "next": "Next",
@@ -212,10 +218,10 @@ var translation = {
                 "thRates": "Rates",
                 "thAction": "Action",
                 "tabLabelRegistration": "Rigistered ",
-                "tabLabelRegistration": "Rigistered ",
                 "tabMsgProduct": "See products match",
                 "category":"Category",
-                "newProduct":"New product"
+                "newProduct":"New product",
+                "added": "Product added"
             },
             "evaluation": {
                 "your_opinion": "Your opinion is really important to us!",
@@ -283,7 +289,11 @@ var translation = {
                 "request_rejected": "La richiesta non può essere accolta",
                 "missing_date": "Devi inserire una data",
                 "invalid_number": "Puoi inserire solo un numero",
-                "noparameter": "Parametri non corretti"
+                "noparameter": "Parametri non corretti",
+                "void_name": "Devi inserire un nome",
+                "void_category": "Devi inserire una categoria",
+                "void_desc": "Devi inserire una descrizione",
+                "void_unit": "Devi inserire un'unità di misura"
             },
             "warning": {
                 "warning": "Attenzione!",
@@ -444,9 +454,11 @@ var translation = {
                 "deliveryIn": "Consegna in",
                 "atleast": "Min",
                 "atmost": "Max",
+                "unit": "Unità",
                 "days": "giorni",
                 "searchResults":"Risultati ricerca",
-                "price":"Prezzo"
+                "price":"Prezzo",
+                "availability": "Disponibilità"
             },
             "pagination": {
                 "next": "Prossima",
@@ -467,7 +479,8 @@ var translation = {
                 "tabLabelRegistration": "Registrato il ",
                 "tabMsgProduct": "Vedi i prodotti associati",
                 "category":"Categoria",
-                "newProduct":"Nuovo prodotto"
+                "newProduct":"Nuovo prodotto",
+                "added": "Prodotto aggiunto"
             },
             "evaluation": {
                 "your_opinion": "Il tuo parere conta molto per noi!",
