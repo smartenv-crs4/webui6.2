@@ -221,7 +221,12 @@ var translation = {
                 "tabMsgProduct": "See products match",
                 "category":"Category",
                 "newProduct":"New product",
-                "added": "Product added"
+                "added": "Product added",
+                "maxCharacters": "Max 500 characters",
+                "note": "Note ",
+                "minimumQuantity": "Minimum quantity",
+                "maximumQuantity": "Maximum quantity",
+                "numberOfDays": "Number of Days",
             },
             "evaluation": {
                 "your_opinion": "Your opinion is really important to us!",
@@ -480,7 +485,12 @@ var translation = {
                 "tabMsgProduct": "Vedi i prodotti associati",
                 "category":"Categoria",
                 "newProduct":"Nuovo prodotto",
-                "added": "Prodotto aggiunto"
+                "added": "Prodotto aggiunto",
+                "maxCharacters": "Max 500  caratteri.",
+                "note": "Note ",
+                "minimumQuantity": "Quantità minima",
+                "maximumQuantity": "Quantità massima",
+                "numberOfDays": "Numero di giorni"
             },
             "evaluation": {
                 "your_opinion": "Il tuo parere conta molto per noi!",

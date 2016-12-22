@@ -11,6 +11,10 @@ var sidebarTemplate = `
       <li class="list-group-item">
           <a href="page_catalog.html?idSupplier={{idSupplier}}"><i class="fa fa-book"></i> <span data-i18n="catalog.mycatalog"></span></a>
       </li>
+      <li class="list-group-item">
+          <a href="page_product_new.html"><i class="fa fa-plus"></i> <span data-i18n="product.newProduct"></span></a>
+      </li>
+      
       {{else}}
       <li class="list-group-item">
           <a href="page_profile_settings.html?tab=favoriteTab"><i class="fa fa-star"></i> <span data-i18n="profile.favoriteSuppliers"></span></a>

@@ -50,7 +50,7 @@
 
     <!-- CSS Customization -->
     <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel="stylesheet" href="assets/css/custom_rfq.css">
+    <!-- link rel="stylesheet" href="assets/css/custom_rfq.css" -->
     <link rel="stylesheet" href="assets/css/typeaheadjs.css">
 
 </head>
@@ -76,11 +76,11 @@
                 <div class="profile-body">
                     <div class="row">
                         <!--Alert-->
-                        <div class="sm-margin-bottom-30 rfq-container">
+                        <div class="sm-margin-bottom-30 ">
                             <div class="panel-heading-v2 overflow-h">
                                 <h2 class="heading-xs pull-left"><i class="fa fa-paper-plane fa-fw"></i> <span data-i18n="product.newProduct"></span> </h2>
                                 <div style="text-align: center">
-                                    <div class="inbox-rfq-header" style="display: inline-block;">
+                                    <div class="" style="display: inline-block;">
                                         <strong id="new-product-header" class="" style=""></strong>
                                     </div>
                                     <a href="#"><i class="fa fa-cog pull-right"></i></a>
@@ -149,16 +149,22 @@
 
 
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-<script type="text/javascript" src="assets/js/custom_rfq.js"></script>
+<!-- script type="text/javascript" src="assets/js/custom_rfq.js"></script -->
 <script type="text/javascript" src="assets/js/footer.js"></script>
 <script type="text/javascript" src="assets/js/plugins/async.js"></script>
 <script type="text/javascript" src="assets/js/utils.js"></script>
 <script type="text/javascript" src="assets/js/plugins/typeahead.bundle.js"></script>
+<script type="" src="assets/plugins/img-resize.js"></script>
 
 <script type="text/javascript">
 
     jQuery(document).ready(function () {
         App.init();
+        
+        if(sessionStorage.userId == undefined)
+        {      
+          redirectToLogin();
+        }
 
         //App.initCounter();
         //App.initScrollBar();
@@ -166,7 +172,7 @@
         //StyleSwitcher.initStyleSwitcher();
         $("#sidebar").show();
 
-        var source = $("#rfq_new_prod_template").html();
+        var source = $("#new_prod_template").html();
         var theTemplate = Handlebars.compile(source);
 
         var theCompiledHtml = theTemplate();
@@ -177,7 +183,6 @@
         $("body").localize();
 
         autoCompleteCat("categoryField");
-
     });
     
     
@@ -295,9 +300,8 @@
 <!--[if lt IE 10]>
 <script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
 <![endif]-->
-<!--Template RFQ New-->
 
-<script id="rfq_new_prod_template" type="text/x-handlebars-template">
+<script id="new_prod_template" type="text/x-handlebars-template">
     <div class="sky-form">
 
         <fieldset>
@@ -331,7 +335,7 @@
                 <label class="textarea">
                     <textarea rows="3" id="description"></textarea>
                 </label>
-                <div class="note"><strong>Note:</strong> massimo 500 caratteri.</div>
+                <div class="note"><strong data.i18n="product.note">Note: </strong><span data-i18n="product.maxCharacters">massimo 500 caratteri.</span></div>
             </section>
             <div class="row" >
 
@@ -339,7 +343,7 @@
                     <label class="label" data-i18n="catalog.atleast"></label>
                     <label class="input">
                         <i class="icon-append   icon-arrow-down"></i>
-                        <input id="qmin"type="text" placeholder="Quantità minima" name="product">
+                        <input id="qmin"type="text" data-i18n="[placeholder]product.minimumQuantity" >
                     </label>
                 </section>
 
@@ -347,7 +351,7 @@
                     <label class="label" data-i18n="catalog.atmost"></label>
                     <label class="input">
                         <i class="icon-append   icon-arrow-up"></i>
-                        <input id="qmax" type="text"  placeholder="Quantità massima" name="product">
+                        <input id="qmax" type="text"  data-i18n="[placeholder]product.maximumQuantity" name="product">
                     </label>
                 </section>
                 
@@ -370,7 +374,7 @@
                     <label class="label" data-i18n="catalog.availability"></label>
                     <label class="input">
                         <i class="icon-append  icon-layers"></i>
-                        <input id="availability" type="text" placeholder="Availability" name="product">
+                        <input id="availability" type="text" data-i18n="[placeholder]catalog.availability" >
                     </label>
                 </section>
                 
@@ -378,14 +382,14 @@
                     <label class="label" data-i18n="catalog.deliveryIn"></label>
                     <label class="input">
                         <i class="icon-append  icon-calendar"></i>
-                        <input id="delin" type="text" placeholder="Numero giorni" name="product">
+                        <input id="delin" type="text"  data-i18n="[placeholder]product.numberOfDays">
                     </label>
                 </section>
                 <section class="col col-3">
                     <label class="label" data-i18n="catalog.price"></label>
                     <label class="input">
                         <i class="icon-append   icon-finance-246"></i>
-                        <input id="price" type="text"  name="product">
+                        <input id="price" type="text"  >
                     </label>
                 </section>
 
@@ -395,13 +399,13 @@
         </fieldset>
 
         <hr>
-        <div class="input-group button-new-rfq">
+        <div class="input-group">
             <button onclick="addProduct()" class="btn-u" data-i18n="profile.save"></button>
         </div>
 
     </div>
 </script>
-<!--End Template RFQ New-->
+<!--End Template New Product-->
 
 
 </body>
