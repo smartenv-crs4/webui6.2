@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
     <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/bootstrap-editable.css">
     <link rel="stylesheet" href="assets/css/jquery.jgrowl.min.css">
 
     <!-- CSS Page Style -->
@@ -142,13 +142,13 @@
 <!--<script type="text/javascript" src="assets/js/plugins/style-switcher.js"></script>-->
 <script type="text/javascript" src="assets/js/common_header.js"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<script type="text/javascript" src="assets/js/plugins/handlebars.min.js"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script type="text/javascript" src="assets/js/plugins/bootstrap-editable.min.js"></script>
 <script type="text/javascript" src="assets/js/plugins/jquery.jgrowl.min.js"></script>
 
 
-<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script type="text/javascript" src="assets/js/plugins/socket.io-1.4.5.js"></script>
 <!-- script type="text/javascript" src="assets/js/custom_rfq.js"></script -->
 <script type="text/javascript" src="assets/js/footer.js"></script>
 <script type="text/javascript" src="assets/js/plugins/async.js"></script>
@@ -285,6 +285,41 @@
       }                    
     });  
   }
+  
+  function addImgInput()
+  {
+    var box = document.createElement("div");
+    var bt = document.createElement("button");
+    bt.onclick = function(){jQuery(this.parentNode).remove();};
+    bt.className = "btn-u";
+    bt.style.float = "left"
+    bt.style.marginRight = "10px";
+    bt.style.display = "block";
+    
+    var ic = document.createElement("span");
+    ic.className = "glyphicon glyphicon-remove";
+    ic.setAttribute("aria-hidden", true);
+        
+    bt.appendChild(ic);
+    
+    var i = document.createElement("input");
+    i.type = "file";
+    i.style.float = "left";
+    
+    var idx = 0;
+    
+    jQuery("#imgBlock input").each(function(){
+      var id = jQuery(this).attr("id");
+      idx = id.split("_")[1];
+    });
+    
+    i.id = "prod-img_" + (++idx);
+    
+    box.appendChild(bt);
+    box.appendChild(i);
+    
+    document.getElementById("imgBlock").appendChild(box);                          
+  }
     
     
     
@@ -392,9 +427,29 @@
                         <input id="price" type="text"  >
                     </label>
                 </section>
-
+                
+                <section class="col col-5">
+                    <label class="label" >File</label>
+                    <label class="input input-file" for="file">
+                        <div class="button"><input class="imgInput" onchange="this.parentNode.nextSibling.nextSibling.value = this.value " type="file">Browse</div>
+                        <input class="fl" readonly="" type="text"> 
+                    </label>
+                </section>
+                
+                
 
             </div>
+            
+            <!-- div class="row" id="imgBlock" style="border: solid 1px #ddd; padding:15px ">
+              <div>
+                <button onclick="addImgInput()" class="btn-u btn-u-default" style="float:left"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+              </div>
+              <br><br>
+              <div style="display:block">                              
+                <button onclick="jQuery(this.parentNode).remove()" class="btn-u" style="float:left; margin-right: 10px"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <input type="file" id="prod-img_1" style="float:left">
+              </div>
+            </div -->
 
         </fieldset>
 

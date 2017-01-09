@@ -383,8 +383,6 @@ function setEditableField(field){
 
     });
 
-
-
 }
 
 function isValidQuantity(q, f){
@@ -398,7 +396,6 @@ function isValidQuantity(q, f){
     else return false;
 }
 
-
 function onSaveEditableField(e, params){
     var id = (e.target.id);
     id = id.split("-")[1];
@@ -407,9 +404,7 @@ function onSaveEditableField(e, params){
     $("#cancel-req-"+id).removeClass("hidden");
     $("#save-accept-req-"+id).removeClass("hidden");
     $("#req-buttons-"+id+" .default-button").addClass("hidden");
-
 }
-
 
 function addTooltipField(){
 
