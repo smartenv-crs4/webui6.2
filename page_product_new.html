@@ -206,9 +206,10 @@
   
   function addImgId(data)
   {
-    console.log(data)
+    
     img.push(data.filecode);
     imgCounter--;
+        
     
     if(imgCounter == 0)
     {
@@ -218,7 +219,7 @@
   
   function onErrorUpload(data)
   {
-    imgCounter--;
+    imgCounter--;    
     
     if(imgCounter == 0)
     {
@@ -291,7 +292,7 @@
       param.images = [];
       
       for(var i in img)
-      {
+      {        
         param.images.push({"imageId" : img[i]});
       }
     }
@@ -343,28 +344,28 @@
     img = [];
     imgCounter = 0;
                 
-    jQuery("#imgBlock input").each(function(){
-      var iid = [];
+    var iid = [];
+    
+    jQuery("#imgBlock input").each(function(){      
       if(this.files.length > 0)
       {
         iid.push(this.id);            
       }            
-      imgCounter = iid.length;
-      
-      if(imgCounter == 0)
-      {
-        sendAddRequest();
-      }
-      
-      for(var i in iid)
-      {
-        resizeImage(iid[i], _uploadMsUrl, addImgId, onErrorUpload, formats )
-      }
-      
-      var id = jQuery(this).attr("id");
-      idx = id.split("_")[1];
     });
+    
+    imgCounter = iid.length;
             
+      
+    if(imgCounter == 0)
+    {
+      sendAddRequest();
+    }
+    
+    for(var i in iid)
+    {
+      resizeImage(iid[i], _uploadMsUrl, addImgId, onErrorUpload, formats )
+    }
+              
     //console.log(sessionStorage.token);
       
   }
@@ -523,17 +524,19 @@
                 
 
             </div>
-            
-            <div class="row" id="imgBlock" style="border: solid 1px #ddd; padding:15px ">
-              <div>
-                <button onclick="addImgInput()" class="btn-u btn-u-default" style="float:left"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            <section class="col col-11">
+              <label class="label" data-i18n="product.images"></label>
+              <div class="row" id="imgBlock" style="border: solid 1px #ddd; padding:15px ">
+                <div>
+                  <button onclick="addImgInput()" class="btn-u btn-u-default" style="float:left"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                </div>
+                <br><br>
+                <div style="margin-bottom:5px">                              
+                  <button onclick="jQuery(this.parentNode).remove()" class="btn-u" style="display:inline-block; margin-right: 10px"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <input type="file" id="prod-img_1" style="display:inline-block">
+                </div>
               </div>
-              <br><br>
-              <div style="margin-bottom:5px">                              
-                <button onclick="jQuery(this.parentNode).remove()" class="btn-u" style="display:inline-block; margin-right: 10px"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                <input type="file" id="prod-img_1" style="display:inline-block">
-              </div>
-            </div>
+            </section>
 
         </fieldset>
 

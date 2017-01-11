@@ -227,6 +227,7 @@ var translation = {
                 "minimumQuantity": "Minimum quantity",
                 "maximumQuantity": "Maximum quantity",
                 "numberOfDays": "Number of Days",
+                "images": "Images"
             },
             "evaluation": {
                 "your_opinion": "Your opinion is really important to us!",
@@ -490,7 +491,8 @@ var translation = {
                 "note": "Note ",
                 "minimumQuantity": "Quantità minima",
                 "maximumQuantity": "Quantità massima",
-                "numberOfDays": "Numero di giorni"
+                "numberOfDays": "Numero di giorni",
+                "images": "Immagini"
             },
             "evaluation": {
                 "your_opinion": "Il tuo parere conta molto per noi!",
