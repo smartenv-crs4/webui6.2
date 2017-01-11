@@ -731,7 +731,7 @@
 
                 for (var i in prods) {
                     prods[i].imgUrl = [];
-                    if (prods[i].images.length > 0 && prods[i].images[0].imageId != undefined) 
+                    if (prods[i].images.length > 0 && prods[i].images[0] != null && prods[i].images[0].imageId != undefined) 
                     {
                         prods[i].imgUrl.push(_uploadMsUrl + prods[i].images[0].imageId + "?tag=t");                        
                         

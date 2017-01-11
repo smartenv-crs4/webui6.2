@@ -158,56 +158,91 @@
 
 <script type="text/javascript">
 
-    jQuery(document).ready(function () {
-        App.init();
-        
-        if(sessionStorage.userId == undefined)
-        {      
-          redirectToLogin();
-        }
+  jQuery(document).ready(function () {
+      App.init();
+      
+      if(sessionStorage.userId == undefined)
+      {      
+        redirectToLogin();
+      }
 
-        //App.initCounter();
-        //App.initScrollBar();
-        //Datepicker.initDatepicker();
-        //StyleSwitcher.initStyleSwitcher();
-        $("#sidebar").show();
+      //App.initCounter();
+      //App.initScrollBar();
+      //Datepicker.initDatepicker();
+      //StyleSwitcher.initStyleSwitcher();
+      $("#sidebar").show();
 
-        var source = $("#new_prod_template").html();
-        var theTemplate = Handlebars.compile(source);
+      var source = $("#new_prod_template").html();
+      var theTemplate = Handlebars.compile(source);
 
-        var theCompiledHtml = theTemplate();
+      var theCompiledHtml = theTemplate();
 
-        // Add the compiled html to the page
-        $("#inbox-new-product-container").html(theCompiledHtml);
+      // Add the compiled html to the page
+      $("#inbox-new-product-container").html(theCompiledHtml);
 
-        $("body").localize();
+      $("body").localize();
 
-        autoCompleteCat("categoryField");
-    });
-    
-    
-  function addProduct()
+      autoCompleteCat("categoryField");
+  });
+  
+  
+  var formats = 
   {
-    if(sessionStorage.userId == undefined)
-    {      
-      redirectToLogin();
+    formats:
+    {
+      o:
+      {
+        maxSize:800
+      },
+      t:
+      {
+        maxSize:150
+      }
     }
+  }
+       
+  var img = [];
+  var imgCounter = 0;
+  
+  function addImgId(data)
+  {
+    console.log(data)
+    img.push(data.filecode);
+    imgCounter--;
     
+    if(imgCounter == 0)
+    {
+      sendAddRequest();
+    }
+  }
+  
+  function onErrorUpload(data)
+  {
+    imgCounter--;
+    
+    if(imgCounter == 0)
+    {
+      sendAddRequest();
+    }
+  }
+  
+  
+        
+  function sendAddRequest()
+  {
     var param = {};
     
     param.name = jQuery("#name").val();
     param.category = jQuery("#categoryField").data("cat-id");
     param.description = jQuery("#description").val();
     param.unit = jQuery("#unit").val();
-    
-    
+        
     param.minNum = jQuery("#qmin").val();
     param.maxNum = jQuery("#qmax").val();
     param.deliveryIn = jQuery("#delin").val();
     param.price = jQuery("#price").val();
-    param.availability = jQuery("#availability").val();
-    
-    
+    param.availability = jQuery("#availability").val();                
+        
     if(param.minNum.trim() == "")
       param.delete("minNum")
       
@@ -249,9 +284,18 @@
       var msg = i18next.t("error.void_desc");
       jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
       return;
-    }    
-        
-    //console.log(sessionStorage.token);
+    }
+    
+    if(img.length > 0)
+    {
+      param.images = [];
+      
+      for(var i in img)
+      {
+        param.images.push({"imageId" : img[i]});
+      }
+    }
+    
     jQuery.ajax({
       url: _brokerMsUrl + "products/",
       type: "POST",
@@ -260,6 +304,7 @@
       dataType: "json",
       success: function(dataResp, textStatus, xhr)
       {          
+        // dataResp.id                    
         jQuery.jGrowl(i18next.t("product.added"), {theme:'bg-color-green1', life: 5000});        
               
       },     
@@ -283,19 +328,58 @@
       { 
         xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
       }                    
-    });  
+    });
+    
+    
+  }
+    
+  function addProduct()
+  {
+    if(sessionStorage.userId == undefined)
+    {      
+      redirectToLogin();
+    }
+    
+    img = [];
+    imgCounter = 0;
+                
+    jQuery("#imgBlock input").each(function(){
+      var iid = [];
+      if(this.files.length > 0)
+      {
+        iid.push(this.id);            
+      }            
+      imgCounter = iid.length;
+      
+      if(imgCounter == 0)
+      {
+        sendAddRequest();
+      }
+      
+      for(var i in iid)
+      {
+        resizeImage(iid[i], _uploadMsUrl, addImgId, onErrorUpload, formats )
+      }
+      
+      var id = jQuery(this).attr("id");
+      idx = id.split("_")[1];
+    });
+            
+    //console.log(sessionStorage.token);
+      
   }
   
   function addImgInput()
   {
     var box = document.createElement("div");
-    var bt = document.createElement("button");
-    bt.onclick = function(){jQuery(this.parentNode).remove();};
-    bt.className = "btn-u";
-    bt.style.float = "left"
-    bt.style.marginRight = "10px";
-    bt.style.display = "block";
+    box.style.marginBottom = "5px";
     
+    var bt = document.createElement("button");
+    bt.setAttribute("onclick", "jQuery(this.parentNode).remove();");    
+    bt.className = "btn-u";
+    bt.style.display = "inline-block"
+    bt.style.marginRight = "10px";
+            
     var ic = document.createElement("span");
     ic.className = "glyphicon glyphicon-remove";
     ic.setAttribute("aria-hidden", true);
@@ -304,7 +388,7 @@
     
     var i = document.createElement("input");
     i.type = "file";
-    i.style.float = "left";
+    i.style.display = "inline-block";
     
     var idx = 0;
     
@@ -440,16 +524,16 @@
 
             </div>
             
-            <!-- div class="row" id="imgBlock" style="border: solid 1px #ddd; padding:15px ">
+            <div class="row" id="imgBlock" style="border: solid 1px #ddd; padding:15px ">
               <div>
                 <button onclick="addImgInput()" class="btn-u btn-u-default" style="float:left"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
               </div>
               <br><br>
-              <div style="display:block">                              
-                <button onclick="jQuery(this.parentNode).remove()" class="btn-u" style="float:left; margin-right: 10px"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                <input type="file" id="prod-img_1" style="float:left">
+              <div style="margin-bottom:5px">                              
+                <button onclick="jQuery(this.parentNode).remove()" class="btn-u" style="display:inline-block; margin-right: 10px"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <input type="file" id="prod-img_1" style="display:inline-block">
               </div>
-            </div -->
+            </div>
 
         </fieldset>
 

@@ -52,7 +52,7 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config)
   {
     config = defaultResizeConfig;
   }
-  
+    
   // Read in file
   var f = jQuery("#" + imgField)[0];
   var file =  f.files[0];
@@ -66,10 +66,10 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config)
     var reader = new FileReader();
     
     reader.onload = function (readerEvent) 
-    {      
+    {    
       var image = new Image();
       image.onload = function (imageEvent) 
-      {                
+      {               
         for(var suf in config.formats)
         {          
           // Resize the image
@@ -97,9 +97,12 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config)
             
           canvas.width = width;
           canvas.height = height;
+  
           canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+
           console.log(file.type);
           var dataUrl = canvas.toDataURL(file.type);
+
                        
           var resizedImage = dataURLToBlob(dataUrl);
           
@@ -107,14 +110,14 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config)
             "suffix": suf,
             "blob": resizedImage,
             "origName" : file.name
-          });                            
-          
+          });                                      
         }                
         
         // fare l'upload
         uploadImages(imgList, msUploadUrl, doSuccess, doError);
       }
       image.src = readerEvent.target.result;
+
     }
     reader.readAsDataURL(file);
   }
@@ -125,11 +128,11 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config)
 function dataURLToBlob(dataURL) {
   var BASE64_MARKER = ';base64,';
   if (dataURL.indexOf(BASE64_MARKER) == -1) {
-      var parts = dataURL.split(',');
-      var contentType = parts[0].split(':')[1];
-      var raw = parts[1];
+    var parts = dataURL.split(',');
+    var contentType = parts[0].split(':')[1];
+    var raw = parts[1];
 
-      return new Blob([raw], {type: contentType});
+    return new Blob([raw], {type: contentType});
   }
 
   var parts = dataURL.split(BASE64_MARKER);
@@ -155,6 +158,7 @@ function uploadImages(imgList, msUploadUrl, doSuccess, doError)
     var name = "";
     var n =  imgList[i].origName;
     var ns = n.split(".");
+  
     if(ns.length > 1)
     {
       for(var j = 0; j < ns.length - 1; j++)
