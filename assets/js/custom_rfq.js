@@ -50,10 +50,10 @@ Handlebars.registerHelper('iff', function(a, operator, b, opts) {
         case '==':
             bool = a.toString() == b.toString();
             break;
-        case '>':
+        case 'gt':
             bool = a.toString() > b.toString();
             break;
-        case '<':
+        case 'lt':
             bool = a.toString() < b.toString();
             break;
         default:
@@ -65,6 +65,19 @@ Handlebars.registerHelper('iff', function(a, operator, b, opts) {
     } else {
         return opts.inverse(this);
     }
+});
+
+Handlebars.registerHelper("math", function(lvalue, operator, rvalue, options) {
+    lvalue = parseFloat(lvalue);
+    rvalue = parseFloat(rvalue);
+        
+    return {
+        "+": lvalue + rvalue,
+        "-": lvalue - rvalue,
+        "*": lvalue * rvalue,
+        "/": lvalue / rvalue,
+        "%": lvalue % rvalue
+    }[operator];
 });
 
 Handlebars.registerHelper('userLogo', function(customer, supplier) {
@@ -135,14 +148,22 @@ jQuery(document).ready(function() {
     });
 
 
-function getConversations()
+function getConversations(page)
 {
     if(sessionStorage.userId == undefined)
     {
         window.location.replace("page_login_and_registration.html");
     }
+    
+    var pageS = "";
+    
+    if(page)
+    {
+      pageS = "&page=" + page;
+    }
+    
      jQuery.ajax({
-        url: _localServiceUrl + "conversations?by_uid="+ sessionStorage.userId,
+        url: _localServiceUrl + "conversations?by_uid="+ sessionStorage.userId + pageS,
         type: "GET",
         contentType: "application/json",
          dataType: 'json',
