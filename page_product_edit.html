@@ -78,7 +78,7 @@
                         <!--Alert-->
                         <div class="sm-margin-bottom-30 ">
                             <div class="panel-heading-v2 overflow-h">
-                                <h2 class="heading-xs pull-left"><i class="fa fa-paper-plane fa-fw"></i> <span data-i18n="product.newProduct"></span> </h2>
+                                <h2 class="heading-xs pull-left"><i class="fa fa-paper-plane fa-fw"></i> <span data-i18n="product.updateProduct"></span> </h2>
                                 <div style="text-align: center">
                                     <div class="" style="display: inline-block;">
                                         <strong id="new-product-header" class="" style=""></strong>
@@ -161,15 +161,24 @@
   jQuery(document).ready(function () {
       App.init();
       
-      if(sessionStorage.userId == undefined)
+      if(sessionStorage.userId == undefined || sessionStorage.type != "supplier")
       {      
         redirectToLogin();
       }
+      
+      var productId = getUrlParameter("pid");
+      
+      if(productId)
+      {
+        getProductInfo(productId);
+      }
+      else
+      {
+        // Errore
+      }
+            
 
-      //App.initCounter();
-      //App.initScrollBar();
-      //Datepicker.initDatepicker();
-      //StyleSwitcher.initStyleSwitcher();
+      
       $("#sidebar").show();
 
       var source = $("#new_prod_template").html();
@@ -204,6 +213,131 @@
   var img = [];
   var imgCounter = 0;
   
+  
+  function getProductInfo(id)
+  {
+    jQuery.ajax({
+      url: _brokerMsUrl + "products/" + id,
+      type: "get",
+      contentType: "application/json; charset=utf-8",
+      //data: JSON.stringify(param),
+      dataType: "json",
+      success: function(dataResp, textStatus, xhr)
+      {          
+        jQuery("#name").val(dataResp.name);
+        jQuery("#description").val(dataResp.description);
+        jQuery("#qmin").val(dataResp.minNum);
+        jQuery("#qmax").val(dataResp.maxNum);
+        jQuery("#availability").val(dataResp.availability);
+        jQuery("#price").val(dataResp.price);
+        jQuery("#delin").val(dataResp.deliveryIn);        
+        jQuery("#unit").val(dataResp.unit);
+        
+        var category = dataResp.categories;
+        
+        if(category && category[0])
+        { 
+          getCategoryName(category[0], function(data){
+            jQuery("#categoryField").data("cat-name", data.name[localStorage.lng]);
+            jQuery("#categoryField").val(data.name[localStorage.lng]);
+            
+          });                   
+          jQuery("#categoryField").data("cat-id", category[0]);
+          
+          
+          var pic = dataResp.images;
+          
+          if(pic && pic.length > 0)
+          {
+            var images = document.getElementById("attachedImg");
+            jQuery(images).empty();
+            
+            for(var i in pic)
+            {
+              picId = pic[i].imageId;              
+              
+              var box = document.createElement("div");
+              box.style.marginRight = "12px"
+              box.style.position = "relative";
+              box.style.border = "solid 1px #ddd";
+              box.style.padding = "5px";
+              box.style.display = "inline-block";
+              
+              var p = document.createElement("img");
+              p.src = _uploadMsUrl + picId + "?tag=t";
+              p.style.maxWidth = "80px";              
+              p.style.width = "100%";
+              p.setClassName = "attachedPictures";
+              p.setAttribute("data-id", picId);
+                            
+              var btn = document.createElement("div");
+              btn.className = "glyphicon glyphicon-remove"
+              btn.style.fontSize = "8pt";
+              btn.style.cursor = "pointer";
+              btn.style.position = "absolute";
+              btn.style.top = "-9px";
+              btn.style.right = "-9px";
+              btn.style.padding = "2px";
+              btn.style.backgroundColor = "#eee";
+              btn.style.color = "#bc0000";
+              btn.style.border = "solid 1px #999";
+              btn.style.borderRadius = "50%";
+              btn.onclick = function(){
+                if(this.className == "glyphicon glyphicon-remove")
+                {
+                  this.className = "glyphicon glyphicon-repeat";
+                  this.style.color = "#007d00";
+                  var im = jQuery(this).parent().find("img").first()[0];
+                  im.style.opacity = "0.15";      
+                  im.setAttribute("data-erased", "true");
+                }
+                else
+                {
+                  this.className = "glyphicon glyphicon-remove";                
+                  this.style.color = "#bc0000";
+                  var im = jQuery(this).parent().find("img").first()[0];
+                  im.style.opacity = "1";
+                  im.removeAttribute("data-erased");                  
+                }
+              }
+                            
+              box.appendChild(p);
+              box.appendChild(btn);
+              images.appendChild(box);                                                        
+            }
+          }
+          
+        }                                
+        // dataResp.id                    
+        //jQuery.jGrowl(i18next.t("product.added"), {theme:'bg-color-green1', life: 5000});        
+              
+      },     
+      error: function(xhr, status)
+      {
+        var msg;
+        try
+        {
+          msg = xhr.responseJSON.message;
+        }
+        catch(err)
+        {
+          msg = i18next.t("error.internal_server_error");
+        }
+        
+        jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+              
+        return;    
+      },
+      beforeSend: function(xhr, settings) 
+      { 
+        xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+      }                    
+    });          
+    
+  }
+  
+  
+  
   function addImgId(data)
   {
     
@@ -213,7 +347,7 @@
     
     if(imgCounter == 0)
     {
-      sendAddRequest();
+      sendUpdateRequest();
     }
   }
   
@@ -223,13 +357,31 @@
     
     if(imgCounter == 0)
     {
-      sendAddRequest();
+      sendUpdateRequest();
     }
+  }
+  
+  function removeImage(id)
+  {
+    jQuery.ajax({
+      url: _uploadMsUrl + id,
+      //data: formData,
+      //cache: false,
+      //contentType: false,
+      //processData: false,
+      type: "DELETE",
+      success: function(data){
+      },
+      error: function(xhr)
+      {
+        console.log("image " + id + " doesn't removed")      
+      }
+    });        
   }
   
   
         
-  function sendAddRequest()
+  function sendUpdateRequest()
   {
     var param = {};
     
@@ -291,9 +443,23 @@
       return;
     }
     
+    jQuery("#attachedImg img").each(function(){
+      if(param.images == undefined)
+      {        
+        param.images = [];
+      }
+          
+      if(!this.hasAttribute("data-erased"))
+      {                  
+        param.images.push({"imageId": this.getAttribute("data-id")});
+      }
+                
+    })    
+    
     if(img.length > 0)
     {
-      param.images = [];
+      if(param.images == undefined)
+          param.images = [];      
       
       for(var i in img)
       {        
@@ -302,16 +468,16 @@
     }
     
     jQuery.ajax({
-      url: _brokerMsUrl + "products/",
-      type: "POST",
+      url: _brokerMsUrl + "products/" + getUrlParameter("pid"),
+      type: "PUT",
       contentType: "application/json; charset=utf-8",
       data: JSON.stringify(param),
       dataType: "json",
       success: function(dataResp, textStatus, xhr)
       {          
         // dataResp.id                    
-        jQuery.jGrowl(i18next.t("product.added"), {theme:'bg-color-green1', life: 5000});        
-              
+        jQuery.jGrowl(i18next.t("product.updated"), {theme:'bg-color-green1', life: 5000});    
+        getProductInfo(getUrlParameter("pid"));                  
       },     
       error: function(xhr, status)
       {
@@ -331,14 +497,12 @@
       },
       beforeSend: function(xhr, settings) 
       { 
-        xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+        xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
       }                    
-    });
-    
-    
+    });        
   }
     
-  function addProduct()
+  function updateProduct()
   {
     if(sessionStorage.userId == undefined)
     {      
@@ -362,15 +526,20 @@
       
     if(imgCounter == 0)
     {
-      sendAddRequest();
+      sendUpdateRequest();
     }
     
     for(var i in iid)
     {
       resizeImage(iid[i], _uploadMsUrl, addImgId, onErrorUpload, formats )
     }
-              
-    //console.log(sessionStorage.token);
+    
+    jQuery("#attachedImg img").each(function(){     
+      if(this.hasAttribute("data-erased"))
+      {  
+        removeImage(this.getAttribute("data-id"));                        
+      }                
+    })                      
       
   }
   
@@ -529,8 +698,12 @@
 
             </div>
             <section class="col col-11">
-              <label class="label" data-i18n="product.images"></label>
+              <label class="label" data-i18n="product.images"></label>              
+                            
               <div class="row" id="imgBlock" style="border: solid 1px #ddd; padding:15px ">
+                <div class="row" id="attachedImg">                              
+                </div>
+                <hr>
                 <div>
                   <button onclick="addImgInput()" class="btn-u btn-u-default" style="float:left"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                 </div>
@@ -546,7 +719,7 @@
 
         <hr>
         <div class="input-group">
-            <button onclick="addProduct()" class="btn-u" data-i18n="profile.save"></button>
+            <button onclick="updateProduct()" class="btn-u" data-i18n="profile.save"></button>
         </div>
 
     </div>

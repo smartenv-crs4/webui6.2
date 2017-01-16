@@ -276,6 +276,29 @@ function getUrlParameter(sParam)
   return undefined;
 }
 
+
+function getCategoryName(cid, callback)
+{
+  jQuery.ajax({
+    url: _brokerMsUrl + "categories/" + cid,
+    type: "GET",    
+    contentType: "application/json; charset=utf-8",
+    success: function(data, textStatus, xhr)
+    {
+      if(callback)
+        callback(data);
+    },
+    error: function(xhr, status)
+    {
+    },
+    beforeSend: function(xhr, settings)
+    {
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+    }
+  });
+  
+}
+
 function autoCompleteCat(tagId)
 {
   var acCategories = new Bloodhound({
