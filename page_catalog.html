@@ -13,6 +13,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    
+    <script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- JS Implementing Plugins -->
+    
+    <script type="text/javascript" src="assets/js/plugins/bootstrap-confirmation.min.js"></script>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
@@ -45,6 +52,9 @@
     <!-- CSS Theme -->
     <link rel="stylesheet" href="assets/css/theme-skins/dark.css" id="style_color">
     <link rel="stylesheet" href="assets/css/theme-colors/dark-red.css">
+    
+    <link rel="stylesheet" href="assets/css/jquery.jgrowl.min.css">
+    <script type="text/javascript" src="assets/js/plugins/jquery.jgrowl.min.js"></script>
 
     <!-- CSS Customization -->
     <link rel="stylesheet" href="assets/css/custom.css">
@@ -376,11 +386,12 @@
 
             <div class="panel-body margin-bottom-50">
                 {{#each products}}
-                <div class="media media-v2">
+                <div class="media media-v2" data-pid="{{_id}}">
                     <span class="pull-left" href="#" style="max-width:120px">
                         <img class="media-s100 img-circle"
                              data-oldsrc="http://seidue.crs4.it:3015/{{trim _id}}/{{trim images.[0].name}}_o.jpg"
-                             src="{{imgUrl.[0]}}"
+                             src="{{imgUrl.[0].url}}"
+                             data-iid="{{imgUrl.[0].id}}"
                              onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'"
                              alt="" 
                              onclick="openGallery(this)"
@@ -389,7 +400,7 @@
                                {{#each imgUrl}}
                                  <div class="th-gallery"  
                                        onclick="updateImgThumb(this)">
-                                   <img src="{{this}}" style="max-width:100%; max-height:100%" >
+                                   <img src="{{this.url}}" style="max-width:100%; max-height:100%" data-iid="{{this.id}}">
                                  </div>
                                {{/each}}
                             </div>
@@ -419,7 +430,13 @@
                         </ul>
                         <ul class="list-inline pull-right">
                             {{#if ../isSupplier}}
-                            <li><a href="page_product_edit.html?pid={{_id}}"><i class="  fa fa-edit"></i></a></li>
+                            <li><a href="page_product_edit.html?pid={{_id}}"><i class="fa fa-edit"></i></a></li>
+                            <li><a data-title="Do you want to remove '{{name}}' from your catalog?" 
+                                   data-placement="top" href="#"
+                                   data-on-confirm="deleteProduct"
+                                   data-product-id="{{_id}}"  
+                                   data-toggle="confirmation" 
+                                   data-popout="true"><i class="fa fa-remove"></i></a></li>
                             {{/if}}
                             <!-- li><a href="#"><i class="expand-list rounded-x fa fa-globe"></i></a></li>
                             <li><a href="#"><i class="expand-list rounded-x fa fa-photo"></i></a></li>
@@ -630,10 +647,7 @@
     </script>
 
 
-    <script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <!-- JS Implementing Plugins -->
+
     <script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
     <script type="text/javascript" src="assets/plugins/counter/waypoints.min.js"></script>
     <script type="text/javascript" src="assets/plugins/counter/jquery.counterup.min.js"></script>
@@ -733,15 +747,15 @@
                     prods[i].imgUrl = [];
                     if (prods[i].images.length > 0 && prods[i].images[0] != null && prods[i].images[0].imageId != undefined) 
                     {
-                        prods[i].imgUrl.push(_uploadMsUrl + prods[i].images[0].imageId + "?tag=t");                        
+                        prods[i].imgUrl.push({"url" : _uploadMsUrl + prods[i].images[0].imageId + "?tag=t", "id": prods[i].images[0].imageId});                        
                         
                         for(var j = 1; j < prods[i].images.length; j++)
                         {
-                          prods[i].imgUrl.push(_uploadMsUrl + prods[i].images[j].imageId + "?tag=t");                          
+                          prods[i].imgUrl.push({"url": _uploadMsUrl + prods[i].images[j].imageId + "?tag=t", "id": prods[i].images[j].imageId});                          
                         }                        
                     }
                     else {
-                        prods[i].imgUrl.push("assets/img/team/img1-md.jpg");
+                        prods[i].imgUrl.push({"url": "assets/img/team/img1-md.jpg", id: ""});
                     }                    
                 }
 
@@ -789,6 +803,11 @@
                 $("#pagination_container").empty();
                 if (data.pages > 1)
                     $("#pagination_container").html(pagination);
+                    
+                  jQuery('[data-toggle=confirmation]').confirmation({
+                    rootSelector: '[data-toggle=confirmation]',
+                    // other options
+                  });
                 $(target).localize();
                 $("ul.pagination").localize();
                 $(target).trigger('onload');
@@ -966,6 +985,54 @@
 
             return (element[0].scrollHeight > (element.innerHeight() + 1)) || (element[0].scrollWidth > (element.innerWidth() + 1));
         };
+        
+        
+        
+        
+        
+        function deleteProduct(pid)
+        {
+          var pid = jQuery(this).data("product-id");                            
+                                                  
+          jQuery.ajax({
+            url: _brokerMsUrl + "products/" + pid,            
+            type: "DELETE",
+            success: function(data){
+              var box = jQuery("[data-pid=" + pid +"]");
+              box.find(".th-gallery img").each(function(){
+                var iid = jQuery(this).data("iid");                
+                if(iid.trim() != "")
+                {
+                  removeImage(iid);              
+                }
+                            
+              });                                          
+              jQuery.jGrowl("OK", {theme:'bg-color-green', life: 5000});
+              getproducts(getproductsURL, 'productstable', '#products_container', null, name, catName);
+            },
+            error: function(xhr)
+            {
+              var msg;
+              try
+              {
+                msg = xhr.responseJSON.message;
+              }
+              catch(err)
+              {
+                msg = i18next.t("error.internal_server_error");
+              }
+              
+              jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+              
+              console.log("product " + pid + " doesn't removed")      
+            },
+            beforeSend: function(xhr, settings) 
+            { 
+              xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+            } 
+          });              
+          
+        }
 
     </script>
 
@@ -973,8 +1040,7 @@
 
         var currentSupplier = isSupplier() && supId == userId();
         var logged = false;
-        jQuery(document).ready(function () {
-
+        jQuery(document).ready(function () {                    
 
             Handlebars.registerHelper('paginate', paginate);
             Handlebars.registerHelper('trim', function (s) {

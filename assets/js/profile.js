@@ -536,8 +536,8 @@ function deleteDocument(name)
 {
   if(!name)
   {
-    console.log(jQuery(this).data("fnme"));
-    console.log(jQuery(this));
+    //console.log(jQuery(this).data("fnme"));
+    //console.log(jQuery(this));
     name = jQuery(this).data("fname");
     if(!name)
     {

@@ -175,9 +175,7 @@
       else
       {
         // Errore
-      }
-            
-
+      }            
       
       $("#sidebar").show();
 
@@ -359,24 +357,6 @@
     {
       sendUpdateRequest();
     }
-  }
-  
-  function removeImage(id)
-  {
-    jQuery.ajax({
-      url: _uploadMsUrl + id,
-      //data: formData,
-      //cache: false,
-      //contentType: false,
-      //processData: false,
-      type: "DELETE",
-      success: function(data){
-      },
-      error: function(xhr)
-      {
-        console.log("image " + id + " doesn't removed")      
-      }
-    });        
   }
   
   

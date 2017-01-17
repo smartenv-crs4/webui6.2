@@ -276,6 +276,20 @@ function getUrlParameter(sParam)
   return undefined;
 }
 
+function removeImage(id)
+{
+  jQuery.ajax({
+    url: _uploadMsUrl + id,      
+    type: "DELETE",
+    success: function(data){
+    },
+    error: function(xhr)
+    {
+      console.log("image " + id + " doesn't removed")      
+    }
+  });        
+}
+
 
 function getCategoryName(cid, callback)
 {
