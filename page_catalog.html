@@ -412,7 +412,7 @@
                             </h4>
                             {{#each categories}}
                             <h4>
-                                <small data-i18n="categories.{{_id}}" style="display:block;"></small>
+                                <small data-i18n="categories.{{_id}}" style="display:block;"></small>                  
                             </h4>
                             {{/each}}
                         </div>
@@ -701,8 +701,7 @@
 
         function getfiles(url, templateid, target) {
             $.get(url, function (data) {
-                console.log(data);
-
+                //console.log(data);
 
                 var files = [];
                 for (var i = 0; i < data.files.length; ++i)
@@ -729,7 +728,7 @@
                     url += "&page=" + page
             }
             $.get(url, function (data) {
-                console.log(data);
+                //console.log(data);
 
                 var prods = data.docs;
 
@@ -780,18 +779,26 @@
                 for (var i = 0; i < prods.length; ++i) {
                     var cat = prods[i].categories;
                     if (cat)
-                        for (var j = 0; j < cat.length; ++j) {
+                        for (var j = 0; j < cat.length; ++j) {                                                                              
                             var c = cat[j];
+                            categories.push({
+                                id: c._id,
+                                name: c.name
+                            });
+                            
+                            /*                            
                             if (c.level.liv == 3) {
                                 categories.push({
                                     id: c._id,
-                                    name: c.name
+                                    name: c.name[localStorage.lng]
                                 });
                             }
-                        }
+                            */
+                        }                        
                 }
                 for (var c = 0; c < categories.length; ++c) {
                     var cat = categories[c];
+ 
                     for (var l in cat.name) {
                         if (!translation[l].translation["categories"])
                             translation[l].translation["categories"] = {};
