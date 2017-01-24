@@ -384,6 +384,9 @@
 
             </div>
 
+            {{#if filtered}}
+              <label data-i18n="catalog.resultsLabel"></label> "{{filtered}}" <button class="btn-u" onclick="getproducts(getproductsURL, 'productstable', '#products_container', null, null, null);" data-i18n="catalog.showAll"></button>
+            {{/if}}
             <div class="panel-body margin-bottom-50">
                 {{#each products}}
                 <div class="media media-v2" data-pid="{{_id}}">
@@ -688,7 +691,6 @@
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
 
-
         var supId = getParameterByName("idSupplier"); //"57f5059fe8094b7137fa3efd";
         var getfilesURL = _brokerMsUrl + "users/attachment/" + supId;
         var getsupplierURL = _brokerMsUrl + "users/supplier/" + supId;
@@ -727,21 +729,44 @@
                 else
                     url += "&page=" + page
             }
+                 
+                
+            if(name && name != "null" && name.trim() != "")
+            {                  
+              if (url.indexOf("?") === -1)
+                url += "?name=" + name;
+              else
+                url += "&name=" + name
+            }
+            
+            
             $.get(url, function (data) {
                 //console.log(data);
 
-                var prods = data.docs;
-
+                var prods = data.docs; 
+                
+                var filtered = undefined;
+                
+                if(name && name != "null" && name.trim() != "")
+                  filtered = name;
+                                
+/*
                 if (name && name != "null")
-                    prods = prods.filter(function (el) {
-                        return el.name.toLowerCase().indexOf(name.toLowerCase()) != -1;
-                    });
+                {                  
+                  filtered = name;
+                  prods = prods.filter(function (el) {                      
+                    return (el.name.toLowerCase().indexOf(name.toLowerCase()) != -1 ||
+                      el.description.toLowerCase().indexOf(name.toLowerCase()) != -1);
+                  });
+                }
+*/                  
 
 //                if (catName && catName != "null")
 //                    prods = prods.filter(function (el) {
 //                        return el.name.toLowerCase().indexOf(name.toLowerCase()) != -1;
 //                    });
-
+                               
+                
                 for (var i in prods) {
                     prods[i].imgUrl = [];
                     if (prods[i].images.length > 0 && prods[i].images[0] != null && prods[i].images[0].imageId != undefined) 
@@ -756,13 +781,12 @@
                     else {
                         prods[i].imgUrl.push({"url": "assets/img/team/img1-md.jpg", id: ""});
                     }                    
-                }
-
+                }           
 
                 var compiled = cacheCompile(templateid, {
                     products: prods,
-                    isSupplier: currentSupplier
-
+                    isSupplier: currentSupplier,
+                    filtered: filtered                                        
                 });
                 $(target).empty();
                 $(target).html(compiled);

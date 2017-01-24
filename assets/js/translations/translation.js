@@ -200,7 +200,10 @@ var translation = {
                 "days": "days",
                 "searchResults":"Search results",
                 "price":"Price",
-                "availability": "Availability"
+                "availability": "Availability",
+                "resultsLabel": "Products matching ",
+                "showAll": "Show all products"
+                
             },
             "pagination": {
                 "next": "Next",
@@ -466,7 +469,9 @@ var translation = {
                 "days": "giorni",
                 "searchResults":"Risultati ricerca",
                 "price":"Prezzo",
-                "availability": "Disponibilità"
+                "availability": "Disponibilità",
+                "resultsLabel": "Prodotti che contengono la voce ",
+                "showAll": "Mostra tutti i prodotti"
             },
             "pagination": {
                 "next": "Prossima",
