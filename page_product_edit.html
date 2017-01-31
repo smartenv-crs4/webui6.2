@@ -374,22 +374,22 @@
     param.maxNum = jQuery("#qmax").val();
     param.deliveryIn = jQuery("#delin").val();
     param.price = jQuery("#price").val();
-    param.availability = jQuery("#availability").val();                
-        
+    param.availability = jQuery("#availability").val();              
+
     if(param.minNum.trim() == "")
-      param.delete("minNum")
+      delete param.minNum
       
     if(param.maxNum.trim() == "")
-      param.delete("maxNum")
+      delete param.maxNum
       
     if(param.deliveryIn.trim() == "")
-      param.delete("deliveryIn")
+      delete param.deliveryIn
       
     if(param.price.trim() == "")
-      param.delete("price")
+      delete param.price
       
     if(param.availability.trim() == "")
-      param.delete("availability")
+      delete param.availability
         
     if(param.name.trim() == "")
     {
