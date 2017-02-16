@@ -120,7 +120,8 @@ var translation = {
                 "cancel": "Cancel",
                 "save": "Save",
                 "yes": "Yes",
-                "no": "No"
+                "no": "No",
+                "noSupplierSearch": "No supplier found"
             },
             "publicProfile": {
                 "web": "Web site:",
@@ -212,7 +213,8 @@ var translation = {
                 "first": "First"
             },
             "product": {
-                "searchTitle": "Discover new suppliers",
+                "searchSupplierTitle": "Discover new suppliers",
+                "searchProductTitle": "Discover new products",
                 "searchLabelCategories": "Categories...",
                 "searchLabelProducts": "Search products...",
                 "searchTagMessage": "Use product tags for your search",
@@ -232,7 +234,8 @@ var translation = {
                 "minimumQuantity": "Minimum quantity",
                 "maximumQuantity": "Maximum quantity",
                 "numberOfDays": "Number of Days",
-                "images": "Images"
+                "images": "Images",
+                "noProductSearch": "No products found"
             },
             "evaluation": {
                 "your_opinion": "Your opinion is really important to us!",
@@ -265,6 +268,7 @@ var translation = {
                 "contactus": "Contact Us",
                 "aboutus": "About us",
                 "site": "Site",
+                "everything": "Everything"
             }
         }
     },
@@ -389,7 +393,8 @@ var translation = {
 
                 "save": "Salva",
                 "yes": "Si",
-                "no": "No"
+                "no": "No",
+                "noSupplierSearch": "Nessun supplier trovato" 
 
             },
             "publicProfile": {
@@ -428,11 +433,11 @@ var translation = {
                 "gaveupRequestMsg": "Il cliente ha annullato la Richiesta",
                 "modifiedRequestMsg": "Il cliente ha modificato la Richiesta",
                 "warning": "Attenzione!",
-                "updateDone": "La tua Richiesta √® stata aggiornata!",
-                "rfqExpired": "L'RFQ √® scaduta!",
+                "updateDone": "La tua Richiesta Ë stata aggiornata!",
+                "rfqExpired": "L'RFQ Ë scaduta!",
                 "NaN": "E' richiesto un numero!",
-                "NaVN":"Non √® una quantit√† valida",
-                "unty": "Unit√†",
+                "NaVN":"Non Ë una quantit‡† valida",
+                "unty": "Unit‡†",
                 "kg": "Kg",
                 "mtr": "Mtr",
                 "ltr": "Ltr",
@@ -465,11 +470,11 @@ var translation = {
                 "deliveryIn": "Consegna in",
                 "atleast": "Min",
                 "atmost": "Max",
-                "unit": "Unit√†",
+                "unit": "Unit‡†",
                 "days": "giorni",
                 "searchResults":"Risultati ricerca",
                 "price":"Prezzo",
-                "availability": "Disponibilit√†",
+                "availability": "Disponibilit‡†",
                 "resultsLabel": "Prodotti che contengono la voce ",
                 "showAll": "Mostra tutti i prodotti"
             },
@@ -481,7 +486,8 @@ var translation = {
 
             },
             "product": {
-                "searchTitle": "Cerca nuovi suppliers",
+                "searchSupplierTitle": "Cerca nuovi suppliers",
+                "searchProductTitle": "Cerca nuovi prodotti",
                 "searchLabelCategories": "Categories...",
                 "searchLabelProducts": "Cerca prodotti...",
                 "searchTagMessage": "Usa i tag dei prodotti per la ricerca",
@@ -498,15 +504,16 @@ var translation = {
                 "updated": "Prodotto aggiornato",
                 "maxCharacters": "Max 500  caratteri.",
                 "note": "Note ",
-                "minimumQuantity": "Quantit√† minima",
-                "maximumQuantity": "Quantit√† massima",
+                "minimumQuantity": "Quantit‡† minima",
+                "maximumQuantity": "Quantit‡† massima",
                 "numberOfDays": "Numero di giorni",
-                "images": "Immagini"
+                "images": "Immagini",
+                "noProductSearch": "Nessun prodotto trovato"
             },
             "evaluation": {
                 "your_opinion": "Il tuo parere conta molto per noi!",
-                "quality": "Qualit√† del prodotto",
-                "pricevalue": "Rapporto qualit√†/prezzo",
+                "quality": "Qualit‡† del prodotto",
+                "pricevalue": "Rapporto qualit‡†/prezzo",
                 "delivery": "Modalit√† e termini di consegna",
                 "overallrating": "Giudizio complessivo (campo obbligatorio)",
                 "customerservice": "Servizio clienti (tempi di risposta, supporto e assistenza)",
@@ -529,11 +536,12 @@ var translation = {
                 "des_simplesearch": "Ricerca veloce dei fornitori che dispongono di un dato prodotto o che appartengono ad una data categoria merceologica.",
                 "des_smartrfq": "Compilazione rapida delle richieste al fornitore con possibilit√† di trattativa e messaggistica diretta.",
                 "des_typicalproducts": "Tantissimi prodotti tipici messi a disposizione dai nostri fornitori. ",
-                "des_crs4": "Il CRS4 √® un centro di ricerca interdisciplinare privato fondato dalla Regione Autonoma della Sardegna.",
+                "des_crs4": "Il CRS4 Ë un centro di ricerca interdisciplinare privato fondato dalla Regione Autonoma della Sardegna.",
                 "useflink": "Links utili",
                 "contactus": "Contattaci",
                 "aboutus": "Chi siamo",
                 "site": "Sito",
+                "everything": "Tutte"
 
             }
         }

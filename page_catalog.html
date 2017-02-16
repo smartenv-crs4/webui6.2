@@ -700,7 +700,7 @@
 
         var name = getParameterByName("name");
         var catName = decodeURI(getParameterByName("cat_name"));
-
+        
         function getfiles(url, templateid, target) {
             $.get(url, function (data) {
                 //console.log(data);
@@ -738,6 +738,10 @@
               else
                 url += "&name=" + name
             }
+            
+            
+            
+            
             
             
             $.get(url, function (data) {
@@ -1103,16 +1107,26 @@
 
             getsupplierinfo(getsupplierURL, "supplier-info_template", "#supplier-info", cbFav);
             getfiles(getfilesURL, "filetable", '#files_container');
-            var searchpage = getParameterByName('page')
-
-            var searchListURL = "list.html";
-            if (name && name != "null") {
-                searchListURL += "?name=" + name;
-                if (searchpage && searchpage != "null")
-                    searchListURL += "&page=" + searchpage;
-            } else if (searchpage && searchpage != "null")
-                searchListURL += "?page=" + searchpage;
-
+            var searchpage = getParameterByName('page');
+            var id_category = getParameterByName('id_category');
+            var cat_name = getParameterByName('cat_name');
+            var type_search = getParameterByName('type_search');
+            
+            
+            var searchListURL = "list.html?";
+            if (name && name != "null") 
+                searchListURL += "&name=" + name;
+            if (searchpage && searchpage != "null")
+                searchListURL += "&page=" + searchpage;
+            if (id_category && id_category != "null")
+                searchListURL += "&id_category=" + id_category;
+            if (cat_name && cat_name != "null")
+                searchListURL += "&cat_name=" + cat_name;
+            if (type_search && type_search != "null")
+                searchListURL += "&type_search=" + type_search;
+            
+            searchListURL = searchListURL.replace('?&', '?');
+            
             $("#searchResultsAnchor").attr('href', searchListURL);
 
             $("body").localize();

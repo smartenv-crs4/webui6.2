@@ -1,37 +1,40 @@
-  
-   
+ var api_url = _brokerMsUrl;  
+ var lang =   localStorage.lng;
+ 
    $( document).ready(function() {
     
+       renderDropCategories();
        
-    autoCompleteCat("category");     
-
-    $("#tags").val('');
-       $("#category").typeahead('val', ''); 
        $("#product").val('');
        $(".search_select").attr("checked", false);
        $("#ckProduct").attr("checked", "true");
     
     $( "#btn_search" ).click(function(e) {
         
-      $('#product').val();
        var str_param  = '';
        if ($('#product').val())
             str_param = str_param + '&name=' + $('#product').val();
        if ($('#category').val())
        {
-            str_param = str_param + '&cat_name='   + $('#category').data("cat-name");
             str_param = str_param + '&categories=' + $('#category').data('cat-id');
        }
-       if ($('#tags').val())
-            str_param = str_param + 'tag =' + $('#tags').val();
-       
+       if ($("#id_category").val())
+            str_param = str_param + '&id_category=' + $('#id_category').val(); 
+       if ($("#cat_name").val())
+            str_param = str_param + '&cat_name=' + $('#cat_name').val();
+       if ($('#ckProduct').is(':checked'))
+            str_param = str_param + '&type_search=p';
+       if ($('#ckSupplier').is(':checked'))
+            str_param = str_param + '&type_search=s';
        
        window.location.href = "list.html?" + str_param; 
        
        // reset dei campi in caso di tasto back
-       $("#tags").val('');
-       $("#category").typeahead('val', ''); 
+       $("#category").val('');
        $("#product").val('');
+       $("#cat_name").val('');
+       $("#id_category").val('');
+       
        $(".search_select").attr("checked", false);
        $("#ckProduct").attr("checked", "true");
        
@@ -41,13 +44,12 @@
     
     $('#ckProduct').click(function(e) {
         $(".search_select").attr("checked", false);
-        $(".spanSearch").css("display", "none");
-        $("#tags").val('');
-        $("#category").typeahead('val', '');        
+        $("#category").val('');        
         
         if ($("#ckProduct").is(':checked') == false)
             {
                 $("#ckProduct").attr("checked", "true");
+                $("#product").attr("placeholder", i18next.t("product.searchLabelProducts"));
             }
             $("#spanProduct").css("display", "block");
             
@@ -55,35 +57,17 @@
     });
     
     
-    $('#ckCategory').click(function(e) {
+   $('#ckSupplier').click(function(e) {
         $(".search_select").attr("checked", false);
-        $(".spanSearch").css("display", "none");
+        $("#category").val('');        
         
-        $("#tags").val('');
-        $("#product").val('');        
-        
-        if ($("#ckCategory").is(':checked') == false)
+        if ($("#ckSupplier").is(':checked') == false)
             {
-                $("#ckCategory").attr("checked", "true");
+                $("#ckSupplier").attr("checked", "true");
+                $("#product").attr("placeholder", i18next.t("product.searchLabelProducts"));
             }
-            $("#spanCategory").css("display", "block");
-    
-    });
-    
-    
-    $('#ckTags').click(function(e) {
-        $(".search_select").attr("checked", false);
-        $(".spanSearch").css("display", "none");
-        $("#category").typeahead('val', '');        
-        $("#product").val('');
-        
-        if ($("#ckTags").is(':checked') == false)
-            {
-                $("#ckTags").attr("checked", "true");
-            }
-            $("#spanTags").css("display", "block");
-    
-    });
+            $("#spanSupplier").css("display", "block");
+    }); 
     
     
    $(document).keypress(function(e){
@@ -95,3 +79,46 @@
     
     
     });
+    
+    
+    
+    function renderDropCategories()
+    {
+        $.ajax({
+                                  type: "GET",
+                                  url: api_url + "categories/drop?liv=2&lang="+lang,
+                                  data: 
+                                  {
+                                    
+                                  },
+
+                                  dataType: "json",
+                                  success: function(data)
+                                  {
+                                      var str = '';  
+                                      for (var i = 0; i < data.length; i++) {
+                                          
+                                      
+                                        str = str + '<li><a href="#'+data[i]._id+'">'+data[i].name.it+'</a></li>';
+                                        //console.log(str);
+                                      }
+                                      
+                                      $('.dropdown-menu').append(str);
+                                      
+                                      $('.search-panel .dropdown-menu').find('a').click(function(e) {
+                                        e.preventDefault();
+                                        var param = $(this).attr("href").replace("#","");
+                                        var concept = $(this).text();
+                                        $('.search-panel span#search_concept').text(concept);
+                                        $('.input-group #id_category').val(param);
+                                        $('.input-group #cat_name').val(concept);
+                                        });
+                                                                      
+                                  },
+                                  error: function()
+                                  {
+                                    alert("Errore di caricamento");
+                                  }
+});
+        
+    }

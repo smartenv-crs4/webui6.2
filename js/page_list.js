@@ -1,7 +1,8 @@
 //* Link api ******************************************/
 // var api_url = "http://156.148.37.167:3010/api/v1/";
  var api_url = _brokerMsUrl;
-
+ var lang =   localStorage.lng;
+ 
  var limit;
  var page;
  var pages;
@@ -12,48 +13,64 @@
 // inizializzo i parametri di ricerca dalla url
 var arr_par = get_par('url');
 
-
-
-
 //******************************************************/
 // Document ready */
 
 $( document).ready(function() {
-   
-    autoCompleteCat("categories");
-    $("#categories").typeahead('val', '');
     
-    // set degli input della pagina in caso di provvenienza da altre pagine
-    if (arr_par[0].name)  
-    {
-        $('#product').val(arr_par[0].name);
-    }
-    if (arr_par[0].categories)
-    {
-        $('#categories').data("cat-id", arr_par[0].categories);
+    if (arr_par[0].type_search == 'p')
+        $('#searchTitle').text(i18next.t("product.searchProductTitle")); 
+    else
+        $('#searchTitle').text(i18next.t("product.searchSupplierTitle"));
+    $("#searchTitle").localize();    
+    
+    
+    renderDropCategories(arr_par[0].id_category, arr_par[0].cat_name);
+    
+    
+    //assegnazione dei parametri ai campi del form
+    init_form(arr_par);
+    
+    //if (arr_par.length == 0)
+    //   refresh_param();
+    
+    
+    $('#ckProduct').click(function(e) {
+        $(".search_select").attr("checked", false);
+        $("#category").val('');        
         
-    }
-    if (arr_par[0].cat_name)
-    {
-        $('#categories').data("cat-name", arr_par[0].cat_name);
-        $("#categories").typeahead('val',arr_par[0].cat_name);
-    }
+        if ($("#ckProduct").is(':checked') == false)
+            {
+                $("#ckProduct").attr("checked", "true");
+                $("#product").attr("placeholder", i18next.t("product.searchLabelProducts"));
+                $('#searchTitle').text(i18next.t("product.searchProductTitle"));
+            }
+            $("#spanProduct").css("display", "block");
+            
+    
+    });
     
     
-    // refresh della pagina 
+   $('#ckSupplier').click(function(e) {
+        $(".search_select").attr("checked", false);
+        $("#category").val('');        
+        
+        if ($("#ckSupplier").is(':checked') == false)
+            {
+                $("#ckSupplier").attr("checked", "true");
+                $("#product").attr("placeholder", i18next.t("product.searchLabelProducts"));
+                $('#searchTitle').text(i18next.t("product.searchSupplierTitle"));
+            }
+            $("#spanSupplier").css("display", "block");
+    });
     
-    if ($('#product').val())
-        arr_par[0].name = $('#product').val();
-    
-    
-    if ($('#categories').attr('#cat-id'))
-        arr_par[0].categories = $('#categories').data('cat-id');
-    if ($('#categories').attr('#cat-name'))
-        arr_par[0].cat_name = $('#categories').data('cat-name');
-    
+   
     // creazione della lista dei supplier
     get_list(arr_par);
     
+    
+    
+    // associazione action button alla tastiera
     $(document).keypress(function(e){
     if (e.which == 13){
         $("#btn_search").click();
@@ -76,7 +93,8 @@ $( "#btn_search" ).click(function(e) {
     
     
     
-$('#divSearchMsg').click(function(e){
+$('#divSearchMsg').click(function(e)
+{
     render_searchInput();
 });    
 
@@ -96,8 +114,30 @@ function render_row(data, arr_par)
     
     var link = '';
     
-    var tab = '';
-                                    for (var i = 0; i < data.docs.length; i++) {
+    var _str = '';
+                                    
+                                    
+                      if (arr_par[0].type_search == 's')
+                      {              
+                          _str = _str +'<div class="table-search-v2" id="divSearch_table">';
+                            _str = _str +'<div class="_strle-responsive">';
+                                _str = _str +'<table class="table table-bordered table-striped">';
+                                    _str = _str +'<thead>';
+                                    _str = _str +'<tr>';
+                                        _str = _str +'<th style="width: 10%" data-i18n="product.thLogo"></th>';
+                                        _str = _str +'<th class="hidden-sm" style="width: 70%" data-i18n="product.thAbout"></th>';
+                                        _str = _str +'<th style="width: 10%" data-i18n="product.thRates"></th>';
+                                        _str = _str +'<th style="width: 10%" data-i18n="product.thAction"></th>';
+                                    _str = _str +'</tr>';
+                                    _str = _str +'</thead>';
+                                    _str = _str +'<tbody id="t_list">';
+                                    
+                                    
+                                            
+                          
+                          
+                          
+                          for (var i = 0; i < data.docs.length; i++) {
                                     
                                     //console.log(data.docs[i]);
                                     
@@ -105,14 +145,14 @@ function render_row(data, arr_par)
                                         
                                         link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i]._id).replace("??", "?").replace("?&", "?");    
                                         
-                                            tab += '<tr>'
+                                            _str += '<tr>'
                                     + '<td>'
                                     + '    <img class="rounded-x" style="width: 100px" src="'; 
                                     if (data.docs[i].logo) 
-                                        tab = tab +  data.docs[i].logo; 
+                                        _str = _str +  data.docs[i].logo; 
                                     else 
-                                        tab = tab +  'assets/img/testimonials/user.jpg';
-                                    tab = tab +  '" alt="logo">'
+                                        _str = _str +  'assets/img/testimonials/user.jpg';
+                                    _str = _str +  '" alt="logo">'
                                     + '</td>'
                                     + '<td>'
                                     + '    <h3><a class="aName" href="page_catalog.html?'+link+'">' + data.docs[i].name + '</a></h3>'
@@ -123,15 +163,15 @@ function render_row(data, arr_par)
                                     + '</td>'
                                      
                                     + '  <!--  <span><a href="#">' + data.docs[i].email + '</a></span>';
-                                    if (data.docs[i].website) tab = tab + '<span><a href="#">'+ data.docs[i].website +'</a></span>';
-                                    if (data.docs[i].phone) tab = tab + '<span>'+ data.docs[i].phone +'</span>';
-                                    tab = tab + '</td> -->'
+                                    if (data.docs[i].website) _str = _str + '<span><a href="#">'+ data.docs[i].website +'</a></span>';
+                                    if (data.docs[i].phone) _str = _str + '<span>'+ data.docs[i].phone +'</span>';
+                                    _str = _str + '</td> -->'
                                     + '<td>'
                                     // if (data.docs[i].rates)
-                                    tab = tab +  str_rates;
+                                    _str = _str +  str_rates;
                                     
                                     
-                                    tab = tab +   '</td>'
+                                    _str = _str +   '</td>'
                                     
                                     + '<td>'
                                     + '<button class="btn-u btn-block rounded sDetails" type="button" data-par="'+var_par+'" data-id="'+ data.docs[i]._id +'"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>';
@@ -142,19 +182,16 @@ function render_row(data, arr_par)
                                       
                                       
                                       }
-                                      $('#t_list').append(tab);                  
-                                
-                                
-                                
-                                
-                                $('.sDetails').click(function(){
-                                      var id = ($(this).attr('data-id'));
-                                      var par = ($(this).attr('data-par'));
                                       
-                                      link = ('page_catalog.html?'+par+'&idSupplier='+id).replace("??", "?").replace("?&", "?");
-                                      window.location.href = link;
-                                        
-                                });
+                                _str = _str +'</tbody>';
+                                _str = _str +'</table>';
+                                _str = _str +'</div>';
+                                _str = _str +'</div>';        
+                                      
+                                      
+                                      $('#div_list').append(_str);                  
+                                
+                                
                                 
                                 
                                 
@@ -174,6 +211,85 @@ function render_row(data, arr_par)
                                       
                                 });
                                 
+                      }
+                      else
+                      if (arr_par[0].type_search == 'p')
+                      {             
+                                    _str = '<div class="container s-results margin-bottom-50">';
+                                    
+                                    
+                                    var _img;
+                                    
+                                    
+                                    for (var i = 0; i < data.docs.length; i++) {        
+                                    
+                                        if (
+                                        data.docs[i].images &&  data.docs[i].images.length > 0
+                                        ) 
+                                        {
+                                             _img = _uploadMsUrl + data.docs[i].images[0].imageId+'?tag=t'; 
+                                        }
+                                        else
+                                             _img = 'assets/img/team/img1-md.jpg';
+                                            
+                                        
+                                        
+                                        
+                                    _str += '<div class="media media-v2">';
+                                    _str +=     '<span class="pull-left" href="#">';
+                                    _str +=         '<img class="media-s100 img-circle" src="' + _img +'" alt="" style="cursor:pointer; height: 100px; width:100px">';
+                                    _str +=     '</span>';
+                                    
+                                    _str += '<span class="pull-right">';
+                                    _str += '<button class="btn-u btn-block rounded sDetails" type="button" data-par="'+var_par+'" data-id="'+ data.docs[i].supplierId._id +'"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>';
+                                     _str += '</span>';
+                                    
+                                    _str +=     '<div class="media-body">';
+                                    _str +=         '<div class="clearfix" style="overflow:hidden; ">';
+                                    _str +=             '<h4 class="media-heading">';
+                                    _str +=                 '<strong style="display:block;"><a href="#">'+data.docs[i].name+'</a></strong>';
+                                    _str +=                 '<small style="display:block; max-width:50%;">'+data.docs[i].categories[0].name[lang]+'</small>';
+                                    _str +=             '</h4>';
+                                    _str +=         '</div><p></p>';
+                                    _str +=         '<div class="giveMeEllipsis blog-author-desc"><span>'+data.docs[i].supplierId.name +'&nbsp;&nbsp;&nbsp;&nbsp;</span><span>'+ render_rates(data.docs[i].supplierId.rates.overall_rate);+'</span></div>';
+                                    _str +=         '<div class="giveMeEllipsis blog-author-desc">'+data.docs[i].description+'</div>';
+                                    
+                                    
+                                    
+                                    _str +=         '<ul class="list-inline share-list">';  
+                                    _str +=             '<li><i class="fa fa-chevron-up"></i><span data-i18n="catalog.atleast">Min</span> '+checkValue(data.docs[i].minNum)+'</li>';
+                                    _str +=             '<li><i class="fa fa-chevron-down"></i><span data-i18n="catalog.atmost">Max</span> '+checkValue(data.docs[i].maxNum)+'</li>';
+                                    _str +=             '<li><i class="fa fa-calendar-o"></i><span data-i18n="catalog.deliveryIn">Consegna in</span> '+checkValue(data.docs[i].deliveryIn); 
+                                    _str +=                 '<span data-i18n="catalog.days"> giorni</span></li>';
+                                    _str +=             '<li><i class="fa fa-inbox"></i><span data-i18n="catalog.availability"></span><span>' +checkValue(data.docs[i].availability)+' '+data.docs[i].unit+'</span></li>';
+                                    _str +=             '<li><i class="fa fa-euro"></i><span> ' +checkValue(data.docs[i].price)+ ' <span class="fa fa-euro"></span> per '+data.docs[i].unit+'</span></li>';
+                                    _str +=             '<li style="text-align: right; font-weight: bold">Score:<span> ' +checkValue(data.docs[i].score)+ ' </span></li>';
+                                    _str +=         '</ul>';
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     _str +=     '</div>';   
+                                    _str += '</div>';
+                                    
+                                    _str += '<hr>';
+                                    
+                                    
+                                }
+                                    
+                                    $('#div_list').append(_str);
+                                    
+                      }
+                      
+                        $('.sDetails').click(function(){
+                              var id = ($(this).attr('data-id'));
+                              var par = ($(this).attr('data-par'));
+                              
+                              link = ('page_catalog.html?'+par+'&idSupplier='+id).replace("??", "?").replace("?&", "?");
+                              window.location.href = link;
+                                
+                        });          
                                 
 }
 
@@ -353,26 +469,80 @@ function render_rates(_rates)
     
 }
 
+
+function renderDropCategories(id_category, cat_name)
+{
+       /*
+        if (id_category)
+        {
+            $('#search_concept').text(cat_name);
+            $('.input-group #id_category').val(id_category);
+            $('.input-group #cat_name').val(cat_name);
+        }
+        else
+        {
+            $('#search_concept').attr("placeholder", i18next.t("profile.categories"));
+        }
+        */    
+        $.ajax({
+                                  type: "GET",
+                                  url: api_url + "categories/drop?liv=2&lang="+lang,
+                                  data: 
+                                  {
+                                    
+                                  },
+
+                                  dataType: "json",
+                                  success: function(data)
+                                  {
+                                      var str = '';  
+                                      for (var i = 0; i < data.length; i++) {
+                                          
+                                      
+                                        str = str + '<li><a href="#'+data[i]._id+'">'+data[i].name.it+'</a></li>';
+                                        //console.log(str);
+                                      }
+                                      
+                                      $('.dropdown-menu').append(str);
+                                      
+                                      $('.search-panel .dropdown-menu').find('a').click(function(e) {
+                                        e.preventDefault();
+                                        var param = $(this).attr("href").replace("#","");
+                                        var concept = $(this).text();
+                                        $('.search-panel span#search_concept').text(concept);
+                                        $('.input-group #id_category').val(param);
+                                        $('.input-group #cat_name').val(concept);
+                                        });
+                                                                      
+                                  },
+                                  error: function()
+                                  {
+                                    alert("Errore di caricamento");
+                                  }
+});
+        
+    }
+
 //**************************************************************/
 //* proxy -> chaimate ajax alle api data*/
 
 
 // estrae tutti i supplier associati ai prodotti cercati
-function get_list(arr_par)
+function get_list(_arr_par)
 {
-    //console.log($("#categories").typeahead('val'));
-                                              if ($("#categories").typeahead('val') == '')
-                                              {
-                                                  arr_par[0].cat_name = '';
-                                                 arr_par[0].categories = ''; 
-                                                 console.log(arr_par);
-                                              }
+    if (_arr_par[0].type_search == 's')
+         url = "products/supplier";                           
+    else
+    {
+        url = "products";
+    }
     
-    var_par =get_par_string(arr_par);
+    _var_par = get_par_string(_arr_par);
     
+    console.log(api_url + url  + _var_par);
     $.ajax({
                                   type: "GET",
-                                  url: api_url + "products/supplier" + var_par,
+                                  url: api_url + url  + _var_par,
                                   data: 
                                   {
                                     
@@ -386,11 +556,9 @@ function get_list(arr_par)
                                       pages     = data.pages;
                                       total     = data.total;
                                       
-                                      $('#t_list').empty();
+                                      $('#div_list').empty();
                                       $('#t_paginate').empty();
                                           
-                                      
-                                      
                                       if (data.total > 0)
                                       {
                                           $('#divSearch_table').css('display', 'block');
@@ -398,23 +566,30 @@ function get_list(arr_par)
                                           
                                            
                                           
-                                          render_row(data, arr_par);
+                                          render_row(data, _arr_par);
                                           if (pages > 1)
                                           {
                                              
                                               
                                               render_paginate(pages, page, arr_par);
                                           }
-                                          
-                                          $("#divSearch_table").localize();
-                                          
-                                            
                                       }
                                       else
                                       {
                                           $('#divSearch_table').css('display', 'none');
                                           $('#divNoResult').css('display', 'block');
+                                          
+                                          if(_arr_par[0].type_search == 'p')
+                                          {
+                                            $("#titleNoResult").text(i18next.t("product.noProductSearch"));
+                                            }
+                                          else
+                                          {
+                                            $("#titleNoResult").text(i18next.t("profile.noSupplierSearch"));
+                                          }
+                                          $("#titleNoResult").localize();
                                       }
+                                      $("#div_list").localize();
                                       setTimeout($.unblockUI, 500);
                                       
                                                                               
@@ -428,15 +603,16 @@ function get_list(arr_par)
 
 
 // estrae tutti i prodotti associati al dato supplier in relazione ai parametri di ricerca effettuata
-function getProductsSupplier(id, arr_par)
+function getProductsSupplier(id, _arr_par)
 {
-    arr_par[0].cat_name= '';
-    arr_par[0].page= '';
-    var_par =get_par_string(arr_par);
+    _arr_par[0].cat_name= '';
+    _arr_par[0].page= '';
+    _arr_par[0].type_search= '';
+    _var_par =get_par_string(_arr_par);
     
     $.ajax({
                                   type: "GET",
-                                  url: api_url + "products" + var_par + '&supplierId=' + id,
+                                  url: api_url + "products" + _var_par + '&supplierId=' + id,
                                   dataType: "json",
                                   success: function(data)
                                   {
@@ -469,6 +645,62 @@ function getProductsSupplier(id, arr_par)
 //************************************************/
 //* page function 
 
+
+// inizializza i parametri della ricerca
+// assegna i parametri url ai campi del form
+
+function init_form(arr_par)
+{
+    if (arr_par[0].name)
+    {
+        $('#product').val(arr_par[0].name);
+    }
+    
+    if (arr_par[0].id_category)  
+    {
+        $('#search_concept').text(arr_par[0].cat_name);
+        $('.input-group #id_category').val(arr_par[0].id_category);
+        $('.input-group #cat_name').val(arr_par[0].cat_name);
+    }
+    else
+    {
+        $('#search_concept').text(i18next.t("profile.categories"));
+    } 
+    
+    if (arr_par[0].type_search == 's')
+    {
+        $("#ckSupplier").attr("checked", true);
+        $("#ckProduct").attr("checked", false);
+    }
+    else
+    {
+        $("#ckProduct").attr("checked", true);
+        $("#ckSupplier").attr("checked", false);
+    }
+}
+
+
+// refresh della pagina 
+// al refresh devo allineare i dati passati alla url di rcerca con i dati del form
+    
+function refresh_param()
+{
+    if ($('#product').val())
+        arr_par[0].name = $('#product').val();
+    if ($('#cat_name').val())
+        arr_par[0].cat_name = $('#cat_name').val();
+    if ($('#id_category').val())
+        arr_par[0].id_category = $('#id_category').val();
+    if ($("#ckSupplier").is(':checked') == false)
+    {
+        arr_par[0].type_search == 's';
+    }
+    else
+        arr_par[0].type_search == 'p';    
+}
+    
+
+
 // crea array con i filtri di ricerca dalla url o dagli input di pagina
 function get_par(_from)
 {
@@ -476,21 +708,32 @@ function get_par(_from)
     
     if (_from == 'url')
     {
-    array_par.push({"name": getParameterByName('name')
-        , "cat_name": getParameterByName('cat_name')
-        , "categories": getParameterByName('categories')
-        , "tag": getParameterByName('tag')
-        , "page": getParameterByName('page')});
+    array_par.push({"name":     getParameterByName('name')
+            , "cat_name":       getParameterByName('cat_name')
+            , "id_category":    getParameterByName('id_category')
+            , "type_search":    getParameterByName('type_search')
+            , "page":           getParameterByName('page')});
     }
     else if (_from == 'page')
     {
-    array_par.push({"name": $('#product').val()
-        , "cat_name": $('#categories').data("cat-name")
-        , "categories": $('#categories').data("cat-id")
-        , "tag": $('#tags').val()
+        var _type = 's';
+        
+        if ($("#ckProduct").is(':checked') == true)
+        {
+            _type = 'p';
+        }
+        
+        
+        array_par.push({"name": $('#product').val()
+        , "cat_name":       $('#cat_name').val()
+        , "id_category":    $('#id_category').val()
+        , "type_search":    _type
         , "page": ''});
     }
-   
+    
+    //allinea la variabile globale arr_par
+    arr_par = array_par;
+        
     return array_par;
 }
 
@@ -500,7 +743,8 @@ function get_par_string(array_par)
     var var_par        = '?';
     if (array_par[0].name)          var_par = var_par + '&name=' + array_par[0].name;
     if (array_par[0].cat_name)      var_par = var_par + '&cat_name=' + array_par[0].cat_name;
-    if (array_par[0].categories)    var_par = var_par + '&categories=' + array_par[0].categories;
+    if (array_par[0].id_category)   var_par = var_par + '&id_category=' + array_par[0].id_category;
+    if (array_par[0].type_search)   var_par = var_par + '&type_search=' + array_par[0].type_search;
     if (array_par[0].tag)           var_par = var_par + '&tag=' + array_par[0].tag;
     if (array_par[0].page)          var_par = var_par + '&page=' + array_par[0].page;
 
@@ -516,7 +760,8 @@ function get_par_string(array_par)
 
 
 // preleva un dato parametro dalla url 
-function getParameterByName(name) {
+function getParameterByName(name) 
+{
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);
@@ -534,7 +779,18 @@ function getDateFromObjectId(objectId)
     return datestring;
 }
 
-
+// check valore render div
+function checkValue(value)
+{
+    if (value)
+    {
+       return value; 
+    }
+    else
+    {
+        return(' -- ');
+    }    
+}
 
 //***********************************************/
 

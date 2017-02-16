@@ -17,11 +17,11 @@
 	<!-- Web Fonts -->
 	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
-	<!-- CSS reset -->  
-  <link rel="stylesheet" href="assets/css/plugins/normalize.min.css">
+	<!-- CSS reset -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
 
 	<!-- CSS Global Compulsory -->
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 
 	<!-- CSS Header and Footer -->
@@ -30,8 +30,8 @@
 
 	<!-- CSS Implementing Plugins -->
 	<link rel="stylesheet" href="assets/plugins/animate.css">
-	<link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">	
-  <link rel="stylesheet" href="assets/css/plugins/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
 	<link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 	<link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
@@ -79,41 +79,47 @@
 				<div class="col-md-8 col-md-offset-2">
 					
                     
-                    <h1 data-i18n="product.searchTitle"></h1>
+                    <h1 id="searchTitle"></h1>
 
-					    <div class="col-md-11" style="padding-right: 0px;">
+                
+                
+                <div class="input-group">
+                    
+                    <div class="input-group-btn search-panel">
+                    <button type="button" class="form-control btn btn-default dropdown-toggle input_custom" style="background: #dddddd" data-toggle="dropdown">
+                        <span id="search_concept"></span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#" data-i18n="homepage.everything"></a></li>
+                      <li class="divider"></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="id_category" value="" id="id_category">
+                <input type="hidden" name="cat_name" value="" id="cat_name">    
+                    
+                        <span id="spanProduct" class="spanSearch">
+                        <input type="text" id="product" class="form-control input_custom" data-i18n="[placeholder]product.searchLabelProducts">
+                        </span>
+                        <span class="input-group-btn">
+                            <button class="btn-u btn-u-lg" id="btn_search" type="button"><i class="fa fa-search"></i></button>
+                        </span>
+                    
+                    </div>
+                
+                 <form action="list" id="form" class="sky-form page-search-form" style="border: none">
                             
-                            <div class="row" id="divSearch1">
-                                <div class="col-md-6" style="padding-left: 0px; padding-right: 2px;" >
-                                <input type="text" id="categories" class="form-control input_custom" data-i18n="[placeholder]product.searchLabelCategories">
-                                </div>
-                                <div class="col-md-6" style="padding-left: 0px">
-                                <input type="text" id="product" class="form-control input_custom" data-i18n="[placeholder]product.searchLabelProducts">
-                                </div>
+                            <div class="inline-group">
+                            <label class="checkbox"><input id="ckProduct" class="search_select" name="checkbox-inline" type="checkbox" value="p"><i ></i><span data-i18n="catalog.products"></span></label>
+                            <label  class="checkbox "><input id="ckSupplier" name="checkbox-inline" class="search_select" type="checkbox" value="s"><i></i><span data-i18n="homepage.suppliers"></span></label>
                             </div>
-                            
-                            <div class="row" id="divSearch2" style="display: none">
-                                <div class="col-md-12" style="padding-left: 0px;">
-                                <input type="text" id="tags" class="form-control input_custom" data-i18n="[placeholder]product.tags">
-                                </div>
-                            </div>
-                            
-                            
-                            
-                            
-                        
-                        </div>
                     
-                        <div class="col-md-1" style="padding-left: 0px;">
-                            <span class="input-group-btn" >
-                                    <button class="btn-u btn-u-lg" id="btn_search" type="button" ><i class="fa fa-search"></i></button>
-                            </span>
-                        </div>
-                    
-                    
+                    </form>
                             
 					
 				</div>
+                
+               
+                
                 
                 <div class="col-md-8 col-md-offset-2" data-i18n="product.searchTagMessage" id="divSearchMsg" style="cursor: pointer; display: none"></div>
                     
@@ -126,78 +132,15 @@
 		
         <!--Left Sidebar-->
             <div id="sidebar" class="col-md-3" style="display: none;"></div>
-        
-        <div class="table-search-v2" id="divSearch_table">
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped">
-					<thead>
-					<tr>
-                        <th style="width: 10%" data-i18n="product.thLogo"></th>
-                        <th class="hidden-sm" style="width: 70%" data-i18n="product.thAbout"></th>
-                        <th style="width: 10%" data-i18n="product.thRates"></th>
-                        <th style="width: 10%" data-i18n="product.thAction"></th>
-                    </tr>
-					</thead>
-					<tbody id="t_list">
-					
-                    <!--
-					<tr>
-						<td>
-							<img class="rounded-x" src="assets/img/testimonials/user.jpg" alt="">
-						</td>
-						<td>
-							<h3><a href="#">Etiam bibendum orci ut ante sagittis, sit amet imperdiet augue vulputate</a></h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id commodo lacus. Fusce non malesuada ante. Donec vel arcu.</p>
-							<small class="hex">Joined March 5, 2014</small>
-						</td>
-						<td>
-							<ul class="list-inline s-icons">
-								<li>
-									<a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Facebook" href="#">
-										<i class="fa fa-facebook"></i>
-									</a>
-								</li>
-								<li>
-									<a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Twitter" href="#">
-										<i class="fa fa-twitter"></i>
-									</a>
-								</li>
-								<li>
-									<a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Dropbox" href="#">
-										<i class="fa fa-dropbox"></i>
-									</a>
-								</li>
-								<li>
-									<a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Linkedin" href="#">
-										<i class="fa fa-linkedin"></i>
-									</a>
-								</li>
-							</ul>
-							<span><a href="#">info@example.com</a></span>
-							<span><a href="#">www.htmlstream.com</a></span>
-						</td>
-						<td>
-							<ul class="list-inline star-vote" style="display: inline-flex">
-								<li><i class="color-green fa fa-star"></i></li>
-								<li><i class="color-green fa fa-star"></i></li>
-								<li><i class="color-green fa fa-star"></i></li>
-								<li><i class="color-green fa fa-star-half-o"></i></li>
-								<li><i class="color-green fa fa-star-o"></i></li>
-							</ul>
-						</td>
-					</tr>
-                    -->
-					</tbody>
-				</table>
-			</div>
-		</div>
+                
+                <div id="div_list" class="panel-body margin-bottom-50"></div>
 		
-        <div class="margin-bottom-30" id="t_paginate"></div>
+            <div class="margin-bottom-30" id="t_paginate"></div>
         
         <div class="container" id="divNoResult" style="display: none">
                 <div class="col-md-8 col-md-offset-2">
         <div class="jumbotron" style="text-align: center">
-          <h2>Nessun supplier trovato</h2>
+          <h2 id="titleNoResult"></h2>
           
         </div>
         </div>
@@ -309,14 +252,14 @@
 
 
 	<!-- JS Global Compulsory -->
-	<script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<!-- JS Translation -->
-	<script src="assets/js/plugins/i18next.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/3.4.3/i18next.min.js"></script>
 	<script src="assets/js/translations/translation.js"></script>
-  <script src="assets/js/plugins/jquery-i18next.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.1.0/jquery-i18next.min.js"></script>
 
 		<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
@@ -335,7 +278,7 @@
 	<script type="text/javascript">
 		var isList = true;
 	</script>
-	<script type="text/javascript" src="assets/js/plugins/handlebars.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/typeahead.bundle.js"></script>
 	<script type="text/javascript" src="assets/js/utils.js"></script>
     <script type="text/javascript" src="assets/js/sidebar.js"></script>

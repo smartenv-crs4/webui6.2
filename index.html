@@ -18,10 +18,10 @@
 	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
 	<!-- CSS reset -->
-  <link rel="stylesheet" href="assets/css/plugins/normalize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
 
-	<!-- CSS Global Compulsory -->	
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+	<!-- CSS Global Compulsory -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 
 	<!-- CSS Header and Footer -->
@@ -32,7 +32,7 @@
 	<link rel="stylesheet" href="assets/plugins/animate.css">
 	<link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
 	<link rel="stylesheet" href="assets/plugins/line-icons-pro/styles.css">
-	<link rel="stylesheet" href="assets/css/plugins/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link rel="stylesheet" href="assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
 	<link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 	<link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
@@ -71,26 +71,37 @@
 
 
                     <div class="input-group">
-                        <span id="spanCategory" class="spanSearch" style="display: none">
-                        <input type="text" id="category" class="form-control" data-i18n="[placeholder]product.searchLabelCategories">
-                        </span>
+                    
+                    <div class="input-group-btn search-panel">
+                    <button type="button" class="form-control btn btn-default dropdown-toggle" style="background: #dddddd" data-toggle="dropdown">
+                        <span id="search_concept" class="spanSearch" data-i18n="profile.categories"></span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#" data-i18n="homepage.everything"></a></li>
+                      <li class="divider"></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="id_category" value="" id="id_category">
+                <input type="hidden" name="cat_name" value="" id="cat_name">    
+                    
                         <span id="spanProduct" class="spanSearch">
                         <input type="text" id="product" class="form-control" data-i18n="[placeholder]product.searchLabelProducts">
-                        </span>
-                        <span id="spanTags" class="spanSearch" style="display: none">
-                        <input type="text" id="tags" class="form-control" data-i18n="[placeholder]product.searchTagMessage">
                         </span>
                         <span class="input-group-btn">
                             <button class="btn-u btn-u-lg" id="btn_search" type="button"><i class="fa fa-search"></i></button>
                         </span>
+                    
                     </div>
+                    
+                    
                     <form action="list" id="form" class="sky-form page-search-form">
+                            
                             <div class="inline-group">
                             <label class="checkbox"><input id="ckProduct" class="search_select" name="checkbox-inline" checked="" type="checkbox" value="p"><i ></i><span data-i18n="catalog.products"></span></label>
-                            <label  class="checkbox "><input id="ckCategory" name="checkbox-inline" class="search_select" type="checkbox" value="c"><i></i><span data-i18n="profile.categories"></span></label>
-                            <label  class="checkbox"><input id="ckTags" name="checkbox-inline" class="search_select" type="checkbox" value="t"><i></i><span></span>Tags</label>
-                    </div>
-					</form>
+                            <label  class="checkbox "><input id="ckSupplier" name="checkbox-inline" class="search_select" type="checkbox" value="s"><i></i><span data-i18n="homepage.suppliers"></span></label>
+                            </div>
+                    
+                    </form>
 				</div>
                 
                 
@@ -173,9 +184,9 @@
     <script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
     <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Translation -->
-	<script src="assets/js/plugins/i18next.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/3.4.3/i18next.min.js"></script>
 	<script src="assets/js/translations/translation.js"></script>
-  <script src="assets/js/plugins/jquery-i18next.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-i18next/1.1.0/jquery-i18next.min.js"></script>
 
 		<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
@@ -195,7 +206,7 @@
 	</script>
 	<script type="text/javascript" src="assets/js/common_header.js"></script>
 	<script type="text/javascript" src="assets/js/footer.js"></script>
-	<script type="text/javascript" src="assets/js/plugins/handlebars.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 	<script src="assets/js/utils.js"></script>
 	<script type="text/javascript" src="assets/js/custom.js"></script>
     <script type="text/javascript" src="assets/js/plugins/typeahead.bundle.js"></script>
