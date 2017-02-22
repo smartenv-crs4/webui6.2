@@ -38,7 +38,6 @@ function signIn()
   //data["user"] = new Object();
   data["username"] = email;
   data["password"] = password;
-
   jQuery.ajax({
     url: _userMsUrl + "users/signin",
     type: "POST",
@@ -47,8 +46,9 @@ function signIn()
     dataType: "json",
     success: function(data, textStatus, xhr)
     {
+        console.log(xhr)
       // success
-      if(xhr.status == 201)
+      if(xhr.status == 200)
       {
         console.log(sessionStorage.userId);
         sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
@@ -142,6 +142,7 @@ function signUp()
   data["user"]["name"] = name;
   data["user"]["password"] = password;
   data["user"]["type"] = userType;
+  console.log(_userMsUrl );        
 
   jQuery.ajax({
     url: _userMsUrl + "users/signup",
@@ -151,15 +152,18 @@ function signUp()
     dataType: "json",
     success: function(data, textStatus, xhr)
     {
-      console.log(xhr);
+      //console.log(xhr);      
       // success
       if(xhr.status == 201)
       {
+        console.log(data);
+        console.log(data.access_credentials.apiKey.token);
         sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
-        sessionStorage.userId = data["created_resource"]["id"];
+        sessionStorage.userId = data["created_resource"]["_id"];
         sessionStorage.email = email;
         getProfileInfo(false);
         sessionStorage.prevPage = "page_profile_settings.html";
+        
         redirectToPrevPage();
       }
       else

@@ -1,18 +1,15 @@
 /* Write here your custom javascript codes */
 
-var _authMsUrl  = "http://seidue.crs4.it:3007/";
-var _userMsUrl  = "http://seidue.crs4.it:3008/";
-var _brokerMsUrl  = "http://seidue.crs4.it:3009/api/v1/";
-var _uploadMsUrl = "http://seidue.crs4.it:3011/api/v1/file/";
+var _authMsUrl  = "http://seidue.crs4.it/api/auth/v1/";
+var _userMsUrl  = "http://seidue.crs4.it/api/user/v1/";
+//var _brokerMsUrl  = "http://localhost:3009/api/v1/";
+var _brokerMsUrl  = "http://seidue.crs4.it:/api/broker/v1/";
+var _uploadMsUrl = "http://seidue.crs4.it/api/upload/v1/file/";
 
-/*
-var _authMsUrl  = "http://localhost:3007/";
-var _userMsUrl  = "http://localhost:3008/";
-var _brokerMsUrl  = "http://localhost:3009/api/v1/";
-var _uploadMsUrl = "http://localhost:3011/api/v1/file/";
-*/
+_access_token =  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXBwIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxODAyMTgxNTY2NzIzfQ.I9tAMVI6mPuxur8r9CVEO83UpD2nKL8Ek4O-y6diZKE";
 
-_access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzg1NTc1MjQ3NTY4fQ.Du2bFjd0jB--geRhnNtbiHxcjQHr5AyzIFmTr3NFDcM";
+
+
 var defaultImg = "assets/img/team/img32-md.jpg";
 jQuery(document).ready(function(){
   var sb = jQuery("#sidebar");
@@ -276,16 +273,20 @@ function getUrlParameter(sParam)
   return undefined;
 }
 
-function removeImage(id)
+function removeImage(iid, pid)
 {
   jQuery.ajax({
-    url: _uploadMsUrl + id,      
+    url: _brokerMsUrl + "files/actions/imageproduct/" + iid + "/" + pid,      
     type: "DELETE",
     success: function(data){
     },
     error: function(xhr)
     {
-      console.log("image " + id + " doesn't removed")      
+      console.log("image " + iid + " doesn't removed")      
+    },
+    beforeSend: function(xhr, settings)
+    {
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
     }
   });        
 }

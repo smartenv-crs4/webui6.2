@@ -17,7 +17,7 @@ var defaultResizeConfig =
   }
 }
 
-function resizeImage(imgField, msUploadUrl, doSuccess, doError, config)
+function resizeImage(imgField, msUploadUrl, doSuccess, doError, config, beforeSend)
 {
   if(config)
   {
@@ -100,7 +100,7 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config)
   
           canvas.getContext('2d').drawImage(image, 0, 0, width, height);
 
-          console.log(file.type);
+          //console.log(file.type);
           var dataUrl = canvas.toDataURL(file.type);
 
                        
@@ -114,7 +114,7 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config)
         }                
         
         // fare l'upload
-        uploadImages(imgList, msUploadUrl, doSuccess, doError);
+        uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend);
       }
       image.src = readerEvent.target.result;
 
@@ -148,7 +148,7 @@ function dataURLToBlob(dataURL) {
 }
 
 
-function uploadImages(imgList, msUploadUrl, doSuccess, doError)
+function uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend)
 {
   var form = jQuery('form')[0];
   var formData = new FormData(form);
@@ -198,6 +198,13 @@ function uploadImages(imgList, msUploadUrl, doSuccess, doError)
       if(doError)
       {
         doError(xhr);
+      }
+    },
+    beforeSend: function(xhr, settings)
+    {
+      if(beforeSend)
+      {
+        beforeSend(xhr, settings);
       }
     }
   });

@@ -775,11 +775,11 @@
                     prods[i].imgUrl = [];
                     if (prods[i].images.length > 0 && prods[i].images[0] != null && prods[i].images[0].imageId != undefined) 
                     {
-                        prods[i].imgUrl.push({"url" : _uploadMsUrl + prods[i].images[0].imageId + "?tag=t", "id": prods[i].images[0].imageId});                        
+                        prods[i].imgUrl.push({"url" : _brokerMsUrl + "/files/" + prods[i].images[0].imageId + "?tag=t", "id": prods[i].images[0].imageId});                        
                         
                         for(var j = 1; j < prods[i].images.length; j++)
                         {
-                          prods[i].imgUrl.push({"url": _uploadMsUrl + prods[i].images[j].imageId + "?tag=t", "id": prods[i].images[j].imageId});                          
+                          prods[i].imgUrl.push({"url": _brokerMsUrl + "/files/" + prods[i].images[j].imageId + "?tag=t", "id": prods[i].images[j].imageId});                          
                         }                        
                     }
                     else {

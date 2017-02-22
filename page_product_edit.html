@@ -262,7 +262,7 @@
               box.style.display = "inline-block";
               
               var p = document.createElement("img");
-              p.src = _uploadMsUrl + picId + "?tag=t";
+              p.src = _brokerMsUrl + "files/" + picId + "?tag=t";
               p.style.maxWidth = "80px";              
               p.style.width = "100%";
               p.setClassName = "attachedPictures";
@@ -338,7 +338,6 @@
   
   function addImgId(data)
   {
-    
     img.push(data.filecode);
     imgCounter--;
         
@@ -511,13 +510,15 @@
     
     for(var i in iid)
     {
-      resizeImage(iid[i], _uploadMsUrl, addImgId, onErrorUpload, formats )
+      resizeImage(iid[i], _brokerMsUrl + "files/" , addImgId, onErrorUpload, formats, function(xhr, settings){
+         xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);      
+      });
     }
     
     jQuery("#attachedImg img").each(function(){     
       if(this.hasAttribute("data-erased"))
       {  
-        removeImage(this.getAttribute("data-id"));                        
+        removeImage(this.getAttribute("data-id"),  getUrlParameter("pid"));                        
       }                
     })                      
       
