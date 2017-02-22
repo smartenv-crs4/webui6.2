@@ -76,6 +76,13 @@ $( document).ready(function() {
         $("#btn_search").click();
     }
 });
+
+
+/*
+$( document).on('translate')(function()
+{});
+*/
+
 });
 
 
@@ -120,8 +127,8 @@ function render_row(data, arr_par)
                       if (arr_par[0].type_search == 's')
                       {              
                           _str = _str +'<div class="table-search-v2" id="divSearch_table">';
-                            _str = _str +'<div class="_strle-responsive">';
-                                _str = _str +'<table class="table table-bordered table-striped">';
+                            _str = _str +'<div class="table-responsive" >';
+                                _str = _str +'<table class="table table-bordered table-striped" >';
                                     _str = _str +'<thead>';
                                     _str = _str +'<tr>';
                                         _str = _str +'<th style="width: 10%" data-i18n="product.thLogo"></th>';
@@ -227,7 +234,7 @@ function render_row(data, arr_par)
                                         data.docs[i].images &&  data.docs[i].images.length > 0
                                         ) 
                                         {
-                                             _img = _uploadMsUrl + data.docs[i].images[0].imageId+'?tag=t'; 
+                                             _img = _brokerMsUrl + 'files/' + data.docs[i].images[0].imageId+'?tag=t'; 
                                         }
                                         else
                                              _img = 'assets/img/team/img1-md.jpg';
@@ -235,42 +242,40 @@ function render_row(data, arr_par)
                                         
                                         
                                         
-                                    _str += '<div class="media media-v2">';
-                                    _str +=     '<span class="pull-left" href="#">';
+                                    _str += '<div class="row">';
+                                    
+                                    _str +=     '<div class="col-md-2 text-center" href="#">';
                                     _str +=         '<img class="media-s100 img-circle" src="' + _img +'" alt="" style="cursor:pointer; height: 100px; width:100px">';
-                                    _str +=     '</span>';
+                                    _str +=     '</div>';
                                     
-                                    _str += '<span class="pull-right">';
-                                    _str += '<button class="btn-u btn-block rounded sDetails" type="button" data-par="'+var_par+'" data-id="'+ data.docs[i].supplierId._id +'"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>';
-                                     _str += '</span>';
                                     
-                                    _str +=     '<div class="media-body">';
+                                    
+                                    _str +=     '<div class="col-md-8">';
                                     _str +=         '<div class="clearfix" style="overflow:hidden; ">';
                                     _str +=             '<h4 class="media-heading">';
                                     _str +=                 '<strong style="display:block;"><a href="#">'+data.docs[i].name+'</a></strong>';
                                     _str +=                 '<small style="display:block; max-width:50%;">'+data.docs[i].categories[0].name[lang]+'</small>';
                                     _str +=             '</h4>';
-                                    _str +=         '</div><p></p>';
+                                    _str +=         '</div><br>';
                                     _str +=         '<div class="giveMeEllipsis blog-author-desc"><span>'+data.docs[i].supplierId.name +'&nbsp;&nbsp;&nbsp;&nbsp;</span><span>'+ render_rates(data.docs[i].supplierId.rates.overall_rate);+'</span></div>';
                                     _str +=         '<div class="giveMeEllipsis blog-author-desc">'+data.docs[i].description+'</div>';
-                                    
-                                    
                                     
                                     _str +=         '<ul class="list-inline share-list">';  
                                     _str +=             '<li><i class="fa fa-chevron-up"></i><span data-i18n="catalog.atleast">Min</span> '+checkValue(data.docs[i].minNum)+'</li>';
                                     _str +=             '<li><i class="fa fa-chevron-down"></i><span data-i18n="catalog.atmost">Max</span> '+checkValue(data.docs[i].maxNum)+'</li>';
                                     _str +=             '<li><i class="fa fa-calendar-o"></i><span data-i18n="catalog.deliveryIn">Consegna in</span> '+checkValue(data.docs[i].deliveryIn); 
                                     _str +=                 '<span data-i18n="catalog.days"> giorni</span></li>';
-                                    _str +=             '<li><i class="fa fa-inbox"></i><span data-i18n="catalog.availability"></span><span>' +checkValue(data.docs[i].availability)+' '+data.docs[i].unit+'</span></li>';
+                                    _str +=             '<li><i class="fa fa-inbox"></i><span data-i18n="catalog.availability"></span><span> ' +checkValue(data.docs[i].availability)+' '+data.docs[i].unit+'</span></li>';
                                     _str +=             '<li><i class="fa fa-euro"></i><span> ' +checkValue(data.docs[i].price)+ ' <span class="fa fa-euro"></span> per '+data.docs[i].unit+'</span></li>';
                                     _str +=             '<li style="text-align: right; font-weight: bold">Score:<span> ' +checkValue(data.docs[i].score)+ ' </span></li>';
                                     _str +=         '</ul>';
                                      
+                                    _str +=     '</div></div>';
                                      
-                                     
-                                     
-                                     
-                                     _str +=     '</div>';   
+                                    _str += '<div class="col-md-2 text-left">';
+                                    _str += '<button class="btn-u  rounded btn-sm sDetails" type="button" data-par="'+var_par+'" data-id="'+ data.docs[i].supplierId._id +'"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>';
+                                    _str += '</div>';
+                                        
                                     _str += '</div>';
                                     
                                     _str += '<hr>';
@@ -499,8 +504,8 @@ function renderDropCategories(id_category, cat_name)
                                       for (var i = 0; i < data.length; i++) {
                                           
                                       
-                                        str = str + '<li><a href="#'+data[i]._id+'">'+data[i].name.it+'</a></li>';
-                                        //console.log(str);
+                                        str = str + '<li><a href="#'+data[i]._id+'">'+data[i].name[lang]+'</a></li>';
+                                        console.log(lang);
                                       }
                                       
                                       $('.dropdown-menu').append(str);
