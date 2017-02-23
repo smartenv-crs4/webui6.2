@@ -222,7 +222,7 @@ function render_row(data, arr_par)
                       else
                       if (arr_par[0].type_search == 'p')
                       {             
-                                    _str = '<div class="container s-results margin-bottom-50">';
+                                    _str = '';
                                     
                                     
                                     var _img;
