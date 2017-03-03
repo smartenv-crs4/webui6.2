@@ -234,11 +234,11 @@
 
                                             <li class="sort-list-btn">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control"
+                                                    <input id="inputSearchCatalog" type="text" class="form-control"
                                                            data-i18n="[placeholder]catalog.placeholder"
                                                            placeholder="">
                                                     <span class="input-group-btn">
-                                                        <button class="btn-u" type="button"><i class="fa fa-search"></i> <span
+                                                        <button id="btnSearchCatalog" class="btn-u" type="button"><i class="fa fa-search"></i> <span
                                                                 data-i18n="catalog.search"></span></button>
                                                     </span>
 
@@ -1169,6 +1169,12 @@
                 });
             }
         }
+              
+       jQuery("#btnSearchCatalog").click(function(){
+          var name = jQuery("#inputSearchCatalog").val();
+          getproducts(getproductsURL, 'productstable', '#products_container', null, name, catName);
+          
+       })
 
 
     </script>

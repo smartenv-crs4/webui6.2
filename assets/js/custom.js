@@ -56,7 +56,7 @@ jQuery(document).ready(function(){
     document.getElementById("smallSearch").onkeydown = function(e){
       if(e.keyCode == 13)
       {
-        window.location = 'list.html?name=' + jQuery('#smallSearch').val();
+        window.location = 'list.html?name=' + jQuery('#smallSearch').val() + "&type_search=p";
       }      
     };    
   }
@@ -194,12 +194,12 @@ function logout()
   //sessionStorage.token = undefined;
   //sessionStorage.userId = undefined;
   sessionStorage.clear();
-  window.location.replace("page_login_and_registration2.html");
+  window.location.replace("page_login_and_registration.html");
 }
 function redirectToLogin()
 {
   sessionStorage.prevPage = window.location.href;
-  window.location.href = "page_login_and_registration2.html";
+  window.location.href = "page_login_and_registration.html";
 }
 function redirectToHome()
 {

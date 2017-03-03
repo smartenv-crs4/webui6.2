@@ -69,7 +69,7 @@ var header_template = `	<div class="header">
                 <div class="input-group animated fadeInDown">
                     <input type="text" class="form-control" placeholder="" id="smallSearch" >
                     <span class="input-group-btn">
-                        <button class="btn-u" type="button"  id="smallSearchButton" onclick="javascript:window.location = 'list.html?name=' + $('#smallSearch').val();" >
+                        <button class="btn-u" type="button"  id="smallSearchButton" onclick="javascript:window.location = 'list.html?name=' + $('#smallSearch').val() + '&type_search=p';" >
                        <i class="fa fa-search"></i>
                        <span data-i18n="catalog.search"></span>
                        </button>
