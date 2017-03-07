@@ -238,6 +238,7 @@ var translation = {
                 "noProductSearch": "No products found"
             },
             "evaluation": {
+                "evaluation": "Evaluation",
                 "your_opinion": "Your opinion is really important to us!",
                 "quality": "Quality of the product",
                 "pricevalue": "Price/Value",
@@ -251,7 +252,11 @@ var translation = {
                 "submit": "Submit",
                 "thank_you": "Thank you for your evaluation!",
                 "invalid_evaluation": "incomplete evaluation",
-                "missing_overall": "The overall rating is required."
+                "missing_overall": "The overall rating is required.",
+                "price_rate": "price rate",
+                "delivery_rate": "delivery rate",
+                "product_rate": "product rate",
+                "customer_rate": "customer rate"
             },
             "homepage": {
                 "discoversuppliers": "Discover",
@@ -488,7 +493,7 @@ var translation = {
             "product": {
                 "searchSupplierTitle": "Cerca nuovi suppliers",
                 "searchProductTitle": "Cerca nuovi prodotti",
-                "searchLabelCategories": "Categories...",
+                "searchLabelCategories": "Categorie...",
                 "searchLabelProducts": "Cerca prodotti...",
                 "searchTagMessage": "Usa i tag dei prodotti per la ricerca",
                 "thLogo": "Logo",
@@ -511,6 +516,7 @@ var translation = {
                 "noProductSearch": "Nessun prodotto trovato"
             },
             "evaluation": {
+                "evaluation": "Evaluation",
                 "your_opinion": "Il tuo parere conta molto per noi!",
                 "quality": "Qualità del prodotto",
                 "pricevalue": "Rapporto qualità/prezzo",
@@ -524,7 +530,12 @@ var translation = {
                 "submit": "Invia",
                 "thank_you": "Grazie per avere lasciato la tua opinione!",
                 "invalid_evaluation": "Valutazione incompleta",
-                "missing_overall": "Manca il giudizio complessivo."
+                "missing_overall": "Manca il giudizio complessivo.",
+                "price_rate": "prezzo",
+                "delivery_rate": "spedizione",
+                "product_rate": "prodotto",
+                "customer_rate": "venditore"
+                
             },
             "homepage": {
                 "discoversuppliers": "Scopri",

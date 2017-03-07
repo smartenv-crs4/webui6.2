@@ -73,6 +73,81 @@
             width: auto;
             display: flex;
         }
+        
+        
+        
+        .media-s100 {
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
+        
+        
+        
+        .imnav {
+          color: #ffffff;
+          margin:o auto;
+          opacity:0.6;
+          display:none;
+          position:absolute;
+          top:0;
+          left:0px;
+          width:100%;
+          height:100%;
+      }
+      
+      .imnav > span {
+        cursor: pointer;
+      }
+
+      .imgcon:hover .imnav{display:inline-block;}
+      
+      .control {
+          float:left;
+          height:100%;
+          width:25%;
+          opacity:0;              
+          display:table; 
+          table-layout:fixed;
+      }
+
+      .control:hover {
+          opacity:0.6;          
+      }
+      
+      .prim {
+        left:0;    
+      }
+
+      .neim{
+        right:0;
+        position: absolute;        
+      }
+      .control > span{
+        display:table-cell; 
+        vertical-align:middle; 
+        color:red; 
+        font-size:30pt;
+      }
+      
+      .neim > span{
+        text-align: right;        
+      }
+      
+      .prim > span{
+        text-align: left;        
+      }
+      
+      .th-gallery{
+        float: left; 
+        width:25px; 
+        cursor:pointer; 
+        height:25px; 
+        margin:3px; 
+        border: solid 1px #eeeeee;
+      }
+      
+      
     </style>
     
     </head>
@@ -177,7 +252,7 @@
             <div class="footer">
                 <div class="container">
                     <div class="row">
-                        <!-- About -->
+                        <!-- About --> 
                         <div class="col-md-4 md-margin-bottom-40">
                             <a href="index.html"><img id="logo-footer" class="footer-logo" src="assets/img/port/crs4.png" alt=""></a>
                             <p>Il CRS4 è un centro di ricerca interdisciplinare privato fondato dalla Regione Autonoma della Sardegna.</p>
@@ -270,6 +345,47 @@
     </div><!--/End Wrapper-->
 
 
+    
+    
+    
+    <div class="modal fade" id="modalGallery" role="dialog">
+        <div class="modal-dialog modal-lg">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>              
+            </div>
+            <div class="modal-body imgcon" >
+              <div style="overflow:auto; text-align: center;" id="galleryContainer">
+                <img src="#" id="galleryImg" style="max-width:100%; max-height:100%">
+                
+                <div class="imnav">
+                  <span onclick="slidePic('prev')">
+                    <div  class="prim control">
+                      <span class="imcontr glyphicon glyphicon-chevron-left"></span>
+                    </div>
+                  </span>
+                        
+                  <span onclick="slidePic('next')">
+                    <div class="neim control glyphicon .glyphicon-chevron-right">
+                      <span class="right glyphicon glyphicon-chevron-right"></span>                
+                    </div>
+                  </span>
+            
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    
+    
+    
     <!-- JS Global Compulsory -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.js"></script>

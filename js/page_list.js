@@ -225,19 +225,27 @@ function render_row(data, arr_par)
                                     _str = '';
                                     
                                     
-                                    var _img;
+                                    var _img = [];
                                     
                                     
                                     for (var i = 0; i < data.docs.length; i++) {        
                                     
-                                        if (
-                                        data.docs[i].images &&  data.docs[i].images.length > 0
-                                        ) 
+                                        _img = [];
+                                        
+                                        
+                                        if (data.docs[i].images && data.docs[i].images.length > 0) 
                                         {
-                                             _img = _brokerMsUrl + 'files/' + data.docs[i].images[0].imageId+'?tag=t'; 
+                                            
+                                            //_img = data.docs[i].images;
+                                            //_img = _brokerMsUrl + 'files/' + data.docs[i].images[0].imageId+'?tag=t';
+                                            for (var j = 0; j < data.docs[i].images.length; j++) {
+                                                _img.push({url: _brokerMsUrl + 'files/' + data.docs[i].images[j].imageId+'?tag=t'
+                                                            , id: data.docs[i].images[j].imageId} );
+                                            } 
                                         }
                                         else
-                                             _img = 'assets/img/team/img1-md.jpg';
+                                             _img.push({url: 'assets/img/team/img1-md.jpg'
+                                             , 'id': 0});
                                             
                                         
                                         
@@ -245,46 +253,86 @@ function render_row(data, arr_par)
                                     _str += '<div class="row">';
                                     
                                     _str +=     '<div class="col-md-2 text-center" href="#">';
-                                    _str +=         '<img class="media-s100 img-circle" src="' + _img +'" alt="" style="cursor:pointer; height: 100px; width:100px">';
+                                    _str +=         '<img class="media-s100 img-circle" src="' + _img[0].url +'" alt="" style="cursor:pointer; height: 100px; width:100px" onclick="openGallery(this)" data-iid="'+ _img[0].id +'" onError="this.onerror=null;this.src=\'assets/img/team/img1-md.jpg\'">';
+                                    _str +=     '<div class="center-block">';
+                                    for (var t in _img)
+                                    {       
+                                       
+                                             _str +=     '<div class="th-gallery" onclick="updateImgThumb(this)">';
+                                             _str +=     '<img src="'+ _img[t].url +'" style="max-width:100%; max-height:100%" data-iid="'+ _img[t].id +'" onError="this.onerror=null;this.src=\'assets/img/team/img1-md.jpg\'">';
+                                             _str +=     '</div>';
+                                           
+                                    }    
+                                    _str +=         '</div>';
+                                        
                                     _str +=     '</div>';
                                     
                                     
                                     
                                     _str +=     '<div class="col-md-8">';
-                                    _str +=         '<div class="clearfix" style="overflow:hidden; ">';
-                                    _str +=             '<h4 class="media-heading">';
-                                    _str +=                 '<strong style="display:block;"><a href="#">'+data.docs[i].name+'</a></strong>';
-                                    _str +=                 '<small style="display:block; max-width:50%;">'+data.docs[i].categories[0].name[lang]+'</small>';
-                                    _str +=             '</h4>';
-                                    _str +=         '</div><br>';
-                                    _str +=         '<div class="giveMeEllipsis blog-author-desc"><span>'+data.docs[i].supplierId.name +'&nbsp;&nbsp;&nbsp;&nbsp;</span><span>'+ render_rates(data.docs[i].supplierId.rates.overall_rate);+'</span></div>';
-                                    _str +=         '<div class="giveMeEllipsis blog-author-desc">'+data.docs[i].description+'</div>';
+                                    _str +=             '<div class="clearfix" style="overflow:hidden; ">';
+                                    _str +=                 '<h4 class="media-heading">';
+                                    _str +=                     '<strong style="display:block;"><a href="#">'+data.docs[i].name+'</a></strong>';
+                                    _str +=                     '<small style="display:block; max-width:50%;">'+data.docs[i].categories[0].name[lang]+'</small>';
+                                    _str +=                 '</h4>';
+                                    _str +=             '</div>';
+                                    _str +=             '<div class="giveMeEllipsis blog-author-desc">';
+                                    _str +=                 "<span>"+data.docs[i].supplierId.name +"&nbsp;&nbsp;&nbsp;&nbsp;</span>"; 
+                                    _str +=                 "<span style='cursor: pointer' tabindex='0' data-trigger='focus' data-toggle='popover' data-html='true' data-content='' class='popOver' >"+ render_rates(data.docs[i].supplierId.rates.overall_rate);+"</span>";
+                                    _str +=             "</div>";
                                     
-                                    _str +=         '<ul class="list-inline share-list">';  
-                                    _str +=             '<li><i class="fa fa-chevron-up"></i><span data-i18n="catalog.atleast">Min</span> '+checkValue(data.docs[i].minNum)+'</li>';
-                                    _str +=             '<li><i class="fa fa-chevron-down"></i><span data-i18n="catalog.atmost">Max</span> '+checkValue(data.docs[i].maxNum)+'</li>';
-                                    _str +=             '<li><i class="fa fa-calendar-o"></i><span data-i18n="catalog.deliveryIn">Consegna in</span> '+checkValue(data.docs[i].deliveryIn); 
-                                    _str +=                 '<span data-i18n="catalog.days"> giorni</span></li>';
-                                    _str +=             '<li><i class="fa fa-inbox"></i><span data-i18n="catalog.availability"></span><span> ' +checkValue(data.docs[i].availability)+' '+data.docs[i].unit+'</span></li>';
-                                    _str +=             '<li><i class="fa fa-euro"></i><span> ' +checkValue(data.docs[i].price)+ ' <span class="fa fa-euro"></span> per '+data.docs[i].unit+'</span></li>';
-                                    _str +=             '<li style="text-align: right; font-weight: bold">Score:<span> ' +checkValue(data.docs[i].score)+ ' </span></li>';
-                                    _str +=         '</ul>';
+                                    _str +=             '<div class="giveMeEllipsis blog-author-desc">'+data.docs[i].description+'</div>';
+                                    
+                                    _str +=             '<ul class="list-inline share-list">';  
+                                    _str +=                 '<li><i class="fa fa-chevron-up"></i><span data-i18n="catalog.atleast">Min</span> '+checkValue(data.docs[i].minNum)+'</li>';
+                                    _str +=                 '<li><i class="fa fa-chevron-down"></i><span data-i18n="catalog.atmost">Max</span> '+checkValue(data.docs[i].maxNum)+'</li>';
+                                    _str +=                 '<li><i class="fa fa-calendar-o"></i><span data-i18n="catalog.deliveryIn">Consegna in</span> '+checkValue(data.docs[i].deliveryIn); 
+                                    _str +=                     '<span data-i18n="catalog.days"> giorni</span></li>';
+                                    _str +=                 '<li><i class="fa fa-inbox"></i><span data-i18n="catalog.availability"></span><span> ' +checkValue(data.docs[i].availability)+' '+data.docs[i].unit+'</span></li>';
+                                    _str +=                 '<li><i class="fa fa-euro"></i><span> ' +checkValue(data.docs[i].price)+ ' <span class="fa fa-euro"></span> per '+data.docs[i].unit+'</span></li>';
+                                    _str +=                 '<li style="text-align: right; font-weight: bold">Score:<span> ' +checkValue(data.docs[i].score)+ ' </span></li>';
+                                    _str +=             '</ul>';
                                      
-                                    _str +=     '</div></div>';
+                                    _str +=     '</div>';
                                      
-                                    _str += '<div class="col-md-2 text-left">';
-                                    _str += '<button class="btn-u  rounded btn-sm sDetails" type="button" data-par="'+var_par+'" data-id="'+ data.docs[i].supplierId._id +'"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>';
-                                    _str += '</div>';
+                                    _str +=     '<div class="col-md-2 text-left">';
+                                    _str +=         '<button class="btn-u  rounded btn-sm sDetails" type="button" data-par="'+var_par+'" data-id="'+ data.docs[i].supplierId._id +'"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>';
+                                    _str +=     '</div>';
                                         
-                                    _str += '</div>';
+                                    _str +=     '</div>';
+                                    
+                                    
+                                    _str += '<div id="popover-content" class="hide">' + popUp_rates(data.docs[i].supplierId.rates) + '</div>';
+                                    
                                     
                                     _str += '<hr>';
+                                    
+                                    
                                     
                                     
                                 }
                                     
                                     $('#div_list').append(_str);
                                     
+                                    /*
+                                    $('document').on('translate', function(){
+                                       
+                                    })
+                                    */
+                                    
+                                    
+                      
+                      
+                                $('.popOver').popover({html: true,
+                                content: function(){
+                                return $('#popover-content').html();   
+                                },
+                                title: i18next.t("evaluation.evaluation")
+                                });
+                      
+                      $(".popOver").attr("data-original-title", i18next.t("evaluation.evaluation")); 
+                                    
+                      
                       }
                       
                         $('.sDetails').click(function(){
@@ -429,7 +477,7 @@ function render_rates(_rates)
                                     + '        <li><i class="color-green fa fa-star-o"></i></li>'
                                     + '        <li><i class="color-green fa fa-star-o"></i></li>'
                                     + '        <li><i class="color-green fa fa-star-o"></i></li>'
-                                    + '    </ul>';
+                                    
       break;
       case 2:
             tab = tab +  '            <li><i class="color-green fa fa-star"></i></li>'
@@ -462,7 +510,12 @@ function render_rates(_rates)
                                     + '        <li><i class="color-green fa fa-star"></i></li>'
                                     + '        <li><i class="color-green fa fa-star"></i></li>';
       break;
-      
+      default:
+            tab = tab +  '    <li><i class="color-green fa fa-star-o"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
+                                    + '        <li><i class="color-green fa fa-star-o"></i></li>';
         
         
     }
@@ -527,6 +580,16 @@ function renderDropCategories(id_category, cat_name)
 });
         
     }
+    
+function popUp_rates(rates)
+{
+    //render_rates(data.docs[i].supplierId
+    
+    return "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.price_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_price_value_rate)      + "</span></div>" +
+           "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.delivery_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_delivery_rate)         + "</span></div>" + 
+           "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.product_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_product_rate)          + "</span></div>"  +
+           "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.customer_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_customer_service_rate) +  "</span></div>";
+}
 
 //**************************************************************/
 //* proxy -> chaimate ajax alle api data*/
@@ -815,3 +878,71 @@ function block(msg)
         
         //setTimeout($.unblockUI, 8000);
 }
+
+/*********************************************/
+
+function updateImgThumb(node)
+        {
+          var src = jQuery(node).find(":nth-child(1)").attr("src");
+          jQuery(node).parent().parent().find(":nth-child(1)").first().attr("src", src);
+        }
+
+
+function openGallery(node)
+        {
+          var src = jQuery(node).attr("src").replace("tag=t", "tag=o");
+          jQuery("#galleryImg").hide();
+          var spinner = document.createElement("span");
+          spinner.className = "fa fa-spinner fa-spin";
+          spinner.style.fontSize = "50pt";
+          spinner.id = "gallerySpinner";
+          jQuery("#galleryContainer").prepend(spinner);
+                    
+          jQuery("#galleryImg").off("load")
+            .on("load", function(){
+              jQuery("#galleryImg").show();
+              jQuery("#gallerySpinner").remove();                            
+            });                              
+          
+          jQuery("#galleryImg").attr("src", src);          
+          
+          if(!window.gallery) window.gallery = {};
+          
+          window.gallery.images = [];
+          window.gallery.index = 0;
+          var c = 0;
+          jQuery(node).siblings().first().find("img").each(function(){
+            var tsrc = this.src.replace("tag=t", "tag=o");
+            window.gallery.images.push(tsrc);
+            
+            if(tsrc == src)
+            {              
+              window.gallery.index = c;              
+            }
+            c++;
+          })          
+          
+          $('#modalGallery').modal('show'); 
+          
+        }
+        
+        function slidePic(dir)
+        {
+          var x;          
+          if(dir == "next")        
+            x = 1;          
+          else
+            x = -1;          
+          var idx = (window.gallery.index + x) % window.gallery.images.length;
+          if(idx < 0) idx = window.gallery.images.length - 1;
+          
+          jQuery("#galleryImg").hide();
+          var spinner = document.createElement("span");
+          spinner.className = "fa fa-spinner fa-spin";
+          spinner.style.fontSize = "50pt";
+          spinner.id = "gallerySpinner";
+          jQuery("#galleryContainer").append(spinner);                    
+          
+          jQuery("#galleryImg").attr("src", window.gallery.images[idx]);
+          window.gallery.index = idx;          
+        }
