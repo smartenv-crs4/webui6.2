@@ -292,7 +292,7 @@ var documentsTableTemplate = `
               <a href="{{url}}"> {{name}} </a>
               <span>                
                 <a class="pull-right" data-toggle="confirmation" 
-                   data-placement="top" href="#" data-on-confirm="deleteDocument" data-fname="{{name}}" 
+                   data-placement="top" href="#" data-on-confirm="deleteDocument" data-fid="{{fid}}" data-fname="{{name}}" 
                    data-btn-ok-class="btn-success important-white"
                    data-i18n="[data-btn-cancel-label]profile.no;[data-btn-ok-label]profile.yes;[data-title]profile.areYouSure;[data-content]profile.confirmDeleteDocument"
                    data-btn-cancel-class="btn-danger important-white" data-popout="true">

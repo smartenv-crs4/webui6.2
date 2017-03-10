@@ -422,13 +422,17 @@ function uploadDocument()
   var fd = new FormData();
   var f = jQuery("#documentInput")[0];
   fd.append( 'document', f.files[0] );
+  fd.append('docName', f.files[0].name);
+ 
+  //var url = _brokerMsUrl + "users/actions/attachment";
+  var url = _brokerMsUrl + "files/actions/attachments";
 
   jQuery.ajax({
-    url: _brokerMsUrl + "users/actions/attachment",
+    url: url,
     data: fd,
     processData: false,
     contentType: false,
-    type: 'POST',
+    type: 'POST',    
     success: function(data)
     {
       jQuery.jGrowl(i18next.t("profile.documentSaved"), {theme:'bg-color-green1', life: 5000});
@@ -441,7 +445,16 @@ function uploadDocument()
       switch(xhr.status)
       {
         case 400:
-          msg = i18next.t("error.invalid_pdf");
+          //msg = i18next.t("error.invalid_pdf");
+          try
+          {        
+            msg = xhr.responseJSON.message;
+          }
+          catch(err)
+          {
+            msg = i18next.t("error.internal_server_error");
+          }                      
+            
           break;
         case 403:
           msg = i18next.t("error.unauthorized");
@@ -473,18 +486,22 @@ function uploadDocument()
 function getDocumentList()
 {
   jQuery.ajax({
-    url: _brokerMsUrl + "users/attachment/" + sessionStorage.userId,     
+    url: _brokerMsUrl + "files/attachments/" + sessionStorage.userId,     
     type: "GET",
     contentType: "application/json; charset=utf-8",
     success: function(data, textStatus, xhr)
     {      
       var dd = [];
-      for(var i in data.files)
+      if(data.attachments)
       {
-        var d ={}
-        d.url = _brokerMsUrl + "users/attachment/" + sessionStorage.userId + "/" + data.files[i];
-        d.name = data.files[i];
-        dd.push(d);
+        for(var i in data.attachments.files)
+        {
+          var d ={}
+          d.url = _brokerMsUrl + "files/" + data.attachments.files[i].id;
+          d.name = data.attachments.files[i].name;
+          d.fid = data.attachments.files[i].id;
+          dd.push(d);
+        }
       }
         
       var tDocTable = Handlebars.compile(documentsTableTemplate);      
@@ -532,22 +549,22 @@ function getDocumentList()
   });
 }
 
-function deleteDocument(name)
+function deleteDocument(fid)
 {
-  if(!name)
+  if(!fid)
   {
     //console.log(jQuery(this).data("fnme"));
     //console.log(jQuery(this));
-    name = jQuery(this).data("fname");
-    if(!name)
+    fid = jQuery(this).data("fid");
+    if(!fid)
     {
-      jQuery.jGrowl("No name", {theme:'bg-color-red', life: 5000});
+      jQuery.jGrowl("No file id", {theme:'bg-color-red', life: 5000});
       return;      
     }
   }
   
   jQuery.ajax({
-    url: _brokerMsUrl + "users/actions/attachment/" + name,
+    url: _brokerMsUrl + "files/actions/attachment/" + fid,
     type: "DELETE",
     contentType: "application/json; charset=utf-8",
     success: function(data, textStatus, xhr)

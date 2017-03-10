@@ -488,13 +488,13 @@
                             {{#each files}}
                             <div class="profile-event">
                                 <div class="date-formats">
-                                    <i onclick="javascript:window.open('{{../url}}{{filename}}');"
+                                    <i onclick="javascript:window.open('{{../url}}{{fid}}');"
                                        class="fa fa-file-pdf-o"></i>
 
                                 </div>
 
                                 <div class="overflow-h">
-                                    <h3 class="heading-xs"><a href="{{../url}}{{filename}}"
+                                    <h3 class="heading-xs"><a href="{{../url}}{{fid}}"
                                                               target="_blank">{{filename}}</a>
                                     </h3>
                                     <p data-i18n="catalog.pdf"></p>
@@ -692,7 +692,7 @@
         }
 
         var supId = getParameterByName("idSupplier"); //"57f5059fe8094b7137fa3efd";
-        var getfilesURL = _brokerMsUrl + "users/attachment/" + supId;
+        var getfilesURL = _brokerMsUrl + "files/attachments/" + supId;
         var getsupplierURL = _brokerMsUrl + "users/supplier/" + supId;
         var getproductsURL = _brokerMsUrl + "products?supplierId=" + supId;
         var getcutomerfavoritesURL = _brokerMsUrl + "users/favorites";
@@ -706,12 +706,20 @@
                 //console.log(data);
 
                 var files = [];
-                for (var i = 0; i < data.files.length; ++i)
-                    files.push({filename: data.files[i]})
+               if(data.attachments)
+               {
+                 for(var i in data.attachments.files)
+                 {
+                   var d ={}                   
+                   d.filename = data.attachments.files[i].name;
+                   d.fid = data.attachments.files[i].id;
+                   files.push(d);
+                 }
+               }
 
                 var compiled = cacheCompile(templateid, {
                     files: files,
-                    url: _brokerMsUrl + "/users/attachment/" + supId + "/",
+                    url: _brokerMsUrl + "files/",
                     isSupplier: currentSupplier
                 });
 
