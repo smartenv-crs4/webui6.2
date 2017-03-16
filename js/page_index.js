@@ -95,11 +95,12 @@
                                   dataType: "json",
                                   success: function(data)
                                   {
-                                      var str = '';  
+                                      var str = ''; 
+                                      console.log(data); 
                                       for (var i = 0; i < data.length; i++) {
                                           
                                       
-                                        str = str + '<li><a href="#'+data[i]._id+'">'+data[i].name.it+'</a></li>';
+                                        str = str + '<li><a href="#'+data[i]._id+'">'+data[i].name[lang]+'</a></li>';
                                         //console.log(str);
                                       }
                                       
