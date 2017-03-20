@@ -192,7 +192,14 @@ function signUp()
           respBlock.html(i18next.t("error.invalid_auth"));
           break;
         case 500:
-          respBlock.html(i18next.t("error.internal_server_error"));
+          if(xhr.responseJSON.error_message.indexOf("UserExistsError") >= 0)
+          {
+            respBlock.html(i18next.t("error.user_already_exixts"));
+          }
+          else
+          {
+            respBlock.html(i18next.t("error.internal_server_error"));
+          }
           break;
         default:
           respBlock.html(xhr.responseJSON.error_message);
