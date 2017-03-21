@@ -86,7 +86,7 @@
     {
         $.ajax({
                                   type: "GET",
-                                  url: api_url + "categories/drop?liv=2&lang="+lang,
+                                  url: api_url + "categories/drop?liv=1&lang="+lang,
                                   data: 
                                   {
                                     
@@ -100,7 +100,14 @@
                                       for (var i = 0; i < data.length; i++) {
                                           
                                       
-                                        str = str + '<li><a href="#'+data[i]._id+'">'+data[i].name[lang]+'</a></li>';
+                                        str = str + '<li><a href="#'+data[i]._id+'">'
+                                                        + '<div class="row">'
+                                                        + '<div class="col-md-1"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
+                                                        + '<div class="col-md-11"><span>'+data[i].name[lang]+'</span>'
+                                                        + '<p class="dropdown-desc">'+data[i].description[lang]+'</p>'
+                                                        + '</div>'
+                                                        + '</div>'
+                                                        + '</a></li>';
                                         //console.log(str);
                                       }
                                       
@@ -109,7 +116,7 @@
                                       $('.search-panel .dropdown-menu').find('a').click(function(e) {
                                         e.preventDefault();
                                         var param = $(this).attr("href").replace("#","");
-                                        var concept = $(this).text();
+                                        var concept = $(this).find("span").text();
                                         $('.search-panel span#search_concept').text(concept);
                                         $('.input-group #id_category').val(param);
                                         $('.input-group #cat_name').val(concept);
