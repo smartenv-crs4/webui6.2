@@ -127,7 +127,7 @@
                 margin:        0,
                 width:        '30%',
                 top:        '40%',
-                left:        '35%',
+                left:        '45%',
                 textAlign:    'center',
                 color:        '#000',
                 border:        '3px solid #aaa',
@@ -144,7 +144,6 @@
 
             // styles for the overlay
             overlayCSS:  {
-                backgroundColor:    '#000',
                 opacity:            0.6,
                 cursor:                'wait'
             },
@@ -155,7 +154,7 @@
 
             // styles applied when using $.growlUI
             growlCSS: {
-                width:        '350px',
+                width:        '150px',
                 top:        '10px',
                 left:        '',
                 right:        '10px',

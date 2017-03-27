@@ -30,9 +30,7 @@ $( document).ready(function() {
     
     //assegnazione dei parametri ai campi del form
     init_form(arr_par);
-    
-    //if (arr_par.length == 0)
-    //   refresh_param();
+   
     
     
     $('#ckProduct').click(function(e) {
@@ -78,10 +76,16 @@ $( document).ready(function() {
 });
 
 
-/*
-$( document).on('translate')(function()
-{});
-*/
+
+$(document).on('translate', function()
+{
+    
+    $(window.location).attr('href', '/list.html'+ get_par_string(get_par('page')));
+    //console.log(get_par('url'));
+    //console.log(api_url);
+//alert(localStorage.lng);
+});
+
 
 });
 
@@ -232,6 +236,7 @@ function render_row(data, arr_par)
                                     
                                         _img = [];
                                         
+                                        link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i]._id).replace("??", "?").replace("?&", "?");
                                         
                                         if (data.docs[i].images && data.docs[i].images.length > 0) 
                                         {
@@ -268,11 +273,10 @@ function render_row(data, arr_par)
                                     _str +=     '</div>';
                                     
                                     
-                                    
                                     _str +=     '<div class="col-md-8">';
                                     _str +=             '<div class="clearfix" style="overflow:hidden; ">';
                                     _str +=                 '<h4 class="media-heading">';
-                                    _str +=                     '<strong style="display:block;"><a href="#">'+data.docs[i].name+'</a></strong>';
+                                    _str +=                     '<strong style="display:block;"><a href=" '+ link + '">'+data.docs[i].name+'</a></strong>';
                                     _str +=                     '<small style="display:block; max-width:50%;">'+data.docs[i].categories[0].name[lang]+'</small>';
                                     _str +=                 '</h4>';
                                     _str +=             '</div>';
@@ -348,7 +352,7 @@ function render_row(data, arr_par)
 
 
 function render_paginate(tot_page, act_page, arr_par)
-{
+ {
    var_par = get_par_string(arr_par);
     
     
@@ -438,7 +442,7 @@ function render_paginate(tot_page, act_page, arr_par)
         
         arr_par[0].page = $(this).attr('data-page');
         
-        console.log(arr_par);
+        //console.log(arr_par);
           
           $('#divPagination').remove();
           
@@ -541,7 +545,9 @@ function renderDropCategories(id_category, cat_name)
         {
             $('#search_concept').attr("placeholder", i18next.t("profile.categories"));
         }
-        */    
+        */
+        
+            
         $.ajax({
                                   type: "GET",
                                   url: api_url + "categories/drop?liv=1&lang="+lang,
@@ -566,9 +572,21 @@ function renderDropCategories(id_category, cat_name)
                                                         + '</div>'
                                                         + '</a></li>';
                                         
+                                      
+                                                  if (id_category && id_category == data[i]._id)
+                                                  {
+                                                      console.log(lang + ' ' + data[i]._id + ' ' + data[i].name[lang]);
+                                                      $('.search-panel span#search_concept').text(data[i].name[lang]);
+                                                      $('.input-group #id_category').val(data[i]._id);
+                                                      $('.input-group #cat_name').val(data[i].name[lang]);
+                                                  }
+                                      
                                       }
                                       
                                       $('.dropdown-menu').append(str);
+                                      
+                                      
+                                      
                                       
                                       $('.search-panel .dropdown-menu').find('a').click(function(e) {
                                         e.preventDefault();
@@ -733,9 +751,11 @@ function init_form(arr_par)
     
     if (arr_par[0].id_category)  
     {
+        /*
         $('#search_concept').text(arr_par[0].cat_name);
         $('.input-group #id_category').val(arr_par[0].id_category);
         $('.input-group #cat_name').val(arr_par[0].cat_name);
+        */
     }
     else
     {
@@ -872,14 +892,14 @@ function checkValue(value)
 function block(msg)
 {
     $.blockUI({ 
-        message: '<img src="assets/img/balls.gif"><span font-weight: bold">&nbsp;'+ msg +'</span>',
-            css: { 
+        message: '<img src="assets/img/rolling.gif"><div font-weight: bold" style="background-color: #555; -webkit-border-radius: 10px; padding: 8px; margin-top: 10px">&nbsp;'+ msg +'</div>',
+            css: {
+            width: '200px', 
             border: 'none', 
             padding: '15px', 
-            backgroundColor: '#000', 
             '-webkit-border-radius': '10px', 
             '-moz-border-radius': '10px', 
-            opacity: .5, 
+            opacity: 0.5, 
             color: '#fff' 
         } });
         
@@ -889,14 +909,14 @@ function block(msg)
 /*********************************************/
 
 function updateImgThumb(node)
-        {
+{
           var src = jQuery(node).find(":nth-child(1)").attr("src");
           jQuery(node).parent().parent().find(":nth-child(1)").first().attr("src", src);
         }
 
 
 function openGallery(node)
-        {
+{
           var src = jQuery(node).attr("src").replace("tag=t", "tag=o");
           jQuery("#galleryImg").hide();
           var spinner = document.createElement("span");
@@ -933,8 +953,8 @@ function openGallery(node)
           
         }
         
-        function slidePic(dir)
-        {
+function slidePic(dir)
+{
           var x;          
           if(dir == "next")        
             x = 1;          
