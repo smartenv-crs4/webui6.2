@@ -154,6 +154,7 @@ function render_row(data, arr_par)
                                     
                                     str_rates = render_rates(data.docs[i].rates.overall_rate);
                                         
+                                        
                                         link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i]._id).replace("??", "?").replace("?&", "?");    
                                         
                                             _str += '<tr>'
@@ -236,7 +237,8 @@ function render_row(data, arr_par)
                                     
                                         _img = [];
                                         
-                                        link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i]._id).replace("??", "?").replace("?&", "?");
+                                        
+                                        link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i].supplierId._id).replace("??", "?").replace("?&", "?");
                                         
                                         if (data.docs[i].images && data.docs[i].images.length > 0) 
                                         {
@@ -632,7 +634,6 @@ function get_list(_arr_par)
     
     _var_par = get_par_string(_arr_par);
     
-    console.log(api_url + url  + _var_par);
     $.ajax({
                                   type: "GET",
                                   url: api_url + url  + _var_par,
