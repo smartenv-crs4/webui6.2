@@ -13,6 +13,9 @@
 // inizializzo i parametri di ricerca dalla url
 var arr_par = get_par('url');
 
+if (!arr_par[0].type_search)
+    arr_par[0].type_search = 'p';
+
 //******************************************************/
 // Document ready */
 
@@ -96,7 +99,9 @@ $(document).on('translate', function()
 
 $( "#btn_search" ).click(function(e) {
       
-    block('Please wait');  
+    block('<span id="blockMsg"></span>');  
+    $('#blockMsg').text(i18next.t("product.blockMsg"));
+    
     
     get_list(get_par('page'));
       
@@ -153,6 +158,7 @@ function render_row(data, arr_par)
                                     //console.log(data.docs[i]);
                                     
                                     str_rates = render_rates(data.docs[i].rates.overall_rate);
+                                        
                                         
                                         link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i]._id).replace("??", "?").replace("?&", "?");    
                                         
@@ -236,7 +242,8 @@ function render_row(data, arr_par)
                                     
                                         _img = [];
                                         
-                                        link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i]._id).replace("??", "?").replace("?&", "?");
+                                        
+                                        link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i].supplierId._id).replace("??", "?").replace("?&", "?");
                                         
                                         if (data.docs[i].images && data.docs[i].images.length > 0) 
                                         {
@@ -575,7 +582,7 @@ function renderDropCategories(id_category, cat_name)
                                       
                                                   if (id_category && id_category == data[i]._id)
                                                   {
-                                                      console.log(lang + ' ' + data[i]._id + ' ' + data[i].name[lang]);
+                                                      //console.log(lang + ' ' + data[i]._id + ' ' + data[i].name[lang]);
                                                       $('.search-panel span#search_concept').text(data[i].name[lang]);
                                                       $('.input-group #id_category').val(data[i]._id);
                                                       $('.input-group #cat_name').val(data[i].name[lang]);
@@ -632,7 +639,6 @@ function get_list(_arr_par)
     
     _var_par = get_par_string(_arr_par);
     
-    console.log(api_url + url  + _var_par);
     $.ajax({
                                   type: "GET",
                                   url: api_url + url  + _var_par,

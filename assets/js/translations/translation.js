@@ -236,7 +236,8 @@ var translation = {
                 "maximumQuantity": "Maximum quantity",
                 "numberOfDays": "Number of Days",
                 "images": "Images",
-                "noProductSearch": "No products found"
+                "noProductSearch": "No products found",
+                "blockMsg": "Please wait..."
             },
             "evaluation": {
                 "evaluation": "Evaluation",
@@ -515,7 +516,8 @@ var translation = {
                 "maximumQuantity": "Quantità massima",
                 "numberOfDays": "Numero di giorni",
                 "images": "Immagini",
-                "noProductSearch": "Nessun prodotto trovato"
+                "noProductSearch": "Nessun prodotto trovato",
+                "blockMsg": "Attendi..."
             },
             "evaluation": {
                 "evaluation": "Evaluation",
