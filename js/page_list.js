@@ -1,7 +1,9 @@
 //* Link api ******************************************/
 // var api_url = "http://156.148.37.167:3010/api/v1/";
- var api_url = _brokerMsUrl;
- var lang =   localStorage.lng;
+ var api_url    = _brokerMsUrl;
+ var lang       = localStorage.lng;
+ var trend_url  = "http://seidue.crs4.it:3040/api/v1/trends"; // TODO: mettere in asset/custom.js
+ 
  
  var limit;
  var page;
@@ -359,7 +361,7 @@ function render_row(data, arr_par)
 
 
 function render_paginate(tot_page, act_page, arr_par)
- {
+{
    var_par = get_par_string(arr_par);
     
     
@@ -412,7 +414,7 @@ function render_paginate(tot_page, act_page, arr_par)
                 }
                 
                 
-                
+                  
                 
                 
                 for (var i = start; i <= limit; i++)
@@ -655,6 +657,11 @@ function get_list(_arr_par)
                                       pages     = data.pages;
                                       total     = data.total;
                                       
+                                      if (!_arr_par[0].page && (_arr_par[0].name != '' || _arr_par[0].id_category != ''))
+                                      {
+                                          insertTrend(_arr_par, data);
+                                      }
+                                      
                                       $('#div_list').empty();
                                       $('#t_paginate').empty();
                                           
@@ -739,7 +746,40 @@ function getProductsSupplier(id, _arr_par)
 }
 
 
-
+function insertTrend(_arr_par, data)
+{
+    var currentDate = new Date();
+    
+    
+    
+    var formData = {
+        "results": data.total,
+        "keyword": arr_par[0].name,
+        "category": arr_par[0].id_category,
+        "userType": sessionStorage.type,
+        "typeUser": sessionStorage.type,
+        "searchType": arr_par[0].type_search,
+        "lang": localStorage.lng,
+        "createdAt": currentDate
+    };
+    
+    
+    $.ajax({
+          type: "POST",
+          url: trend_url,
+          data: formData,
+          success: function()
+            {
+               
+            },
+            error: function(xhr, textStatus, error){
+                /* 
+                console.log(textStatus);     
+                console.log(error);
+                */
+                  }
+        });
+}
 
 //************************************************/
 //* page function 
