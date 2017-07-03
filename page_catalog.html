@@ -1184,6 +1184,13 @@
           
        })
 
+        var name = getParameterByName("name");
+
+        if(name && name != "null")
+        {          
+          jQuery("a[href=#catalogTab]").trigger("click");
+          jQuery("#catalogTab").trigger("click");
+        }
 
     </script>
     <!--[if lt IE 9]>

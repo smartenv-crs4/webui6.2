@@ -176,10 +176,10 @@ function uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend)
     {
       name = n + "_" + imgList[i].suffix;
     }
-    
+   
     formData.append(imgList[i].suffix, imgList[i].blob, name);    
   }
-    
+
   jQuery.ajax({
     url: msUploadUrl,
     data: formData,
