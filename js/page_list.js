@@ -85,7 +85,7 @@ $( document).ready(function() {
 $(document).on('translate', function()
 {
     
-    $(window.location).attr('href', '/list.html'+ get_par_string(get_par('page')));
+    $(window.location).attr('href', 'list.html'+ get_par_string(get_par('page')));
     //console.log(get_par('url'));
     //console.log(api_url);
 //alert(localStorage.lng);
