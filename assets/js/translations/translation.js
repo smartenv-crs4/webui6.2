@@ -56,7 +56,7 @@ var translation = {
                 "password": "Password",
                 "choosePassword": "Choose password",
                 "retypePassword": "Retype password",
-                "userType": "You are a ...",
+                "userType": "User type",
                 "customer": "Customer",
                 "supplier": "Supplier"
             },
@@ -335,7 +335,7 @@ var translation = {
                 "password": "Password",
                 "choosePassword": "Scegli una password",
                 "retypePassword": "Conferma password",
-                "userType": "Sei un ...",
+                "userType": "Tipo utente",
                 "customer": "Cliente",
                 "supplier": "Fornitore"
 
