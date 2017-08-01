@@ -411,7 +411,7 @@
                     <div class="media-body">
                         <div class="clearfix" style="overflow:hidden; ">
                             <h4 class="media-heading">
-                                <strong style="display:block;"><a href="#">{{name}}</a></strong>
+                                <strong style="display:block;"><a href="#" data-i18n="prodCatalog.name.{{_id}}" ></a></strong>
                             </h4>
                             {{#each categories}}
                             <h4>
@@ -421,7 +421,7 @@
                         </div>
 
                         <p>
-                        <div class="giveMeEllipsis blog-author-desc">{{description}}</div>
+                        <div class="giveMeEllipsis blog-author-desc" data-i18n="prodCatalog.description.{{_id}}" ></div>
                         <a class="more" style="display:none" data-i18n="catalog.more"></a>
                         <a class="less" style="display:none" data-i18n="catalog.less"></a>
                         </p>
@@ -746,11 +746,7 @@
               else
                 url += "&name=" + name
             }
-            
-            
-            
-            
-            
+                
             
             $.get(url, function (data) {
                 //console.log(data);
@@ -779,6 +775,15 @@
 //                    });
                                
                 
+                if(!translation.it.translation.prodCatalog)
+                {
+                  translation.it.translation.prodCatalog = {};
+                  translation.it.translation.prodCatalog.name = {};
+                  translation.it.translation.prodCatalog.description = {};
+                  translation.en.translation.prodCatalog = {};
+                  translation.en.translation.prodCatalog.name = {};
+                  translation.en.translation.prodCatalog.description = {};
+                }
                 for (var i in prods) {
                     prods[i].imgUrl = [];
                     if (prods[i].images.length > 0 && prods[i].images[0] != null && prods[i].images[0].imageId != undefined) 
@@ -792,8 +797,20 @@
                     }
                     else {
                         prods[i].imgUrl.push({"url": "assets/img/team/img1-md.jpg", id: ""});
-                    }                    
-                }           
+                    }                                        
+
+                      
+                    prods[i].locName = {"it": prods[i].name, "en": prods[i].translation[0].name};
+                    prods[i].locDescription = {"it": prods[i].description, "en": prods[i].translation[0].description};
+
+                    translation.it.translation.prodCatalog.name[prods[i]["_id"]] = prods[i].name;
+                    translation.it.translation.prodCatalog.description[prods[i]["_id"]] = prods[i].description;
+
+                    var prodEn = translate_product(prods[i].name, prods[i].description, prods[i].translation[0], "en");
+                    translation.en.translation.prodCatalog.name[prods[i]["_id"]] = prodEn.name;
+                    translation.en.translation.prodCatalog.description[prods[i]["_id"]] = prodEn.description;
+                   
+                }        
 
                 var compiled = cacheCompile(templateid, {
                     products: prods,
@@ -1191,6 +1208,44 @@
           jQuery("a[href=#catalogTab]").trigger("click");
           jQuery("#catalogTab").trigger("click");
         }
+
+
+       function translate_product(name, description, translation, lang)
+	    {
+
+                                       switch(lang) {
+                                            case 'en':
+                                            {
+                                              if (translation.name)
+                                                name_tr = translation.name;
+                                              else
+                                                  name_tr = name;
+
+                                              if (translation.description)
+                                                  description_tr = translation.description;
+                                              else
+                                                  description_tr = description;
+
+                                              break;
+                                            }
+                                            case 'it':
+                                            {
+                                                name_tr = name;
+                                                description_tr = description;
+                                                break;
+                                            }
+                                            default:
+                                            {
+                                                name_tr = name;
+                                                description_tr = description;
+                                            }
+
+                                        }
+                                        return {"name": name_tr, "description": description_tr};
+
+                                    }
+
+
 
     </script>
     <!--[if lt IE 9]>

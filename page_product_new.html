@@ -232,10 +232,13 @@
   function sendAddRequest()
   {
     var param = {};
+    param.translation = [{"language" : "english"}];
     
-    param.name = jQuery("#name").val();
+    param.name = jQuery("#name_it").val();
+    param.translation[0].name = jQuery("#name_en").val();
     param.categories = jQuery("#categoryField").data("cat-id");
-    param.description = jQuery("#description").val();
+    param.description = jQuery("#description_it").val();
+    param.translation[0].description = jQuery("#description_en").val();
     param.unit = jQuery("#unit").val();
         
     param.minNum = jQuery("#qmin").val();
@@ -434,13 +437,6 @@
 
             <div class="row">
                 <section class="col col-6">
-                    <label class="label" data-i18n="profile.name"></label>
-                    <label class="input">
-                        <i class="icon-append  icon-target"></i>
-                        <input type="text" name="name" id="name">
-                    </label>
-                </section>
-                <section class="col col-6">
                     <label class="label" data-i18n="product.category"></label>
                     <label class="input">
                       <!--  <select name="gender">
@@ -453,14 +449,43 @@
 
                     </label>
                 </section>
+
+                <section class="col col-11" style="border: solid 1px #ddd; padding:5px;">
+                    <h4 style="width:40px; margin-top: -20px; margin-left:5px; background:white; text-align:center">IT</h4>
+                    <label class="label" data-i18n="profile.name"></label>
+                    <label class="input">
+                        <i class="icon-append  icon-target"></i>
+                        <input type="text" name="name" id="name_it">
+                    </label>
+
+                    <label class="label" data-i18n="profile.description"></label>
+                    <label class="textarea">
+                      <textarea rows="3" id="description_it"></textarea>
+                    </label>
+                    <div class="note"><strong data.i18n="product.note">Note: </strong><span data-i18n="product.maxCharacters">massimo 500 caratteri.</span></div>
+                  </section>
+
+                  <section class="col col-11" style="border: solid 1px #ddd; padding:5px;">
+                    <h4 style="width:40px; margin-top: -20px; margin-left:5px; background:white; text-align:center">EN</h4>
+                    <label class="label" data-i18n="profile.name"></label>
+                    <label class="input">
+                        <i class="icon-append  icon-target"></i>
+                        <input type="text" name="name" id="name_en">
+                    </label>
+                    <label class="label" data-i18n="profile.description"></label>
+                    <label class="textarea">
+                      <textarea rows="3" id="description_en"></textarea>
+                    </label>
+                    <div class="note"><strong data.i18n="product.note">Note: </strong><span data-i18n="product.maxCharacters">massimo 500 caratteri.</span></div>
+                  </section>
+
+
+
+
             </div>
 
 
             <section>
-                <label class="label" data-i18n="profile.description"></label>
-                <label class="textarea">
-                    <textarea rows="3" id="description"></textarea>
-                </label>
                 <div class="note"><strong data.i18n="product.note">Note: </strong><span data-i18n="product.maxCharacters">massimo 500 caratteri.</span></div>
             </section>
             <div class="row" >

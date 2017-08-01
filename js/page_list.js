@@ -1,5 +1,5 @@
 //* Link api ******************************************/
-// var api_url = "http://156.148.37.167:3010/api/v1/";
+ //var api_url = "http://156.148.37.167:3011/api/v1/";
  var api_url    = _brokerMsUrl;
  var lang       = localStorage.lng;
  var trend_url  = "http://seidue.crs4.it:3040/api/v1/trends"; // TODO: mettere in asset/custom.js
@@ -99,7 +99,8 @@ $(document).on('translate', function()
 //******************************************************************/
 //* Actions -> azioni presenti nella pagina */
 
-$( "#btn_search" ).click(function(e) {
+$( "#btn_search" ).click(function(e) 
+{
       
     block('<span id="blockMsg"></span>');  
     $('#blockMsg').text(i18next.t("product.blockMsg"));
@@ -281,12 +282,20 @@ function render_row(data, arr_par)
                                         
                                     _str +=     '</div>';
                                     
+                                    var category = ' - ';
+                                    var translate = {};
+                                    if (data.docs[i].categories[0])
+                                        category = data.docs[i].categories[0].name[lang];
+                                    
+                                    translate = translate_product(data.docs[i].name, data.docs[i].description, data.docs[i].translation[0], lang);
+                                    console.log(translate);
+                                    
                                     
                                     _str +=     '<div class="col-md-8">';
                                     _str +=             '<div class="clearfix" style="overflow:hidden; ">';
                                     _str +=                 '<h4 class="media-heading">';
-                                    _str +=                     '<strong style="display:block;"><a href=" '+ link + '">'+data.docs[i].name+'</a></strong>';
-                                    _str +=                     '<small style="display:block; max-width:50%;">'+data.docs[i].categories[0].name[lang]+'</small>';
+                                    _str +=                     '<strong style="display:block;"><a href=" '+ link + '">'+translate.name+'</a></strong>';
+                                    _str +=                     '<small style="display:block; max-width:50%;">'+category+'</small>';
                                     _str +=                 '</h4>';
                                     _str +=             '</div>';
                                     _str +=             '<div class="giveMeEllipsis blog-author-desc">';
@@ -294,7 +303,7 @@ function render_row(data, arr_par)
                                     _str +=                 "<span style='cursor: pointer' tabindex='0' data-trigger='focus' data-toggle='popover' data-html='true' data-content='' class='popOver' >"+ render_rates(data.docs[i].supplierId.rates.overall_rate);+"</span>";
                                     _str +=             "</div>";
                                     
-                                    _str +=             '<div class="giveMeEllipsis blog-author-desc">'+data.docs[i].description+'</div>';
+                                    _str +=             '<div class="giveMeEllipsis blog-author-desc">'+translate.description+'</div>';
                                     
                                     _str +=             '<ul class="list-inline share-list">';  
                                     _str +=                 '<li><i class="fa fa-chevron-up"></i><span data-i18n="catalog.atleast">Min</span> '+checkValue(data.docs[i].minNum)+'</li>';
@@ -641,9 +650,13 @@ function get_list(_arr_par)
     
     _var_par = get_par_string(_arr_par);
     
+    
+    console.log(_var_par);
+    
+    
     $.ajax({
                                   type: "GET",
-                                  url: api_url + url  + _var_par,
+                                  url: api_url + url  + _var_par + '&lang=' + lang,
                                   data: 
                                   {
                                     
@@ -716,9 +729,10 @@ function getProductsSupplier(id, _arr_par)
     _arr_par[0].type_search= '';
     _var_par =get_par_string(_arr_par);
     
+    
     $.ajax({
                                   type: "GET",
-                                  url: api_url + "products" + _var_par + '&supplierId=' + id,
+                                  url: api_url + "products" + _var_par + '&supplierId=' + id + '&lang=' + lang,
                                   dataType: "json",
                                   success: function(data)
                                   {
@@ -726,11 +740,14 @@ function getProductsSupplier(id, _arr_par)
                                       $('#divListProducts' + id).css('display', 'block');
                                       
                                       var str_listProducts2 = '<table>';
+                                      var translate;
                                       
                                       for (var c = 0; c < data.total; c++) {
+                                      
+                                            translate = translate_product(data.docs[c].name, data.docs[c].description, data.docs[c].translation[0], lang);
                                          
                                           str_listProducts2 = str_listProducts2 + '<tr>'
-                                        + '<td style="padding-top: 5px" ><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;'+ data.docs[c].name+'</td>'
+                                        + '<td style="padding-top: 5px" ><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;'+ translate.name +'</td>'
                                         + '</tr>';
                                       } 
                                       
@@ -894,6 +911,45 @@ function get_par_string(array_par)
     return var_par;
 }
 
+
+
+// restituisce i dati del prodotto nella lingua scelta
+
+function translate_product(name, description, translation, lang)
+       
+                                    {
+                                         
+                                       switch(lang) {
+                                            case 'en':
+                                            {
+                                              if (translation.name)
+                                                name_tr = translation.name;
+                                              else
+                                                  name_tr = name;
+                                                  
+                                              if (translation.description)
+                                                  description_tr = translation.description;
+                                              else
+                                                  description_tr = description;
+                                                  
+                                              break; 
+                                            }
+                                            case 'it':
+                                            {
+                                                name_tr = name;
+                                                description_tr = description;
+                                                break;
+                                            }
+                                            default:
+                                            {
+                                                name_tr = name;
+                                                description_tr = description;
+                                            }
+                                                
+                                        }
+                                        return {"name": name_tr, "description": description_tr}; 
+                                         
+                                    }
 
 
 //************************************************/
