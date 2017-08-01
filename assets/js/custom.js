@@ -3,7 +3,7 @@
 var _authMsUrl  = "http://seidue.crs4.it/api/auth/v1/";
 var _userMsUrl  = "http://seidue.crs4.it/api/user/v1/";
 //var _brokerMsUrl  = "http://localhost:3009/api/v1/";
-var _brokerMsUrl  = "http://seidue.crs4.it:/api/broker_test/v1/";
+var _brokerMsUrl  = "http://seidue.crs4.it:/api/broker/v1/";
 var _uploadMsUrl = "http://seidue.crs4.it/api/upload/v1/file/";
 
 _access_token =  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXBwIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxODAyMTgxNTY2NzIzfQ.I9tAMVI6mPuxur8r9CVEO83UpD2nKL8Ek4O-y6diZKE";
