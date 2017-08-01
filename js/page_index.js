@@ -80,7 +80,7 @@
     $(document).on('translate', function()
 {
     
-    $(window.location).attr('href', '/index.html');
+    $(window.location).attr('href', 'index.html');
     //console.log(get_par('url'));
     //console.log(api_url);
 //alert(localStorage.lng);

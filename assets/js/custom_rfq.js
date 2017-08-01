@@ -1,12 +1,7 @@
 /**
  * Created by michela on 06/10/16.
  */
-var _authMsUrl  = "http://seidue.crs4.it:3007/";
-var _userMsUrl  = "http://seidue.crs4.it:3008/";
-//var _localServiceUrl  = "http://localhost:3000/api/v1/";
 var _localServiceUrl  = _brokerMsUrl;
-var _serviceUrl =  "http://seidue.crs4.it:3009";
-//var _serviceUrl =  "http://localhost:3000";
 
 window.isRFQ = true;
 
@@ -994,7 +989,16 @@ function initFormNewRfq(){
 
             error.insertAfter(element.parent());
             $("body").localize();
+        },
+        invalidHandler: function(ev, validator)
+        {
+          jQuery("#btnSendRfq").prop("disabled", false);
         }
+    });
+
+    
+    jQuery("#btnSendRfq").click(function(){
+      jQuery(this).prop("disabled", true);
     });
 
 
@@ -1054,6 +1058,7 @@ function saveConversation(){
         {
           //  console.log(xhr.responseJSON.error);
             viewError(xhr);
+            jQuery("#btnSendRfq").prop("disabled", false);
         },
         beforeSend: function(xhr, settings)
         {
