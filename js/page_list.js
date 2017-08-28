@@ -288,8 +288,7 @@ function render_row(data, arr_par)
                                         category = data.docs[i].categories[0].name[lang];
                                     
                                     translate = translate_product(data.docs[i].name, data.docs[i].description, data.docs[i].translation[0], lang);
-                                    console.log(translate);
-                                    
+                                    //console.log(translate);
                                     
                                     _str +=     '<div class="col-md-8">';
                                     _str +=             '<div class="clearfix" style="overflow:hidden; ">';
@@ -318,7 +317,7 @@ function render_row(data, arr_par)
                                     _str +=     '</div>';
                                      
                                     _str +=     '<div class="col-md-2 text-left">';
-                                    _str +=         '<button class="btn-u  rounded btn-sm sDetails" type="button" data-par="'+var_par+'" data-id="'+ data.docs[i].supplierId._id +'"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>';
+                                    _str +=         '<button class="btn-u  rounded btn-sm sDetails" type="button" data-par="'+var_par+'" data-id_product="'+ data.docs[i]._id +'" data-id="'+ data.docs[i].supplierId._id +'"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>';
                                     _str +=     '</div>';
                                         
                                     _str +=     '</div>';
@@ -358,10 +357,12 @@ function render_row(data, arr_par)
                       }
                       
                         $('.sDetails').click(function(){
-                              var id = ($(this).attr('data-id'));
+                              
+                              var id_product = ($(this).attr('data-id_product'));
+                              var id_supplier = ($(this).attr('data-id'));
                               var par = ($(this).attr('data-par'));
                               
-                              link = ('page_catalog.html?'+par+'&idSupplier='+id).replace("??", "?").replace("?&", "?");
+                             link = ('page_catalog.html?'+par+'&idSupplier='+id_supplier + '&idProduct=' + id_product).replace("??", "?").replace("?&", "?");
                               window.location.href = link;
                                 
                         });          

@@ -520,7 +520,7 @@ var translation = {
                 "blockMsg": "Attendi..."
             },
             "evaluation": {
-                "evaluation": "Evaluation",
+                "evaluation": "Valutazioni",
                 "your_opinion": "Il tuo parere conta molto per noi!",
                 "quality": "Qualità del prodotto",
                 "pricevalue": "Rapporto qualità/prezzo",
