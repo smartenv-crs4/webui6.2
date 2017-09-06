@@ -8,6 +8,7 @@ window.isRFQ = true;
 _access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzg1NTc1MjQ3NTY4fQ.Du2bFjd0jB--geRhnNtbiHxcjQHr5AyzIFmTr3NFDcM";
 var defaultImg = "assets/img/team/img32-md.jpg";
 var defaultImgPr = "assets/img/port/no_image_available.png";
+var _socketUrl = "http://seidue.crs4.it:3012";
 
 var data_r;
 
@@ -200,7 +201,7 @@ function getConversationRequestsAndMessages()
 {
     if(sessionStorage.userId == undefined)
     {
-        window.location.replace("page_login_and_registration.html");
+        redirectToLogin();
     }
     var id_conv;
     if(hasParameter("convId"))
@@ -214,7 +215,7 @@ function getConversationRequestsAndMessages()
             contentType: "application/json",
             dataType: 'json',
             success: function(data, textStatus, xhr)
-            {
+            {                
 
                 if(data){
                     // Compile the template
@@ -280,14 +281,28 @@ function getConversationRequestsAndMessages()
                     $("body").localize();
 
 
+                   
 
+                    //var socket = io.connect("http://seidue.crs4.it:3012 ,
+                    //var socket = io.connect(_localServiceUrl,
+                    var socket = io.connect(_socketUrl ,
 
-                    var socket = io.connect(_serviceUrl,{reconnection:true});
+                    {
+                      transports: ['websocket', 'xhr-pollin'],
+                      reconnection:true,
+                      //path: "/api/v1/message/socket",
+                      //path: "/api/broker/v1/message/socket",
+                      //withCredentials: false,
+                      //query: "token=" + sessionStorage.token 
+                    });
+
                     socket.once('connect', function() {
+                        console.log("connect");
                         socket.emit('join', data._id);
                     });
 
                     socket.on('message', function(msg){
+                        console.log("message");
                         var source;
                         var theTemplate;
                         var theCompiledHtml;

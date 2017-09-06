@@ -203,7 +203,7 @@ var translation = {
                 "searchResults":"Search results",
                 "price":"Price",
                 "availability": "Availability",
-                "resultsLabel": "Products matching ",
+                "resultsLabel": "Desired products ",
                 "showAll": "Show all products"
                 
             },
@@ -483,7 +483,7 @@ var translation = {
                 "searchResults":"Risultati ricerca",
                 "price":"Prezzo",
                 "availability": "Disponibilità",
-                "resultsLabel": "Prodotti che contengono la voce ",
+                "resultsLabel": "Prodotti ricercati",
                 "showAll": "Mostra tutti i prodotti"
             },
             "pagination": {

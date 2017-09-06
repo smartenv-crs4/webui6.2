@@ -210,6 +210,10 @@
                             <li><a data-toggle="tab" href="#documentsReviews"><i class="fa fa-star-o"></i>&nbsp;<span
                                     data-i18n="profile.reviews">Reviews</span> </a>
                             </li>
+                            <li><a data-toggle="tab" href="#documentsTab"><i class="fa fa-file-pdf-o"></i>&nbsp;<span
+                                    data-i18n="profile.documents">Documents</span> </a>
+                            </li>
+                        </ul>
                         </ul>
 
                         <div class="tab-content" id="tabBodyContainer">
@@ -282,7 +286,7 @@
                                 </div>
                                 <div class="row">
                                     <!--Alert-->
-                                    <div class="sm-margin-bottom-30 col-md-8">
+                                    <div class="sm-margin-bottom-30 col-md-13">
                                         <div class="panel-heading-v2 overflow-h">
 
                                         </div>
@@ -296,16 +300,19 @@
 
                                     </div>
                                     <!--End Alert-->
-                                    <div id="files_container" class="col-md-4">
 
-
-                                    </div>
 
                                 </div><!--/end row-->
 
                             </div>
 
                             <div id="documentsReviews" class="profile-edit tab-pane fade">
+
+                            </div>
+
+                            <div id="documentsTab" class="profile-edit tab-pane fade">
+                                    <div id="files_container" class="col-md-13">
+                                    </div>
 
                             </div>
 
@@ -385,7 +392,7 @@
             </div>
 
             {{#if filtered}}
-              <label data-i18n="catalog.resultsLabel"></label> "{{filtered}}" <button class="btn-u" onclick="getproducts(getproductsURL, 'productstable', '#products_container', null, null, null);" data-i18n="catalog.showAll"></button>
+              <label data-i18n="catalog.resultsLabel"></label> <button class="btn-u" onclick="getproducts(getproductsURL, 'productstable', '#products_container', null, null, null);" data-i18n="catalog.showAll"></button>
             {{/if}}
             <div class="panel-body margin-bottom-50">
                 {{#each products}}
@@ -569,7 +576,8 @@
     <script type="text/x-handlebars-template" id="supplier-info_template">
         <div class="blog-author " style="min-height: 110px;">
             {{#if logged}}
-            <button class="btn-u " id="btn_rfq" type="button" style="float: right;"
+            <button class="btn-u " id="btn_rfq" type="button" style="float: right; background-color:#1E4D7D; 
+                    padding: 15px; font-size:15pt;"
                     onclick="javascript:window.location='page_rfq_new.html?supplierId={{_id}}&supplierName={{plusname}}'">
                 <i class="fa fa-paper-plane"></i> <span data-i18n="rfq.sendRFQ"></span>
             </button>
@@ -700,6 +708,9 @@
 
         var name = getParameterByName("name");
         var catName = decodeURI(getParameterByName("cat_name"));
+        var prodId = decodeURI(getParameterByName("idProduct"));
+        if(prodId == "undefined")
+          prodId = undefined;
         
         function getfiles(url, templateid, target) {
             $.get(url, function (data) {
@@ -730,16 +741,20 @@
             });
         }
 
-        function getproducts(url, templateid, target, page, name, catName) {
+        function getproducts(url, templateid, target, page, name, catName, prodId) {
             if (page) {
                 if (url.indexOf("?") === -1)
                     url += "?page=" + page;
                 else
                     url += "&page=" + page
             }
-                 
-                
-            if(name && name != "null" && name.trim() != "")
+            
+ 
+            if(prodId && prodId != "null" && prodId.trim() != "")
+            {
+              url = url.replace("/products", "/products/" + prodId)             
+            }
+            else if(name && name != "null" && name.trim() != "")
             {                  
               if (url.indexOf("?") === -1)
                 url += "?name=" + name;
@@ -747,33 +762,29 @@
                 url += "&name=" + name
             }
                 
-            
             $.get(url, function (data) {
                 //console.log(data);
 
-                var prods = data.docs; 
+                var prods;
+                if(data.docs)
+                { 
+                  prods = data.docs;
+                }
+                else
+                {
+                  prods = [data];              
+                }
                 
                 var filtered = undefined;
-                
-                if(name && name != "null" && name.trim() != "")
-                  filtered = name;
-                                
-/*
-                if (name && name != "null")
-                {                  
-                  filtered = name;
-                  prods = prods.filter(function (el) {                      
-                    return (el.name.toLowerCase().indexOf(name.toLowerCase()) != -1 ||
-                      el.description.toLowerCase().indexOf(name.toLowerCase()) != -1);
-                  });
-                }
-*/                  
 
-//                if (catName && catName != "null")
-//                    prods = prods.filter(function (el) {
-//                        return el.name.toLowerCase().indexOf(name.toLowerCase()) != -1;
-//                    });
-                               
+                if(prodId && prodId != "null" && prodId.trim() != "")
+                {
+                  filtered = prodId
+                }
+                else if(name && name != "null" && name != "undefined" && name.trim() != "")
+                {
+                  filtered = name;
+                }
                 
                 if(!translation.it.translation.prodCatalog)
                 {
@@ -885,7 +896,7 @@
         });
 
         $("a[href=#catalogTab]").click(function () {
-            getproducts(getproductsURL, 'productstable', '#products_container', null, name, catName);
+            getproducts(getproductsURL, 'productstable', '#products_container', null, name, catName, prodId);
 
         });
 
@@ -1068,7 +1079,7 @@
                             
               });                                          
               jQuery.jGrowl("OK", {theme:'bg-color-green', life: 5000});
-              getproducts(getproductsURL, 'productstable', '#products_container', null, name, catName);
+              getproducts(getproductsURL, 'productstable', '#products_container', null, name, catName, prodId);
             },
             error: function(xhr)
             {
@@ -1197,7 +1208,7 @@
               
        jQuery("#btnSearchCatalog").click(function(){
           var name = jQuery("#inputSearchCatalog").val();
-          getproducts(getproductsURL, 'productstable', '#products_container', null, name, catName);
+          getproducts(getproductsURL, 'productstable', '#products_container', null, name, catName, prodId);
           
        })
 

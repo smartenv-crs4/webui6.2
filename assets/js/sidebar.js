@@ -3,9 +3,9 @@ var sidebarTemplate = `
   <img class="img-thumbnail profile-img margin-bottom-20" src="assets/img/team/img32-md.jpg" alt="" id="imgBox">
 
   <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
-      <li class="list-group-item active">
+      <!-- li class="list-group-item active">
           <a href="page_profile.html"><i class="fa fa-bar-chart-o"></i> Menu</a>
-      </li>
+      </li -->
       
       {{#if isSupplier}}
       <li class="list-group-item">
