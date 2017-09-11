@@ -591,7 +591,7 @@
                 <p>{{address}}</p>
             </div>
 
-            <div id="starBlock" style="position:absolute; top:0; left:0; margin:5px">
+            <div id="starBlock" style=" margin:5px">
             </div>
 
         </div>
@@ -602,20 +602,29 @@
         {{#if isCustomer}}
         {{#if noFavorite}}
             <span style="cursor:pointer" data-toggle="tooltip" data-i18n="[title]publicProfile.addSupplier"
-                  onclick="addToFavorite()">
-              <span style="" class="yellow glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                  onclick="toggleFavorite()" data-fav="false">
+              <span style="font-size:16pt; color:#b5b5b5;" class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
             </span>
         {{else}}
-            <span>
-              <span style="" class="yellow glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span style="cursor:pointer" data-toggle="tooltip" data-i18n="[title]publicProfile.removeSupplier"
+                  onclick="toggleFavorite()" data-fav="true">
+              <span style="font-size:16pt; color:#cebf3b;" class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
             </span>
         {{/if}}
         {{/if}}
     </script>
 
-    <script type="text/x-handlebars-template" id="full-star_template">
-      <span class="pull-right" aria-label="Left Align">
-        <span style="" class="yellow glyphicon glyphicon-star" aria-hidden="true"></span>
+    <script type="text/x-handlebars-template" id="fav-yes_template">
+      <span data-fav="true" style="cursor:pointer" data-toggle="tooltip" data-i18n="[title]publicProfile.removeSupplier"
+                  onclick="toggleFavorite()">
+        <span style="font-size:16pt; color:#cebf3b;" class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+      </span>
+    </script>
+
+    <script type="text/x-handlebars-template" id="fav-no_template">
+      <span data-fav="false" style="cursor:pointer" data-toggle="tooltip" data-i18n="[title]publicProfile.addSupplier"
+                  onclick="toggleFavorite()">
+        <span style="font-size:16pt; color:#b5b5b5;" class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
       </span>
     </script>
 
@@ -1169,7 +1178,19 @@
 
         });
 
-        function addToFavorite() {
+        function toggleFavorite()
+        {
+          if(jQuery("#starBlock span").data("fav") == true)
+          {
+            removeFromFavorites();
+          }
+          else
+          {
+            addToFavorites();
+          }
+        }
+
+        function addToFavorites() {
             if (sessionStorage.token) {
                 var data = {};
                 data.supplier = supId;
@@ -1181,11 +1202,45 @@
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (dataResp, textStatus, xhr) {
-                        var compiled = cacheCompile("full-star_template");
+                        var compiled = cacheCompile("fav-yes_template");
                         jQuery("#starBlock").empty();
                         jQuery("#starBlock").append(compiled);
                         jQuery("#starBlock").localize();
                         //jQuery.jGrowl("OK", {theme:'bg-color-green', life: 5000});
+                    },
+                    error: function (xhr, status) {
+                        var msg;
+
+                        try {
+                            msg = xhr.responseJSON.message;
+                        }
+                        catch (err) {
+                            msg = i18next.t("error.internal_server_error");
+                        }
+
+                        console.log(msg)
+                    },
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.token);
+                    }
+                });
+            }
+        }
+
+        function removeFromFavorites() {
+            if (sessionStorage.token) {
+                var data = {};
+
+                jQuery.ajax({
+                    url: _brokerMsUrl + "users/actions/favorites/" + supId,
+                    type: "DELETE",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (dataResp, textStatus, xhr) {
+                        var compiled = cacheCompile("fav-no_template");
+                        jQuery("#starBlock").empty();
+                        jQuery("#starBlock").append(compiled);
+                        jQuery("#starBlock").localize();
                     },
                     error: function (xhr, status) {
                         var msg;

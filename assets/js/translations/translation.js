@@ -128,7 +128,8 @@ var translation = {
                 "web": "Web site:",
                 "address": "Address:",
                 "noSupplier": "Missing Supplier code",
-                "addSupplier": "Add to favorites"
+                "addSupplier": "Add to favorites",
+                "removeSupplier": "Remove from favorites"
             },
             "rfq": {
                 "requests": "Requests",
@@ -263,7 +264,7 @@ var translation = {
             "homepage": {
                 "discoversuppliers": "Discover",
                 "new": "new",
-                "suppliers": "suppliers",
+                "suppliers": "Suppliers",
                 "simplesearch": "Quick search",
                 "smartrfq": "Smart RFQ",
                 "typicalproducts": "Typical products",
@@ -409,7 +410,8 @@ var translation = {
                 "web": "Sito web:",
                 "address": "Indirizzo:",
                 "noSupplier": "Codice fornitore mancante",
-                "addSupplier": "Aggiungi ai preferiti"
+                "addSupplier": "Aggiungi ai preferiti",
+                "removeSupplier": "Rimuovi dai preferiti"
             },
             "rfq": {
                 "requests": "Richieste",
@@ -544,7 +546,7 @@ var translation = {
             "homepage": {
                 "discoversuppliers": "Scopri",
                 "new": "nuovi",
-                "suppliers": "fornitori",
+                "suppliers": "Fornitori",
                 "simplesearch": "Ricerca veloce",
                 "smartrfq": "RFQ rapide",
                 "typicalproducts": "Prodotti tipici",
