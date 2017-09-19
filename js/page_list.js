@@ -309,8 +309,8 @@ function render_row(data, arr_par)
                                     _str +=                 '<li><i class="fa fa-chevron-down"></i><span data-i18n="catalog.atmost">Max</span> '+checkValue(data.docs[i].maxNum)+'</li>';
                                     _str +=                 '<li><i class="fa fa-calendar-o"></i><span data-i18n="catalog.deliveryIn">Consegna in</span> '+checkValue(data.docs[i].deliveryIn); 
                                     _str +=                     '<span data-i18n="catalog.days"> giorni</span></li>';
-                                    _str +=                 '<li><i class="fa fa-inbox"></i><span data-i18n="catalog.availability"></span><span> ' +checkValue(data.docs[i].availability)+' '+data.docs[i].unit+'</span></li>';
-                                    _str +=                 '<li><i class="fa fa-euro"></i><span> ' +checkValue(data.docs[i].price)+ ' <span class="fa fa-euro"></span> per '+data.docs[i].unit+'</span></li>';
+                                    _str +=                 '<li><i class="fa fa-inbox"></i><span data-i18n="catalog.availability"></span><span> ' +checkValue(data.docs[i].availability)+' '+translation[localStorage.lng].translation.rfq[data.docs[i].unit]+'</span></li>';
+                                    _str +=                 '<li><i class="fa fa-euro"></i><span> ' +checkValue(data.docs[i].price)+ ' <span class="fa fa-euro"></span> per '+translation[localStorage.lng].translation.rfq[data.docs[i].unit]+'</span></li>';
                                     _str +=                 '<li style="text-align: right; font-weight: bold">Score:<span> ' +checkValue(data.docs[i].score)+ ' </span></li>';
                                     _str +=             '</ul>';
                                      

@@ -994,10 +994,11 @@ function initFormNewRfq(){
         },
 
         // Ajax form submition
+        /*
         submitHandler: function(form)
         {
             saveConversation();
-        },
+        },*/
         // Do not change code below
         errorPlacement: function(error, element)
         {
@@ -1014,6 +1015,7 @@ function initFormNewRfq(){
     
     jQuery("#btnSendRfq").click(function(){
       jQuery(this).prop("disabled", true);
+      saveConversation();
     });
 
 
