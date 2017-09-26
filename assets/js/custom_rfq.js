@@ -965,7 +965,9 @@ function changeUnit(ele){
 
 function initFormNewRfq(){
     // Validation
-    $("#form-new-rfq").validate({
+    $("#form-new-rfq").submit(function(e){
+         e.preventDefault();
+     }).validate({
         // Rules for form validation
         rules:
         {
