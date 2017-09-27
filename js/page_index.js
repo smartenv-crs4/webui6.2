@@ -2,7 +2,6 @@
  var lang =   localStorage.lng;
  
    $( document).ready(function() {
-    
        renderDropCategories();
        
        $("#product").val('');
