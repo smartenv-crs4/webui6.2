@@ -14,7 +14,7 @@ function getUserProfile()
     
   //console.log(sessionStorage.token);
   jQuery.ajax({
-    url: _userMsUrl + "users/" + sessionStorage.userId,
+    url: _brokerMsUrl + "users/profile/" + sessionStorage.userId,
     type: "GET",
     contentType: "application/json; charset=utf-8",
     success: function(data, textStatus, xhr)
@@ -283,7 +283,7 @@ function changePassword()
   
   //console.log(sessionStorage.token);
   jQuery.ajax({
-    url: _userMsUrl + "users/" + sessionStorage.userId + "/actions/setpassword",
+    url: _brokerMsUrl + "users/actions/setpassword",
     type: "POST",
     contentType: "application/json; charset=utf-8",
     data: JSON.stringify(data),

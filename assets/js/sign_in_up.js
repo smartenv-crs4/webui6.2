@@ -36,10 +36,10 @@ function signIn()
 
   var data = new Object();
   //data["user"] = new Object();
-  data["username"] = email;
+  data["email"] = email;
   data["password"] = password;
   jQuery.ajax({
-    url: _userMsUrl + "users/signin",
+    url: _brokerMsUrl + "users/signin",
     type: "POST",
     data: JSON.stringify(data),
     contentType: "application/json; charset=utf-8",
@@ -91,13 +91,11 @@ function signIn()
       }
       respBlock.removeClass("invisible");
       return;
-    },
-    beforeSend: function(xhr, settings)
-    {
-      xhr.setRequestHeader('Authorization','Bearer ' + _access_token);
     }
   });
 }
+
+
 
 function signUp()
 {
@@ -137,15 +135,13 @@ function signUp()
   }
 
   var data = new Object();
-  data["user"] = new Object();
-  data["user"]["email"] = email;
-  data["user"]["name"] = name;
-  data["user"]["password"] = password;
-  data["user"]["type"] = userType;
-  console.log(_userMsUrl );        
+  data["email"] = email;
+  data["name"] = name;
+  data["password"] = password;
+  data["type"] = userType;
 
   jQuery.ajax({
-    url: _userMsUrl + "users/signup",
+    url: _brokerMsUrl + "users/signup",
     type: "POST",
     data: JSON.stringify(data),
     contentType: "application/json; charset=utf-8",
@@ -206,10 +202,6 @@ function signUp()
       }
       respBlock.removeClass("invisible");
       return;
-    },
-    beforeSend: function(xhr, settings)
-    {
-      xhr.setRequestHeader('Authorization','Bearer ' + _access_token);
     }
   });
 }

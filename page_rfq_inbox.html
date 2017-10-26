@@ -223,7 +223,7 @@
                  {{#iff page 'gt' "1"}}
                    <button onclick='getConversations({{math page "-" 1}})' class="btn-u btn-u-default" ><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
                  {{/iff}}
-                   <span style="font-size:18pt">[{{page}}]</span>
+                   <span style="font-size:18pt">{{page}}</span>
                  {{#iff page 'lt' pages}}
                    <button onclick='getConversations({{math page "+" 1}})' class="btn-u btn-u-default" ><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
                  {{/iff}}
