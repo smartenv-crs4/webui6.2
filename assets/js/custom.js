@@ -1,9 +1,26 @@
 /* Write here your custom javascript codes */
 
-var _authMsUrl  = "http://seidue.crs4.it/api/auth/v1/";
-//var _brokerMsUrl  = "http://localhost:3009/api/v1/";
 var _brokerMsUrl  = "http://seidue.crs4.it/api/broker/v1/";
-var _uploadMsUrl = "http://seidue.crs4.it/api/upload/v1/file/";
+var _authMsUrl;
+var _uploadMsUrl;
+var messagingMsUrl;
+
+jQuery.ajax({
+  url: _brokerMsUrl + "sys/urls",
+  type: "GET",
+  async: false,
+  contentType: "application/json; charset=utf-8",
+  success: function(data, textStatus, xhr)
+  {
+    _authMsUrl = data.authMs + "/";
+    _uploadMsUrl = data.uploadMsUrl + "/file/";
+    _messagingMsUrl = data.messagingMsUrl + "/";
+  },
+  error: function(xhr, status)
+  {
+    console.error("Impossible to retrieve microservices url");
+  }
+});
 
 
 var defaultImg = "assets/img/team/img32-md.jpg";
