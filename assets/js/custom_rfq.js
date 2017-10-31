@@ -11,6 +11,7 @@ var defaultImgPr = "assets/img/port/no_image_available.png";
 var _socketUrl = _brokerMsUrl.replace(/(http(s)?:\/\/)|(\/.*){1}/g, '');
 
 var data_r;
+var users_info = {};
 
 Handlebars.registerHelper('if_eq', function(a, b, opts) {
     if(a) a=a.toString();
@@ -218,6 +219,16 @@ function getConversationRequestsAndMessages()
             {                
 
                 if(data){
+                    if(data.customer)
+                    {
+                      users_info[data.customer["_id"]] = data.customer;
+                    }
+
+                    if(data.supplier)
+                    {
+                      users_info[data.supplier["_id"]] = data.supplier;
+                    } 
+
                     // Compile the template
 
                     var source = $("#inbox_rfq_requests_messages").html();
@@ -280,46 +291,52 @@ function getConversationRequestsAndMessages()
                     addTooltipField();
                     $("body").localize();
 
-
-                   
-
-                    //var socket = io.connect("http://seidue.crs4.it:3012 ,
-                    //var socket = io.connect(_localServiceUrl,
-                    var socket = io.connect(_socketUrl ,
+                    var socketM = io.connect(_socketUrl ,
                     {
                       transports: ['websocket', 'xhr-pollin'],
                       reconnection:true,
-                      path: "/socket",
-                      //path: "/api/v1/message/socket",
-                      //path: "/api/broker/v1/message/socket",
-                      //withCredentials: false,
-                      //query: "token=" + sessionStorage.token 
+                      path: "/socket/messaging"
                     });
 
-                    socket.once('connect', function() {
+                    socketM.once('connect', function() {
                         console.log("connect");
-                        socket.emit('join', data._id);
+                        socketM.emit('join', data._id);
                     });
 
-                    socket.on('message', function(msg){
-                        console.log("message");
+                    socketM.on('message', function(msg){
                         var source;
                         var theTemplate;
                         var theCompiledHtml;
-                        if(msg.automatic){
-                            msg.text = i18next.t(msg.text);
+
+                        var o = {};
+                        o["_id"] = msg["_id"];
+                        o.text = msg.text;
+                        o.dateIn = msg.date;
+                        o.sender = users_info[msg["sender"]];
+                        o.type = users_info[msg["sender"]].type;
+                        if(msg.aux)
+                        {
+                          if(msg.aux.automatic)
+                            o.automatic = msg.aux.automatic;
+                          if(msg.aux.link)
+                            o.link = msg.aux.link;
+                        }
+
+                        if(o.automatic){
+                            o.text = i18next.t(o.text);
                             source = $("#rfq_new_message_auto_template").html();
                             theTemplate = Handlebars.compile(source);
 
                             // Pass our data to the template
-                            theCompiledHtml = theTemplate(msg);
+                            theCompiledHtml = theTemplate(o);
                         }
                         else{
                             source = $("#rfq_new_message_template").html();
+
                             theTemplate = Handlebars.compile(source);
 
                             // Pass our data to the template
-                            theCompiledHtml = theTemplate(msg);
+                            theCompiledHtml = theTemplate(o);
                         }
 
 
@@ -329,7 +346,27 @@ function getConversationRequestsAndMessages()
                         var d = $('.cont-list-messages').first();
                         d.scrollTop(d.prop("scrollHeight"));
 
+                    });
 
+                    socketM.on('error', function(msg){
+                        console.log(msg);
+                    });
+
+                    var socket = io.connect(_socketUrl ,
+                    {
+                      transports: ['websocket', 'xhr-pollin'],
+                      reconnection:true,
+                      path: "/socket"
+                      //query: {token: sessionStorage.token}
+                      //path: "/api/v1/message/socket",
+                      //path: "/api/broker/v1/message/socket",
+                      //withCredentials: false,
+                      //query: "token=" + sessionStorage.token 
+                    });
+
+                    socket.once('connect', function() {
+                        console.log("connect");
+                        socket.emit('join', data._id);
                     });
 
                     socket.on('request', function(rqs){
