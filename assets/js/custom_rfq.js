@@ -295,7 +295,11 @@ function getConversationRequestsAndMessages()
                     {
                       transports: ['websocket', 'xhr-pollin'],
                       reconnection:true,
-                      path: "/socket/messaging"
+                      path: "/socket/messaging",
+                      query: {
+                               token: sessionStorage.token,
+                               room: data._id
+                             } 
                     });
 
                     socketM.once('connect', function() {

@@ -1,6 +1,7 @@
 /* Write here your custom javascript codes */
 
 var _brokerMsUrl  = "http://seidue.crs4.it/api/broker/v1/";
+var _trendsMsUrl;
 var _authMsUrl;
 var _uploadMsUrl;
 var messagingMsUrl;
@@ -12,9 +13,11 @@ jQuery.ajax({
   contentType: "application/json; charset=utf-8",
   success: function(data, textStatus, xhr)
   {
-    _authMsUrl = data.authMs + "/";
+    _authMsUrl = data.authMsUrl + "/";
     _uploadMsUrl = data.uploadMsUrl + "/file/";
     _messagingMsUrl = data.messagingMsUrl + "/";
+    _trendsMsUrl = data.trendsMsUrl + "/";
+
   },
   error: function(xhr, status)
   {

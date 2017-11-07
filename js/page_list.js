@@ -2,7 +2,7 @@
  //var api_url = "http://156.148.37.167:3011/api/v1/";
  var api_url    = _brokerMsUrl;
  var lang       = localStorage.lng;
- var trend_url  = "http://seidue.crs4.it:3040/api/v1/trends"; // TODO: mettere in asset/custom.js
+ var trend_url  = _trendsMsUrl;
  
  
  var limit;
