@@ -248,11 +248,11 @@ function getConversationRequestsAndMessages()
                       
                       if (data.requests[i].product.images.length > 0 && data.requests[i].product.images[0].imageId != undefined)
                       {
-                          data.requests[i].product.imgUrl.push(_uploadMsUrl + data.requests[i].product.images[0].imageId + "?tag=t");
+                          data.requests[i].product.imgUrl.push(_brokerMsUrl + 'files/'+ data.requests[i].product.images[0].imageId + "?tag=t");
 
                           for(var j = 1; j < data.requests[i].product.images.length; j++)
                           {
-                            data.requests[i].product.imgUrl.push(_uploadMsUrl + data.requests[i].product.images[j].imageId + "?tag=t");                          
+                            data.requests[i].product.imgUrl.push(_brokerMsUrl + 'files/' + data.requests[i].product.images[j].imageId + "?tag=t");                          
                           }                        
                       }
                       else {
