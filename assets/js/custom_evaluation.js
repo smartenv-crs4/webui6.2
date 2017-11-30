@@ -1,9 +1,3 @@
-var _authMsUrl  = "http://seidue.crs4.it:3007/";
-var _apiUrl  = "http://seidue.crs4.it:3009/api/v1/";
-//var _apiUrl  = "http://localhost:3000/api/v1/"; 
-_access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtb2RlIjoibXMiLCJpc3MiOiJub3QgdXNlZCBmbyBtcyIsImVtYWlsIjoibm90IHVzZWQgZm8gbXMiLCJ0eXBlIjoiYXV0aG1zIiwiZW5hYmxlZCI6dHJ1ZSwiZXhwIjoxNzg1NTc1MjQ3NTY4fQ.Du2bFjd0jB--geRhnNtbiHxcjQHr5AyzIFmTr3NFDcM";
-
-
  /*******************************************
  ************* EVALUATION START *************
  *******************************************/
@@ -84,7 +78,7 @@ function sendEvaluation()
 ///
 
   jQuery.ajax({
-    url: _apiUrl + "evaluations",
+    url: _brokerMsUrl + "evaluations",
     type: "POST",
     data: JSON.stringify(evaluation),
     contentType: "application/json",
