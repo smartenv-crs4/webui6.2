@@ -56,11 +56,11 @@ var header_template = `	<div class="header">
            </a>
           </li>          
             {{/if}}
-          <li>
+          <!-- li>
             <a href="javascript:void(0);"  data-i18n="nav.about">
               
             </a>
-          </li>
+          </li -->
           </li>
           {{#if showSearch}}
           <li>

@@ -80,23 +80,20 @@
 						<div class="col-md-12">
 							<button type="submit" class="btn-u btn-block rounded" onclick="signIn()" data-i18n="login.signIn"></button>
 						</div>
+
 					</div>
-					<!--div class="social-login">
-						<div class="or rounded-x">Or</div>
-						<ul class="list-unstyled">
-							<li>
-								<button class="btn rounded btn-block btn-lg btn-facebook-inversed margin-bottom-20">
-									<i class="fa fa-facebook"></i> Sign in with Facebook
-								</button>
-							</li>
-							<li>
-								<button class="btn rounded btn-block btn-lg btn-twitter-inversed">
-									<i class="fa fa-twitter"></i> Sign in with Twitter
-								</button>
-							</li>
-						</ul>
-					</div -->
+          <span data-i18n="login.forgotPassword" href="#" style="color:#ffffff; cursor:pointer;" onclick="jQuery('#boxForgot').toggle();"></span>
+          <div style="display:none; border: solid 1px white; padding:10px; height:150px" id="boxForgot">
+		 	      <div class="input-group margin-bottom-20">
+						  <span class="input-group-addon rounded-left"><i class="icon-user color-white"></i></span>
+              <input type="text" class="form-control rounded-right" data-i18n="[placeholder]login.yourEmail" id="emailForgotPass">
+            </div>
+						<div class="col-md-12">
+							<button type="submit" class="btn-u btn-block rounded" onclick="resetPassword();" data-i18n="login.resetPassword"></button>
+						</div>
+          </div>
 				</div>
+        
 				<!--End login Block-->
 
 				<!--Reg Block-->

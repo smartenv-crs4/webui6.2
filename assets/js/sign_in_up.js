@@ -7,6 +7,14 @@ jQuery(document).ready(function(){
       return false;
     }
   });
+  jQuery("#resetblock").keypress(function (e) {
+    var key = e.which;
+    if(key == 13)  // the enter key code
+    {
+      setPassword();
+      return false;
+    }
+  });
 });
 
 
@@ -196,6 +204,174 @@ function signUp()
           {
             respBlock.html(i18next.t("error.internal_server_error"));
           }
+          break;
+        default:
+          respBlock.html(xhr.responseJSON.error_message);
+      }
+      respBlock.removeClass("invisible");
+      return;
+    }
+  });
+}
+
+
+
+function resetPassword()
+{
+  var email = jQuery("#emailForgotPass").val();
+
+  var respBlock = jQuery("#signInResponse");
+
+  respBlock.addClass("alert-danger");
+  respBlock.removeClass("alert-success");
+
+  if(respBlock.is(":visible"))
+  {
+    respBlock.addClass("invisible");
+  }
+
+
+  if(!isValidEmailAddress(email))
+  {
+    respBlock.html(i18next.t("error.invalid_email"));
+    respBlock.removeClass("invisible");
+    return;
+  }
+
+  var data = new Object();
+  data["email"] = email;
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/actions/askresetpassword",
+    type: "POST",
+    data: JSON.stringify(data),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(data, textStatus, xhr)
+    {
+      if(xhr.status == 200)
+      {
+        respBlock.removeClass("invisible");
+        respBlock.removeClass("alert-danger");
+        respBlock.addClass("alert-success");
+        respBlock.html(i18next.t("login.resetEmail"));
+        return;
+      }
+      // error
+      else
+      {
+        respBlock.html(xhr.responseJSON.error_message);
+        respBlock.removeClass("invisible");
+        return;
+      }
+    },
+    error: function(xhr, status)
+    {
+      console.log(xhr.status);
+      switch(xhr.status)
+      {
+        case 400:
+          if(xhr.responseJSON.error == "invalid_token")
+            respBlock.html(i18next.t("error.unauthorized"))
+          else if(xhr.responseJSON.error == "BadRequest")
+            respBlock.html(i18next.t("error.missing_user_or_password"));
+          else
+            respBlock.html(xhr.responseJSON.error_message);
+          break;
+        case 500:
+          respBlock.html(i18next.t("error.internal_server_error"));
+          break;
+        case 403:
+          respBlock.html(i18next.t("error.invalid_auth"));
+          break;
+        default:
+          respBlock.html(xhr.responseJSON.error_message);
+      }
+      respBlock.removeClass("invisible");
+      return;
+    }
+  });
+}
+
+function setPassword()
+{
+  var email = getUrlParameter("email");
+  var token = getUrlParameter("token");
+
+  var password1 = jQuery("#resetPassword1").val();
+  var password2 = jQuery("#resetPassword2").val();
+
+  var respBlock = jQuery("#signInResponse");
+
+  respBlock.addClass("alert-danger");
+  respBlock.removeClass("alert-success");
+
+  if(respBlock.is(":visible"))
+  {
+    respBlock.addClass("invisible");
+  }
+
+
+  if(!email || !token)
+  {
+    respBlock.html(i18next.t("error.invalid_link"));
+    respBlock.removeClass("invisible");
+    return;
+  }
+
+  if(password1 !== password2)
+  {
+    respBlock.html(i18next.t("error.password_differs"));
+    respBlock.removeClass("invisible");
+    return;
+  }
+
+  var data = new Object();
+  data["email"] = email;
+  data["password"] = password1;
+  data["resetToken"] = token;
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/actions/resetpassword",
+    type: "POST",
+    data: JSON.stringify(data),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(data, textStatus, xhr)
+    {
+      if(xhr.status == 201)
+      {
+        respBlock.removeClass("invisible");
+        respBlock.removeClass("alert-danger");
+        respBlock.addClass("alert-success");
+        respBlock.html(i18next.t("login.resetSuccess"));
+        return;
+      }
+      // error
+      else
+      {
+        respBlock.html(xhr.responseJSON.error_message);
+        respBlock.removeClass("invisible");
+        return;
+      }
+    },
+    error: function(xhr, status)
+    {
+      console.log(xhr.status);
+      switch(xhr.status)
+      {
+
+        case 400:
+          if(xhr.responseJSON.error == "invalid_token")
+            respBlock.html(i18next.t("error.unauthorized"))
+          else if(xhr.responseJSON.error == "BadRequest")
+            respBlock.html(i18next.t("error.missing_user_or_password"));
+          else
+            respBlock.html(xhr.responseJSON.error_message);
+          break;
+        case 500:
+          respBlock.html(i18next.t("error.internal_server_error"));
+          break;
+        case 403:
+          respBlock.html(i18next.t("error.invalid_auth"));
           break;
         default:
           respBlock.html(xhr.responseJSON.error_message);

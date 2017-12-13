@@ -25,6 +25,7 @@ var translation = {
                 "unauthorized": "You are not authorized to call this endpoint",
                 "internal_server_error": "Internal server error",
                 "invalid_auth": "Invalid email and/or password",
+                "invalid_link": "Link is not valid",
                 "password_differs": "Passwords must be equals",
                 "unknown_user_type": "Select a valid user type",
                 "user_already_exixts": "Email address already in use",
@@ -58,7 +59,12 @@ var translation = {
                 "retypePassword": "Retype password",
                 "userType": "User type",
                 "customer": "Customer",
-                "supplier": "Supplier"
+                "supplier": "Supplier",
+                "forgotPassword": "Forgot your password ?",
+                "resetPassword": "Reset password",
+                "resetSuccess":  "Your password has been reset successfully",
+                "resetEmail":  "Your password reset email has been sent. When you receieve the Email you will need to follow the link and complete the password reset form"
+
             },
             "profile": {
                 "email": "Email",
@@ -75,6 +81,7 @@ var translation = {
                 "categories": "Categories",
                 "pIva": "VATIN",
                 "reviews": "Reviews",
+                "chooseLogo": "Choose a logo",
                 "profile": "Profile",
 
                 "documents": "Documents",
@@ -102,6 +109,7 @@ var translation = {
                 "favoriteTitle2": "Below you can show your favorite suppliers",
                 "documentsInputLabel": "Choose a pdf document",
                 "uploadDocument": "Upload",
+                "uploadLogo": "Save logo",
 
                 "documentSaved": "Document saved",
 
@@ -305,6 +313,7 @@ var translation = {
                 "unauthorized": "Non sei autorizzato ad accedere a questa funzione",
                 "internal_server_error": "Errore interno del server",
                 "invalid_auth": "Email e/o password errati",
+                "invalid_link": "Link non valido",
                 "password_differs": "Le password differiscono",
                 "unknown_user_type": "Seleziona il tipo di account che vuoi creare",
                 "user_already_exixts": "Indirizzo email già registrato",
@@ -338,7 +347,11 @@ var translation = {
                 "retypePassword": "Conferma password",
                 "userType": "Tipo utente",
                 "customer": "Cliente",
-                "supplier": "Fornitore"
+                "supplier": "Fornitore",
+                "forgotPassword": "Hai dimenticato la password ?",
+                "resetPassword": "Reimposta password",
+                "resetSuccess":  "Password reimpostata correttamente",
+                "resetEmail":  "Ti è stata inviata un' email. Seguendo il link riportato su di essa potrai accedere alla pagina in cui inserire una nuova password."
 
             },
             "profile": {
@@ -356,6 +369,7 @@ var translation = {
                 "categories": "Categorie",
                 "pIva": "Partita IVA",
                 "reviews": "Recensioni",
+                "chooseLogo": "Scegli un logo",
                 "profile": "Profilo",
 
 
@@ -364,6 +378,7 @@ var translation = {
                 "documentsTitle2": "Qui puoi aggiungere o rimuovere documenti",
                 "documentsInputLabel": "Scegli un documento pdf",
                 "uploadDocument": "Upload",
+                "uploadLogo": "Salva il logo",
                 "documentSaved": "Documento salvato",
                 "documentDeleted": "Il documento  stato cancellato correttamente",
 

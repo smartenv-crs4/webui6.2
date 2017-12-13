@@ -15,12 +15,32 @@ var customerProfileTemplate = `
   <dt><strong data-i18n="profile.type"></strong></dt>
   <dd id="pType" data-accountType={{type}}>
     {{typeTranslate}}
-    <!-- span>
-      <a class="pull-right" href="#">
-        <!-- i class="fa fa-pencil"></i -->
-      </a>
-    </span -->
   </dd>
+  <hr>
+  <hr>
+  <!-- --------------------------------- -->
+
+  <dt><strong data-i18n="profile.logo"></strong></dt>
+  <dd><br>
+    <div class="row">
+      <div class="col-xs-10">
+        <input id="logoInput" name="document" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);" tabindex="-1" type="file">
+        <div class="bootstrap-filestyle input-group">
+          <span class="group-span-filestyle input-group-btn" tabindex="0">
+            <label for="logoInput" class="btn btn-default ">
+              <span class="icon-span-filestyle glyphicon glyphicon-folder-open"></span> 
+              <span class="buttonText" data-i18n="profile.chooseLogo"></span>
+            </label>
+          </span>
+          <input class="form-control " placeholder="" disabled="" type="text">
+        </div>
+      </div>
+      <button type="button" class="btn-u" data-i18n="profile.uploadLogo" onclick="uploadLogo()">Upload</button>
+    </div>    
+  </dd>
+
+  <!-- -------------------------------- -->
+
   <hr>
   <dt><strong data-i18n="profile.name"></strong></dt>
   <dd>
@@ -61,17 +81,12 @@ var customerProfileTemplate = `
       </a>
     </span -->
   </dd>
-  <hr>
+  <!-- hr>
   <dt><strong data-i18n="profile.logo"></strong></dt>
   <dd>
     <a class="editable editable-click" data-name="logo" data-i18n="[data-emptytext]profile.emptyText" id="ed-logo" data-type="text" href="#">{{logo}}</a>
-    <!-- span>
-      <a class="pull-right" href="#">
-        <i class="fa fa-pencil"></i>
-      </a>
-    </span -->
-  </dd>
-  <!-- hr>
+  </dd -->
+  <hr>
   <dt><strong data-i18n="profile.favoriteSuppliers"></strong></dt>
   <dd>
     <a class="editable editable-click" data-name="favoriteSupplier" data-i18n="[data-emptytext]profile.emptyText" id="ed-favoriteSuppliers" data-type="text" href="#">{{favoriteSuppliers}}</a>    
@@ -102,10 +117,34 @@ var supplierProfileTemplate = `
     {{typeTranslate}}
     <span>
       <a class="pull-right" href="#">
-        <!-- i class="fa fa-pencil"></i -->
       </a>
     </span>
   </dd>
+  <hr>
+  <hr>
+  <!-- --------------------------------- -->
+
+  <dt><strong data-i18n="profile.logo"></strong></dt>
+  <dd><br>
+    <div class="row">
+      <div class="col-xs-10">
+        <input id="logoInput" name="document" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);" tabindex="-1" type="file">
+        <div class="bootstrap-filestyle input-group">
+          <span class="group-span-filestyle input-group-btn" tabindex="0">
+            <label for="logoInput" class="btn btn-default">
+              <span class="icon-span-filestyle glyphicon glyphicon-folder-open"></span> 
+              <span class="buttonText" data-i18n="profile.chooseLogo"></span>
+            </label>
+          </span>
+          <input class="form-control " placeholder="" disabled="" type="text">
+        </div>
+      </div>
+      <button type="button" class="btn-u" data-i18n="profile.uploadLogo" onclick="uploadLogo()"></button>
+    </div>    
+  </dd>
+
+  <!-- -------------------------------- -->
+
   <hr>
   <dt><strong data-i18n="profile.name"></strong></dt>
   <dd>
@@ -117,6 +156,7 @@ var supplierProfileTemplate = `
     </span -->
   </dd>
   <hr>
+
   <dt><strong data-i18n="profile.referenceName"></strong></dt>
   <dd>
     <a class="editable editable-click" data-name="references.name" data-i18n="[data-emptytext]profile.emptyText" id="ed-referencename" data-type="text" href="#">{{references.name}}</a>
@@ -146,16 +186,11 @@ var supplierProfileTemplate = `
       </a>
     </span -->
   </dd>
-  <hr>
+  <!-- hr>
   <dt><strong data-i18n="profile.logo"></strong></dt>
   <dd>
     <a class="editable editable-click" data-name="logo" data-i18n="[data-emptytext]profile.emptyText" id="ed-logo" data-type="text" href="#">{{logo}}</a>
-    <!-- span>
-      <a class="pull-right" href="#">
-        <i class="fa fa-pencil"></i>
-      </a>
-    </span -->
-  </dd>
+  </dd -->
   <hr>
   <dt><strong data-i18n="profile.description"></strong></dt>
   <dd>

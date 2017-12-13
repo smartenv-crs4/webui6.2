@@ -223,18 +223,6 @@ function updateProfile()
       jQuery('.editable-unsaved').removeClass('editable-unsaved');
       jQuery.jGrowl(i18next.t("profile.saved"), {theme:'bg-color-green1', life: 5000});
       
-      var defaultImg = "assets/img/team/img32-md.jpg";      
-      
-      if(data.user.logo)
-      {
-        jQuery("#imgBox").attr("src", data.user.logo);  
-        sessionStorage.logo = data.user.logo;   
-      }
-      else
-      {
-        jQuery("#imgBox").attr("src", defaultImg);
-        sessionStorage.logo = undefined;
-      }      
     },     
     error: function(xhr, status)
     {
@@ -412,7 +400,92 @@ function getCertificationsList()
   
 }
 
+function uploadLogo()
+{
+  var fd = new FormData();
+  var f = jQuery("#logoInput")[0];
+  fd.append( 'image', f.files[0] );
+  fd.append('imgName', f.files[0].name);
+ 
+  //var url = _brokerMsUrl + "users/actions/attachment";
+  var url = _brokerMsUrl + "users/actions/logo";
 
+  jQuery.ajax({
+    url: url,
+    data: fd,
+    processData: false,
+    contentType: false,
+    type: 'POST',    
+    success: function(data)
+    {
+      jQuery("#ed-logo").editable("setValue", _brokerMsUrl + "files/" + data.filecode);
+      //jQuery.jGrowl(i18next.t("profile.documentSaved"), {theme:'bg-color-green1', life: 5000});
+      //
+      var defaultImg = "assets/img/team/img32-md.jpg";      
+      
+      if(data.logo)
+      {
+        var uLogo;
+        if(data.logo.startsWith("http"))
+        {
+          uLogo = data.logo;
+        }
+        else
+        {
+          uLogo = _brokerMsUrl + "files/" + data.logo;
+        }
+
+        jQuery("#imgBox").attr("src", uLogo);  
+        sessionStorage.logo = uLogo;   
+      }
+      else
+      {
+        jQuery("#imgBox").attr("src", defaultImg);
+        sessionStorage.logo = undefined;
+      }      
+    },
+    error: function(xhr, status)
+    {
+      var msg;
+      
+      switch(xhr.status)
+      {
+        case 400:
+          try
+          {        
+            msg = xhr.responseJSON.message;
+          }
+          catch(err)
+          {
+            msg = i18next.t("error.internal_server_error");
+          }                      
+            
+          break;
+        case 403:
+          msg = i18next.t("error.unauthorized");
+          break;
+        case 500:
+          msg = i18next.t("disk_quota_exceeded");
+          break;
+        default:
+          try
+          {        
+            msg = xhr.responseJSON.message;
+          }
+          catch(err)
+          {
+            msg = i18next.t("error.internal_server_error");
+          }
+      }
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    } 
+  });
+}
 
 
 

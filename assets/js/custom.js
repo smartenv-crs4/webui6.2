@@ -257,7 +257,14 @@ function getProfileInfo(async)
       
       if(data.logo != undefined)
       {
-        sessionStorage.logo = data.logo;
+        if(data.logo.startsWith("http"))
+        {
+          sessionStorage.logo = data.logo;
+        }
+        else
+        {
+          sessionStorage.logo = _brokerMsUrl + "files/" + data.logo;
+        }
       }
 
 

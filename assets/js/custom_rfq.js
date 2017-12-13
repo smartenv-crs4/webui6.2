@@ -90,7 +90,7 @@ Handlebars.registerHelper('productLogo', function(product) {
 
 
 var formatStatus = function(status) {
-    console.log(status);
+    //console.log(status);
     var s = '';
     switch(status) {
         case 'pending':
@@ -172,7 +172,6 @@ function getConversations(page)
                 var source = $("#inbox_rfq_template").html();
                 var theTemplate = Handlebars.compile(source);
 
-
                 // Pass our data to the template
                 data.currentUser = sessionStorage.type;
                 var theCompiledHtml = theTemplate(data);
@@ -216,18 +215,34 @@ function getConversationRequestsAndMessages()
             contentType: "application/json",
             dataType: 'json',
             success: function(data, textStatus, xhr)
-            {                
+            {               
 
                 if(data){
                     if(data.customer)
-                    {
+                    {                      
+                      if(data.customer.logo)
+                      {
+                        if(!data.customer.logo.startsWith("http"))
+                        {
+                          data.customer.logo = _brokerMsUrl + "files/" + data.customer.logo;
+                        }
+                      }
                       users_info[data.customer["_id"]] = data.customer;
                     }
 
                     if(data.supplier)
                     {
                       users_info[data.supplier["_id"]] = data.supplier;
-                    } 
+
+                      if(data.supplier.logo)
+                      {
+                        if(!data.supplier.logo.startsWith("http"))
+                        {
+                          data.supplier.logo = _brokerMsUrl + "files/" + data.supplier.logo;
+                        }
+                      }
+                      users_info[data.supplier["_id"]] = data.supplier;
+                    }
 
                     // Compile the template
 
@@ -238,9 +253,10 @@ function getConversationRequestsAndMessages()
                     var theTemplate = Handlebars.compile(source);
 
                     // Pass our data to the template
-                    var userType =sessionStorage.type;
+                    var userType = sessionStorage.type;
                     data.currentUser = userType;
-                    //console.log(data);
+
+
                     
                     for(var i in data.requests)
                     {
@@ -259,7 +275,17 @@ function getConversationRequestsAndMessages()
                           data.requests[i].product.imgUrl.push("assets/img/team/img1-md.jpg");
                       }     
                     }
-                    
+
+                    console.log(data);
+                    for(var i in data.messages)
+                    {
+                      if(!data.messages[i].sender.logo.startsWith("http"))
+                      {
+                        data.messages[i].sender.logo = _brokerMsUrl + "files/" + data.messages[i].sender.logo;
+                      }
+                    }
+
+                 
                     var theCompiledHtml = theTemplate(data);
 
                     // Add the compiled html to the page
@@ -318,6 +344,15 @@ function getConversationRequestsAndMessages()
                         o.dateIn = msg.date;
                         o.sender = users_info[msg["sender"]];
                         o.type = users_info[msg["sender"]].type;
+
+                        if(o.sender.logo)
+                        {
+                          if(!o.sender.logo.startsWith("http"))
+                          {
+                            o.sender.logo = _brokerMsUrl + "files/" + o.sender.logo;
+                          }
+                        }
+
                         if(msg.aux)
                         {
                           if(msg.aux.automatic)
@@ -433,7 +468,7 @@ function setEditableField(field){
                var f = $(".editable-open:first").attr("id");
             var id_field = f.split("-")[1];
             var name_field = f.split("-")[0];
-            console.log(f);
+            //console.log(f);
  /*          if(name_field== "quantity")
             if(!v){
                 $("#selectqnty-"+id_field).val('--');
@@ -461,8 +496,8 @@ function isValidQuantity(q, f){
     var min = $("#"+f).data("min");
     var max = $("#"+f).data("max");
 
-    console.log(min);
-    console.log(max);
+    //console.log(min);
+    //console.log(max);
 
     if(q>=min && q<=max) return true;
     else return false;
@@ -572,7 +607,7 @@ function updateRequest(rqs){
         $("#status-"+num_req).removeClass(classcolor).addClass("color-danger");
     }
 
-    console.log(rqs.status);
+    //console.log(rqs.status);
 
     $("a[href='#collapse-"+num_req+"'] i").
     replaceWith("<i class='fa "+iconPanelRqs+" fa-lg pull-right'></i>");
@@ -930,7 +965,8 @@ function openNewRfq(){
 
                 data.products = resp.docs;
                 data_r = data;
-                data_r.totalrequests = 0;
+                data_r.totalrequests = 0;              
+
                 var theCompiledHtml = theTemplate(data);
 
                 // Add the compiled html to the page
@@ -1107,7 +1143,7 @@ function saveConversation(){
                 createRequest(resp._id, r, cb);
             }, function(err, results) {
                 // results is now an array of stats for each file
-                console.log("Fine creazione conv");
+                //console.log("Fine creazione conv");
                 jQuery.jGrowl(i18next.t("rfq.newrfqcreated"), {theme:'bg-color-green', life: 5000});
                 window.location.href="page_rfq_inbox.html";
 
