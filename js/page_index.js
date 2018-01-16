@@ -21,6 +21,8 @@
             str_param = str_param + '&id_category=' + $('#id_category').val(); 
        if ($("#cat_name").val())
             str_param = str_param + '&cat_name=' + $('#cat_name').val();
+        if ($("#cat_type").val())
+            str_param = str_param + '&cat_type=' + $('#cat_type').val();
        if ($('#ckProduct').is(':checked'))
             str_param = str_param + '&type_search=p';
        if ($('#ckSupplier').is(':checked'))
@@ -103,30 +105,60 @@
                                   dataType: "json",
                                   success: function(data)
                                   {
-                                      var str = ''; 
-                                      console.log(data); 
+                                      
+                                    
+                                      var str = '<div class="row"><div class="col-md-6"><ul class="dropdown-menu_items" role="menu">';
+                                       console.log(data); 
                                       for (var i = 0; i < data.length; i++) {
                                           
-                                      
-                                        str = str + '<li><a href="#'+data[i]._id+'">'
+                                      if (data[i].type== 1)
+                                      {
+                                      str = str + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
                                                         + '<div class="row">'
-                                                        + '<div class="col-md-1"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
-                                                        + '<div class="col-md-11"><span>'+data[i].name[lang]+'</span>'
+                                                        + '<div class="col-md-2"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
+                                                        + '<div class="col-md-10"><span>'+data[i].name[lang]+'</span>'
                                                         + '<p class="dropdown-desc">'+data[i].description[lang]+'</p>'
                                                         + '</div>'
                                                         + '</div>'
                                                         + '</a></li>';
-                                        //console.log(str);
-                                      }
+                                      }  
+                                      //console.log(str);
+                                    
+                                    }
                                       
-                                      $('.dropdown-menu').append(str);
+                                      str = str + '</ul></div>'
+                                                + '<div class="col-md-6"><ul class="dropdown-menu_items">';
+
+
+                                                for (var i = 0; i < data.length; i++) {
+                                          
+                                                    if (data[i].type== 2)
+                                                    {
+                                                    str = str + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
+                                                                    + '<div class="row">'
+                                                                    + '<div class="col-md-2"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
+                                                                    + '<div class="col-md-10"><span>'+data[i].name[lang]+'</span>'
+                                                                    + '<p class="dropdown-desc">'+data[i].description[lang]+'</p>'
+                                                                    + '</div>'
+                                                                    + '</div>'
+                                                                    + '</a></li>';
+                                                     } //console.log(str);
+                                                  }
+
+
+                                      str = str + '</ul></div></div>';
+
+
+                                      $('#dropmenu').append(str);
                                       
-                                      $('.search-panel .dropdown-menu').find('a').click(function(e) {
+                                      $('.search-panel #dropmenu').find('a').click(function(e) {
                                         e.preventDefault();
                                         var param = $(this).attr("href").replace("#","");
+                                        var type = $(this).attr("type");
                                         var concept = $(this).find("span").text();
                                         $('.search-panel span#search_concept').text(concept);
                                         $('.input-group #id_category').val(param);
+                                        $('.input-group #cat_type').val(type);
                                         $('.input-group #cat_name').val(concept);
                                         });
                                                                       

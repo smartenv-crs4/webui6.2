@@ -55,16 +55,46 @@
     
     <link rel="stylesheet" href="assets/css/typeaheadjs.css">  
     <style>
+    
+    
+    
     .dropdown-menu {
-        min-width: 540px;
+        min-width: 740px;
+    }
+
+    .dropdown-menu_items {
+        list-style: none;
+        padding-left: 0px;
     }
     
+    .dropdown-menu_items>li>a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    text-decoration: none;
+}
+    
+.dropdown-menu_items>li:hover 
+{background: #e9e9e9}
+
+
     .dropdown-desc {
          font-weight: 400;
           color: #bbb;
           white-space: pre-wrap;
       }
+    
+    
+      
     </style>
+
+
+</script>
+
 </head>
 
 <body>
@@ -88,13 +118,23 @@
                     <button type="button" class="form-control btn btn-default dropdown-toggle" style="background: #dddddd" data-toggle="dropdown">
                         <span id="search_concept" class="spanSearch" data-i18n="profile.categories"></span> <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu" role="menu" >
+                    <ul class="dropdown-menu" role="menu" id="dropmenu">
                       <li><a href="#"><span data-i18n="homepage.everything"></span></a></li>
                       <li class="divider"></li>
-                    </ul>
+                      <li>
+                                <div class="row">
+                                        <div class="col-md-6"><ul class="dropdown-menu_items"><li><a href="#" type="1"><span data-i18n="catalog.products"></span></a></li></ul></div>
+                                        <div class="col-md-6" ><ul class="dropdown-menu_items"><li><a href="#" type="2"><span data-i18n="nav.services"></span></a></ul></div>
+                                </div>
+                        </li>
+                      <li class="divider"></li>
+                      
+                        </ul>
+
                 </div>
                 <input type="hidden" name="id_category" value="" id="id_category">
-                <input type="hidden" name="cat_name" value="" id="cat_name">    
+                <input type="hidden" name="cat_name" value="" id="cat_name">
+                <input type="hidden" name="cat_type" value="" id="cat_type">    
                     
                         <span id="spanProduct" class="spanSearch">
                         <input type="text" id="product" class="form-control" data-i18n="[placeholder]product.searchLabelProducts">

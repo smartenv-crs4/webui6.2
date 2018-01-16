@@ -30,7 +30,7 @@ $( document).ready(function() {
     $("#searchTitle").localize();    
     
     
-    renderDropCategories(arr_par[0].id_category, arr_par[0].cat_name);
+    renderDropCategories(arr_par[0].id_category, arr_par[0].cat_name, arr_par[0].cat_type);
     
     
     //assegnazione dei parametri ai campi del form
@@ -551,7 +551,7 @@ function render_rates(_rates)
 }
 
 
-function renderDropCategories(id_category, cat_name)
+function renderDropCategories(id_category, cat_name, cat_type)
 {
        /*
         if (id_category)
@@ -578,41 +578,86 @@ function renderDropCategories(id_category, cat_name)
                                   dataType: "json",
                                   success: function(data)
                                   {
-                                      var str = '';  
+                                    var str = '<div class="row"><div class="col-md-6"><ul class="dropdown-menu_items" role="menu">';  
                                       for (var i = 0; i < data.length; i++) {
                                           
                                       
-                                        str = str + '<li><a href="#'+data[i]._id+'">'
+                                        if (data[i].type== 1)
+                                      {
+                                      str = str + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
                                                         + '<div class="row">'
-                                                        + '<div class="col-md-1"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
-                                                        + '<div class="col-md-11"><span>'+data[i].name[lang]+'</span>'
+                                                        + '<div class="col-md-2"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
+                                                        + '<div class="col-md-10"><span>'+data[i].name[lang]+'</span>'
                                                         + '<p class="dropdown-desc">'+data[i].description[lang]+'</p>'
                                                         + '</div>'
                                                         + '</div>'
                                                         + '</a></li>';
+                                      }  
+                                      //console.log(str);
+
+                                      if (id_category && id_category == data[i]._id)
+                                    {
+                                        //console.log(lang + ' ' + data[i]._id + ' ' + data[i].name[lang]);
+                                        $('.search-panel span#search_concept').text(data[i].name[lang]);
+                                        $('.input-group #id_category').val(data[i]._id);
+                                        $('.input-group #cat_name').val(data[i].name[lang]);
+                                        $('.input-group #cat_type').val(data[i].type);
+                                    }
+
+                                    
+                                    }
+                                      
+                                      str = str + '</ul></div>'
+                                                + '<div class="col-md-6"><ul class="dropdown-menu_items">';
+
+
+                                                for (var i = 0; i < data.length; i++) {
+                                          
+                                                    if (data[i].type== 2)
+                                                    {
+                                                    str = str + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
+                                                                    + '<div class="row">'
+                                                                    + '<div class="col-md-2"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
+                                                                    + '<div class="col-md-10"><span>'+data[i].name[lang]+'</span>'
+                                                                    + '<p class="dropdown-desc">'+data[i].description[lang]+'</p>'
+                                                                    + '</div>'
+                                                                    + '</div>'
+                                                                    + '</a></li>';
+                                                     } //console.log(str);
+
+
+                                                     if (id_category && id_category == data[i]._id)
+                                                     {
+                                                         //console.log(lang + ' ' + data[i]._id + ' ' + data[i].name[lang]);
+                                                         $('.search-panel span#search_concept').text(data[i].name[lang]);
+                                                         $('.input-group #id_category').val(data[i]._id);
+                                                         $('.input-group #cat_name').val(data[i].name[lang]);
+                                                         $('.input-group #cat_type').val(data[i].type);
+                                                     }
+
+                                                  }
+
+
+                                      str = str + '</ul></div></div>';
                                         
                                       
-                                                  if (id_category && id_category == data[i]._id)
-                                                  {
-                                                      //console.log(lang + ' ' + data[i]._id + ' ' + data[i].name[lang]);
-                                                      $('.search-panel span#search_concept').text(data[i].name[lang]);
-                                                      $('.input-group #id_category').val(data[i]._id);
-                                                      $('.input-group #cat_name').val(data[i].name[lang]);
-                                                  }
+                                                  
                                       
-                                      }
                                       
-                                      $('.dropdown-menu').append(str);
+                                      
+                                      $('#dropmenu').append(str);
                                       
                                       
                                       
                                       
-                                      $('.search-panel .dropdown-menu').find('a').click(function(e) {
+                                      $('.search-panel #dropmenu').find('a').click(function(e) {
                                         e.preventDefault();
                                         var param = $(this).attr("href").replace("#","");
+                                        var type = $(this).attr("type");
                                         var concept = $(this).find("span").text();
                                         $('.search-panel span#search_concept').text(concept);
                                         $('.input-group #id_category').val(param);
+                                        $('.input-group #cat_type').val(type);
                                         $('.input-group #cat_name').val(concept);
                                         });
                                                                       
@@ -726,6 +771,7 @@ function get_list(_arr_par)
 function getProductsSupplier(id, _arr_par)
 {
     _arr_par[0].cat_name= '';
+    _arr_par[0].cat_type= '';
     _arr_par[0].page= '';
     _arr_par[0].type_search= '';
     _var_par =get_par_string(_arr_par);
@@ -848,6 +894,8 @@ function refresh_param()
         arr_par[0].name = $('#product').val();
     if ($('#cat_name').val())
         arr_par[0].cat_name = $('#cat_name').val();
+    if ($('#cat_type').val())
+        arr_par[0].cat_type = $('#cat_type').val();
     if ($('#id_category').val())
         arr_par[0].id_category = $('#id_category').val();
     if ($("#ckSupplier").is(':checked') == false)
@@ -869,6 +917,7 @@ function get_par(_from)
     {
     array_par.push({"name":     getParameterByName('name')
             , "cat_name":       getParameterByName('cat_name')
+            , "cat_type":       getParameterByName('cat_type')
             , "id_category":    getParameterByName('id_category')
             , "type_search":    getParameterByName('type_search')
             , "page":           getParameterByName('page')});
@@ -885,6 +934,7 @@ function get_par(_from)
         
         array_par.push({"name": $('#product').val()
         , "cat_name":       $('#cat_name').val()
+        , "cat_type":       $('#cat_type').val()
         , "id_category":    $('#id_category').val()
         , "type_search":    _type
         , "page": ''});
@@ -902,6 +952,7 @@ function get_par_string(array_par)
     var var_par        = '?';
     if (array_par[0].name)          var_par = var_par + '&name=' + array_par[0].name;
     if (array_par[0].cat_name)      var_par = var_par + '&cat_name=' + array_par[0].cat_name;
+    if (array_par[0].cat_type)      var_par = var_par + '&cat_type=' + array_par[0].cat_type;
     if (array_par[0].id_category)   var_par = var_par + '&id_category=' + array_par[0].id_category;
     if (array_par[0].type_search)   var_par = var_par + '&type_search=' + array_par[0].type_search;
     if (array_par[0].tag)           var_par = var_par + '&tag=' + array_par[0].tag;
