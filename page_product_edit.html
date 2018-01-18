@@ -189,7 +189,34 @@
 
       $("body").localize();
 
-      autoCompleteCat("categoryField");
+      autoCompleteCat("categoryField", function(datum)
+      {
+        if(datum.type == 2)
+        {
+          jQuery("#qmin_box").hide();
+          jQuery("#qmin").val("");
+
+          jQuery("#qmax_box").hide();
+          jQuery("#qmax").val("");
+
+          jQuery("#unit_box").hide();
+          jQuery("#unit").val("");
+
+          jQuery("#availability_box").hide();
+          jQuery("#availability").val("");
+        }
+        else
+        {
+          jQuery("#qmin_box").show();
+          jQuery("#qmax_box").show();
+          jQuery("#unit_box").show();
+          jQuery("#availability_box").show();
+        }
+      });
+
+
+
+
   });
   
   
@@ -238,8 +265,17 @@
         if(category && category[0])
         { 
           getCategoryName(category[0], function(data){
+            jQuery("#categoryField").data("cat-type", data.type);
             jQuery("#categoryField").data("cat-name", data.name[localStorage.lng]);
             jQuery("#categoryField").val(data.name[localStorage.lng]);
+
+            if(data.type != 1)
+            {
+              jQuery("#qmin_box").hide();
+              jQuery("#qmax_box").hide();
+              jQuery("#availability_box").hide();
+              jQuery("#unit_box").hide();
+            }
             
           });                   
           jQuery("#categoryField").data("cat-id", category[0]);
@@ -379,7 +415,12 @@
     param.maxNum = jQuery("#qmax").val();
     param.deliveryIn = jQuery("#delin").val();
     param.price = jQuery("#price").val();
-    param.availability = jQuery("#availability").val();              
+    param.availability = jQuery("#availability").val();
+
+/*
+    if(param.unit == null || param.unit.trim() == "")
+      delete param.unit;
+
 
     if(param.minNum.trim() == "")
       delete param.minNum
@@ -395,7 +436,8 @@
       
     if(param.availability.trim() == "")
       delete param.availability
-        
+*/  
+    
     if(param.name.trim() == "")
     {
       var msg = i18next.t("error.void_name");
@@ -414,13 +456,13 @@
       param.categories = [param.categories];
     }
     
-    if(param.unit.trim() == "")
+    if(jQuery("#categoryField").data("type") === 1 && (!param.unit || param.unit.trim() == "" ))
     {
       var msg = i18next.t("error.void_unit");
       jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
       return;
     }
-    
+
     if(param.description.trim() == "")
     {
       var msg = i18next.t("error.void_desc");
@@ -636,7 +678,7 @@
 
             <div class="row" >
 
-                <section class="col col-3">
+                <section class="col col-3" id="qmin_box">
                     <label class="label" data-i18n="catalog.atleast"></label>
                     <label class="input">
                         <i class="icon-append   icon-arrow-down"></i>
@@ -644,7 +686,7 @@
                     </label>
                 </section>
 
-                <section class="col col-3">
+                <section class="col col-3" id="qmax_box">
                     <label class="label" data-i18n="catalog.atmost"></label>
                     <label class="input">
                         <i class="icon-append   icon-arrow-up"></i>
@@ -652,7 +694,7 @@
                     </label>
                 </section>
                 
-                <section class="col col-3">
+                <section class="col col-3" id="unit_box">
                     <label class="label" data-i18n="catalog.unit"></label>
                     <label class="select">
                         <select id="unit" >
@@ -667,7 +709,7 @@
                     </label>
                 </section>
                 
-                <section class="col col-3">
+                <section class="col col-3" id="availability_box">
                     <label class="label" data-i18n="catalog.availability"></label>
                     <label class="input">
                         <i class="icon-append  icon-layers"></i>
@@ -675,14 +717,14 @@
                     </label>
                 </section>
                 
-                <section class="col col-3">
+                <section class="col col-3" id="deliveryIn_box">
                     <label class="label" data-i18n="catalog.deliveryIn"></label>
                     <label class="input">
                         <i class="icon-append  icon-calendar"></i>
                         <input id="delin" type="text"  data-i18n="[placeholder]product.numberOfDays">
                     </label>
                 </section>
-                <section class="col col-3">
+                <section class="col col-3" id="price_box">
                     <label class="label" data-i18n="catalog.price"></label>
                     <label class="input">
                         <i class="icon-append   icon-finance-246"></i>
