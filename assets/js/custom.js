@@ -1,6 +1,6 @@
 /* Write here your custom javascript codes */
 
-var _brokerMsUrl  = "http://seidue.crs4/api/broker/v1/";
+var _brokerMsUrl  = "http://seidue.crs4.it/api/broker/v1/";
 var _trendsMsUrl;
 //var _authMsUrl;
 //var _uploadMsUrl;
@@ -337,7 +337,7 @@ function getCategoryName(cid, callback)
   
 }
 
-function autoCompleteCat(tagId)
+function autoCompleteCat(tagId, callback)
 {
   var acCategories = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
@@ -360,7 +360,7 @@ function autoCompleteCat(tagId)
         for(var i in response)
         {          
           ret.push({"name": response[i].name[localStorage.lng],
-            "id": response[i]._id});
+            "id": response[i]._id, "type"  :response[i].type});
         }
         //console.log(JSON.stringify(ret));
         return ret;
@@ -392,7 +392,14 @@ function autoCompleteCat(tagId)
   
   jQuery('#' + tagId).bind('typeahead:selected', function(obj, datum, name){
     jQuery('#' + tagId).data("cat-id", datum.id);
+    jQuery('#' + tagId).data("cat-type", datum.type);
     jQuery('#' + tagId).data("cat-name", datum.name);
+
+    if(callback)
+    {
+      callback(datum);
+    }
+
   });
 
   jQuery('#' + tagId).data("cat-id", "");
