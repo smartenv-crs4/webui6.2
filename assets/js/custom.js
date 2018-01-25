@@ -1,6 +1,6 @@
 /* Write here your custom javascript codes */
 
-var _brokerMsUrl  = "http://localhost:3000/api/broker/v1/";
+var _brokerMsUrl  = "http://seidue.crs4/api/broker/v1/";
 var _trendsMsUrl;
 //var _authMsUrl;
 //var _uploadMsUrl;
