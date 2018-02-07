@@ -577,13 +577,13 @@
         <div class="blog-author " style="min-height: 110px;">
             {{#if logged}}
             <button class="btn-u " id="btn_rfq" type="button" style="float: right; background-color:#1E4D7D; 
-                    padding: 15px; font-size:15pt;"
+                    padding: 15px; margin-bottom:8px; font-size:15pt; width:100%"
                     onclick="javascript:window.location='page_rfq_new.html?supplierId={{_id}}&supplierName={{plusname}}'">
                 <i class="fa fa-paper-plane"></i> <span data-i18n="rfq.sendRFQ"></span>
             </button>
             {{/if}}
             <img onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'" src="{{logo}}" alt="">
-            <div class="blog-author-desc">
+            <div class="blog-author-desc" style="display:inline-block">
                 <div class="overflow-h">
                     <h4>{{name}}</h4>
 
@@ -1019,6 +1019,16 @@
             $.get(url, function (data) {
 
                 //console.log(data);
+                if(data[0].logo.startsWith("http"))
+                {
+                  uLogo = data.logo;
+                }
+                else
+                {
+                  uLogo = _brokerMsUrl + "files/" + data[0].logo;
+                }
+
+                data[0].logo = uLogo;
                 var values = data[0];
                 var plusname = values.name.split(" ").join("+");
                 values['plusname'] = plusname;
@@ -1032,6 +1042,8 @@
 
                 target = "#supplier-profile";
                 templateid = "supplier-profile_template";
+                var uLogo;                
+
 
                 compiled = cacheCompile(templateid, data[0]);
 
