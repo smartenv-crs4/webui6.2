@@ -89,6 +89,54 @@
 
     <script type="text/javascript">
 
+      function setPassword()
+      {
+        var data = {};
+
+        var bEdit = jQuery(".userEdit").first(); 
+        var uid = bEdit.attr("id").split("-")[1];
+        var password = jQuery("#ed-password").val();
+
+        data.newpassword = password;
+
+
+
+        //console.log(sessionStorage.token);
+        jQuery.ajax({
+          url: _brokerMsUrl + "admin/users/" + uid + "/actions/setpassword",
+          type: "POST",
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify(data),
+          dataType: "json",
+          success: function(dataResp, textStatus, xhr)
+          {  
+            jQuery('.editable-unsaved').removeClass('editable-unsaved');
+            jQuery.jGrowl(i18next.t("profile.saved"), {theme:'bg-color-green1', life: 5000});
+            
+          },     
+          error: function(xhr, status)
+          {
+            var msg;
+            try
+            {
+              msg = xhr.responseJSON.message;
+            }
+            catch(err)
+            {
+              msg = i18next.t("error.internal_server_error");
+            }
+            
+            jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+                  
+            return;    
+          },
+          beforeSend: function(xhr, settings) 
+          { 
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+          }                    
+        });  
+      }
+
       function updateUserProfile()
       {
         var data = new Object();
@@ -293,6 +341,13 @@
             getCertificationsList();                      
 */            
           }  
+          else if(data.type == "admin")
+          {
+            data.typeTranslate = i18next.t("profile.admin");
+            var template = Handlebars.compile(adminProfileTemplate); 
+            jQuery('#edit-' + uid).html(template(data));                      
+            jQuery('#edit-' + uid).localize();
+          }
 
 
 
@@ -373,36 +428,33 @@
       {   
         jQuery(".dynamicTabEdit").remove();
 
-        if(type === "customer" || type === "supplier")
-        {
-          var tabContainer = jQuery("#tabContainer");
-          tabContainer.find(".active").removeClass("active");
-          var li = document.createElement("li");
-          li.className = "tab-bar dynamicTabEdit";
-          var a = document.createElement("a");
-          a.setAttribute("data-toggle", "tab");
-          a.setAttribute("href", "#edit-" + uid);
-          a.setAttribute("aria-expanded", "true");
-          a.innerHTML = "Edit " + uid;
+        var tabContainer = jQuery("#tabContainer");
+        tabContainer.find(".active").removeClass("active");
+        var li = document.createElement("li");
+        li.className = "tab-bar dynamicTabEdit";
+        var a = document.createElement("a");
+        a.setAttribute("data-toggle", "tab");
+        a.setAttribute("href", "#edit-" + uid);
+        a.setAttribute("aria-expanded", "true");
+        a.innerHTML = "Edit " + uid;
 
-          li.appendChild(a);
-          tabContainer.append(li);
+        li.appendChild(a);
+        tabContainer.append(li);
 
-          var tBodyContainer = jQuery("#tabBodyContainer");        
-          tBodyContainer.find(".active").removeClass("active");
+        var tBodyContainer = jQuery("#tabBodyContainer");        
+        tBodyContainer.find(".active").removeClass("active");
 
-          var div = document.createElement("div");
-          div.id = "edit-" + uid;
-          div.className = "tab-pane fade in dynamicTabEdit userEdit";
-          tBodyContainer.append(div);
+        var div = document.createElement("div");
+        div.id = "edit-" + uid;
+        div.className = "tab-pane fade in dynamicTabEdit userEdit";
+        tBodyContainer.append(div);
 
-          li.className = li.className + " active";
-          div.className = div.className + " active";
+        li.className = li.className + " active";
+        div.className = div.className + " active";
 
-          getUserProfile(uid);
-        }
-        
+        getUserProfile(uid);
       }
+        
 
       function createUser()
       { 
@@ -572,11 +624,9 @@
                   {{name}}
                 </td>
                 <td>
-                  {{#if_not_eq type "admin"}}
-                  <span style="cursor:pointer" onclick="editUser('{{_id}}', '{{_type}}')">
+                  <span style="cursor:pointer" onclick="editUser('{{_id}}', '{{type}}')">
                     <i class="fa fa-pencil"></i>
                   </span>
-                  {{/if_not_eq}}
                 </td>           
                 <td>
                   <span style="cursor:pointer" onclick="enableUser('{{_id}}')">

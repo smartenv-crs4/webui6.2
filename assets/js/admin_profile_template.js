@@ -10,6 +10,14 @@ var customerProfileTemplate = `
     </span -->
   </dd>
   <hr>
+
+  <dt><strong data-i18n="profile.password">Password</strong></dt>
+  <dd>
+    <input class="form-control" id="ed-password" type="password" style="display:inline; width:70%" />    
+    <button type="button" class="btn-u" data-i18n="profile.save" onclick="setPassword()" style="display:inline;">Save password</button>
+  </dd>
+
+  <hr>
   <dt><strong data-i18n="profile.type"></strong></dt>
   <dd id="pType" data-accountType={{type}}>
     {{typeTranslate}}
@@ -104,6 +112,12 @@ var supplierProfileTemplate = `
         <!-- i class="fa fa-pencil"></i -->
       </a>
     </span>
+  </dd>
+  <hr>
+  <dt><strong data-i18n="profile.password">Password</strong></dt>
+  <dd>
+    <input class="form-control" id="ed-password" type="password" style="display:inline; width:70%" />    
+    <button type="button" class="btn-u" data-i18n="profile.save" onclick="setPassword()" style="display:inline;">Save password</button>
   </dd>
   <hr>
   <dt><strong data-i18n="profile.type"></strong></dt>
@@ -214,6 +228,16 @@ var supplierProfileTemplate = `
 <button type="button" class="btn-u btn-u-default" data-i18n="profile.cancel" onclick="getUserProfile()"></button>
 <button type="button" class="btn-u" data-i18n="profile.save" onclick="updateUserProfile()"></button>
 `;
+
+var adminProfileTemplate = `
+<dl class="dl-horizontal">
+  <dt><strong data-i18n="profile.password">Password</strong></dt>
+  <dd>
+    <input class="form-control" id="ed-password" type="password" style="display:inline; width:70%" />    
+    <button type="button" class="btn-u" data-i18n="profile.save" onclick="setPassword()" style="display:inline;">Save password</button>
+  </dd>
+`;
+
 
 var changePasswordTemplate = `
 <h2 class="heading-md" data-i18n="profile.passwordTitle"></h2>
