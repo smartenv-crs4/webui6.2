@@ -33,6 +33,14 @@ function userType() {
         return "customer";
 }
 
+function isApplicativeUser()
+{
+  if(sessionStorage.type == "customer" || sessionStorage.type == "supplier")
+    return true;
+  else
+    return false;
+}
+
 function userId() {
 
     if (window.sessionStorage.userId)

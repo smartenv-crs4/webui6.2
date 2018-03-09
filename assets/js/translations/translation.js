@@ -21,6 +21,7 @@ var translation = {
             "error": {
                 "invalid_email": "Your email address is not valid",
                 "bad_request": "Bad request",
+                "user_disabled": "Your user is disabled",
                 "missing_user_or_password": "No username o password provided",
                 "unauthorized": "You are not authorized to call this endpoint",
                 "internal_server_error": "Internal server error",
@@ -309,6 +310,7 @@ var translation = {
             "error": {
                 "invalid_email": "L'indirizzo email inserito non &egrave; valido",
                 "bad_request": "Richiesta non valida",
+                "user_disabled": "Il tuo utente è disabilitato",
                 "missing_user_or_password": "Nome utente o password mancanti",
                 "unauthorized": "Non sei autorizzato ad accedere a questa funzione",
                 "internal_server_error": "Errore interno del server",

@@ -15,6 +15,13 @@ jQuery(document).ready(function(){
       return false;
     }
   });
+
+  if(sessionStorage.disabled === "true")
+  {
+    var respBlock = jQuery("#signInResponse");
+    respBlock.html(i18next.t("error.user_disabled"));
+    respBlock.removeClass("invisible");
+  }
 });
 
 
@@ -58,7 +65,7 @@ function signIn()
       // success
       if(xhr.status == 200)
       {
-        console.log(sessionStorage.userId);
+        //console.log(sessionStorage.userId);
         sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
         sessionStorage.userId = data["access_credentials"]["userId"];
         sessionStorage.email = email;

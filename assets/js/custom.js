@@ -59,6 +59,7 @@ jQuery(document).ready(function(){
   var headerCompiled = Handlebars.compile(header_template);
   var headerHTML = headerCompiled({
     isLogged: isLogged(),
+    isApplicativeUser: isApplicativeUser(),
     showSearch : isSearchVisible(),
     isHome : window['isHome'] || false,
     isRFQ : window['isRFQ'] || false
@@ -252,8 +253,11 @@ function getProfileInfo(async)
     contentType: "application/json; charset=utf-8",
     success: function(data, textStatus, xhr)
     {
+      console.log(data);
+
       sessionStorage.type = data.type;
       sessionStorage.name = data.name;
+      sessionStorage.removeItem("disabled");    
       
       if(data.logo != undefined)
       {
@@ -271,6 +275,10 @@ function getProfileInfo(async)
     },
     error: function(xhr, status)
     {
+      if(sessionStorage.getItem("token") !== undefined)
+      {
+        sessionStorage.disabled = true;
+      }
     },
     beforeSend: function(xhr, settings)
     {
@@ -469,4 +477,87 @@ function initCookieBar()
   });
 
   jQuery("#cookie-bar p").css("color", "#FFFFFF");
+}
+
+
+
+if(typeof Handlebars !== 'undefined')
+{
+  Handlebars.registerHelper('for', function(from, to, incr, block) 
+  {
+    var accum = '';
+    for(var i = from; i < to; i += incr)
+     accum += block.fn(i);
+    return accum;
+  });
+
+
+  Handlebars.registerHelper('if_eq', function(a, b, opts) {
+      if(a) a=a.toString();
+      if(b) b=b.toString();
+      if (a == b) {
+          return opts.fn(this);
+      } else {
+          return opts.inverse(this);
+      }
+  });
+
+  Handlebars.registerHelper('if_not_eq', function(a, b, opts) {
+      if(a) a=a.toString();
+      if(b) b=b.toString();
+      if (a != b) {
+          return opts.fn(this);
+      } else {
+          return opts.inverse(this);
+      }
+  });
+
+  Handlebars.registerHelper('if_eq_or_eq', function(a, b, c, d, opts) {
+      if (a.toString() == b.toString() || c.toString() == d.toString()) {
+          return opts.fn(this);
+      } else {
+          return opts.inverse(this);
+      }
+  });
+
+  Handlebars.registerHelper('iff', function(a, operator, b, opts) {
+      var bool = false;
+      switch(operator) {
+          case '==':
+              bool = a.toString() == b.toString();
+              break;
+          case 'gt':
+              bool = a.toString() > b.toString();
+              break;
+          case 'lt':
+              bool = a.toString() < b.toString();
+              break;
+          default:
+              throw "Unknown operator " + operator;
+      }
+
+      if (bool) {
+          return opts.fn(this);
+      } else {
+          return opts.inverse(this);
+      }
+  });
+
+
+  Handlebars.registerHelper("math", function(lvalue, operator, rvalue, options) {
+    lvalue = parseFloat(lvalue);
+    rvalue = parseFloat(rvalue);
+                  
+    return {
+      "+": lvalue + rvalue,
+      "-": lvalue - rvalue,
+      "*": lvalue * rvalue,
+      "/": lvalue / rvalue,
+      "%": lvalue % rvalue
+    }[operator];
+  });
+
+  Handlebars.registerHelper('json', function(context) {
+        return JSON.stringify(context);
+  });
 }

@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <title>Administration Area</title>
+
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <!-- Web Fonts -->  
+  <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+
+
+  <!-- CSS Global Compulsory -->
+  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/plugins/bootstrap-select.min.css">
+
+  <!-- CSS Header and Footer -->
+  <link rel="stylesheet" href="assets/css/headers/header-default.css">
+  <link rel="stylesheet" href="assets/css/footers/footer-v1.css">
+
+
+  <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="assets/plugins/animate.css">
+  <link rel="stylesheet" href="assets/plugins/line-icons/line-icons.css">
+  <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
+  <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+  <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+
+  <!-- CSS Page Style -->
+  <link rel="stylesheet" href="assets/css/pages/profile.css">
+
+  <!-- CSS Theme -->
+  <link rel="stylesheet" href="assets/css/theme-skins/dark.css" id="style_color">
+  <link rel="stylesheet" href="assets/css/theme-colors/dark-red.css">
+
+  <!-- CSS Customization -->
+  <link rel="stylesheet" href="assets/css/custom.css">
+  <link rel="stylesheet" href="assets/css/bootstrap-editable.css">
+
+  <link rel="stylesheet" href="assets/css/jquery.jgrowl.min.css">
+  
+  <link rel="stylesheet" href="assets/css/typeaheadjs.css">  
+
+  <!-- CSS Page Style Import-->
+  <link rel="stylesheet" href="assets/css/pages/page_log_reg_v3.css">
+  
+  <style type="text/css">
+        .giveMeEllipsis {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 5; /* number of lines to show */
+            /*  line-height: 1;  fallback */
+            max-height: 5; /* fallback */
+        }
+
+        .sidebar-showhide {
+            max-width: 25%;
+            float: left;
+            display: flex;
+            padding: 15px;
+            padding-top: 0;
+        }
+
+        .autoexpand {
+            width: auto;
+            display: flex;
+        }
+
+        #pagination_container {
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            max-width: 530px;
+            width: 530px;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+      function updateUserProfile()
+      {
+        var data = new Object();
+        data.user = new Object();
+        
+        var bEdit = jQuery(".userEdit").first(); 
+        data.uid = bEdit.attr("id").split("-")[1];
+
+        bEdit.find(".editable").each(function(){
+          var name = jQuery(this).data("name");
+          var value = jQuery(this).editable('getValue')[name];
+          if(value || jQuery(this).hasClass("editable-unsaved"))
+          {
+            if(name.indexOf(".") >= 0)
+            {
+              var sName = name.split(".");
+              if(data.user[sName[0]] == undefined)
+              {
+                data.user[sName[0]] = {};          
+              }
+              data.user[sName[0]][sName[1]] = value;
+            }
+            else
+            {
+              data.user[name] = value;    
+            }
+          }
+        });
+        
+        //console.log(sessionStorage.token);
+        jQuery.ajax({
+          url: _brokerMsUrl + "admin/users",
+          type: "PUT",
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify(data),
+          dataType: "json",
+          success: function(dataResp, textStatus, xhr)
+          {  
+            jQuery('.editable-unsaved').removeClass('editable-unsaved');
+            jQuery.jGrowl(i18next.t("profile.saved"), {theme:'bg-color-green1', life: 5000});
+            
+          },     
+          error: function(xhr, status)
+          {
+            var msg;
+            try
+            {
+              msg = xhr.responseJSON.message;
+            }
+            catch(err)
+            {
+              msg = i18next.t("error.internal_server_error");
+            }
+            
+            jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+                  
+            return;    
+          },
+          beforeSend: function(xhr, settings) 
+          { 
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+          }                    
+        });  
+
+      }
+
+      function deleteUser()
+      {
+        var uid = jQuery(this)[0].getAttribute('data-id');
+
+        var page = jQuery("#user-paginator li.active").first().children().first().html();
+        console.log(page);
+
+        jQuery.ajax({
+          url: _brokerMsUrl + "admin/users/" + uid,
+          type: "DELETE",
+          contentType: "application/json; charset=utf-8",
+          success: function(data, textStatus, xhr)
+          {
+            jQuery.jGrowl("Success", {theme:'bg-color-green', life: 5000});
+            filterResults(page);
+          },
+          error: function(xhr, status)
+          {
+            var errMsg = "Internal Server Error";
+
+            if(xhr.responseJSON.error_message)
+              errMsg = xhr.responseJSON.error_message;
+            else if(xhr.responseJSON.message)
+              errMsg = xhr.responseJSON.message;
+
+            jQuery.jGrowl(errMsg, {theme:'bg-color-red', life: 5000});
+          },
+          beforeSend: function(xhr, settings)
+          {
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+          }
+        });
+      }
+
+      function getUserProfile(uid)
+      {
+/*     
+        jQuery('#profileContent').localize();
+
+        var templatePassword = Handlebars.compile(changePasswordTemplate); 
+        jQuery('#passwordTab').html(templatePassword());
+        jQuery('#passwordTab').localize();  
+*/
+        jQuery.ajax(
+        {
+          url: _brokerMsUrl + "admin/users/" + uid,
+          type: "GET",
+          contentType: "application/json; charset=utf-8",
+          success: function(data, textStatus, xhr)
+          {  
+          var defaultImg = "assets/img/team/img32-md.jpg";
+
+          // success
+          if(data.type == "customer")
+          {
+            data.typeTranslate = i18next.t("profile.customer");
+            var template = Handlebars.compile(customerProfileTemplate); 
+            jQuery('#edit-' + uid).html(template(data));                      
+            jQuery('#edit-' + uid).localize();
+
+/*            
+            getFavoriteSuppliers();
+            
+            var tFavTab = Handlebars.compile(favoriteTabTemplate); 
+            jQuery("#tabContainer").append(tFavTab());
+            jQuery("#tabContainer").localize();
+
+
+            var tFav = Handlebars.compile(favoriteTemplate); 
+            jQuery("#tabBodyContainer").append(tFav());
+            jQuery("#tabBodyContainer").localize();                           
+
+            if(getUrlParameter("tab") == "favoriteTab")
+            {           
+              jQuery("#tabContainer li.active").removeClass("active");                             
+              jQuery("[href='#favoriteTab'").parent().addClass("active");
+
+              jQuery("#tabBodyContainer div.active").removeClass("in active"); 
+              jQuery("#favoriteTab").addClass("in active");
+
+            }
+*/           
+
+          }
+          else if(data.type == "supplier")
+          {
+            data.typeTranslate = i18next.t("profile.supplier");
+            var template = Handlebars.compile(supplierProfileTemplate); 
+            jQuery('#edit-' + uid).html(template(data));
+            jQuery('#edit-' + uid).localize();
+
+/*            
+            getDocumentList();        
+
+            var tDocTab = Handlebars.compile(documentsTabTemplate); 
+            jQuery("#tabContainer").append(tDocTab());
+            jQuery("#tabContainer").localize();
+
+            var tDoc = Handlebars.compile(documentsTemplate); 
+            jQuery("#tabBodyContainer").append(tDoc());
+            //jQuery("#tabBodyContainer").localize();   
+
+            //jQuery("#documentInput").filestyle();          
+            jQuery("#documentInput").filestyle({buttonText: i18next.t("profile.documentsInputLabel"),
+                buttonBefore: true});
+            /*        
+                      var tCertTab = Handlebars.compile(certificationsTabTemplate); 
+                      jQuery("#tabContainer").append(tCertTab());
+                      jQuery("#tabContainer").localize();
+
+                      var tCert = Handlebars.compile(certificationsTemplate); 
+                      jQuery("#tabBodyContainer").append(tCert());
+                      jQuery("#tabBodyContainer").localize();  
+
+             */ 
+/*            
+            var tCatTab = Handlebars.compile(categoriesTabTemplate); 
+            jQuery("#tabContainer").append(tCatTab());
+            jQuery("#tabContainer").localize();
+
+            var tCat = Handlebars.compile(categoriesTemplate); 
+            jQuery("#tabBodyContainer").append(tCat());
+            jQuery("#tabBodyContainer").localize();  
+
+            autoCompleteCat("acCat");
+            getUserCategoryList();
+
+            var tCertTab = Handlebars.compile(certificationsTabTemplate); 
+            jQuery("#tabContainer").append(tCertTab());
+            jQuery("#tabContainer").localize();
+
+            var tCert = Handlebars.compile(certificationsTemplate); 
+            jQuery("#tabBodyContainer").append(tCert());
+            jQuery("#tabBodyContainer").localize();     
+
+            getCertificationsList();                      
+*/            
+          }  
+
+
+
+          jQuery(".editable").editable();
+          jQuery(".editable").css("color", "black");
+
+
+          jQuery(document).on("translate", function(){   
+              var aType = jQuery("#pType").data("accounttype");        
+              if(aType == "customer")
+              jQuery("#pType").html(i18next.t("profile.customer"));
+              else if(aType == "supplier")
+              {
+              jQuery("#pType").html(i18next.t("profile.supplier"));
+              jQuery("#documentInput").filestyle('buttonText', i18next.t("profile.documentsInputLabel"));            
+              }
+
+              jQuery(".editable").each(function(){          
+                jQuery(this).editable("option", "emptytext", jQuery(this).data("emptytext"));          
+                });               
+              jQuery(".editable-empty").each(function(){
+                jQuery(this).html(jQuery(this).data("emptytext"));          
+                });
+
+
+              jQuery('[data-toggle=confirmation]').confirmation("destroy");            
+              jQuery('[data-toggle=confirmation]').popover("destroy");
+              jQuery('[data-toggle=confirmation]').attr('data-original-title', i18next.t("profile.areYouSure"));
+              //jQuery('[data-toggle=confirmation]').attr('data-btn-cancel-label', i18next.t("profile.no"));
+              //jQuery('[data-toggle=confirmation]').attr('data-btn-ok-label', i18next.t("profile.yes"));
+
+
+              jQuery('[data-toggle=confirmation]').confirmation(
+              {
+                rootSelector: '[data-toggle=confirmation]',
+                btnOkLabel: i18next.t("profile.yes"),
+                btnCancelLabel: i18next.t("profile.no"),
+                title: i18next.t("profile.areYouSure")      
+              });
+            });
+
+          },     
+          error: function(xhr, status)
+          {      
+            switch(xhr.status)
+            {
+              case 400: 
+                if(xhr.responseJSON.error == "invalid_token")
+                {
+                  jQuery.jGrowl(i18next.t("error.unauthorized"), {theme:'bg-color-red', life: 5000});
+                  redirectToLogin();
+                }
+                else if(xhr.responseJSON.error == "BadRequest")
+                  jQuery.jGrowl(i18next.t("error.missing_user_or_password"), {theme:'bg-color-red', life: 5000});
+                else
+                  jQuery.jGrowl(xhr.responseJSON.error_message, {theme:'bg-color-red', life: 5000});
+                break;
+              case 401:
+                jQuery.jGrowl(i18next.t("error.unauthorized"), {theme:'bg-color-red', life: 5000});
+                redirectToLogin();
+                break;
+              case 500:
+                jQuery.jGrowl(i18next.t("error.internal_server_error"), {theme:'bg-color-red', life: 5000});
+                break;        
+              default:
+                jQuery.jGrowl(xhr.responseJSON.error_message, {theme:'bg-color-red', life: 5000});
+            }
+            return;    
+          },
+          beforeSend: function(xhr, settings) 
+          { 
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+          }                    
+          });        
+      }
+
+      function editUser(uid, type)
+      {   
+        jQuery(".dynamicTabEdit").remove();
+
+        if(type === "customer" || type === "supplier")
+        {
+          var tabContainer = jQuery("#tabContainer");
+          tabContainer.find(".active").removeClass("active");
+          var li = document.createElement("li");
+          li.className = "tab-bar dynamicTabEdit";
+          var a = document.createElement("a");
+          a.setAttribute("data-toggle", "tab");
+          a.setAttribute("href", "#edit-" + uid);
+          a.setAttribute("aria-expanded", "true");
+          a.innerHTML = "Edit " + uid;
+
+          li.appendChild(a);
+          tabContainer.append(li);
+
+          var tBodyContainer = jQuery("#tabBodyContainer");        
+          tBodyContainer.find(".active").removeClass("active");
+
+          var div = document.createElement("div");
+          div.id = "edit-" + uid;
+          div.className = "tab-pane fade in dynamicTabEdit userEdit";
+          tBodyContainer.append(div);
+
+          li.className = li.className + " active";
+          div.className = div.className + " active";
+
+          getUserProfile(uid);
+        }
+        
+      }
+
+      function createUser()
+      { 
+        var pars = {};
+
+        pars.email = jQuery("#uc-email").val();
+        pars.name = jQuery("#uc-name").val();
+        pars.password = jQuery("#uc-password").val();
+        pars.type = jQuery("#uc-type").val();
+
+        if(!isValidEmailAddress(pars.email))
+        {
+          jQuery.jGrowl(i18next.t("error.invalid_email"), {theme:'bg-color-red', life: 5000});
+          return;
+        }
+
+        jQuery.ajax({
+          url: _brokerMsUrl + "admin/users",
+          type: "POST",
+          data: JSON.stringify(pars),
+          contentType: "application/json; charset=utf-8",
+          success: function(data, textStatus, xhr)
+          {
+            jQuery.jGrowl("Success", {theme:'bg-color-green', life: 5000});
+          },
+          error: function(xhr, status)
+          {
+            var errMsg = "Internal Server Error";
+
+            if(xhr.responseJSON.error_message)
+              errMsg = xhr.responseJSON.error_message;
+            else if(xhr.responseJSON.message)
+              errMsg = xhr.responseJSON.message;
+
+            jQuery.jGrowl(errMsg, {theme:'bg-color-red', life: 5000});
+          },
+          beforeSend: function(xhr, settings)
+          {
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+          }
+        });
+
+      }
+
+      function enableUser(id)
+      {
+        jQuery.ajax({
+          url: _brokerMsUrl + "admin/users/" + id + "/actions/enable",
+          type: "POST",
+          contentType: "application/json; charset=utf-8",
+          success: function(data, textStatus, xhr)
+          {
+            // success
+          },
+          beforeSend: function(xhr, settings)
+          {
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+          }
+
+        });
+      }
+
+      function disableUser(id)
+      {
+        jQuery.ajax({
+          url: _brokerMsUrl + "admin/users/" + id + "/actions/disable",
+          type: "POST",
+          contentType: "application/json; charset=utf-8",
+          success: function(data, textStatus, xhr)
+          {
+            // success
+          },
+          beforeSend: function(xhr, settings)
+          {
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+          }
+
+        });
+      }
+
+      function filterResults(page)
+      {
+        var p = 1;
+
+        if(page)
+          p = page;
+
+        var email = jQuery("#searchUserEmail").val();
+        var type = jQuery("#searchUserType").val();
+        var par = {};
+
+        if(email.trim() !== "")
+          par.email = email;
+
+        if(type.trim() !== "")
+          par.type = type;
+
+        findUsers(p, par);        
+      }
+
+      function findUsers(page, pars)
+      {
+       
+
+        jQuery.ajax({
+          url: _brokerMsUrl + "admin/users" + "?limit=15&page=" + page,
+          type: "GET",
+          data: pars,
+          contentType: "application/json; charset=utf-8",
+          success: function(data, textStatus, xhr)
+          {
+            // success
+            data.pars = pars;
+
+            if(pars)
+              data.pars = pars ;
+            else              
+              data.pars = 'undefined';
+
+            var source = $("#users_table_template").html();
+            var theTemplate = Handlebars.compile(source);
+            var theCompiledHtml = theTemplate(data);
+            jQuery("#usersList").html(theCompiledHtml);
+            jQuery('[data-toggle=confirmation]').confirmation({
+              rootSelector: '[data-toggle=confirmation]',
+              // other options
+            });
+          },
+          beforeSend: function(xhr, settings)
+          {
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+          }
+
+        });
+      }      
+    </script> 
+  
+    <script id="users_table_template" type="text/x-handlebars-template">
+      <div class="table-search-v1 margin-bottom-30">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th data-i18n="admin.uTable-id">Id</th>                
+                <th data-i18n="admin.uTable-type">Type</th>                
+                <th data-i18n="admin.uTable-email">Email</th>                
+                <th data-i18n="admin.uTable-name">Name</th>                
+                <th data-i18n="admin.uTable-edit">Edit</th>                
+                <th data-i18n="admin.uTable-enable">Enable</th>                
+                <th data-i18n="admin.uTable-disable">Disable</th>                            
+                <th data-i18n="admin.uTable-delete">Delete</th>                             
+              </tr>
+            </thead>
+            <tbody> 
+              {{#each docs}}             
+              <tr data-id="{{_id}}">
+                <td>
+                  {{_id}}
+                </td>            
+                <td>
+                  {{type}}
+                </td>            
+                <td>
+                  {{email}}
+                </td>
+                <td>
+                  {{name}}
+                </td>
+                <td>
+                  {{#if_not_eq type "admin"}}
+                  <span style="cursor:pointer" onclick="editUser('{{_id}}', '{{_type}}')">
+                    <i class="fa fa-pencil"></i>
+                  </span>
+                  {{/if_not_eq}}
+                </td>           
+                <td>
+                  <span style="cursor:pointer" onclick="enableUser('{{_id}}')">
+                    <i class="fa fa-thumbs-up"></i>
+                  </span>
+                </td>           
+                <td>
+                  <span style="cursor:pointer" onclick="disableUser('{{_id}}')">
+                    <i class="fa fa-thumbs-down"></i>
+                  </span>
+                </td>           
+                <td>
+                  <span style="cursor:pointer" data-title="Do you want to remove user {{email}} ? This action is irreversible!" 
+                                   data-placement="top"
+                                   data-on-confirm="deleteUser"
+                                   data-toggle="confirmation"
+                                   data-id="{{_id}}" 
+                                   data-popout="true">
+                    <i class="fa fa-remove"></i>
+                  </span>
+                </td>           
+              </tr>
+              {{/each}}      
+            </tbody>
+          </table>
+        </div>
+      </div>
+     <div class="text-center">
+       <ul class="pagination" id="user-paginator">
+         <li><a href="#" onclick="findUsers({{math page '-' 1}}, {{json pars}})" >«</a></li>
+         {{#for 1 (math pages '+' 1) 1}}
+         <li {{#if_eq this ../page}} class="active"{{/if_eq}}><a href="#" onclick="findUsers({{this}}, {{json ../pars}})">{{this}}</a></li>
+         {{/for}}
+         <li><a href="#" onclick="findUsers({{math page '+' 1}}, {{json pars}})">»</a></li>
+       </ul>
+     </div>
+    </script>
+ 
+  </head>
+
+  <body>
+    <div class="wrapper">
+     <!--=== Header ===-->
+      <div id="header_p"></div>
+      <!--=== End Header ===-->
+		  <div class="container content">
+        <!-- Sidebar -->
+        <div id="admin-sidebar" class="sidebar-showhide" >
+          <div class=" md-margin-bottom-40 hidden-xs">
+            <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1" style="min-width:230px">    
+              <li class="list-group-item">
+                <a href="#">
+                  <i class="fa fa-users"></i>
+                  <span data-i18n="admin.users">Users</span>
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a href="#">
+                  <i class="fa fa-shopping-bag"></i>
+                  <span data-i18n="admin.products">Products</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Sidebar -->
+
+        <div class="col-md-8">   
+          <div class="profile-body margin-bottom-20">
+            <div class="tab-v1">
+              <ul class="nav nav-justified nav-tabs" id="tabContainer">
+                <li class="tab-bar active">
+                  <a data-toggle="tab" href="#userSearch" data-i18n="admin.usersList" aria-expanded="false">Users List</a>
+                </li>
+                <li class="tab-bar">
+                  <a data-toggle="tab" href="#userCreate" data-i18n="admin.userCreate" aria-expanded="true">New User</a>
+                </li>              
+              </ul>
+              <div class="tab-content" id="tabBodyContainer">
+
+                <div id="userSearch" class="profile-edit tab-pane fade in active">
+                  <input class="form-control" placeholder="Email" id="searchUserEmail" type="text">
+                  <select class="selectpicker form-control"  id="searchUserType">
+                    <option value="">Account type</option>
+                    <option value="customer">Customer</option>
+                    <option value="supplier">Supplier</option>
+                    <option value="admin">Admin</option>
+                  </select>
+
+                  <br />
+                  <br />
+                  <span class="input-group-btn">
+                    <button class="btn-u" type="button" id="searchUserEmailButton" 
+                      onclick="filterResults()">
+                      <i class="fa fa-search"></i>
+                      <span data-i18n="admin.searchUser">Cerca</span>              
+                    </button>
+                  </span>
+  
+                  <br>
+                  <div id="usersList" class="profile-edit tab-pane fade in active"> 
+                    <div id="usersList">
+                    </div>
+
+                  </div>
+                </div>
+                <div id="userCreate" class="profile-edit tab-pane fade in">
+                  <div class="input-group margin-bottom-20">
+                    <span class="input-group-addon rounded-left">
+                      <i class="icon-envelope"></i>
+                    </span>
+                    <input class="form-control rounded-right" data-i18n="[placeholder]admin.email" id="uc-email" placeholder="Email" type="email">
+                  </div>               
+
+                  <div class="input-group margin-bottom-20">
+                    <span class="input-group-addon rounded-left">
+                      <i class="icon-pencil"></i>
+                    </span>
+                    <input class="form-control rounded-right" data-i18n="[placeholder]admin.name" id="uc-name" placeholder="Name" type="text">
+                  </div>               
+
+                  <div class="input-group margin-bottom-20">
+                    <span class="input-group-addon rounded-left">
+                      <i class="icon-lock"></i>
+                    </span>
+                    <input class="form-control rounded-right" data-i18n="[placeholder]admin.password" id="uc-password" placeholder="Password" type="password">
+                  </div>               
+
+                  <div class="input-group margin-bottom-20">
+                    <select class="selectpicker form-control"  id="uc-type">
+                      <option value="">Account type</option>
+                      <option value="customer">Customer</option>
+                      <option value="supplier">Supplier</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </div>
+
+                  <div class="input-group margin-bottom-20">
+                    <button onclick="createUser()" class="btn-u btn-block rounded" data-i18n="admin.createUser">Create</button>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+
+
+
+
+		  </div>
+
+      <!--=== Footer Version 1 ===-->
+      <div id="footer_p" ></div>
+      <!--=== End Footer Version 1 ===-->
+    </div><!--/wrapper-->
+
+    <!-- JS Global Compulsory -->
+    <script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/bootstrap-select.min.js"></script>
+
+    <!-- JS Translation -->  
+    <script src="assets/js/plugins/i18next.min.js"></script>
+    <script src="assets/js/translations/translation.js"></script>  
+    <script src="assets/js/plugins/jquery-i18next.min.js"></script>
+
+    <!-- JS Implementing Plugins -->
+    <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+    <script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
+    <script type="text/javascript" src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- JS Customization -->
+    <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/forms/reg.js"></script>
+    <script type="text/javascript" src="assets/js/forms/checkout.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/datepicker.js"></script>
+    <script type="text/javascript" src="assets/js/common_header.js"></script>
+    <script type="text/javascript" src="assets/js/footer.js"></script>
+    <script type="text/javascript" src="assets/js/profile_template.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/handlebars.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/bootstrap-editable.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/jquery.jgrowl.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/bootstrap-confirmation.min.js"></script>
+
+    <script type="text/javascript" src="assets/js/plugins/bootstrap-filestyle.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/typeahead.bundle.js"></script>
+    <script type="text/javascript" src="assets/js/utils.js"></script>
+    <script type="text/javascript" src="assets/js/custom.js"></script>
+    <script type="text/javascript" src="assets/js/sidebar.js"></script>
+    <script type="text/javascript" src="assets/js/admin_profile_template.js"></script>
+    <!-- script type="text/javascript" src="assets/js/profile.js"></script -->
+    <script type="text/javascript">
+
+      if(sessionStorage.userId == undefined  || sessionStorage.type !== "admin")
+      {   
+        redirectToLogin();
+      }
+      jQuery(document).ready(function() {
+        App.init();
+        findUsers(1);       
+      });
+    </script>
+  </body>
+</html>

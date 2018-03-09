@@ -26,7 +26,11 @@ var header_template = `	<div class="header">
           <li id="h_login"><a href="page_login_and_registration.html">Login</a></li>          
           <li id="h_logout"><a href="#" onclick="logout()" data-i18n="nav.logout"></a></li>   
                                            
-          <li style="padding-left:20px" id="h_user"><a href="page_profile_settings.html" ><strong></strong></a></li>
+            {{#if isApplicativeUser}}
+              <li style="padding-left:20px" id="h_user"><a href="page_profile_settings.html" ><strong></strong></a></li>
+            {{else}}
+              <li style="padding-left:20px" id="h_user"><a href="#" ><strong></strong></a></li>
+            {{/if}}
         </ul>
       </div>
       <!-- End Topbar -->
@@ -49,12 +53,20 @@ var header_template = `	<div class="header">
               Home
             </a>
           </li>
-            {{#if isLogged}}
+            {{#if isApplicativeUser}}
           <li class="logged {{#if isRFQ}}active{{/if}}">
            <a href="./page_rfq_inbox.html"  >
               RFQ
            </a>
           </li>          
+            {{else}}
+              {{#if isLogged}}
+                <li class="logged">
+                  <a href="./page_admin.html"  >
+                    ADMIN
+                 </a>              
+                </li>          
+              {{/if}}
             {{/if}}
           <!-- li>
             <a href="javascript:void(0);"  data-i18n="nav.about">

@@ -1,7 +1,7 @@
 
 function getUserProfile()
-{      
-  if(sessionStorage.userId == undefined)
+{     
+  if(sessionStorage.userId == undefined || ((sessionStorage.type !== "customer") && (sessionStorage.type !== "supplier")))
   {      
     redirectToLogin();
   }
