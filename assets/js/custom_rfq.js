@@ -13,6 +13,16 @@ var _socketUrl = _brokerMsUrl.replace(/(http(s)?:\/\/)|(\/.*){1}/g, '');
 var data_r;
 var users_info = {};
 
+Handlebars.registerHelper('userLogo', function(customer, supplier) {
+    if((customer._id == sessionStorage.userId) && supplier.logo) return supplier.logo;
+    else if(customer.logo) return customer.logo;
+    else return defaultImg;
+});
+
+Handlebars.registerHelper('productLogo', function(product) {
+    if(product.images && product.images.length > 0) return product.images[0];
+    else return defaultImgPr;
+});
 
 
 

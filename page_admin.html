@@ -424,7 +424,7 @@
           });        
       }
 
-      function editUser(uid, type)
+      function editUser(uid, type, email)
       {   
         jQuery(".dynamicTabEdit").remove();
 
@@ -436,7 +436,7 @@
         a.setAttribute("data-toggle", "tab");
         a.setAttribute("href", "#edit-" + uid);
         a.setAttribute("aria-expanded", "true");
-        a.innerHTML = "Edit " + uid;
+        a.innerHTML = "Edit " + email;
 
         li.appendChild(a);
         tabContainer.append(li);
@@ -589,7 +589,20 @@
           }
 
         });
-      }      
+      }    
+ 
+      function showUsersPanel()
+      {
+        jQuery("#productsConainer").hide();
+        jQuery("#usersContainer").show();
+      }
+
+      function showProductsPanel()
+      {
+        jQuery("#usersContainer").hide();
+        jQuery("#productsConainer").show();
+      }
+
     </script> 
   
     <script id="users_table_template" type="text/x-handlebars-template">
@@ -624,7 +637,7 @@
                   {{name}}
                 </td>
                 <td>
-                  <span style="cursor:pointer" onclick="editUser('{{_id}}', '{{type}}')">
+                  <span style="cursor:pointer" onclick="editUser('{{_id}}', '{{type}}', '{{email}}')">
                     <i class="fa fa-pencil"></i>
                   </span>
                 </td>           
@@ -680,21 +693,23 @@
               <li class="list-group-item">
                 <a href="#">
                   <i class="fa fa-users"></i>
-                  <span data-i18n="admin.users">Users</span>
+                  <span data-i18n="admin.users" onclick="showUsersPanel()" >Users</span>
                 </a>
               </li>
               <li class="list-group-item">
                 <a href="#">
                   <i class="fa fa-shopping-bag"></i>
-                  <span data-i18n="admin.products">Products</span>
+                  <span data-i18n="admin.products" onclick="showProductsPanel()">Products</span>
                 </a>
               </li>
             </ul>
           </div>
         </div>
         <!-- Sidebar -->
+        <div id="productsConainer" class="col-md-8" style="display:none">  
+        </div>   
 
-        <div class="col-md-8">   
+        <div id="usersContainer" class="col-md-8">   
           <div class="profile-body margin-bottom-20">
             <div class="tab-v1">
               <ul class="nav nav-justified nav-tabs" id="tabContainer">
@@ -767,8 +782,6 @@
                   <div class="input-group margin-bottom-20">
                     <button onclick="createUser()" class="btn-u btn-block rounded" data-i18n="admin.createUser">Create</button>
                   </div>
-
-
                 </div>
               </div>
             </div>

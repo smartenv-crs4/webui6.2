@@ -480,7 +480,6 @@ function initCookieBar()
 }
 
 
-
 if(typeof Handlebars !== 'undefined')
 {
   Handlebars.registerHelper('for', function(from, to, incr, block) 
