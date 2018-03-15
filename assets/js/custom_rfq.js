@@ -8,7 +8,7 @@ window.isRFQ = true;
 var defaultImg = "assets/img/team/img32-md.jpg";
 var defaultImgPr = "assets/img/port/no_image_available.png";
 
-var _socketUrl = _brokerMsUrl.replace(/(http(s)?:\/\/)|(\/.*){1}/g, '');
+//var _socketUrl = _brokerMsUrl.replace(/(http(s)?:\/\/)|(\/.*){1}/g, '');
 
 var data_r;
 var users_info = {};
@@ -254,11 +254,11 @@ function getConversationRequestsAndMessages()
                     addTooltipField();
                     $("body").localize();
 
-                    var socketM = io.connect(_socketUrl ,
+                    var socketM = io.connect(_messagingMsSocketBaseUrl ,
                     {
                       transports: ['websocket', 'xhr-pollin'],
                       reconnection:true,
-                      path: "/socket/messaging",
+                      path: _messagingMsSocketPath,
                       query: {
                                token: sessionStorage.token,
                                room: data._id
@@ -328,11 +328,11 @@ function getConversationRequestsAndMessages()
                         console.log(msg);
                     });
 
-                    var socket = io.connect(_socketUrl ,
+                    var socket = io.connect(_socketBaseUrl ,
                     {
                       transports: ['websocket', 'xhr-pollin'],
                       reconnection:true,
-                      path: "/socket"
+                      path: _socketPath,
                       //query: {token: sessionStorage.token}
                       //path: "/api/v1/message/socket",
                       //path: "/api/broker/v1/message/socket",

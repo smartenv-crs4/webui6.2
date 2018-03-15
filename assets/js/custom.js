@@ -2,6 +2,12 @@
 
 var _brokerMsUrl  = "http://seidue.crs4.it/api/broker/v1/";
 var _trendsMsUrl;
+var _socketBaseUrl;
+var _socketPath;
+var _messagingMsSocketUrl;
+var _messagingMsSocketPath;
+
+
 //var _authMsUrl;
 //var _uploadMsUrl;
 //var _messagingMsUrl;
@@ -17,6 +23,12 @@ jQuery.ajax({
     //_uploadMsUrl = data.uploadMsUrl + "/file/";
     //_messagingMsUrl = data.messagingMsUrl + "/";
     _trendsMsUrl = data.trendsMsUrl + "/";
+
+    _socketBaseUrl = data.socketBaseUrl;
+    _socketPath = data.socketPath;
+
+    _messagingMsSocketBaseUrl = data.messagingMsSocketBaseUrl;
+    _messagingMsSocketPath = data.messagingMsSocketPath;
 
   },
   error: function(xhr, status)
