@@ -571,4 +571,8 @@ if(typeof Handlebars !== 'undefined')
   Handlebars.registerHelper('json', function(context) {
         return JSON.stringify(context);
   });
+
+  Handlebars.registerHelper('json64', function(context) {
+        return btoa(JSON.stringify(context));
+  });
 }

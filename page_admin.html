@@ -86,8 +86,178 @@
             width: 530px;
         }
     </style>
+    <script id="edit_prod_template" type="text/x-handlebars-template">
+      <div class="sky-form">
+        <fieldset>
+
+            <div class="row">
+                <section class="col col-6">
+                    <label class="label" data-i18n="product.category"></label>
+                    <label class="input">
+                      <!--  <select name="gender">
+                            <option value="0" selected="" disabled="">Pasta fresca</option>
+                            <option value="1">Pesce</option>
+                            <option value="2">Formaggio</option>
+                            <option value="3">Dolci</option>
+                        </select>-->
+                        <input type="text" name="name" id="categoryField">
+
+                    </label>
+                </section>
+
+
+                  <section class="col col-11" style="border: solid 1px #ddd; padding:5px;">
+                    <h4 style="width:40px; margin-top: -20px; margin-left:5px; background:white; text-align:center">IT</h4>
+                    <label class="label" data-i18n="profile.name"></label>
+                    <label class="input">
+                        <i class="icon-append  icon-target"></i>
+                        <input type="text" name="name" id="name_it">
+                    </label>
+
+                    <label class="label" data-i18n="profile.description"></label>
+                    <label class="textarea">
+                      <textarea rows="3" id="description_it"></textarea>
+                    </label>
+                    <div class="note"><strong data.i18n="product.note">Note: </strong><span data-i18n="product.maxCharacters">massimo 500 caratteri.</span></div>
+                  </section>
+
+                  <section class="col col-11" style="border: solid 1px #ddd; padding:5px;">
+                    <h4 style="width:40px; margin-top: -20px; margin-left:5px; background:white; text-align:center">EN</h4>
+                    <label class="label" data-i18n="profile.name"></label>
+                    <label class="input">
+                        <i class="icon-append  icon-target"></i>
+                        <input type="text" name="name" id="name_en">
+                    </label>
+                    <label class="label" data-i18n="profile.description"></label>
+                    <label class="textarea">
+                      <textarea rows="3" id="description_en"></textarea>
+                    </label>
+                    <div class="note"><strong data.i18n="product.note">Note: </strong><span data-i18n="product.maxCharacters">massimo 500 caratteri.</span></div>
+                  </section>
+
+            </div>
+
+
+            <div class="row" >
+
+                <section class="col col-3" id="qmin_box">
+                    <label class="label" data-i18n="catalog.atleast"></label>
+                    <label class="input">
+                        <i class="icon-append   icon-arrow-down"></i>
+                        <input id="qmin"type="text" data-i18n="[placeholder]product.minimumQuantity" >
+                    </label>
+                </section>
+
+                <section class="col col-3" id="qmax_box">
+                    <label class="label" data-i18n="catalog.atmost"></label>
+                    <label class="input">
+                        <i class="icon-append   icon-arrow-up"></i>
+                        <input id="qmax" type="text"  data-i18n="[placeholder]product.maximumQuantity" name="product">
+                    </label>
+                </section>
+                
+                <section class="col col-3" id="unit_box">
+                    <label class="label" data-i18n="catalog.unit"></label>
+                    <label class="select">
+                        <select id="unit" >
+                          <option value="unty" data-i18n="rfq.unty"></option>
+                          <option value="kg" data-i18n="rfq.kg"></option>
+                          <option value="mtr" data-i18n="rfq.mtr"></option>
+                          <option value="ltr" data-i18n="rfq.ltr"></option>
+                          <option value="fot" data-i18n="rfq.fot"></option>
+                          <option value="lbr" data-i18n="rfq.lbr"></option>
+                          <option value="g" data-i18n="rfq.g"></option>
+                        </select>
+                    </label>
+                </section>
+                
+                <section class="col col-3" id="availability_box">
+                    <label class="label" data-i18n="catalog.availability"></label>
+                    <label class="input">
+                        <i class="icon-append  icon-layers"></i>
+                        <input id="availability" type="text" data-i18n="[placeholder]catalog.availability" >
+                    </label>
+                </section>
+                
+                <section class="col col-3" id="deliveryIn_box">
+                    <label class="label" data-i18n="catalog.deliveryIn"></label>
+                    <label class="input">
+                        <i class="icon-append  icon-calendar"></i>
+                        <input id="delin" type="text"  data-i18n="[placeholder]product.numberOfDays">
+                    </label>
+                </section>
+                <section class="col col-3" id="price_box">
+                    <label class="label" data-i18n="catalog.price"></label>
+                    <label class="input">
+                        <i class="icon-append   icon-finance-246"></i>
+                        <input id="price" type="text"  >
+                    </label>
+                </section>
+                
+                <!-- section class="col col-5">
+                    <label class="label" >File</label>
+                    <label class="input input-file" for="file">
+                        <div class="button"><input class="imgInput" onchange="this.parentNode.nextSibling.nextSibling.value = this.value " type="file">Browse</div>
+                        <input class="fl" readonly="" type="text"> 
+                    </label>
+                </section -->
+                
+                
+
+            </div>
+            <section class="col col-11">
+              <label class="label" data-i18n="product.images"></label>              
+                            
+              <div class="row" id="imgBlock" style="border: solid 1px #ddd; padding:15px ">
+                <div class="row" id="attachedImg">                              
+                </div>
+              </div>
+            </section>
+
+        </fieldset>
+          
+        <hr>
+        <input type="hidden" id="editProductId" />
+        <div class="input-group">
+            <button onclick="updateProduct()" class="btn-u" data-i18n="profile.save"></button>
+        </div>
+
+    </div>
+</script>
 
     <script type="text/javascript">
+      function deleteProduct()
+      {
+        var pid = jQuery(this)[0].getAttribute('data-id');
+        var page  = jQuery(this)[0].getAttribute('data-page');
+        var sid  = jQuery(this)[0].getAttribute('data-sid');
+
+        jQuery.ajax({
+          url: _brokerMsUrl + "admin/products/" + pid,
+          type: "DELETE",
+          contentType: "application/json; charset=utf-8",
+          success: function(data, textStatus, xhr)
+          {
+            jQuery.jGrowl("Success", {theme:'bg-color-green', life: 5000});
+            getProducts(sid, page)
+          },
+          error: function(xhr, status)
+          {
+            var errMsg = "Internal Server Error";
+
+            if(xhr.responseJSON.error_message)
+              errMsg = xhr.responseJSON.error_message;
+            else if(xhr.responseJSON.message)
+              errMsg = xhr.responseJSON.message;
+
+            jQuery.jGrowl(errMsg, {theme:'bg-color-red', life: 5000});
+          },
+          beforeSend: function(xhr, settings)
+          {
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+          }
+        });
+      }
 
       function setPassword()
       {
@@ -99,8 +269,6 @@
 
         data.newpassword = password;
 
-
-
         //console.log(sessionStorage.token);
         jQuery.ajax({
           url: _brokerMsUrl + "admin/users/" + uid + "/actions/setpassword",
@@ -111,8 +279,7 @@
           success: function(dataResp, textStatus, xhr)
           {  
             jQuery('.editable-unsaved').removeClass('editable-unsaved');
-            jQuery.jGrowl(i18next.t("profile.saved"), {theme:'bg-color-green1', life: 5000});
-            
+            jQuery.jGrowl(i18next.t("profile.saved"), {theme:'bg-color-green1', life: 5000});            
           },     
           error: function(xhr, status)
           {
@@ -136,6 +303,134 @@
           }                    
         });  
       }
+
+      function a_removeImage(iid)
+      {
+        jQuery.ajax({
+          url: _brokerMsUrl + "admin/images/" + iid,
+          type: "DELETE",
+          success: function(data){
+          },
+          error: function(xhr)
+          {
+            console.log("image " + iid + " doesn't removed")
+          },
+          beforeSend: function(xhr, settings)
+          {
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
+          }
+        });
+      }
+
+      function updateProduct()
+      {
+        var pid = jQuery("#editProductId").val();
+
+        jQuery("#attachedImg img").each(function(){     
+          if(this.hasAttribute("data-erased"))
+          {  
+            a_removeImage(this.getAttribute("data-id"));                        
+          }                
+        });
+    
+        var param = {};
+
+        param.translation = [{"language" : "english"}];
+        
+        param.name = jQuery("#name_it").val();
+        param.translation[0].name = jQuery("#name_en").val();
+        param.categories = jQuery("#categoryField").data("cat-id");
+        param.description = jQuery("#description_it").val();
+        param.translation[0].description = jQuery("#description_en").val();
+        param.unit = jQuery("#unit").val();
+            
+        param.minNum = jQuery("#qmin").val();
+        param.maxNum = jQuery("#qmax").val();
+        param.deliveryIn = jQuery("#delin").val();
+        param.price = jQuery("#price").val();
+        param.availability = jQuery("#availability").val();
+
+        if(param.name.trim() == "")
+        {
+          var msg = i18next.t("error.void_name");
+          jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+          return;
+        }
+        
+        if(param.categories.trim() == "")
+        {
+          var msg = i18next.t("error.void_category");
+          jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+          return;
+        }
+        else
+        {
+          param.categories = [param.categories];
+        }
+        
+        if(jQuery("#categoryField").data("type") === 1 && (!param.unit || param.unit.trim() == "" ))
+        {
+          var msg = i18next.t("error.void_unit");
+          jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+          return;
+        }
+
+        if(param.description.trim() == "")
+        {
+          var msg = i18next.t("error.void_desc");
+          jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+          return;
+        }
+        
+        jQuery("#attachedImg img").each(function(){
+          if(param.images == undefined)
+          {        
+            param.images = [];
+          }
+              
+          if(!this.hasAttribute("data-erased"))
+          {                  
+            param.images.push({"imageId": this.getAttribute("data-id")});
+          }
+                    
+        })    
+        
+        //console.log(sessionStorage.token);
+        jQuery.ajax({
+          url: _brokerMsUrl + "admin/products/" + pid,
+          type: "PUT",
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify(param),
+          dataType: "json",
+          success: function(dataResp, textStatus, xhr)
+          {  
+            jQuery('.editable-unsaved').removeClass('editable-unsaved');
+            
+            jQuery.jGrowl(i18next.t("profile.saved"), {theme:'bg-color-green1', life: 5000});            
+          },     
+          error: function(xhr, status)
+          {
+            var msg;
+            try
+            {
+              msg = xhr.responseJSON.message;
+            }
+            catch(err)
+            {
+              msg = i18next.t("error.internal_server_error");
+            }
+            
+            jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+                  
+            return;    
+          },
+          beforeSend: function(xhr, settings) 
+          { 
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+          }                    
+        });  
+      }
+
 
       function updateUserProfile()
       {
@@ -176,8 +471,7 @@
           success: function(dataResp, textStatus, xhr)
           {  
             jQuery('.editable-unsaved').removeClass('editable-unsaved');
-            jQuery.jGrowl(i18next.t("profile.saved"), {theme:'bg-color-green1', life: 5000});
-            
+            jQuery.jGrowl(i18next.t("profile.saved"), {theme:'bg-color-green1', life: 5000});            
           },     
           error: function(xhr, status)
           {
@@ -200,7 +494,6 @@
             xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
           }                    
         });  
-
       }
 
       function deleteUser()
@@ -239,13 +532,6 @@
 
       function getUserProfile(uid)
       {
-/*     
-        jQuery('#profileContent').localize();
-
-        var templatePassword = Handlebars.compile(changePasswordTemplate); 
-        jQuery('#passwordTab').html(templatePassword());
-        jQuery('#passwordTab').localize();  
-*/
         jQuery.ajax(
         {
           url: _brokerMsUrl + "admin/users/" + uid,
@@ -262,30 +548,6 @@
             var template = Handlebars.compile(customerProfileTemplate); 
             jQuery('#edit-' + uid).html(template(data));                      
             jQuery('#edit-' + uid).localize();
-
-/*            
-            getFavoriteSuppliers();
-            
-            var tFavTab = Handlebars.compile(favoriteTabTemplate); 
-            jQuery("#tabContainer").append(tFavTab());
-            jQuery("#tabContainer").localize();
-
-
-            var tFav = Handlebars.compile(favoriteTemplate); 
-            jQuery("#tabBodyContainer").append(tFav());
-            jQuery("#tabBodyContainer").localize();                           
-
-            if(getUrlParameter("tab") == "favoriteTab")
-            {           
-              jQuery("#tabContainer li.active").removeClass("active");                             
-              jQuery("[href='#favoriteTab'").parent().addClass("active");
-
-              jQuery("#tabBodyContainer div.active").removeClass("in active"); 
-              jQuery("#favoriteTab").addClass("in active");
-
-            }
-*/           
-
           }
           else if(data.type == "supplier")
           {
@@ -294,52 +556,6 @@
             jQuery('#edit-' + uid).html(template(data));
             jQuery('#edit-' + uid).localize();
 
-/*            
-            getDocumentList();        
-
-            var tDocTab = Handlebars.compile(documentsTabTemplate); 
-            jQuery("#tabContainer").append(tDocTab());
-            jQuery("#tabContainer").localize();
-
-            var tDoc = Handlebars.compile(documentsTemplate); 
-            jQuery("#tabBodyContainer").append(tDoc());
-            //jQuery("#tabBodyContainer").localize();   
-
-            //jQuery("#documentInput").filestyle();          
-            jQuery("#documentInput").filestyle({buttonText: i18next.t("profile.documentsInputLabel"),
-                buttonBefore: true});
-            /*        
-                      var tCertTab = Handlebars.compile(certificationsTabTemplate); 
-                      jQuery("#tabContainer").append(tCertTab());
-                      jQuery("#tabContainer").localize();
-
-                      var tCert = Handlebars.compile(certificationsTemplate); 
-                      jQuery("#tabBodyContainer").append(tCert());
-                      jQuery("#tabBodyContainer").localize();  
-
-             */ 
-/*            
-            var tCatTab = Handlebars.compile(categoriesTabTemplate); 
-            jQuery("#tabContainer").append(tCatTab());
-            jQuery("#tabContainer").localize();
-
-            var tCat = Handlebars.compile(categoriesTemplate); 
-            jQuery("#tabBodyContainer").append(tCat());
-            jQuery("#tabBodyContainer").localize();  
-
-            autoCompleteCat("acCat");
-            getUserCategoryList();
-
-            var tCertTab = Handlebars.compile(certificationsTabTemplate); 
-            jQuery("#tabContainer").append(tCertTab());
-            jQuery("#tabContainer").localize();
-
-            var tCert = Handlebars.compile(certificationsTemplate); 
-            jQuery("#tabBodyContainer").append(tCert());
-            jQuery("#tabBodyContainer").localize();     
-
-            getCertificationsList();                      
-*/            
           }  
           else if(data.type == "admin")
           {
@@ -349,11 +565,8 @@
             jQuery('#edit-' + uid).localize();
           }
 
-
-
           jQuery(".editable").editable();
           jQuery(".editable").css("color", "black");
-
 
           jQuery(document).on("translate", function(){   
               var aType = jQuery("#pType").data("accounttype");        
@@ -378,7 +591,6 @@
               jQuery('[data-toggle=confirmation]').attr('data-original-title', i18next.t("profile.areYouSure"));
               //jQuery('[data-toggle=confirmation]').attr('data-btn-cancel-label', i18next.t("profile.no"));
               //jQuery('[data-toggle=confirmation]').attr('data-btn-ok-label', i18next.t("profile.yes"));
-
 
               jQuery('[data-toggle=confirmation]').confirmation(
               {
@@ -421,7 +633,7 @@
           { 
             xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
           }                    
-          });        
+        });        
       }
 
       function editUser(uid, type, email)
@@ -454,6 +666,170 @@
 
         getUserProfile(uid);
       }
+
+
+      function editProduct(pid, name, pObj)
+      {
+        var dataResp = JSON.parse(atob(pObj)); 
+        jQuery(".dynamicTabEditProduct").remove();
+
+        var tabContainer = jQuery("#tabContainerProducts");
+        tabContainer.find(".active").removeClass("active");
+        var li = document.createElement("li");
+        li.className = "tab-bar dynamicTabEditProduct";
+        var a = document.createElement("a");
+        a.setAttribute("data-toggle", "tab");
+        a.setAttribute("href", "#editProduct-" + pid);
+        a.setAttribute("aria-expanded", "true");
+        a.innerHTML = "Edit " + name;
+
+        li.appendChild(a);
+        tabContainer.append(li);
+
+        var tBodyContainer = jQuery("#tabBodyContainerProducts");        
+        tBodyContainer.find(".active").removeClass("active");
+
+        var div = document.createElement("div");
+        div.id = "editProduct-" + pid;
+        div.className = "tab-pane fade in dynamicTabEditProduct productEdit";
+        tBodyContainer.append(div);
+
+        li.className = li.className + " active";
+        div.className = div.className + " active";
+
+        var source = $("#edit_prod_template").html();
+        var template = Handlebars.compile(source);
+
+        var compiledHtml = template();
+        jQuery(div).html(compiledHtml);
+        
+        autoCompleteCat("categoryField", function(datum)
+        {
+          if(datum.type == 2)
+          {
+            jQuery("#qmin_box").hide();
+            jQuery("#qmin").val("");
+
+            jQuery("#qmax_box").hide();
+            jQuery("#qmax").val("");
+
+            jQuery("#unit_box").hide();
+            jQuery("#unit").val("");
+
+            jQuery("#availability_box").hide();
+            jQuery("#availability").val("");
+          }
+          else
+          {
+            jQuery("#qmin_box").show();
+            jQuery("#qmax_box").show();
+            jQuery("#unit_box").show();
+            jQuery("#availability_box").show();
+          }
+        });
+
+        //getUserProfile(uid);
+
+        jQuery("#name_it").val(dataResp.name);
+        jQuery("#name_en").val(dataResp.translation[0].name);
+        jQuery("#description_it").val(dataResp.description);
+        jQuery("#description_en").val(dataResp.translation[0].description);
+        jQuery("#qmin").val(dataResp.minNum);
+        jQuery("#qmax").val(dataResp.maxNum);
+        jQuery("#availability").val(dataResp.availability);
+        jQuery("#price").val(dataResp.price);
+        jQuery("#delin").val(dataResp.deliveryIn);        
+        jQuery("#unit").val(dataResp.unit);
+        jQuery("#editProductId").val(pid);
+        
+        var category = dataResp.categories;
+        
+        if(category && category[0])
+        {          
+          getCategoryName(category[0], function(data){
+            jQuery("#categoryField").data("cat-type", data.type);
+            jQuery("#categoryField").data("cat-name", data.name[localStorage.lng]);
+            jQuery("#categoryField").val(data.name[localStorage.lng]);
+
+            if(data.type != 1)
+            {
+              jQuery("#qmin_box").hide();
+              jQuery("#qmax_box").hide();
+              jQuery("#availability_box").hide();
+              jQuery("#unit_box").hide();
+            }
+            
+          });
+
+          jQuery("#categoryField").data("cat-id", category[0]);
+          
+          var pic = dataResp.images;
+          
+          if(pic && pic.length > 0)
+          {
+            var images = document.getElementById("attachedImg");
+            jQuery(images).empty();
+            
+            for(var i in pic)
+            {
+              picId = pic[i].imageId;              
+              
+              var box = document.createElement("div");
+              box.style.marginRight = "12px"
+              box.style.position = "relative";
+              box.style.border = "solid 1px #ddd";
+              box.style.padding = "5px";
+              box.style.display = "inline-block";
+              
+              var p = document.createElement("img");
+              p.src = _brokerMsUrl + "files/" + picId + "?tag=t";
+              p.style.maxWidth = "80px";              
+              p.style.width = "100%";
+              p.setClassName = "attachedPictures";
+              p.setAttribute("data-id", picId);
+                            
+              var btn = document.createElement("div");
+              btn.className = "glyphicon glyphicon-remove"
+              btn.style.fontSize = "8pt";
+              btn.style.cursor = "pointer";
+              btn.style.position = "absolute";
+              btn.style.top = "-9px";
+              btn.style.right = "-9px";
+              btn.style.padding = "2px";
+              btn.style.backgroundColor = "#eee";
+              btn.style.color = "#bc0000";
+              btn.style.border = "solid 1px #999";
+              btn.style.borderRadius = "50%";
+              btn.onclick = function(){
+                if(this.className == "glyphicon glyphicon-remove")
+                {
+                  this.className = "glyphicon glyphicon-repeat";
+                  this.style.color = "#007d00";
+                  var im = jQuery(this).parent().find("img").first()[0];
+                  im.style.opacity = "0.15";      
+                  im.setAttribute("data-erased", "true");
+                }
+                else
+                {
+                  this.className = "glyphicon glyphicon-remove";                
+                  this.style.color = "#bc0000";
+                  var im = jQuery(this).parent().find("img").first()[0];
+                  im.style.opacity = "1";
+                  im.removeAttribute("data-erased");                  
+                }
+              }
+                            
+              box.appendChild(p);
+              box.appendChild(btn);
+              images.appendChild(box);                                                        
+            }
+          }
+        }
+
+        jQuery("body").localize();
+
+      }
+
         
 
       function createUser()
@@ -496,7 +872,6 @@
             xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);
           }
         });
-
       }
 
       function enableUser(id)
@@ -556,9 +931,7 @@
       }
 
       function findUsers(page, pars)
-      {
-       
-
+      {       
         jQuery.ajax({
           url: _brokerMsUrl + "admin/users" + "?limit=15&page=" + page,
           type: "GET",
@@ -595,12 +968,79 @@
       {
         jQuery("#productsConainer").hide();
         jQuery("#usersContainer").show();
+        jQuery("#admin-sidebar .active").removeClass("active");
+        jQuery("#groupItemUsers").addClass("active");
       }
 
       function showProductsPanel()
       {
         jQuery("#usersContainer").hide();
         jQuery("#productsConainer").show();
+        jQuery("#admin-sidebar .active").removeClass("active");
+        jQuery("#groupItemProducts").addClass("active");
+      }
+
+
+      function getProducts(sid, page)
+      {   
+        if(page == undefined)
+        {
+          page = 1;
+        }
+        if(sid.trim() === "")
+          return;
+
+        jQuery.ajax(
+        {
+          url: _brokerMsUrl + "admin/products?sid=" + sid + "&limit=15&page=" + page,
+          type: "GET",
+          contentType: "application/json; charset=utf-8",
+          success: function(data, textStatus, xhr)
+          {  
+            // success
+
+            var source = jQuery("#products_table_template").html();
+            var template = Handlebars.compile(source);
+            var compiledHtml = template(data);
+            jQuery("#productsList").html(compiledHtml);
+            showProductsPanel();
+            jQuery('[data-toggle=confirmation]').confirmation({
+              rootSelector: '[data-toggle=confirmation]',
+              // other options
+            });
+          },     
+          error: function(xhr, status)
+          {      
+            switch(xhr.status)
+            {
+              case 400: 
+                if(xhr.responseJSON.error == "invalid_token")
+                {
+                  jQuery.jGrowl(i18next.t("error.unauthorized"), {theme:'bg-color-red', life: 5000});
+                  redirectToLogin();
+                }
+                else if(xhr.responseJSON.error == "BadRequest")
+                  jQuery.jGrowl(i18next.t("error.missing_user_or_password"), {theme:'bg-color-red', life: 5000});
+                else
+                  jQuery.jGrowl(xhr.responseJSON.error_message, {theme:'bg-color-red', life: 5000});
+                break;
+              case 401:
+                jQuery.jGrowl(i18next.t("error.unauthorized"), {theme:'bg-color-red', life: 5000});
+                redirectToLogin();
+                break;
+              case 500:
+                jQuery.jGrowl(i18next.t("error.internal_server_error"), {theme:'bg-color-red', life: 5000});
+                break;        
+              default:
+                jQuery.jGrowl(xhr.responseJSON.error_message, {theme:'bg-color-red', life: 5000});
+            }
+            return;    
+          },
+          beforeSend: function(xhr, settings) 
+          { 
+            xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+          }                    
+        });        
       }
 
     </script> 
@@ -611,7 +1051,7 @@
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th data-i18n="admin.uTable-id">Id</th>                
+                <!-- th data-i18n="admin.uTable-id">Id</th -->                
                 <th data-i18n="admin.uTable-type">Type</th>                
                 <th data-i18n="admin.uTable-email">Email</th>                
                 <th data-i18n="admin.uTable-name">Name</th>                
@@ -619,14 +1059,15 @@
                 <th data-i18n="admin.uTable-enable">Enable</th>                
                 <th data-i18n="admin.uTable-disable">Disable</th>                            
                 <th data-i18n="admin.uTable-delete">Delete</th>                             
+                <th data-i18n="admin.uTable-products">Products</th>                             
               </tr>
             </thead>
             <tbody> 
               {{#each docs}}             
               <tr data-id="{{_id}}">
-                <td>
+                <!-- td>
                   {{_id}}
-                </td>            
+                </td -->            
                 <td>
                   {{type}}
                 </td>            
@@ -661,6 +1102,13 @@
                     <i class="fa fa-remove"></i>
                   </span>
                 </td>           
+                <td>
+                  {{#if_eq type 'supplier'}}
+                  <span style="cursor:pointer" onclick="getProducts('{{_id}}')">
+                    <i class="fa fa-shopping-bag"></i>
+                  </span>
+                  {{/if_eq}}
+                </td>           
               </tr>
               {{/each}}      
             </tbody>
@@ -677,6 +1125,69 @@
        </ul>
      </div>
     </script>
+
+    <script id="products_table_template" type="text/x-handlebars-template">
+      <div class="table-search-v1 margin-bottom-30">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th data-i18n="admin.pTable-nameIt">Name (IT)</th>                
+                <th data-i18n="admin.pTable-nameEn">Name (EN)</th>                
+                <th data-i18n="admin.pTable-descIt">Description (IT)</th>                
+                <th data-i18n="admin.pTable-descEn">Description (EN)</th>                
+                <th data-i18n="admin.pTable-delete">Delete</th>                
+                <th data-i18n="admin.pTable-edit">Edit</th>                
+              </tr>
+            </thead>
+            <tbody> 
+              {{#each docs}}             
+              <tr data-id="{{_id}}" >
+                <td>
+                  {{name}}
+                </td>            
+                <td>
+                  {{translation.0.name}}
+                </td>            
+                <td>
+                  {{description}}
+                </td>
+                <td>
+                  {{translation.0.description}}
+                </td>
+                <td>
+                  <span style="cursor:pointer" data-title="Do you want to remove user {{email}} ? This action is irreversible!" 
+                                   data-placement="top"
+                                   data-on-confirm="deleteProduct"
+                                   data-toggle="confirmation"
+                                   data-id="{{_id}}" 
+                                   data-sid="{{supplierId}}" 
+                                   data-page="{{../page}}" 
+                                   data-popout="true">
+                    <i class="fa fa-remove"></i>
+                  </span>
+                </td>           
+                <td>
+                  <span style="cursor:pointer" onclick="editProduct('{{_id}}', '{{name}}', '{{json64 this}}')">
+                    <i class="fa fa-pencil"></i>
+                  </span>
+                </td>           
+              </tr>
+              {{/each}}      
+            </tbody>
+          </table>
+        </div>
+      </div>
+     <div class="text-center">
+       <ul class="pagination" id="user-paginator">
+         <li><a href="#" onclick="getProducts('{{docs.0.supplierId}}', {{math page '-' 1}})" >«</a></li>
+         {{#for 1 (math pages '+' 1) 1}}
+         <li {{#if_eq this ../page}} class="active"{{/if_eq}}><a href="#" onclick="getProducts('{{../docs.1.supplierId}}', {{this}})" >{{this}}</a></li>
+         {{/for}}
+         <li><a href="#" onclick="getProducts('{{docs.0.supplierId}}', {{math page '+' 1}})">»</a></li>
+       </ul>
+     </div>
+    </script>
  
   </head>
 
@@ -690,23 +1201,37 @@
         <div id="admin-sidebar" class="sidebar-showhide" >
           <div class=" md-margin-bottom-40 hidden-xs">
             <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1" style="min-width:230px">    
-              <li class="list-group-item">
+              <li class="list-group-item active" onclick="showUsersPanel()" id="groupItemUsers">
                 <a href="#">
                   <i class="fa fa-users"></i>
-                  <span data-i18n="admin.users" onclick="showUsersPanel()" >Users</span>
+                  <span data-i18n="admin.users">Users</span>
                 </a>
               </li>
-              <li class="list-group-item">
+              <li class="list-group-item" onclick="showProductsPanel()" id="groupItemProducts">
                 <a href="#">
                   <i class="fa fa-shopping-bag"></i>
-                  <span data-i18n="admin.products" onclick="showProductsPanel()">Products</span>
+                  <span data-i18n="admin.products">Products</span>
                 </a>
               </li>
             </ul>
           </div>
         </div>
         <!-- Sidebar -->
-        <div id="productsConainer" class="col-md-8" style="display:none">  
+        <div id="productsConainer" class="col-md-8" style="display:none"> 
+          <div class="profile-body margin-bottom-20">
+            <div class="tab-v1">
+              <ul class="nav nav-justified nav-tabs" id="tabContainerProducts">
+                <li class="tab-bar active">
+                  <a data-toggle="tab" href="#productsList" data-i18n="admin.productsList" aria-expanded="false">Products List</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="tabBodyContainerProducts">
+                <div id="productsList" class="profile-edit tab-pane fade in active">
+                  <p> Select a supplier from the user list <p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>   
 
         <div id="usersContainer" class="col-md-8">   
@@ -733,6 +1258,7 @@
 
                   <br />
                   <br />
+
                   <span class="input-group-btn">
                     <button class="btn-u" type="button" id="searchUserEmailButton" 
                       onclick="filterResults()">
