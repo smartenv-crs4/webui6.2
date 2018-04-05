@@ -66,8 +66,10 @@ function signIn()
       if(xhr.status == 200)
       {
         //console.log(sessionStorage.userId);
-        sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
-        sessionStorage.userId = data["access_credentials"]["userId"];
+        //sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
+        //sessionStorage.userId = data["access_credentials"]["userId"];
+        sessionStorage.token = data["apiKey"]["token"];
+        sessionStorage.userId = data["userId"];
         sessionStorage.email = email;
         getProfileInfo(false);
         redirectToPrevPage();
@@ -167,10 +169,10 @@ function signUp()
       // success
       if(xhr.status == 201)
       {
-        console.log(data);
-        console.log(data.access_credentials.apiKey.token);
-        sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
-        sessionStorage.userId = data["created_resource"]["_id"];
+        //sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
+        //sessionStorage.userId = data["created_resource"]["_id"];
+        sessionStorage.userId = data["userId"];
+        sessionStorage.token = data["apiKey"]["token"];
         sessionStorage.email = email;
         getProfileInfo(false);
         sessionStorage.prevPage = "page_profile_settings.html";
@@ -203,6 +205,7 @@ function signUp()
           respBlock.html(i18next.t("error.invalid_auth"));
           break;
         case 500:
+          console.log(xhr);
           if(xhr.responseJSON.error_message.indexOf("UserExistsError") >= 0)
           {
             respBlock.html(i18next.t("error.user_already_exixts"));
@@ -344,7 +347,7 @@ function setPassword()
     dataType: "json",
     success: function(data, textStatus, xhr)
     {
-      if(xhr.status == 201)
+      if(xhr.status == 200)
       {
         respBlock.removeClass("invisible");
         respBlock.removeClass("alert-danger");

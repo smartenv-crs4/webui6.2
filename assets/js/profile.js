@@ -278,14 +278,17 @@ function changePassword()
     dataType: "json",
     success: function(dataResp, textStatus, xhr)
     {        
+      jQuery.jGrowl(i18next.t("profile.passwordSaved"), {theme:'bg-color-green1', life: 5000});    
+      /*
       if(!dataResp.access_credentials.error)
       {
-        jQuery.jGrowl(i18next.t("profile.passwordSaved"), {theme:'bg-color-green1', life: 5000});    
+
       }
       else
       {
         jQuery.jGrowl(dataResp.access_credentials.error_message, {theme:'bg-color-red', life: 5000});    
       }
+      */
     },     
     error: function(xhr, status)
     {
