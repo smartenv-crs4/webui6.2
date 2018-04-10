@@ -24,7 +24,7 @@
 	<!-- CSS Header and Footer -->
 	<!-- link rel="stylesheet" href="assets/css/headers/header-v6.css" -->
   <link rel="stylesheet" href="assets/css/headers/header-default.css">
-
+ <link rel="stylesheet" href="assets/css/footers/footer-v1.css">
     <!-- link rel="stylesheet" href="assets/css/footers/sticky-footer-navbar.css" -->
 
 	<!-- CSS Implementing Plugins -->
@@ -60,16 +60,17 @@
 </script>
 	<!--=== Content Part ===-->
     <div>
-	<div class="forms-wrapper">
+	<div>
 		<!--=== Header ===-->
 		<div id="header_p"></div>
 
 		<!--=== End Header ===-->
 		<div class="container content-md">
 
-			<div class="row space-xlg-hor equal-height-columns">
+			<div class="row">
+      <div id="sidebar" class="col-md-3"></div>
 <!-- Evaluation Form-->
-<div action="#" id="my-sky-form2" class="sky-form">
+<div action="#" id="my-sky-form2" class="sky-form col-md-9">
 	<header data-i18n="evaluation.your_opinion"></header>
 		<fieldset>
 			<div class="alert alert-danger invisible margin-bottom-20" id="evaluationResponse"></div>
@@ -175,7 +176,7 @@
 			</section>
 		</fieldset>
 		<footer>
-			<button class="btn-u" onclick="sendEvaluation()" data-i18n="evaluation.submit"></button>
+			<button class="btn-u" onclick="sendEvaluation()" id="button-send-evaluation"  data-i18n="evaluation.submit"></button>
 		</footer>
 	</div>
 <!-- End of Evaluation Form-->
@@ -202,7 +203,6 @@
 
     <!-- JS Implementing Plugins -->
     <script src="assets/plugins/back-to-top.js"></script>
-    <script src="assets/plugins/backstretch/jquery.backstretch.min.js"></script>
     <script type="text/javascript" src="assets/js/plugins/style-switcher.js"></script>
 
 
@@ -227,37 +227,17 @@
 
     <!-- JS Page Level -->
     <script src="assets/js/app.js"></script>
-	<script src="assets/plugins/backstretch/jquery.backstretch.min.js"></script>
 
     <script type="text/javascript" src="assets/js/forms/review.js"></script>
     <script type="text/javascript" src="assets/js/common_header.js"></script>
     <script type="text/javascript" src="assets/js/footer.js"></script>
     <script type="text/javascript" src="assets/js/plugins/handlebars.min.js"></script>	<script src="assets/js/utils.js"></script>
+    <script type="text/javascript" src="assets/js/sidebar.js"></script>
     <script src="assets/js/custom_rfq.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
             App.init();
             ReviewForm.initReviewForm();
-            //App.initCounter();
-            //	App.initParallaxBg();
-            //OwlCarousel.initOwlCarousel();
-         //   StyleSwitcher.initStyleSwitcher();
-         //   $('#header_p').html(header_template);
-
-
-            $.backstretch([
-                "assets/img/port/login_1.jpg",
-                "assets/img/port/login_2.jpg",
-                "assets/img/port/login_3.jpg",
-                //"assets/img/port/login_4.jpg",
-                "assets/img/port/login_5.jpg",
-                "assets/img/port/login_6.jpg",
-                "assets/img/port/login_7.jpg",
-                "assets/img/port/login_8.jpg",
-            ], {
-                fade: 1000,
-                duration: 4000
-            });
         });
 
 

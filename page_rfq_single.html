@@ -186,9 +186,11 @@
     {{#if completed}}
     {{#if_eq currentUser 'customer'}}
     <div class="writeval alert alert-success fade in">
+    {{#if evaluated }}
         <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>-->
         <strong>RFQ </strong>&nbsp; <strong data-i18n="rfq.close"></strong>!&nbsp; <a class="alert-link" href="javascript:window.location.href='evaluation.html?convId={{_id}}'" data-i18n="rfq.sendeval"></a>
     </div>
+{{/if}}
 {{/if_eq}}{{/if}}
     <div class="col-sm-6 chat-panel panel panel-default	">
         <div class="panel-heading overflow-h">

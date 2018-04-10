@@ -89,18 +89,17 @@ function sendEvaluation()
       console.log('inside success, xhr is ' + xhr);
       console.log('inside success, xhr staus is ' + xhr.status);
       console.log('inside success, evaluation is ' + evaluation);
-       if(respBlock.is(":visible"))
-        {
-		respBlock.addClass("invisible");
-	}
+	    respBlock.removeClass("invisible");
+	    respBlock.removeClass("alert-danger");
+	    respBlock.addClass("alert-success");
 
       if(xhr.status == 201)
       {
 	// Show thank you message
 	console.log('success!');
-        //respBlock.html(i18next.t("evaluation.thank_you"));
+  respBlock.html(i18next.t("evaluation.thank_you"));
+	jQuery("#button-send-evaluation").attr("disabled","disabled");
 	//jQuery("#evaluationResponse").html(i18next.t("evaluation.thank_you"));
-	window.location.replace("response_evaluation.html");
 	//respBlock.removeClass("invisible");
 	return;
         }
