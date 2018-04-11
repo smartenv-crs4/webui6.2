@@ -19,8 +19,8 @@ Handlebars.registerHelper('userLogo', function(customer, supplier) {
     else return defaultImg;
 });
 
-Handlebars.registerHelper('productLogo', function(product) {
-    if(product.images && product.images.length > 0) return product.images[0];
+Handlebars.registerHelper('productLogo', function(product) {    
+    if(product && product.images && product.images.length > 0) return product.images[0];
     else return defaultImgPr;
 });
 
@@ -197,20 +197,23 @@ function getConversationRequestsAndMessages()
                     
                     for(var i in data.requests)
                     {
-                      data.requests[i].product.imgUrl = [];
-                      
-                      if (data.requests[i].product.images.length > 0 && data.requests[i].product.images[0].imageId != undefined)
+                      if(data.requests[i].product)
                       {
-                          data.requests[i].product.imgUrl.push(_brokerMsUrl + 'files/'+ data.requests[i].product.images[0].imageId + "?tag=t");
+                        data.requests[i].product.imgUrl = [];
+                      
+                        if (data.requests[i].product.images.length > 0 && data.requests[i].product.images[0].imageId != undefined)
+                        {
+                            data.requests[i].product.imgUrl.push(_brokerMsUrl + 'files/'+ data.requests[i].product.images[0].imageId + "?tag=t");
 
-                          for(var j = 1; j < data.requests[i].product.images.length; j++)
-                          {
-                            data.requests[i].product.imgUrl.push(_brokerMsUrl + 'files/' + data.requests[i].product.images[j].imageId + "?tag=t");                          
-                          }                        
+                            for(var j = 1; j < data.requests[i].product.images.length; j++)
+                            {
+                              data.requests[i].product.imgUrl.push(_brokerMsUrl + 'files/' + data.requests[i].product.images[j].imageId + "?tag=t");                          
+                            }                        
+                        }
+                        else {
+                            data.requests[i].product.imgUrl.push("assets/img/team/img1-md.jpg");
+                        }     
                       }
-                      else {
-                          data.requests[i].product.imgUrl.push("assets/img/team/img1-md.jpg");
-                      }     
                     }
 
                     console.log(data);
