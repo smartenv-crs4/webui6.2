@@ -1019,7 +1019,7 @@
             $.get(url, function (data) {
 
                 //console.log(data);
-                if(data[0].logo.startsWith("http"))
+                if(data[0].logo && data[0].logo.startsWith("http"))
                 {
                   uLogo = data.logo;
                 }

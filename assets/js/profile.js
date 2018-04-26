@@ -14,7 +14,7 @@ function getUserProfile()
     
   //console.log(sessionStorage.token);
   jQuery.ajax({
-    url: _brokerMsUrl + "users/profile/" + sessionStorage.userId,
+    url: _brokerMsUrl + "users/profile/",
     type: "GET",
     contentType: "application/json; charset=utf-8",
     success: function(data, textStatus, xhr)

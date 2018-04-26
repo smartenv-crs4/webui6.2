@@ -259,7 +259,7 @@ function getProfileInfo(async)
 
 
   jQuery.ajax({
-    url: _brokerMsUrl + "users/profile/" + sessionStorage.userId,
+    url: _brokerMsUrl + "users/profile/",
     type: "GET",
     async: async,
     contentType: "application/json; charset=utf-8",

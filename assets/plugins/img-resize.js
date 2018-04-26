@@ -69,7 +69,9 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config, beforeSe
     {    
       var image = new Image();
       image.onload = function (imageEvent) 
-      {               
+      { 
+        var sufs = Object.keys(config.formats);        
+        var nImg = sufs.length;        
         for(var suf in config.formats)
         {          
           // Resize the image
@@ -102,19 +104,25 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config, beforeSe
 
           //console.log(file.type);
           var dataUrl = canvas.toDataURL(file.type);
-
                        
-          var resizedImage = dataURLToBlob(dataUrl);
-          
-          imgList.push({
-            "suffix": suf,
-            "blob": resizedImage,
-            "origName" : file.name
-          });                                      
-        }                
+          //var resizedImage = dataURLToBlob(dataUrl);
+          canvas.toBlob(function(resizedImage){
+               
+            imgList.push({
+              "suffix": sufs[sufs.length - nImg],
+              "blob": resizedImage,
+              "origName" : file.name
+            });            
+            if(--nImg == 0)
+            {
+              uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend);
+            }
+
+          });
+        }               
         
         // fare l'upload
-        uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend);
+        //uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend);i
       }
       image.src = readerEvent.target.result;
 

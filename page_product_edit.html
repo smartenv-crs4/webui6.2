@@ -6,7 +6,7 @@
 <!--[if !IE]><!-->
 <html lang="en" xmlns="http://www.w3.org/1999/html"> <!--<![endif]-->
 <head>
-    <title>Add Product Page - Cagliari Port 2020</title>
+    <title>Edit Product - Cagliari Port 2020</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -154,6 +154,7 @@
 <script type="text/javascript" src="assets/js/plugins/async.js"></script>
 <script type="text/javascript" src="assets/js/utils.js"></script>
 <script type="text/javascript" src="assets/js/plugins/typeahead.bundle.js"></script>
+<script type="" src="assets/plugins/canvas-to-blob.min.js"></script>
 <script type="" src="assets/plugins/img-resize.js"></script>
 
 <script type="text/javascript">
@@ -282,11 +283,14 @@
           
           
           var pic = dataResp.images;
+
+          var images = document.getElementById("attachedImg");
+          jQuery(images).empty();
           
           if(pic && pic.length > 0)
           {
-            var images = document.getElementById("attachedImg");
-            jQuery(images).empty();
+            //var images = document.getElementById("attachedImg");
+            //jQuery(images).empty();
             
             for(var i in pic)
             {
@@ -380,7 +384,7 @@
     imgCounter--;
         
     
-    if(imgCounter == 0)
+    if(imgCounter <= 0)
     {
       sendUpdateRequest();
     }
@@ -390,7 +394,7 @@
   {
     imgCounter--;    
     
-    if(imgCounter == 0)
+    if(imgCounter <= 0)
     {
       sendUpdateRequest();
     }
@@ -549,6 +553,13 @@
     });
     
     imgCounter = iid.length;
+
+    jQuery("#attachedImg img").each(function(){     
+      if(this.hasAttribute("data-erased"))
+      {  
+        removeImage(this.getAttribute("data-id"),  getUrlParameter("pid"));                        
+      }                
+    })                      
             
       
     if(imgCounter == 0)
@@ -561,14 +572,7 @@
       resizeImage(iid[i], _brokerMsUrl + "files/" , addImgId, onErrorUpload, formats, function(xhr, settings){
          xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token);      
       });
-    }
-    
-    jQuery("#attachedImg img").each(function(){     
-      if(this.hasAttribute("data-erased"))
-      {  
-        removeImage(this.getAttribute("data-id"),  getUrlParameter("pid"));                        
-      }                
-    })                      
+    }        
       
   }
   
