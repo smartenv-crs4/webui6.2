@@ -107,13 +107,15 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config, beforeSe
                        
           //var resizedImage = dataURLToBlob(dataUrl);
           canvas.toBlob(function(resizedImage){
+            var idx = nImg;
+            nImg--;
                
             imgList.push({
-              "suffix": sufs[sufs.length - nImg],
+              "suffix": sufs[sufs.length - idx],
               "blob": resizedImage,
               "origName" : file.name
             });            
-            if(--nImg == 0)
+            if(nImg == 0)
             {
               uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend);
             }
