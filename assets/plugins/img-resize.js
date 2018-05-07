@@ -103,9 +103,9 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config, beforeSe
           canvas.getContext('2d').drawImage(image, 0, 0, width, height);
 
           //console.log(file.type);
-          var dataUrl = canvas.toDataURL(file.type);
-                       
+          //var dataUrl = canvas.toDataURL(file.type);                       
           //var resizedImage = dataURLToBlob(dataUrl);
+
           canvas.toBlob(function(resizedImage){
             var idx = nImg;
             nImg--;
@@ -117,6 +117,17 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config, beforeSe
             });            
             if(nImg == 0)
             {
+              if(imgList[0].blob.size > imgList[1].blob.size)
+              {
+                imgList[0].suffix = "o"; 
+                imgList[1].suffix = "t";
+              }
+              else
+              {
+                imgList[1].suffix = "o"; 
+                imgList[0].suffix = "t";
+              } 
+
               uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend);
             }
 

@@ -1091,14 +1091,16 @@
             type: "DELETE",
             success: function(data){
               var box = jQuery("[data-pid=" + pid +"]");
+              /*
               box.find(".th-gallery img").each(function(){
                 var iid = jQuery(this).data("iid");                
                 if(iid.trim() != "")
                 {
-                  removeImage(iid);              
+                  removeImage(iid, pid);              
                 }
                             
-              });                                          
+              });
+              */              
               jQuery.jGrowl("OK", {theme:'bg-color-green', life: 5000});
               getproducts(getproductsURL, 'productstable', '#products_container', null, name, catName, prodId);
             },
