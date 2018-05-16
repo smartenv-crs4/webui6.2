@@ -216,10 +216,11 @@ function getConversationRequestsAndMessages()
                       }
                     }
 
-                    console.log(data);
+                    //console.log(data);
                     for(var i in data.messages)
                     {
-                      if(!data.messages[i].sender.logo.startsWith("http"))
+                      
+                      if(data.messages[i].sender.logo && !data.messages[i].sender.logo.startsWith("http"))
                       {
                         data.messages[i].sender.logo = _brokerMsUrl + "files/" + data.messages[i].sender.logo;
                       }
