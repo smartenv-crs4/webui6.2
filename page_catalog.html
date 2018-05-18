@@ -1283,7 +1283,7 @@
 
         var name = getParameterByName("name");
 
-        if(name && name != "null")
+        if((name && name != "null") || getParameterByName("catalog"))
         {          
           jQuery("a[href=#catalogTab]").trigger("click");
           jQuery("#catalogTab").trigger("click");

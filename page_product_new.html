@@ -342,7 +342,8 @@
       success: function(dataResp, textStatus, xhr)
       {          
         // dataResp.id                    
-        jQuery.jGrowl(i18next.t("product.added"), {theme:'bg-color-green1', life: 5000});        
+        jQuery.jGrowl(i18next.t("product.added"), {theme:'bg-color-green1', life: 5000});
+        window.location.href = "page_catalog.html?idSupplier=" + sessionStorage.userId + "&catalog=true";
               
       },     
       error: function(xhr, status)
