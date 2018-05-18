@@ -9,7 +9,7 @@ var sidebarTemplate = `
       
       {{#if isSupplier}}
       <li class="list-group-item">
-          <a href="page_catalog.html?idSupplier={{idSupplier}}"><i class="fa fa-book"></i> <span data-i18n="catalog.mycatalog"></span></a>
+          <a href="page_catalog.html?idSupplier={{idSupplier}}&catalog=true"><i class="fa fa-book"></i> <span data-i18n="catalog.mycatalog"></span></a>
       </li>
       <li class="list-group-item">
           <a href="page_product_new.html"><i class="fa fa-plus"></i> <span data-i18n="product.newProduct"></span></a>
