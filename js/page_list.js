@@ -281,11 +281,16 @@ function render_row(data, arr_par)
                                     _str +=         '</div>';
                                         
                                     _str +=     '</div>';
+                                    var mcat;                                                                                                                         
+                                    if(data.docs[i].categories[0])
+                                      mcat = data.docs[i].categories[0];
+                                    else
+                                      mcat = data.docs[i].categories; 
                                     
                                     var category = ' - ';
                                     var translate = {};
-                                    if (data.docs[i].categories[0])
-                                        category = data.docs[i].categories[0].name[lang];
+                                    if (mcat)
+                                        category = mcat.name[lang];
                                     
                                     translate = translate_product(data.docs[i].name, data.docs[i].description, data.docs[i].translation[0], lang);
                                     //console.log(data.docs[i].categories[0]);
@@ -305,17 +310,17 @@ function render_row(data, arr_par)
                                     _str +=             '<div class="giveMeEllipsis blog-author-desc">'+translate.description+'</div>';
                                     
                                     _str +=             '<ul class="list-inline share-list">';  
-                                    if (data.docs[i].categories[0].type == 1)
+                                    if (mcat.type == 1)
                                     {
                                         _str +=                 '<li><i class="fa fa-chevron-up"></i><span data-i18n="catalog.atleast">Min</span> '+checkValue(data.docs[i].minNum)+'</li>';
                                         _str +=                 '<li><i class="fa fa-chevron-down"></i><span data-i18n="catalog.atmost">Max</span> '+checkValue(data.docs[i].maxNum)+'</li>';
                                     }
                                     _str +=                 '<li><i class="fa fa-calendar-o"></i><span data-i18n="catalog.deliveryIn">Consegna in</span> '+checkValue(data.docs[i].deliveryIn); 
                                     _str +=                     '<span data-i18n="catalog.days"> giorni</span></li>';
-                                    if (data.docs[i].categories[0].type == 1)
+                                    if (mcat.type == 1)
                                         _str +=                 '<li><i class="fa fa-inbox"></i><span data-i18n="catalog.availability"></span><span> ' +checkValue(data.docs[i].availability)+' '+translation[localStorage.lng].translation.rfq[data.docs[i].unit]+'</span></li>';
                                     _str +=                 '<li><i class="fa fa-euro"></i><span> ' +checkValue(data.docs[i].price)+ ' <span class="fa fa-euro"></span>';
-                                    if (data.docs[i].categories[0].type == 1)
+                                    if (mcat.type == 1)
                                         _str +=                 ' per '+translation[localStorage.lng].translation.rfq[data.docs[i].unit]+'</span>';
                                     _str +='                </li>';
                                     _str +=                 '<li style="text-align: right; font-weight: bold">Score:<span> ' +checkValue(data.docs[i].score)+ ' </span></li>';
