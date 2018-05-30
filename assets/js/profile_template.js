@@ -74,7 +74,7 @@ var customerProfileTemplate = `
   <hr>
   <dt><strong data-i18n="profile.phone"></strong></dt>
   <dd>
-    <a class="editable editable-click" data-name="phone" data-i18n="[data-emptytext]profile.emptyText" id="ed-phone data-type="text" href="#">{{phone}}</a>
+    <a class="editable editable-click" data-id="fld-phone" data-name="phone" data-i18n="[data-emptytext]profile.emptyText" id="ed-phone" data-type="tel" href="#">{{phone}}</a>
     <!-- span>
       <a class="pull-right" href="#">
         <i class="fa fa-pencil"></i>
@@ -179,7 +179,7 @@ var supplierProfileTemplate = `
   <hr>
   <dt><strong data-i18n="profile.phone"></strong></dt>
   <dd>
-    <a class="editable editable-click" data-name="phone" data-i18n="[data-emptytext]profile.emptyText" id="ed-phone" data-type="text" href="#">{{phone}}</a>
+    <a class="editable editable-click" data-id="fld-phone" data-name="phone" data-i18n="[data-emptytext]profile.emptyText" id="ed-phone" data-type="tel" href="#">{{phone}}</a>
     <!-- span>
       <a class="pull-right" href="#">
         <i class="fa fa-pencil"></i>

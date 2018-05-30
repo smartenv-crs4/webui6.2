@@ -106,7 +106,63 @@ function getUserProfile()
  
       
       jQuery(".editable").editable();
+      //jQuery(".editable:not('#ed-phone')").editable();
+
+      jQuery('#ed-phone').on('hidden', function(e, reason) {
+
+        if(reason == "save" || reason == "nochange")
+        {
+          var cd = jQuery("#ed-phone").parent().find("input").first().intlTelInput("getSelectedCountryData");
+          var dialCode = "+39";
+          if(cd && cd.dialCode)
+          {
+            dialCode = "+" + cd.dialCode;
+          }
+          
+          jQuery('#ed-phone').editable("setValue", dialCode + " " + jQuery('#ed-phone').editable("getValue", true));
+        }
+      });
+
+
+
       jQuery(".editable").css("color", "black");
+      jQuery('#ed-phone').on('shown', function(e, editable) {        
+        jQuery("#ed-phone").parent().find("input").first().intlTelInput({
+          initialCountry: "it",
+          preferredCountries:["it"],
+          /*
+          geoIpLookup: function(callback) {
+            if(sessionStorage.getItem("countryCode"))
+            {
+              callback(sessionStorage.getItem("countryCode"));
+            }
+            else
+            {
+              jQuery.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+                var countryCode = (resp && resp.country) ? resp.country : "";
+                sessionStorage.setItem("countryCode", countryCode);              
+                callback(countryCode);
+              });
+            }
+          },
+          */
+          utilsScript: "assets/plugins/intl-tel-input/js/utils.js" 
+        });
+
+        var pNumber = "" + jQuery("#ed-phone").editable('getValue')["phone"];
+        if(pNumber && !pNumber.startsWith("+"))
+        {
+          pNumber = "+39 " + pNumber;
+        }
+        if(pNumber && data.phone)
+        {
+          console.log(pNumber);
+          jQuery("#ed-phone").parent().find("input").first().intlTelInput("setNumber", pNumber);
+        }
+        //editable.input.$input.val('overwriting value of input..');
+      });
+
+
       
       
       jQuery(document).on("translate", function(){   
@@ -124,7 +180,7 @@ function getUserProfile()
         });               
         jQuery(".editable-empty").each(function(){
           jQuery(this).html(jQuery(this).data("emptytext"));          
-        });
+        });        
         
              
         jQuery('[data-toggle=confirmation]').confirmation("destroy");            
