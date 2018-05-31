@@ -84,11 +84,16 @@ var translation = {
                 "reviews": "Reviews",
                 "chooseLogo": "Choose a logo",
                 "profile": "Profile",
+                "feedback": "Feedback",
+                "feedback_pros": "You are great in",
+                "feedback_cons": "... but you seem to be weak in",
 
                 "documents": "Documents",
                 "documentsTitle": "Manage your public documents",
                 "documentsTitle2": "Below you can add or remove documents",
                 "documentDeleted": "The document has been deleted successfully",
+                "feedbackTitle": "Your customers opinion about you",
+                "feedbackTitle2": "The most frequent words in their comments",
 
                 "areYouSure": "Are you sure ?",
                 "confirmDeleteDocument": "Do you want to remove this  document ?",
@@ -373,12 +378,17 @@ var translation = {
                 "reviews": "Recensioni",
                 "chooseLogo": "Scegli un logo",
                 "profile": "Profilo",
-
+                "feedback": "Gradimento",
+                "feedback_pros": "I tuoi punti di forza sono",
+                "feedback_cons": "... mentre puoi migliorare in questi aspetti",
+ 
 
                 "documents": "Documenti",
                 "documentsTitle": "Gestisci i tuoi documenti pubblici",
                 "documentsTitle2": "Qui puoi aggiungere o rimuovere documenti",
                 "documentsInputLabel": "Scegli un documento pdf",
+                "feedbackTitle": "Cosa scrivono di te i clienti",
+                "feedbackTitle2": "Le parole che hanno usato maggiormente",
                 "uploadDocument": "Upload",
                 "uploadLogo": "Salva il logo",
                 "documentSaved": "Documento salvato",

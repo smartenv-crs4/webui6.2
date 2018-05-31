@@ -250,6 +250,29 @@ var changePasswordTemplate = `
 </div>
 `;
 
+
+
+var feedbackTabTemplate = `
+<li class="tab-bar"><a data-toggle="tab" href="#feedbackTab" data-i18n="profile.feedback"></a></li>
+`;
+
+var feedbackTemplate = `
+
+<div id="feedbackTab" class="profile-edit tab-pane fade">									
+  <h2 class="heading-md" data-i18n="profile.feedbackTitle"></h2>
+  <p data-i18n="profile.feedbackTitle2"></p>
+  <br>
+  <div style="text-align:center;width:100%">
+  <p data-i18n="profile.feedback_pros" style="font-size:15pt"></p>
+  <div id="pros_feedbackBox">     
+  </div>
+  <p data-i18n="profile.feedback_cons" style="font-size:15pt"></p>
+  <div id="cons_feedbackBox">     
+  </div>
+  </div>
+</div>
+`;
+
 var favoriteTabTemplate = `
 <li class="tab-bar"><a data-toggle="tab" href="#favoriteTab" data-i18n="profile.favoriteSuppliers"></a></li>
 `;

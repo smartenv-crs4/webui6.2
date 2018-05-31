@@ -6,6 +6,7 @@ var _socketBaseUrl;
 var _socketPath;
 var _messagingMsSocketUrl;
 var _messagingMsSocketPath;
+var _analyzerMsUrl;
 
 
 //var _authMsUrl;
@@ -29,6 +30,7 @@ jQuery.ajax({
 
     _messagingMsSocketBaseUrl = data.messagingMsSocketBaseUrl;
     _messagingMsSocketPath = data.messagingMsSocketPath;
+    _analyzerMsUrl = data.analyzerMsUrl;
 
   },
   error: function(xhr, status)

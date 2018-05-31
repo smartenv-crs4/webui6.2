@@ -100,7 +100,17 @@ function getUserProfile()
         jQuery("#tabBodyContainer").append(tCert());
         jQuery("#tabBodyContainer").localize();     
         
-        getCertificationsList();                         
+        getCertificationsList();    
+
+        var tfeedbackTab = Handlebars.compile(feedbackTabTemplate); 
+        jQuery("#tabContainer").append(tfeedbackTab());
+        jQuery("#tabContainer").localize();
+        
+    
+        var tfeedback = Handlebars.compile(feedbackTemplate); 
+        jQuery("#tabBodyContainer").append(tfeedback());
+        jQuery("#tabBodyContainer").localize();     
+        getFeedback();
       }  
       
  
@@ -458,6 +468,100 @@ function getCertificationsList()
   });  
   
 }
+        function draw_cloud(words, boxSelector, color) {
+
+        var cloud = d3.layout.cloud;
+
+        var fill = d3.scale.category20();
+
+
+        var layout = cloud()
+              //.size([500, 500])
+                  .words(words.map(function(d) {
+                                          return {text: d.term, size: 10 + d.probability * 70, boxSelector:"#feedbackBox"};
+                                              }))
+            .padding(5)
+                  .rotate(function() { return ~~(Math.random() * 1) * 90; })
+                      .font("Impact")
+                          .fontSize(function(d) { return d.size; })
+                              .on("end", function(words) {  
+            d3.select(boxSelector).append("svg")
+          .attr("width", layout.size()[0])
+          .attr("height", layout.size()[1])
+        .append("g")
+          .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+        .selectAll("text")
+          .data(words)
+        .enter().append("text")
+          .style("font-size", function(d) { return d.size + "px"; })
+          .style("font-family", "Impact")
+          .style("fill", function(d, i) { return color; })
+          .attr("text-anchor", "middle")
+                .attr("transform", function(d) {
+                          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                                })
+        .text(function(d) { return d.text; });
+
+            });
+            layout.start();
+        }
+
+
+function getFeedback()
+{
+  if(sessionStorage.userId == undefined)
+  {      
+    redirectToLogin(); 
+  }
+  
+  var ret;
+  
+  jQuery.ajax({
+    url: _analyzerMsUrl + "lda",
+    type: "GET",    
+    contentType: "application/json; charset=utf-8",
+    success: function(dataResp, textStatus, xhr)
+    {        
+      if (dataResp.length > 0) {
+       var cons_topics = [];
+       var pros_topics = [];
+       for (var i in dataResp[0].cons_topics[0]) {
+         cons_topics.push(dataResp[0].cons_topics[0][i].term);
+       }
+       for (var i in dataResp[0].pros_topics[0]) {
+         pros_topics.push(dataResp[0].pros_topics[0][i].term);
+       }
+
+
+       draw_cloud(dataResp[0].cons_topics[0], "#cons_feedbackBox", '#d40000');
+       draw_cloud(dataResp[0].pros_topics[0], "#pros_feedbackBox", '#1d4976');
+
+      }
+    },     
+    error: function(xhr, status)
+    {
+      var msg;
+      try
+      {        
+        msg = xhr.responseJSON.message;
+      }
+      catch(err)
+      {
+        msg = i18next.t("error.internal_server_error");
+      }
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+            
+      return;    
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    }                    
+  });  
+  
+}
+
 
 function uploadLogo()
 {
