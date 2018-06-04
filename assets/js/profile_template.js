@@ -260,16 +260,45 @@ var feedbackTemplate = `
 
 <div id="feedbackTab" class="profile-edit tab-pane fade">									
   <h2 class="heading-md" data-i18n="profile.feedbackTitle"></h2>
+  <div>
+    <div style="display:inline-block;margin-right:5px">
+     <span id="label_overall">Overall</span>
+     <div id="overall">
+     </div>
+    </div>
+    <div style="display:inline-block;margin-right:5px">
+     <span id="label_price">Price/Value</span>
+     <div id="price">
+     </div>
+    </div>
+    <div style="display:inline-block;margin-right:5px">
+     <span id="label_cservice">Customer service</span>
+     <div id="cservice">
+     </div>
+    </div>
+    <div style="display:inline-block;margin-right:5px">
+     <span id="label_delivery">Delivery</span>
+     <div id="delivery">
+     </div>
+    </div>
+    <div style="display:inline-block;margin-right:5px">
+     <span id="label_product">Product</span>
+     <div id="product">
+     </div>
+    </div>
+  </div>
+  <br>
   <p data-i18n="profile.feedbackTitle2"></p>
   <br>
   <div style="text-align:center;width:100%">
-  <p data-i18n="profile.feedback_pros" style="font-size:15pt"></p>
-  <div id="pros_feedbackBox">     
+      <p data-i18n="profile.feedback_pros" style="font-size:15pt"></p>
+      <div id="pros_feedbackBox">     
+      </div>
+      <p data-i18n="profile.feedback_cons" style="font-size:15pt"></p>
+      <div id="cons_feedbackBox">     
+      </div>
   </div>
-  <p data-i18n="profile.feedback_cons" style="font-size:15pt"></p>
-  <div id="cons_feedbackBox">     
-  </div>
-  </div>
+
 </div>
 `;
 

@@ -111,8 +111,71 @@ function getUserProfile()
         jQuery("#tabBodyContainer").append(tfeedback());
         jQuery("#tabBodyContainer").localize();     
         getFeedback();
-      }  
       
+        if(data.rates) {
+
+            if(data.rates.bayesian_overall_rate) {
+              jQuery("#overall").starRating({
+                 starSize: 25,
+                 readOnly:true,
+                 totalStar:5,
+                 initialRating:data.rates.bayesian_overall_rate
+              });  
+            } else {
+              jQuery("#label_overall").hide();
+            }
+
+            if(data.rates.bayesian_price_value_rate) {
+              jQuery("#price").starRating({
+                starSize: 25,
+                readOnly:true,
+                totalStar:5,
+                initialRating:data.rates.bayesian_price_value_rate
+              });  
+            } else {
+              jQuery("#label_price").hide();
+            }
+
+            if(data.rates.bayesian_customer_service_rate) {
+              jQuery("#cservice").starRating({
+                starSize: 25,
+                readOnly:true,
+                totalStar:5,
+                initialRating:data.rates.bayesian_customer_service_rate
+              });  
+            } else {
+              jQuery("#label_cservice").hide();
+            }
+        
+            if(data.rates.bayesian_delivery_rate) {
+              jQuery("#delivery").starRating({
+                starSize: 25,
+                readOnly:true,
+                totalStar:5,
+                initialRating:data.rates.bayesian_delivery_rate
+              });  
+            } else {
+              jQuery("#label_delivery").hide();
+            }
+
+            if(data.rates.bayesian_product_rate) {
+              jQuery("#product").starRating({
+                starSize: 25,
+                readOnly:true,
+                totalStar:5,
+                initialRating:data.rates.bayesian_product_rate
+              });  
+            } else {
+              jQuery("#label_product").hide();
+            }
+        } else {
+              jQuery("#label_overall").hide();
+              jQuery("#label_price").hide();
+              jQuery("#label_cservice").hide();
+              jQuery("#label_delivery").hide();
+              jQuery("#label_product").hide();
+        }
+      }
  
       
       jQuery(".editable").editable();
