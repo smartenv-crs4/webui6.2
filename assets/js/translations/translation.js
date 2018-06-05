@@ -87,6 +87,11 @@ var translation = {
                 "feedback": "Feedback",
                 "feedback_pros": "You are great in",
                 "feedback_cons": "... but you seem to be weak in",
+                "overallFeedback": "Overall",
+                "priceFeedback": "Price/Value",
+                "deliveryFeedback": "Delivery",
+                "customerFeedback": "Customer Service",
+                "productFeedback": "Product Quality",
 
                 "documents": "Documents",
                 "documentsTitle": "Manage your public documents",
@@ -381,6 +386,11 @@ var translation = {
                 "feedback": "Gradimento",
                 "feedback_pros": "I tuoi punti di forza sono",
                 "feedback_cons": "... mentre puoi migliorare in questi aspetti",
+                "overallFeedback": "Complessivo",
+                "priceFeedback": "Qualità/Prezzo",
+                "deliveryFeedback": "Consegna",
+                "customerFeedback": "Servizio Clienti",
+                "productFeedback": "Qualità del prodotto",
  
 
                 "documents": "Documenti",

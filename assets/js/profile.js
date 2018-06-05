@@ -119,6 +119,7 @@ function getUserProfile()
                  starSize: 25,
                  readOnly:true,
                  totalStar:5,
+                 starGradient:{start:"#D40000",end:"#FF0000"},
                  initialRating:data.rates.bayesian_overall_rate
               });  
             } else {
@@ -130,6 +131,7 @@ function getUserProfile()
                 starSize: 25,
                 readOnly:true,
                 totalStar:5,
+                starGradient:{start:"#D40000",end:"#FF0000"},
                 initialRating:data.rates.bayesian_price_value_rate
               });  
             } else {
@@ -141,6 +143,7 @@ function getUserProfile()
                 starSize: 25,
                 readOnly:true,
                 totalStar:5,
+                starGradient:{start:"#D40000",end:"#FF0000"},
                 initialRating:data.rates.bayesian_customer_service_rate
               });  
             } else {
@@ -152,6 +155,7 @@ function getUserProfile()
                 starSize: 25,
                 readOnly:true,
                 totalStar:5,
+                starGradient:{start:"#D40000",end:"#FF0000"},
                 initialRating:data.rates.bayesian_delivery_rate
               });  
             } else {
@@ -163,6 +167,7 @@ function getUserProfile()
                 starSize: 25,
                 readOnly:true,
                 totalStar:5,
+                starGradient:{start:"#D40000",end:"#FF0000"},
                 initialRating:data.rates.bayesian_product_rate
               });  
             } else {

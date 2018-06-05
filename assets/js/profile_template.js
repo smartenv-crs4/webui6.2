@@ -261,28 +261,28 @@ var feedbackTemplate = `
 <div id="feedbackTab" class="profile-edit tab-pane fade">									
   <h2 class="heading-md" data-i18n="profile.feedbackTitle"></h2>
   <div>
-    <div style="display:inline-block;margin-right:5px">
-     <span id="label_overall">Overall</span>
+    <div style="display:inline-block;margin-right:20px">
+     <span id="label_overall" data-i18n="profile.overallFeedback">Overall</span>
      <div id="overall">
      </div>
     </div>
-    <div style="display:inline-block;margin-right:5px">
-     <span id="label_price">Price/Value</span>
+    <div style="display:inline-block;margin-right:20px">
+     <span id="label_price" data-i18n="profile.priceFeedback">Price/Value</span>
      <div id="price">
      </div>
     </div>
-    <div style="display:inline-block;margin-right:5px">
-     <span id="label_cservice">Customer service</span>
+    <div style="display:inline-block;margin-right:20px">
+     <span id="label_cservice" data-i18n="profile.customerFeedback">Customer service</span>
      <div id="cservice">
      </div>
     </div>
-    <div style="display:inline-block;margin-right:5px">
-     <span id="label_delivery">Delivery</span>
+    <div style="display:inline-block;margin-right:20px">
+     <span id="label_delivery" data-i18n="profile.deliveryFeedback">Delivery</span>
      <div id="delivery">
      </div>
     </div>
-    <div style="display:inline-block;margin-right:5px">
-     <span id="label_product">Product</span>
+    <div style="display:inline-block;margin-right:20px">
+     <span id="label_product" data-i18n="profile.productFeedback">Product</span>
      <div id="product">
      </div>
     </div>
