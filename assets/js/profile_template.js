@@ -80,6 +80,30 @@ var customerProfileTemplate = `
         <i class="fa fa-pencil"></i>
       </a>
     </span -->
+    {{#if_eq phoneVerified 'true'}}
+    <div style="margin-left:12px; display:inline-block">
+      <span class="glyphicon glyphicon-ok" style="color:green;"></span>
+      <span data-i18n="profile.verified"></span>
+    </div>
+    {{/if_eq}}
+
+    {{#if_not_eq phoneVerified 'true'}}
+      <div style="display: inline-block;margin-left: 12px;">
+         <button type="button" class="btn-u" data-i18n="profile.sendVerificationCode" onclick="sendPhoneVerificationCode()">Send verification code</button>
+         <div class="input-group">
+           <span class="input-group-btn">
+             <button type="button" data-i18n="profile.verifyCode" onclick="verifyPhoneCode()" class="btn-u btn-outline-secondary">
+             </button>
+           </span>
+           <input class="form-control" id="phoneValidationCode"  type="text">
+         </div>
+      </div>
+
+
+
+    {{/if_not_eq}}
+
+
   </dd>
   <!-- hr>
   <dt><strong data-i18n="profile.logo"></strong></dt>
@@ -185,6 +209,26 @@ var supplierProfileTemplate = `
         <i class="fa fa-pencil"></i>
       </a>
     </span -->
+    {{#if_eq phoneVerified 'true'}}
+      <div style="margin-left:12px; display:inline-block">
+       <span class="glyphicon glyphicon-ok" style="color:green;"></span>
+        <span data-i18n="profile.verified"></span>
+      </div>
+    {{/if_eq}}
+
+    {{#if_not_eq phoneVerified 'true'}}
+      <div style="display: inline-block;margin-left: 12px;">
+         <button type="button" class="btn-u" data-i18n="profile.sendVerificationCode" onclick="sendPhoneVerificationCode()"></button>
+         <div class="input-group">
+           <span class="input-group-btn">
+             <button type="button" data-i18n="profile.verifyCode" onclick="verifyPhoneCode()" class="btn-u btn-outline-secondary">
+               Verify code
+             </button>
+           </span>
+           <input class="form-control" id="phoneValidationCode"  type="text">
+         </div>
+      </div>
+    {{/if_not_eq}}
   </dd>
   <!-- hr>
   <dt><strong data-i18n="profile.logo"></strong></dt>

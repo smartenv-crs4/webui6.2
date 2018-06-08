@@ -356,6 +356,8 @@ function updateProfile()
     {  
       jQuery('.editable-unsaved').removeClass('editable-unsaved');
       jQuery.jGrowl(i18next.t("profile.saved"), {theme:'bg-color-green1', life: 5000});
+      getUserProfile();
+
       
     },     
     error: function(xhr, status)
@@ -447,6 +449,102 @@ function changePassword()
   });  
 }
 
+function sendPhoneVerificationCode()
+{
+  if(sessionStorage.userId == undefined)
+  {      
+    redirectToLogin(); 
+  }
+  
+  var ret;
+  
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/actions/phone/verification",
+    type: "POST",    
+    contentType: "application/json; charset=utf-8",
+    success: function(dataResp, textStatus, xhr)
+    {
+      //msg = i18next.t("error.internal_server_error");
+      var msg = "The SMS verification code has been sent to the provided phone number";
+      jQuery.jGrowl(msg, {theme:'bg-color-green', life: 10000});
+          
+    },     
+    error: function(xhr, status)
+    {
+      var msg;
+      try
+      {        
+        msg = xhr.responseJSON.message;
+      }
+      catch(err)
+      {
+        msg = i18next.t("error.internal_server_error");
+      }
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+            
+      return;    
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    }                    
+  });   
+}
+
+
+function verifyPhoneCode()
+{
+  if(sessionStorage.userId == undefined)
+  {      
+    redirectToLogin(); 
+  }
+  
+  var ret;
+
+  var data = {};
+  data.verificationCode = jQuery("#phoneValidationCode").val();
+  
+  jQuery.ajax({
+    url: _brokerMsUrl + "users/actions/phone/verify",
+    type: "POST",    
+    data: JSON.stringify(data),
+    contentType: "application/json; charset=utf-8",
+    success: function(dataResp, textStatus, xhr)
+    {
+      //msg = i18next.t("error.internal_server_error");
+      getUserProfile();  
+    },     
+    error: function(xhr, status)
+    {
+      var msg;
+      try
+      {        
+        msg = xhr.responseJSON.message;
+      }
+      catch(err)
+      {
+        msg = i18next.t("error.internal_server_error");
+      }
+      
+      jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+            
+      return;    
+    },
+    beforeSend: function(xhr, settings) 
+    { 
+      xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+    }                    
+  });   
+}
+
+
+
+
+
+
+
+
 function getFavoriteSuppliers()
 {
   if(sessionStorage.userId == undefined)
@@ -487,8 +585,7 @@ function getFavoriteSuppliers()
     { 
       xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
     }                    
-  });  
-  
+  });   
 }
 
 function getCertificationsList()
