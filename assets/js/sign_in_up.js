@@ -61,15 +61,13 @@ function signIn()
     dataType: "json",
     success: function(data, textStatus, xhr)
     {
-        console.log(xhr)
       // success
       if(xhr.status == 200)
       {
-        //console.log(sessionStorage.userId);
-        //sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
-        //sessionStorage.userId = data["access_credentials"]["userId"];
-        sessionStorage.token = data["apiKey"]["token"];
-        sessionStorage.userId = data["userId"];
+        sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
+        sessionStorage.userId = data["access_credentials"]["userId"];
+        //sessionStorage.token = data["apiKey"]["token"];
+        //sessionStorage.userId = data["userId"];
         sessionStorage.email = email;
         getProfileInfo(false);
         redirectToPrevPage();
@@ -169,10 +167,10 @@ function signUp()
       // success
       if(xhr.status == 201)
       {
-        //sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
-        //sessionStorage.userId = data["created_resource"]["_id"];
-        sessionStorage.userId = data["userId"];
-        sessionStorage.token = data["apiKey"]["token"];
+        sessionStorage.token = data["access_credentials"]["apiKey"]["token"];
+        sessionStorage.userId = data["created_resource"]["_id"];
+        //sessionStorage.userId = data["userId"];
+        //sessionStorage.token = data["apiKey"]["token"];
         sessionStorage.email = email;
         getProfileInfo(false);
         sessionStorage.prevPage = "page_profile_settings.html";

@@ -267,8 +267,6 @@ function getProfileInfo(async)
     contentType: "application/json; charset=utf-8",
     success: function(data, textStatus, xhr)
     {
-      console.log(data);
-
       sessionStorage.type = data.type;
       sessionStorage.name = data.name;
       sessionStorage.removeItem("disabled");    
