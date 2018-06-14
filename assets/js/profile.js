@@ -49,6 +49,8 @@ function getUserProfile()
           jQuery("#favoriteTab").addClass("in active");
           
         }
+        jQuery("#logoInput").filestyle({buttonText: i18next.t("profile.logoInputLabel"),
+            buttonBefore: true});
         
       }
       else if(data.type == "supplier")
@@ -70,6 +72,8 @@ function getUserProfile()
         
         //jQuery("#documentInput").filestyle();          
         jQuery("#documentInput").filestyle({buttonText: i18next.t("profile.documentsInputLabel"),
+            buttonBefore: true});
+        jQuery("#logoInput").filestyle({buttonText: i18next.t("profile.logoInputLabel"),
             buttonBefore: true});
     /*        
         var tCertTab = Handlebars.compile(certificationsTabTemplate); 
@@ -246,11 +250,15 @@ function getUserProfile()
       jQuery(document).on("translate", function(){   
         var aType = jQuery("#pType").data("accounttype");        
         if(aType == "customer")
+        {
           jQuery("#pType").html(i18next.t("profile.customer"));
+          jQuery("#logoInput").filestyle("buttonText", i18next.t("profile.logoInputLabel"));
+        }
         else if(aType == "supplier")
           {
             jQuery("#pType").html(i18next.t("profile.supplier"));
             jQuery("#documentInput").filestyle('buttonText', i18next.t("profile.documentsInputLabel"));            
+            jQuery("#logoInput").filestyle('buttonText', i18next.t("profile.logoInputLabel"));
           }
           
         jQuery(".editable").each(function(){          

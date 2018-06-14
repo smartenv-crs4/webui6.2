@@ -122,6 +122,7 @@ var translation = {
                 "favoriteTitle": "Mange your favorite suppliers' list",
                 "favoriteTitle2": "Below you can show your favorite suppliers",
                 "documentsInputLabel": "Choose a pdf document",
+                "logoInputLabel": "Choose an image",
                 "uploadDocument": "Upload",
                 "uploadLogo": "Save logo",
 
@@ -403,6 +404,7 @@ var translation = {
                 "documentsTitle": "Gestisci i tuoi documenti pubblici",
                 "documentsTitle2": "Qui puoi aggiungere o rimuovere documenti",
                 "documentsInputLabel": "Scegli un documento pdf",
+                "logoInputLabel": "Scegli un'immagine",
                 "feedbackTitle": "Cosa scrivono di te i clienti",
                 "feedbackTitle2": "Le parole che hanno usato maggiormente",
                 "uploadDocument": "Upload",
