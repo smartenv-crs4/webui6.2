@@ -21,21 +21,12 @@ var customerProfileTemplate = `
   <!-- --------------------------------- -->
 
   <dt><strong data-i18n="profile.logo"></strong></dt>
-  <dd><br>
+  <dd>
     <div class="row">
       <div class="col-xs-10">
-        <input id="logoInput" name="document" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);" tabindex="-1" type="file">
-        <div class="bootstrap-filestyle input-group">
-          <span class="group-span-filestyle input-group-btn" tabindex="0">
-            <label for="logoInput" class="btn btn-default ">
-              <span class="icon-span-filestyle glyphicon glyphicon-folder-open"></span> 
-              <span class="buttonText" data-i18n="profile.chooseLogo"></span>
-            </label>
-          </span>
-          <input class="form-control " placeholder="" disabled="" type="text">
-        </div>
+        <input id="logoInput" name="logo"  type="file">
       </div>
-      <button type="button" class="btn-u" data-i18n="profile.uploadLogo" onclick="uploadLogo()">Upload</button>
+        <button type="button" class="btn-u" data-i18n="profile.uploadLogo" onclick="uploadLogo()"></button>
     </div>    
   </dd>
 
