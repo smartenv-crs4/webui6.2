@@ -735,7 +735,14 @@ function getFeedback()
       }
       else
       {
-        console.log(xhr.responseJSON.message);
+        try
+        {
+          console.log(xhr.responseJSON.message);
+        }
+        catch(error)
+        {
+          console.log("Error during lda call");
+        }
       }
             
       return;    
