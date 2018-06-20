@@ -159,9 +159,18 @@ function render_row(data, arr_par)
                           for (var i = 0; i < data.docs.length; i++) {
                                     
                                     //console.log(data.docs[i]);
-                                    
-                                    str_rates = render_rates(data.docs[i].rates.overall_rate);
-                                        
+                                   
+                                  
+                                    //str_rates = render_rates(data.docs[i].rates.overall_rate);
+
+                                    try
+                                    {
+                                      str_rates = render_rates(data.docs[i].rates.overall_rate);
+                                    }
+                                    catch(err)
+                                    {
+                                      str_rates = 0;
+                                    }  
                                         
                                         link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i]._id).replace("??", "?").replace("?&", "?");    
                                         
@@ -294,6 +303,16 @@ function render_row(data, arr_par)
                                     
                                     translate = translate_product(data.docs[i].name, data.docs[i].description, data.docs[i].translation[0], lang);
                                     //console.log(data.docs[i].categories[0]);
+                                    var str_rates = "";
+                                    try
+                                    {
+                                      str_rates = render_rates(data.docs[i].rates.overall_rate);
+                                    }
+                                    catch(err)
+                                    {
+                                      str_rates = "";
+                                    }  
+
                                     
                                     _str +=     '<div class="col-md-8">';
                                     _str +=             '<div class="clearfix" style="overflow:hidden; ">';
@@ -304,7 +323,7 @@ function render_row(data, arr_par)
                                     _str +=             '</div>';
                                     _str +=             '<div class="giveMeEllipsis blog-author-desc">';
                                     _str +=                 "<span>"+data.docs[i].supplierId.name +"&nbsp;&nbsp;&nbsp;&nbsp;</span>"; 
-                                    _str +=                 "<span style='cursor: pointer' tabindex='0' data-trigger='focus' data-toggle='popover' data-html='true' data-content='' class='popOver' >"+ render_rates(data.docs[i].supplierId.rates.overall_rate);+"</span>";
+                                    _str +=                 "<span style='cursor: pointer' tabindex='0' data-trigger='focus' data-toggle='popover' data-html='true' data-content='' class='popOver' >"+ str_rates + "</span>";
                                     _str +=             "</div>";
                                     
                                     _str +=             '<div class="giveMeEllipsis blog-author-desc">'+translate.description+'</div>';
@@ -685,11 +704,18 @@ function renderDropCategories(id_category, cat_name, cat_type)
 function popUp_rates(rates)
 {
     //render_rates(data.docs[i].supplierId
-    
-    return "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.price_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_price_value_rate)      + "</span></div>" +
-           "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.delivery_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_delivery_rate)         + "</span></div>" + 
-           "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.product_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_product_rate)          + "</span></div>"  +
-           "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.customer_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_customer_service_rate) +  "</span></div>";
+   
+    try
+    { 
+      return "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.price_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_price_value_rate)      + "</span></div>" +
+             "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.delivery_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_delivery_rate)         + "</span></div>" + 
+             "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.product_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_product_rate)          + "</span></div>"  +
+             "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.customer_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_customer_service_rate) +  "</span></div>";
+   }
+   catch(err)
+   {
+     return "";
+   }
 }
 
 //**************************************************************/

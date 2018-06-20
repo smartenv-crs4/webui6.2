@@ -5,10 +5,14 @@ function getUserProfile()
   {      
     redirectToLogin();
   }
+
   
   jQuery('#profileContent').localize();
   
   var templatePassword = Handlebars.compile(changePasswordTemplate); 
+  jQuery("#passwordTab").nextAll().remove();
+  jQuery("#ptab").nextAll().remove();
+
   jQuery('#passwordTab').html(templatePassword());
   jQuery('#passwordTab').localize();  
     
@@ -20,6 +24,8 @@ function getUserProfile()
     success: function(data, textStatus, xhr)
     {  
       var defaultImg = "assets/img/team/img32-md.jpg";
+      //jQuery("#tabContainer").empty();
+      //jQuery("#tabBodyContainer").empty();
       
       // success
       if(data.type == "customer")

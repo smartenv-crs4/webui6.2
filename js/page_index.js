@@ -108,12 +108,26 @@
                                       
                                     
                                       var str = '<div class="row"><div class="col-md-6"><ul class="dropdown-menu_items" role="menu">';
-                                       console.log(data); 
+                                     
+                                      var str2 = '<div class="row"><div class="col-md-12"><ul class="dropdown-menu_items" role="menu">';
+                                     
+
+                                      var str_p = '';
+
+                                    // type 1  
+                                    
+                                      str2 = str2 + '<li class="visible-xs visible-sm visible-md hidden-lg">'
+                                        + '<div class="row row visible-xs visible-sm visible-md hidden-lg">'
+                                        + '<div ><ul class="dropdown-menu_items"><li><a href="#" type="1"><span id="title_menu_products"></span></a></li></ul></div>'
+                                        + '</div>'
+                                        + '</li>'
+                                        + '<li class="divider visible-xs visible-sm visible-md hidden-lg"></li>'; 
+                                    
+
                                       for (var i = 0; i < data.length; i++) {
-                                          
-                                      if (data[i].type== 1)
+                                       if (data[i].type== 1)
                                       {
-                                      str = str + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
+                                      str_p = str_p + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
                                                         + '<div class="row">'
                                                         + '<div class="col-md-2"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
                                                         + '<div class="col-md-10"><span>'+data[i].name[lang]+'</span>'
@@ -126,15 +140,31 @@
                                     
                                     }
                                       
-                                      str = str + '</ul></div>'
+                                      str_p = str_p + '</ul></div>'
                                                 + '<div class="col-md-6"><ul class="dropdown-menu_items">';
+                                    
 
+                                                str = str + str_p;
+                                                str2 = str2 + str_p;
+          
 
+                                    // type 2
+                                                
+                                                str2 = str2 + '<li class="divider visible-xs visible-sm hidden-md hidden-lg"></li>' +
+                                                + '<li class="visible-xs hidden-sm visible-md hidden-lg">'
+                                                + '<div class="row visible-xs visible-sm visible-md hidden-lg">'
+                                                + '<div <ul class="dropdown-menu_items"><li><a href="#" type="2"><span id="title_menu_services"></span></a></ul></div>'
+                                                + '</div>'
+                                                + '</li>'
+                                                + '<li class="divider visible-xs visible-sm visible-md hidden-lg"></li>'; 
+                                                
+                                                str_p = '';
+                                                
                                                 for (var i = 0; i < data.length; i++) {
                                           
-                                                    if (data[i].type== 2)
+                                                 if (data[i].type== 2)
                                                     {
-                                                    str = str + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
+                                                    str_p = str_p + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
                                                                     + '<div class="row">'
                                                                     + '<div class="col-md-2"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
                                                                     + '<div class="col-md-10"><span>'+data[i].name[lang]+'</span>'
@@ -144,13 +174,18 @@
                                                                     + '</a></li>';
                                                      } //console.log(str);
                                                   }
+                                    
 
 
-                                      str = str + '</ul></div></div>';
+                                      str_p = str_p + '</ul></div></div>';
+                                    
 
+                                      str = str + str_p;
+                                      str2 = str2 + str_p;
 
                                       $('#dropmenu').append(str);
-                                      
+                                      $('#dropmenu2').append(str2);
+
                                       $('.search-panel #dropmenu').find('a').click(function(e) {
                                         e.preventDefault();
                                         var param = $(this).attr("href").replace("#","");
@@ -161,7 +196,24 @@
                                         $('.input-group #cat_type').val(type);
                                         $('.input-group #cat_name').val(concept);
                                         });
-                                                                      
+
+
+
+                                        $('#dropmenu2').find('a').click(function(e) {
+                                            e.preventDefault();
+                                            var param = $(this).attr("href").replace("#","");
+                                            var type = $(this).attr("type");
+                                            var concept = $(this).find("span").text();
+                                            $(' span#search_concept2').text(concept);
+                                            $('.input-group #id_category').val(param);
+                                            $('.input-group #cat_type').val(type);
+                                            $('.input-group #cat_name').val(concept);
+                                            });
+
+
+                                            $("#title_menu_products").text(i18next.t("catalog.products"));
+                                            $("#title_menu_services").text(i18next.t("nav.services"));
+                                                                       
                                   },
                                   error: function()
                                   {

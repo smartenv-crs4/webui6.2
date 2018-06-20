@@ -402,7 +402,11 @@ function autoCompleteCat(tagId, callback)
       }
     }
   });
-    
+  
+  jQuery('#' + tagId).localize();
+  jQuery("#" + tagId).attr("data-i18n-bak", jQuery("#" + tagId).attr("data-i18n"));
+  jQuery("#" + tagId).removeAttr("data-i18n");
+
   jQuery('#' + tagId).typeahead(null, {
     name: 'categories',
     display: 'name',
@@ -421,6 +425,8 @@ function autoCompleteCat(tagId, callback)
     }
 
   });
+
+  jQuery("#" + tagId).attr("data-i18n", jQuery("#" + tagId).attr("data-i18n-bak"));
 
   jQuery('#' + tagId).data("cat-id", "");
   jQuery('#' + tagId).data("cat-name", "");

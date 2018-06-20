@@ -56,10 +56,12 @@
     <link rel="stylesheet" href="assets/css/typeaheadjs.css">  
     <style>
     
+    .button-menu {
+        padding: 0px;
+    }
     
-    
-    .dropdown-menu {
-        min-width: 740px;
+    .dropdown-menu  {
+        min-width: 800%;
     }
 
     .dropdown-menu_items {
@@ -115,10 +117,19 @@
                     <div class="input-group">
                     
                     <div class="input-group-btn search-panel">
-                    <button type="button" class="form-control btn btn-default dropdown-toggle" style="background: #dddddd" data-toggle="dropdown">
+                    
+
+                            
+            <!--        
+            <nav class="navbar navbar-default" role="navigation">   
+                        <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse button-menu">
+                        -->            
+             <div class="hidden-xs hidden-sm hidden-md visble-lg">           
+                        
+                            <button type="button" class="form-control btn btn-default dropdown-toggle" style="background: #dddddd" data-toggle="dropdown">
                         <span id="search_concept" class="spanSearch" data-i18n="profile.categories"></span> <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu" role="menu" id="dropmenu">
+                    <ul class="dropdown-menu " role="menu" id="dropmenu">
                       <li><a href="#"><span data-i18n="homepage.everything"></span></a></li>
                       <li class="divider"></li>
                       <li>
@@ -130,8 +141,17 @@
                       <li class="divider"></li>
                       
                         </ul>
-
+                    
+                <!--    
+                    </div>
+                
+                </nav>
+            -->
+        </div> 
+                
                 </div>
+
+
                 <input type="hidden" name="id_category" value="" id="id_category">
                 <input type="hidden" name="cat_name" value="" id="cat_name">
                 <input type="hidden" name="cat_type" value="" id="cat_type">    
@@ -149,6 +169,21 @@
                     <form action="list" id="form" class="sky-form page-search-form">
                             
                             <div class="inline-group">
+                            <label class="visible-xs visible-sm visible-md hidden-lg checkbox ">
+                                
+                                <span class="dropdown-toggle" data-toggle="dropdown">
+                                        <span id="search_concept2" class="spanSearch" style="font-weight: bold" data-i18n="profile.categories"></span> <span class="caret"></span>
+                                </span>
+
+                                    <ul class="dropdown-menu " style="width: 100%" role="menu" id="dropmenu2">
+                                            <li><a href="#"><span data-i18n="homepage.everything"></span></a></li>
+                                            <li class="divider"></li>
+                                            
+                                              </ul>
+
+
+                            </label>
+                            
                             <label class="checkbox"><input id="ckProduct" class="search_select" name="checkbox-inline" checked="" type="checkbox" value="p"><i ></i><span data-i18n="catalog.products" style="font-weight: bold"></span></label>
                             <label  class="checkbox "><input id="ckSupplier" name="checkbox-inline" class="search_select" type="checkbox" value="s"><i></i><span data-i18n="homepage.suppliers" style="font-weight: bold"></span></label>
                             </div>
