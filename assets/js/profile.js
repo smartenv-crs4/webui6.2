@@ -1,3 +1,11 @@
+window.onbeforeunload = function()
+{
+  if(jQuery(".editable-unsaved").length > 0)
+  {
+    return "";
+  }
+}
+
 
 function getUserProfile()
 {     

@@ -261,7 +261,9 @@ var translation = {
                 "numberOfDays": "Number of Days",
                 "images": "Images",
                 "noProductSearch": "No products found",
-                "blockMsg": "Please wait..."
+                "blockMsg": "Please wait...",
+                "infoIt": "Italian",
+                "infoEn": "English"
             },
             "evaluation": {
                 "evaluation": "Evaluation",
@@ -564,7 +566,9 @@ var translation = {
                 "numberOfDays": "Numero di giorni",
                 "images": "Immagini",
                 "noProductSearch": "Nessun prodotto trovato",
-                "blockMsg": "Attendi..."
+                "blockMsg": "Attendi...",
+                "infoIt": "Italiano",
+                "infoEn": "Inglese"
             },
             "evaluation": {
                 "evaluation": "Valutazioni",

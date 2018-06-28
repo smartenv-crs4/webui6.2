@@ -83,7 +83,6 @@
                                     <div class="" style="display: inline-block;">
                                         <strong id="new-product-header" class="" style=""></strong>
                                     </div>
-                                    <a href="#"><i class="fa fa-cog pull-right"></i></a>
                                 </div>
 
                             </div>
@@ -466,21 +465,56 @@
         <fieldset>
 
             <div class="row">
-                <section class="col col-6">
+                <section class="">
                     <label class="label" data-i18n="product.category"></label>
                     <label class="input">
-                      <!--  <select name="gender">
-                            <option value="0" selected="" disabled="">Pasta fresca</option>
-                            <option value="1">Pesce</option>
-                            <option value="2">Formaggio</option>
-                            <option value="3">Dolci</option>
-                        </select>-->
                         <input type="text" name="name" id="categoryField">
 
                     </label>
                 </section>
+                <section class="">
+                  <ul class="nav nav-justified nav-tabs">
+                    <li  class="active tab-bar"><a data-toggle="tab" href="#it-block" data-i18n="product.infoIt"></a></li>
+                    <li  class="tab-bar"><a data-toggle="tab" href="#en-block" data-i18n="product.infoEn" ></a></li>
+                  </ul>
+                  <div class="tab-content" style="border: solid 1px #ddd;">
+                    <div id="it-block" class="tab-pane fade in active">
+                      
+                      <section class="" style=" padding:5px;">
+                        <!-- h4 style="width:40px; margin-top: -20px; margin-left:5px; background:white; text-align:center">IT</h4 -->
+                        <label class="label" data-i18n="profile.name"></label>
+                        <label class="input">
+                            <i class="icon-append  icon-target"></i>
+                            <input type="text" name="name" id="name_it">
+                        </label>
 
-                <section class="col col-11" style="border: solid 1px #ddd; padding:5px;">
+                        <label class="label" data-i18n="profile.description"></label>
+                        <label class="textarea">
+                          <textarea rows="3" id="description_it"></textarea>
+                        </label>
+                        <div class="note"><strong data.i18n="product.note">Note: </strong><span data-i18n="product.maxCharacters">massimo 500 caratteri.</span></div>
+                      </section>
+                    </div>
+
+                    <div id="en-block" class="tab-pane fade">
+                      <section class="" style="padding:5px;">
+                        <!-- h4 style="width:40px; margin-top: -20px; margin-left:5px; background:white; text-align:center">EN</h4 -->
+                        <label class="label" data-i18n="profile.name"></label>
+                        <label class="input">
+                          <i class="icon-append  icon-target"></i>
+                          <input type="text" name="name" id="name_en">
+                        </label>
+                        <label class="label" data-i18n="profile.description"></label>
+                        <label class="textarea">
+                        <textarea rows="3" id="description_en"></textarea>
+                      </label>
+                      <div class="note"><strong data.i18n="product.note">Note: </strong><span data-i18n="product.maxCharacters">massimo 500 caratteri.</span></div>
+                    </section>
+                  </div>
+                </div>
+              </section>
+<!--
+                <section class="" style="border: solid 1px #ddd; padding:5px;">
                     <h4 style="width:40px; margin-top: -20px; margin-left:5px; background:white; text-align:center">IT</h4>
                     <label class="label" data-i18n="profile.name"></label>
                     <label class="input">
@@ -495,7 +529,7 @@
                     <div class="note"><strong data.i18n="product.note">Note: </strong><span data-i18n="product.maxCharacters">massimo 500 caratteri.</span></div>
                   </section>
 
-                  <section class="col col-11" style="border: solid 1px #ddd; padding:5px;">
+                  <section class="" style="border: solid 1px #ddd; padding:5px;">
                     <h4 style="width:40px; margin-top: -20px; margin-left:5px; background:white; text-align:center">EN</h4>
                     <label class="label" data-i18n="profile.name"></label>
                     <label class="input">
@@ -509,7 +543,7 @@
                     <div class="note"><strong data.i18n="product.note">Note: </strong><span data-i18n="product.maxCharacters">massimo 500 caratteri.</span></div>
                   </section>
 
-
+-->
 
 
             </div>
