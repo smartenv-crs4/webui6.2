@@ -146,7 +146,7 @@ function render_row(data, arr_par)
                                         _str = _str +'<th style="width: 10%" data-i18n="product.thLogo"></th>';
                                         _str = _str +'<th class="hidden-sm" style="width: 70%" data-i18n="product.thAbout"></th>';
                                         _str = _str +'<th style="width: 10%" data-i18n="product.thRates"></th>';
-                                        _str = _str +'<th style="width: 10%" data-i18n="product.thAction"></th>';
+                                        _str = _str +'<th data-i18n="product.thAction"></th>';
                                     _str = _str +'</tr>';
                                     _str = _str +'</thead>';
                                     _str = _str +'<tbody id="t_list">';
@@ -158,23 +158,9 @@ function render_row(data, arr_par)
                           
                           for (var i = 0; i < data.docs.length; i++) {
                                     
-                                    //console.log(data.docs[i]);
-                                   
-                                  
-                                    //str_rates = render_rates(data.docs[i].rates.overall_rate);
-
-                                    try
-                                    {
-                                      str_rates = render_rates(data.docs[i].rates.overall_rate);
-                                    }
-                                    catch(err)
-                                    {
-                                      str_rates = 0;
-                                    }  
+                                     link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i]._id).replace("??", "?").replace("?&", "?");    
                                         
-                                        link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i]._id).replace("??", "?").replace("?&", "?");    
-                                        
-                                            _str += '<tr>'
+                                    _str += '<tr>'
                                     + '<td>'
                                     + '    <img class="rounded-x" style="width: 100px" src="'; 
                                     if (data.docs[i].logo) 
@@ -196,8 +182,8 @@ function render_row(data, arr_par)
                                     if (data.docs[i].phone) _str = _str + '<span>'+ data.docs[i].phone +'</span>';
                                     _str = _str + '</td> -->'
                                     + '<td>'
-                                    // if (data.docs[i].rates)
-                                    _str = _str +  str_rates;
+                                    + '<span style="cursor: pointer;" tabindex="0" data-trigger="focus" data-toggle="popover" data-html="true" data-content="" class="popOver" id="rates_'+data.docs[i]._id+'" data-id="'+data.docs[i]._id+'"></span>'
+                                   // + '<div id="rates_' + data.docs[i]._id + '"></div>'
                                     
                                     
                                     _str = _str +   '</td>'
@@ -208,21 +194,49 @@ function render_row(data, arr_par)
                                     + '</td>' 
                                 + '</tr>';
                                           
+                                _str += '<div id="popover-content_'+data.docs[i]._id+'" class="hide">'
+                                _str +=     '<div class="clearfix" style="padding: 4px 0"><span class="pull-left" data-i18n="evaluation.price_rate">:</span>&nbsp;<span class="pull-right" id="rates_price_value_'+data.docs[i]._id+'"></span></div>' 
+                                _str +=     '<div class="clearfix" style="padding: 4px 0"><span class="pull-left" data-i18n="evaluation.delivery_rate">:</span>&nbsp;<span class="pull-right" id="rates_delivery_'+data.docs[i]._id+'"></span></div>'  
+                                _str +=     '<div class="clearfix" style="padding: 4px 0"><span class="pull-left" data-i18n="evaluation.product_rate">:</span>&nbsp;<span class="pull-right" id="rates_product_'+data.docs[i]._id+'"></span></div>'  
+                                _str +=     '<div class="clearfix" style="padding: 4px 0"><span class="pull-left" data-i18n="evaluation.customer_rate">:</span>&nbsp;<span class="pull-right" id="rates_customer_service_'+data.docs[i]._id+'"></span></div>';
+                                _str +=     '</div>';
+  
                                       
+                            }
                                       
-                                      }
-                                      
-                                _str = _str +'</tbody>';
+                                _str = _str +'</tbody>'; 
                                 _str = _str +'</table>';
                                 _str = _str +'</div>';
                                 _str = _str +'</div>';        
-                                      
+                                
+                                
                                       
                                       $('#div_list').append(_str);                  
+                                      
+                                      // star ratings
+                                for (var i = 0; i < data.docs.length; i++) {
+                                      
+                                    getStars("#rates_" +data.docs[i]._id,                                   data.docs[i].rates.bayesian_overall_rate);
+                                    getStars("#rates_price_value_" +data.docs[i]._id,                data.docs[i].rates.bayesian_price_value_rate);
+                                    getStars("#rates_delivery_" +data.docs[i]._id,                     data.docs[i].rates.bayesian_delivery_rate);
+                                    getStars("#rates_product_" +data.docs[i]._id,                     data.docs[i].rates.bayesian_product_rate);
+                                    getStars("#rates_customer_service_" +data.docs[i]._id,      data.docs[i].rates.bayesian_customer_service_rate);
+                                    
+                                }
+                                      
                                 
-                                
-                                
-                                
+                                $('.popOver').popover({html: true,
+                                    placement: 'bottom',
+                                    content: function(){
+                                        return $('#popover-content_'+ $(this).attr('data-id')).html();   
+                                    },
+                                    title: i18next.t("evaluation.evaluation")
+                                    });
+                      
+                                    $(".popOver").attr("data-original-title", i18next.t("evaluation.evaluation")); 
+                                      
+                                      
+                                      
                                 
                                 $('.a_productList').click(function(){
                                       var id = ($(this).attr('data-id'));
@@ -239,6 +253,9 @@ function render_row(data, arr_par)
                                       
                                       
                                 });
+
+
+
                                 
                       }
                       else
@@ -276,9 +293,9 @@ function render_row(data, arr_par)
                                         
                                     _str += '<div class="row">';
                                     
-                                    _str +=     '<div class="col-md-2 text-center" href="#">';
+                                    _str +=     '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 text-center" href="#">';
                                     _str +=         '<img class="media-s100 img-circle" src="' + _img[0].url +'" alt="" style="cursor:pointer; height: 100px; width:100px" onclick="openGallery(this)" data-iid="'+ _img[0].id +'" onError="this.onerror=null;this.src=\'assets/img/team/img1-md.jpg\'">';
-                                    _str +=     '<div class="center-block">';
+                                    _str +=     '<div class="center-block margin-left-10">';
                                     for (var t in _img)
                                     {       
                                        
@@ -302,33 +319,22 @@ function render_row(data, arr_par)
                                         category = mcat.name[lang];
                                     
                                     translate = translate_product(data.docs[i].name, data.docs[i].description, data.docs[i].translation[0], lang);
-                                    //console.log(data.docs[i].categories[0]);
-                                    var str_rates = "";
-                                    try
-                                    {
-                                      str_rates = render_rates(data.docs[i].rates.overall_rate);
-                                    }
-                                    catch(err)
-                                    {
-                                      str_rates = "";
-                                    }  
-
                                     
-                                    _str +=     '<div class="col-md-8">';
-                                    _str +=             '<div class="clearfix" style="overflow:hidden; ">';
+                                    _str +=     '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">';
+                                    _str +=             '<div class="clearfix margin_left_10" style="overflow:hidden; margin-top: 4px;"> ';
                                     _str +=                 '<h4 class="media-heading">';
                                     _str +=                     '<strong style="display:block;"><a href=" '+ link + '">'+translate.name+'</a></strong>';
                                     _str +=                     '<small style="display:block; max-width:50%;">'+category+'</small>';
                                     _str +=                 '</h4>';
                                     _str +=             '</div>';
-                                    _str +=             '<div class="giveMeEllipsis blog-author-desc">';
+                                    _str +=             '<div class="giveMeEllipsis blog-author-desc margin_left_10">';
                                     _str +=                 "<span>"+data.docs[i].supplierId.name +"&nbsp;&nbsp;&nbsp;&nbsp;</span>"; 
-                                    _str +=                 "<span style='cursor: pointer' tabindex='0' data-trigger='focus' data-toggle='popover' data-html='true' data-content='' class='popOver' >"+ str_rates + "</span>";
+                                    _str +=                 "<span style='cursor: pointer;' tabindex='0' data-trigger='focus' data-toggle='popover' data-html='true' data-content='' class='popOver' id='rates_"+data.docs[i]._id+"' data-id='"+data.docs[i]._id+"'></span>";
                                     _str +=             "</div>";
                                     
-                                    _str +=             '<div class="giveMeEllipsis blog-author-desc">'+translate.description+'</div>';
+                                    _str +=             '<div class="giveMeEllipsis blog-author-desc" style="margin-left: 10px">'+translate.description+'</div>';
                                     
-                                    _str +=             '<ul class="list-inline share-list">';  
+                                    _str +=             '<ul class="list-inline share-list margin_left_10">';  
                                     if (mcat.type == 1)
                                     {
                                         _str +=                 '<li><i class="fa fa-chevron-up"></i><span data-i18n="catalog.atleast">Min</span> '+checkValue(data.docs[i].minNum)+'</li>';
@@ -347,15 +353,22 @@ function render_row(data, arr_par)
                                      
                                     _str +=     '</div>';
                                      
-                                    _str +=     '<div class="col-md-2 text-left">';
-                                    _str +=         '<button class="btn-u  rounded btn-sm sDetails" type="button" data-par="'+var_par+'" data-id_product="'+ data.docs[i]._id +'" data-id="'+ data.docs[i].supplierId._id +'"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>';
+                                    _str +=     '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 text-left">';
+                                    _str +=         '<button style="margin-top: 4px;" class="btn-u  rounded btn-sm sDetails margin_left_10" type="button" data-par="'+var_par+'" data-id_product="'+ data.docs[i]._id +'" data-id="'+ data.docs[i].supplierId._id +'"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>';
                                     _str +=     '</div>';
-                                        
+                                     // row   
                                     _str +=     '</div>';
                                     
                                     
-                                    _str += '<div id="popover-content" class="hide">' + popUp_rates(data.docs[i].supplierId.rates) + '</div>';
+                                   // _str += '<div id="popover-content" class="hide">' + popUp_rates(data.docs[i].supplierId.rates) + '</div>';
                                     
+
+                                    _str += '<div id="popover-content_'+data.docs[i]._id+'" class="hide">'
+                                    _str +=     '<div class="clearfix" style="padding: 4px 0"><span class="pull-left" data-i18n="evaluation.price_rate">:</span>&nbsp;<span class="pull-right" id="rates_price_value_'+data.docs[i]._id+'"></span></div>' 
+                                    _str +=     '<div class="clearfix" style="padding: 4px 0"><span class="pull-left" data-i18n="evaluation.delivery_rate">:</span>&nbsp;<span class="pull-right" id="rates_delivery_'+data.docs[i]._id+'"></span></div>'  
+                                    _str +=     '<div class="clearfix" style="padding: 4px 0"><span class="pull-left" data-i18n="evaluation.product_rate">:</span>&nbsp;<span class="pull-right" id="rates_product_'+data.docs[i]._id+'"></span></div>'  
+                                    _str +=     '<div class="clearfix" style="padding: 4px 0"><span class="pull-left" data-i18n="evaluation.customer_rate">:</span>&nbsp;<span class="pull-right" id="rates_customer_service_'+data.docs[i]._id+'"></span></div>';
+                                    _str +=     '</div>';
                                     
                                     _str += '<hr>';
                                     
@@ -365,24 +378,29 @@ function render_row(data, arr_par)
                                 }
                                     
                                     $('#div_list').append(_str);
+                                
+                                // star ratings
+                                for (var i = 0; i < data.docs.length; i++) {
+                                     console.log(data.docs[i].supplierId.rates); 
+                                    getStars("#rates_" +data.docs[i]._id,                                   data.docs[i].supplierId.rates.bayesian_overall_rate);
+                                    getStars("#rates_price_value_" +data.docs[i]._id,                data.docs[i].supplierId.rates.bayesian_price_value_rate);
+                                    getStars("#rates_delivery_" +data.docs[i]._id,                     data.docs[i].supplierId.rates.bayesian_delivery_rate);
+                                    getStars("#rates_product_" +data.docs[i]._id,                     data.docs[i].supplierId.rates.bayesian_product_rate);
+                                    getStars("#rates_customer_service_" +data.docs[i]._id,      data.docs[i].supplierId.rates.bayesian_customer_service_rate); 
                                     
-                                    /*
-                                    $('document').on('translate', function(){
-                                       
-                                    })
-                                    */
-                                    
-                                    
+                                }
+                                
+                                
+                                    $('.popOver').popover({html: true,
+                                        placement: 'bottom',
+                                        content: function(){ 
+                                            console.log($(this).attr('data-id'));
+                                            return $('#popover-content_'+ $(this).attr('data-id')).html();   
+                                        },
+                                        title: i18next.t("evaluation.evaluation")
+                                        });
                       
-                      
-                                $('.popOver').popover({html: true,
-                                content: function(){
-                                return $('#popover-content').html();   
-                                },
-                                title: i18next.t("evaluation.evaluation")
-                                });
-                      
-                      $(".popOver").attr("data-original-title", i18next.t("evaluation.evaluation")); 
+                                    $(".popOver").attr("data-original-title", i18next.t("evaluation.evaluation")); 
                                     
                       
                       }
@@ -400,14 +418,37 @@ function render_row(data, arr_par)
                                 
 }
 
+// render star rating
+function getStars(el, count)
+{
+    
+    let _rates = 0;
+    
+    if(count) {
+        _rates = count;
+    }    
+   
 
+        jQuery(el).starRating({
+            starSize: 18,
+            readOnly:true,
+            totalStar:5, 
+            starGradient:{start:"#D40000",end:"#FF0000"},
+            initialRating: _rates
+            
+});
+
+}
+
+
+// render pagination number
 function render_paginate(tot_page, act_page, arr_par)
 {
    var_par = get_par_string(arr_par);
     
     
     var str = '<div class="text-left" id="divPagination">'
-    + '<ul class="pagination"><li><a ';
+    + '<ul class="pagination pagination-sm" ><li><a ';
    if (act_page > 1) 
         str = str + ' href="#" class="p_link" ';
      
@@ -515,208 +556,6 @@ function render_searchInput()
     }     
 }
 
-
-function render_rates(_rates)
-{
-    
-    var tab = '<ul class="list-inline star-vote" style="display: inline-flex">';
-    
-    
-    
-    switch (_rates) {
-      case 1:
-            tab = tab +  '    <ul class="list-inline star-vote" style="display: inline-flex">'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
-                                    
-      break;
-      case 2:
-            tab = tab +  '            <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>';
-                                    
-      break;
-      case 3:
-            tab = tab +  '    <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>';
-                                    
-      break;
-      case 4:
-            tab = tab +  '    <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>';
-                                    
-      break;
-      case 5:
-            tab = tab +  '    <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star"></i></li>';
-      break;
-      default:
-            tab = tab +  '    <li><i class="color-green fa fa-star-o"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>'
-                                    + '        <li><i class="color-green fa fa-star-o"></i></li>';
-        
-        
-    }
-    
-    tab = tab +  '    </ul>';
-    
-    
-    return tab;
-    
-}
-
-
-function renderDropCategories(id_category, cat_name, cat_type)
-{
-       /*
-        if (id_category)
-        {
-            $('#search_concept').text(cat_name);
-            $('.input-group #id_category').val(id_category);
-            $('.input-group #cat_name').val(cat_name);
-        }
-        else
-        {
-            $('#search_concept').attr("placeholder", i18next.t("profile.categories"));
-        }
-        */
-        
-            
-        $.ajax({
-                                  type: "GET",
-                                  url: api_url + "categories/drop?liv=1&lang="+lang,
-                                  data: 
-                                  {
-                                    
-                                  },
-
-                                  dataType: "json",
-                                  success: function(data)
-                                  {
-                                    var str = '<div class="row"><div class="col-md-6"><ul class="dropdown-menu_items" role="menu">';  
-                                      for (var i = 0; i < data.length; i++) {
-                                          
-                                      
-                                        if (data[i].type== 1)
-                                      {
-                                      str = str + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
-                                                        + '<div class="row">'
-                                                        + '<div class="col-md-2"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
-                                                        + '<div class="col-md-10"><span>'+data[i].name[lang]+'</span>'
-                                                        + '<p class="dropdown-desc">'+data[i].description[lang]+'</p>'
-                                                        + '</div>'
-                                                        + '</div>'
-                                                        + '</a></li>';
-                                      }  
-                                      //console.log(str);
-
-                                      if (id_category && id_category == data[i]._id)
-                                    {
-                                        //console.log(lang + ' ' + data[i]._id + ' ' + data[i].name[lang]);
-                                        $('.search-panel span#search_concept').text(data[i].name[lang]);
-                                        $('.input-group #id_category').val(data[i]._id);
-                                        $('.input-group #cat_name').val(data[i].name[lang]);
-                                        $('.input-group #cat_type').val(data[i].type);
-                                    }
-
-                                    
-                                    }
-                                      
-                                      str = str + '</ul></div>'
-                                                + '<div class="col-md-6"><ul class="dropdown-menu_items">';
-
-
-                                                for (var i = 0; i < data.length; i++) {
-                                          
-                                                    if (data[i].type== 2)
-                                                    {
-                                                    str = str + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
-                                                                    + '<div class="row">'
-                                                                    + '<div class="col-md-2"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
-                                                                    + '<div class="col-md-10"><span>'+data[i].name[lang]+'</span>'
-                                                                    + '<p class="dropdown-desc">'+data[i].description[lang]+'</p>'
-                                                                    + '</div>'
-                                                                    + '</div>'
-                                                                    + '</a></li>';
-                                                     } //console.log(str);
-
-
-                                                     if (id_category && id_category == data[i]._id)
-                                                     {
-                                                         //console.log(lang + ' ' + data[i]._id + ' ' + data[i].name[lang]);
-                                                         $('.search-panel span#search_concept').text(data[i].name[lang]);
-                                                         $('.input-group #id_category').val(data[i]._id);
-                                                         $('.input-group #cat_name').val(data[i].name[lang]);
-                                                         $('.input-group #cat_type').val(data[i].type);
-                                                     }
-
-                                                  }
-
-
-                                      str = str + '</ul></div></div>';
-                                        
-                                      
-                                                  
-                                      
-                                      
-                                      
-                                      $('#dropmenu').append(str);
-                                      
-                                      
-                                      
-                                      
-                                      $('.search-panel #dropmenu').find('a').click(function(e) {
-                                        e.preventDefault();
-                                        var param = $(this).attr("href").replace("#","");
-                                        var type = $(this).attr("type");
-                                        var concept = $(this).find("span").text();
-                                        $('.search-panel span#search_concept').text(concept);
-                                        $('.input-group #id_category').val(param);
-                                        $('.input-group #cat_type').val(type);
-                                        $('.input-group #cat_name').val(concept);
-                                        });
-                                                                      
-                                  },
-                                  error: function()
-                                  {
-                                    alert("Errore di caricamento");
-                                  }
-});
-        
-    }
-    
-function popUp_rates(rates)
-{
-    //render_rates(data.docs[i].supplierId
-   
-    try
-    { 
-      return "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.price_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_price_value_rate)      + "</span></div>" +
-             "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.delivery_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_delivery_rate)         + "</span></div>" + 
-             "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.product_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_product_rate)          + "</span></div>"  +
-             "<div class='clearfix'><span class='pull-left' data-i18n='evaluation.customer_rate'>:</span>&nbsp;&nbsp;<span class='pull-right'>" + render_rates(rates.avg_customer_service_rate) +  "</span></div>";
-   }
-   catch(err)
-   {
-     return "";
-   }
-}
 
 //**************************************************************/
 //* proxy -> chaimate ajax alle api data*/
@@ -1040,6 +879,224 @@ function translate_product(name, description, translation, lang)
                                         return {"name": name_tr, "description": description_tr}; 
                                          
                                     }
+
+
+/* ******************/
+// dropdown categories
+/* ******************/
+
+function renderDropCategories(id_category, cat_name, cat_type)
+{
+    $.ajax({
+        type: "GET",
+        url: api_url + "categories/drop?liv=1&lang="+lang,
+        data: 
+        {
+          
+        },
+
+        dataType: "json",
+        success: function(data)
+        {
+            renderListCategories_1(data, id_category, cat_name, cat_type);
+            renderListCategories_2(data, id_category, cat_name, cat_type)
+        },
+        error: function()
+        {
+          alert("Errore di caricamento");
+        }
+});
+}
+
+
+function renderListCategories_1(data, id_category, cat_name, cat_type)
+{
+    var str = '<div class="row"><div class="col-md-6"><ul class="dropdown-menu_items" role="menu">';  
+                                      for (var i = 0; i < data.length; i++) {
+                                          
+                                      
+                                      if (data[i].type== 1)
+                                      {
+                                      str = str + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
+                                                        + '<div class="row">'
+                                                        + '<div class="col-md-2"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
+                                                        + '<div class="col-md-10"><span>'+data[i].name[lang]+'</span>'
+                                                        + '<p class="dropdown-desc">'+data[i].description[lang]+'</p>'
+                                                        + '</div>'
+                                                        + '</div>'
+                                                        + '</a></li>';
+                                      }  
+                                      //console.log(str);
+
+                                      if (id_category && id_category == data[i]._id)
+                                    {
+                                        //console.log(lang + ' ' + data[i]._id + ' ' + data[i].name[lang]);
+                                        $('.search-panel span#search_concept').text(data[i].name[lang]);
+                                        $('.input-group #id_category').val(data[i]._id);
+                                        $('.input-group #cat_name').val(data[i].name[lang]);
+                                        $('.input-group #cat_type').val(data[i].type);
+                                    }
+
+                                    
+                                    }
+                                      
+                                      str = str + '</ul></div>'
+                                                + '<div class="col-md-6"><ul class="dropdown-menu_items">';
+
+
+                                    for (var i = 0; i < data.length; i++) {
+                                
+                                        if (data[i].type== 2)
+                                        {
+                                        str = str + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
+                                                        + '<div class="row">'
+                                                        + '<div class="col-md-2"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
+                                                        + '<div class="col-md-10"><span>'+data[i].name[lang]+'</span>'
+                                                        + '<p class="dropdown-desc">'+data[i].description[lang]+'</p>'
+                                                        + '</div>'
+                                                        + '</div>'
+                                                        + '</a></li>';
+                                            } //console.log(str);
+
+
+                                            if (id_category && id_category == data[i]._id)
+                                            {
+                                                $('.search-panel span#search_concept').text(data[i].name[lang]);
+                                                $('.input-group #id_category').val(data[i]._id);
+                                                $('.input-group #cat_name').val(data[i].name[lang]);
+                                                $('.input-group #cat_type').val(data[i].type);
+                                            }
+
+                                        }
+
+
+                                      str = str + '</ul></div></div>';
+                                        
+                                      
+                                                  
+                                      
+                                      
+                                      
+                                      $('#dropmenu').append(str);
+                                      
+                                      
+                                      
+                                      
+                                      $('.search-panel #dropmenu').find('a').click(function(e) {
+                                        e.preventDefault();
+                                        var param = $(this).attr("href").replace("#","");
+                                        var type = $(this).attr("type");
+                                        var concept = $(this).find("span").text();
+                                        $('.search-panel span#search_concept').text(concept);
+                                        $('.input-group #id_category').val(param);
+                                        $('.input-group #cat_type').val(type);
+                                        $('.input-group #cat_name').val(concept);
+                                        
+                                        $("html, body").animate({ scrollTop: 0 }, "slow");
+                                        
+                                        $(this).addclass('dropdown-toggle');
+                                        $(this).attr('data-toggle', 'dropdown');
+
+                                        return false;
+                                        });
+}
+
+
+
+
+function renderListCategories_2(data, id_category, cat_name, cat_type)
+{
+    var str = '<div class="row"><div class="col-md-12"><ul class="dropdown-menu_items" role="menu">';  
+    
+    str = str + '<li><a href="#" type="1"><span id="title_menu_products"></span></a></li>'
+                                        + '<li class="divider visible-xs visible-sm visible-md hidden-lg"></li>'; 
+    
+    
+                    for (var i = 0; i < data.length; i++) {
+                                           
+                                      
+                        if (data[i].type== 1)
+                        {
+                        str = str + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
+                                        + '<div class="row">'
+                                        + '<div class="col-xs-1 col-sm-1 col-md-1"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
+                                        + '<div class="col-xs-11 col-sm-11 col-md-11"><span>'+data[i].name[lang]+'</span>'
+                                        + '<p class="dropdown-desc">'+data[i].description[lang]+'</p>'
+                                        + '</div>'
+                                        + '</div>'
+                                        + '</a></li>';
+                        } 
+                        
+                        if (id_category && id_category == data[i]._id)
+                        {
+                            $('.search-panel span#search_concept2').text(data[i].name[lang]);
+                            $('.input-group #id_category').val(data[i]._id);
+                            $('.input-group #cat_name').val(data[i].name[lang]);
+                            $('.input-group #cat_type').val(data[i].type);
+                        }
+                                      
+                                    
+                }
+                                    
+                str = str + '<li class="divider visible-xs visible-sm visible-md hidden-lg"></li>'
+                + '<li><a href="#" type="2"><span id="title_menu_services"></span></a>'
+                + '</li>'
+                + '<li class="divider visible-xs visible-sm visible-md hidden-lg"></li>'; 
+
+                    for (var i = 0; i < data.length; i++) {
+                                          
+                        if (data[i].type== 2)
+                        {
+                        str = str + '<li><a href="#'+data[i]._id+'" type="'+ data[i].type +'">'
+                                        + '<div class="row">'
+                                        + '<div class="col-xs-1 col-sm-1 col-md-1"><span class="'+ data[i].css.classImg +'" style="font-size: 2em" aria-hidden="true"></span></div>'
+                                        + '<div class="col-xs-11 col-sm-11 col-md-11"><span>'+data[i].name[lang]+'</span>'
+                                        + '<p class="dropdown-desc">'+data[i].description[lang]+'</p>'
+                                        + '</div>'
+                                        + '</div>'
+                                        + '</a></li>';
+                            }
+
+                            if (id_category && id_category == data[i]._id)
+                            {
+                                $('.search-panel span#search_concept2').text(data[i].name[lang]);
+                                $('.input-group #id_category').val(data[i]._id);
+                                $('.input-group #cat_name').val(data[i].name[lang]);
+                                $('.input-group #cat_type').val(data[i].type);
+                            }
+
+                    }
+
+
+                                                  str = str + '</ul></div></div>';
+                                                  
+                                                $('#dropmenu2').append(str);
+                                     
+                                    
+                                                $('#dropmenu2').find('a').click(function(e) {
+                                                    e.preventDefault();
+                                                    var param = $(this).attr("href").replace("#","");
+                                                    var type = $(this).attr("type");
+                                                    var concept = $(this).find("span").text();
+                                                    $(' span#search_concept2').text(concept);
+                                                    $('.input-group #id_category').val(param);
+                                                    $('.input-group #cat_type').val(type);
+                                                    $('.input-group #cat_name').val(concept);
+                                                    
+                                        
+                                                    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+                                                    $(this).addclass('dropdown-toggle');
+                                                    $(this).attr('data-toggle', 'dropdown');
+
+                                                    return false;
+                                                    
+                                                    });
+        
+        
+                                                    $("#title_menu_products").text(i18next.t("catalog.products"));
+                                                    $("#title_menu_services").text(i18next.t("nav.services"));
+}
 
 
 //************************************************/

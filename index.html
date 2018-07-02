@@ -61,7 +61,7 @@
     }
     
     .dropdown-menu  {
-        min-width: 800%;
+        width: 300%;
     }
 
     .dropdown-menu_items {
@@ -90,12 +90,20 @@
           white-space: pre-wrap;
       }
     
-    
-      
+    .check-m {
+        padding-left: 0px !important; padding-top: 8px; padding-bottom: 12px 
+    }
+
+    .search_cont
+    {
+        background-color:rgba(34,53,57,0.4); 
+        margin-left:0; 
+        width: 100%
+    }
+
     </style>
 
 
-</script>
 
 </head>
 
@@ -108,28 +116,19 @@
         <!--=== Search Block ===-->
         <div class="search-block parallaxBg" style="z-index:3;" id="s-block">
             <div class="container">
-                <div class="col-md-6 col-md-offset-3" style="background-color:rgba(34,53,57,0.4); margin-left:0; width: 100%">
+                <div class="col-md-6 col-md-offset-3 search_cont">
                     <h1><span data-i18n="homepage.discoversuppliers"></span> <span data-i18n="homepage.new" class="color-dark-red_no"></span> <span data-i18n="homepage.suppliers" ></span> </h1>
 
-
-
-
-                    <div class="input-group">
+     <div class="input-group">
                     
-                    <div class="input-group-btn search-panel">
-                    
-
-                            
-            <!--        
-            <nav class="navbar navbar-default" role="navigation">   
-                        <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse button-menu">
-                        -->            
+        <div class="input-group-btn search-panel">
+             <!--=== Categories dropdown web ===--> 
              <div class="hidden-xs hidden-sm hidden-md visble-lg">           
                         
-                            <button type="button" class="form-control btn btn-default dropdown-toggle" style="background: #dddddd" data-toggle="dropdown">
+                <button type="button" id="btn_cat_1" class="form-control btn btn-default dropdown-toggle" style="background: #dddddd" data-toggle="dropdown">
                         <span id="search_concept" class="spanSearch" data-i18n="profile.categories"></span> <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu " role="menu" id="dropmenu">
+                    <ul class="dropdown-menu " style="width: 800px" role="menu" id="dropmenu">
                       <li><a href="#"><span data-i18n="homepage.everything"></span></a></li>
                       <li class="divider"></li>
                       <li>
@@ -142,11 +141,7 @@
                       
                         </ul>
                     
-                <!--    
-                    </div>
                 
-                </nav>
-            -->
         </div> 
                 
                 </div>
@@ -166,27 +161,30 @@
                     </div>
                     
                     
-                    <form action="list" id="form" class="sky-form page-search-form">
+                    <form action="list" id="form" class="sky-form page-search-form" style="text-align: left">
+                     
+                        <!--=== Categories dropdown responaive ===-->    
+                        <div class="visible-xs visible-sm visible-md hidden-lg">
                             
-                            <div class="inline-group">
-                            <label class="visible-xs visible-sm visible-md hidden-lg checkbox ">
-                                
+                                <label class="checkbox-m visible-xs visible-sm visible-md hidden-lg checkbox check-m">
+                                 
                                 <span class="dropdown-toggle" data-toggle="dropdown">
                                         <span id="search_concept2" class="spanSearch" style="font-weight: bold" data-i18n="profile.categories"></span> <span class="caret"></span>
                                 </span>
 
-                                    <ul class="dropdown-menu " style="width: 100%" role="menu" id="dropmenu2">
+                                    <ul class="dropdown-menu " style="width: 340px" role="menu" id="dropmenu2">
                                             <li><a href="#"><span data-i18n="homepage.everything"></span></a></li>
                                             <li class="divider"></li>
-                                            
-                                              </ul>
-
+                                    </ul>
+                            
 
                             </label>
-                            
+                        </div>    
+
+                        <div class="inline-group">
                             <label class="checkbox"><input id="ckProduct" class="search_select" name="checkbox-inline" checked="" type="checkbox" value="p"><i ></i><span data-i18n="catalog.products" style="font-weight: bold"></span></label>
                             <label  class="checkbox "><input id="ckSupplier" name="checkbox-inline" class="search_select" type="checkbox" value="s"><i></i><span data-i18n="homepage.suppliers" style="font-weight: bold"></span></label>
-                            </div>
+                        </div>
                     
                     </form>
                 </div>

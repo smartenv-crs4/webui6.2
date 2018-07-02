@@ -5,7 +5,7 @@ var header_template = `	<div class="header">
         <img src="assets/img/port/logo1-default.png" alt="Logo"/>
       </a>
       <!-- End Logo -->
-
+    
       <!-- Topbar -->
       <div class="topbar">
         <ul class="loginbar pull-right">
@@ -21,20 +21,18 @@ var header_template = `	<div class="header">
             </ul>
           </li>
           <li class="topbar-devider"></li>
-          <li><a href="page_faq.html" data-i18n="nav.help">Help</a></li>
-          <li class="topbar-devider"></li>
+          
           <li id="h_login"><a href="page_login_and_registration.html">Login</a></li>          
-          <li id="h_logout"><a href="#" onclick="logout()" data-i18n="nav.logout"></a></li>   
                                            
             {{#if isApplicativeUser}}
-              <li style="padding-left:20px" id="h_user"><a href="page_profile_settings.html" ><strong></strong></a></li>
+              <li id="h_user"><a href="page_profile_settings.html" ><strong></strong></a></li>
             {{else}}
-              <li style="padding-left:20px" id="h_user"><a href="#" ><strong></strong></a></li>
+              <li id="h_user"><a href="#" ><strong></strong></a></li>
             {{/if}}
         </ul>
       </div>
       <!-- End Topbar -->
-
+ 
       <!-- Toggle get grouped for better mobile display -->
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -74,6 +72,10 @@ var header_template = `	<div class="header">
             </a>
           </li -->
           </li>
+          <li>
+          </span><a href="page_faq.html" data-i18n="nav.help"></a>
+          </li>
+          <li id="h_logout"><a href="#" onclick="logout()"><span  class="fa fa-sign-out"></span><span  data-i18n="nav.logout"></span></a></li>
           {{#if showSearch}}
           <li>
             <i class="search fa fa-search search-btn"></i>

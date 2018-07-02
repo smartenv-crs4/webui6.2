@@ -51,7 +51,9 @@
     <!-- CSS Page Style Import-->
     <link rel="stylesheet" href="assets/css/pages/page_log_reg_v3.css">
     
-    <link rel="stylesheet" href="assets/css/typeaheadjs.css">  
+    <link rel="stylesheet" href="assets/css/typeaheadjs.css">
+    
+    <link rel="stylesheet" href="assets/plugins/star-rating-svg/star-rating-svg.css">
 
 
     <style type="text/css">
@@ -158,7 +160,7 @@
      
      
       .dropdown-menu {
-        min-width: 740px;
+        width: 300%;
     }
 
     .dropdown-menu_items {
@@ -180,14 +182,27 @@
 .dropdown-menu_items>li:hover 
 {background: #e9e9e9}
       
-      .dropdown-desc {
-         font-weight: 400;
-          color: #bbb;
-          white-space: pre-wrap;
-      }
+.dropdown-desc {
+    font-weight: 400;
+    color: #bbb;
+    white-space: pre-wrap;
+}
 
+.check-m {
+        padding-left: 0px !important; padding-top: 8px; padding-bottom: 12px 
+    }
+
+    .search_cont
+    {
+        background-color:rgba(34,53,57,0.4); 
+        margin-left:0; 
+        width: 100%
+    }
       
-
+ .margin_left_10
+ {
+     margin-left: 10px;
+ }
     </style>
     
     </head>
@@ -214,10 +229,13 @@
                     <div class="input-group">
                     
                         <div class="input-group-btn search-panel">
-                        <button type="button" class="form-control btn btn-default dropdown-toggle" style="background: #dddddd" data-toggle="dropdown">
+                        <!--=== Categories dropdown web ===-->    
+                        <div class="hidden-xs hidden-sm hidden-md visble-lg">
+                         
+                            <button type="button" id="btn_cat_1" class="form-control btn btn-default dropdown-toggle" style="background: #dddddd" data-toggle="dropdown">
                             <span id="search_concept" class="spanSearch" data-i18n="profile.categories"></span> <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu" role="menu" id="dropmenu">
+                        <ul class="dropdown-menu" style="width: 800px" role="menu" id="dropmenu">
                           <li><a href="#"><span data-i18n="homepage.everything"></span></a></li>
                           <li class="divider"></li>
                           <li>
@@ -231,6 +249,8 @@
                             </ul>
     
                     </div>
+                    </div>
+
                     <input type="hidden" name="id_category" value="" id="id_category">
                     <input type="hidden" name="cat_name" value="" id="cat_name">
                     <input type="hidden" name="cat_type" value="" id="cat_type">    
@@ -245,11 +265,25 @@
                         </div>
                 
                  <form action="list" id="form" class="sky-form page-search-form" style="border: none">
-                            
-                            <div class="inline-group">
+                        
+                        <!--=== Categories dropdown responaive ===-->    
+                        <div class="visible-xs visible-sm visible-md hidden-lg">
+                                <label class="checkbox-m visible-xs visible-sm visible-md hidden-lg checkbox check-m">
+                                     <span class="dropdown-toggle" data-toggle="dropdown">
+                                            <span id="search_concept2" class="spanSearch" style="font-weight: bold" data-i18n="profile.categories"></span> <span class="caret"></span>
+                                    </span>
+                                    <ul class="dropdown-menu " style="width: 340px" role="menu" id="dropmenu2">
+                                            <li><a href="#"><span data-i18n="homepage.everything"></span></a></li>
+                                            <li class="divider"></li>
+                                    </ul>
+                                 </label>
+                        </div>
+
+
+                        <div class="inline-group">
                             <label class="checkbox"><input id="ckProduct" class="search_select" name="checkbox-inline" type="checkbox" value="p"><i ></i><span data-i18n="catalog.products"></span></label>
                             <label  class="checkbox "><input id="ckSupplier" name="checkbox-inline" class="search_select" type="checkbox" value="s"><i></i><span data-i18n="homepage.suppliers"></span></label>
-                            </div>
+                        </div>
                     
                     </form>
                             
@@ -269,8 +303,8 @@
         <div class="container content-sm">
         
         <div class="row">
-        <div id="sidebar" class="sidebar-showhide" style="display: none;"></div>
-        <div class="autoexpand">
+        <div id="sidebar" class="hidden-xs hidden-sm hidden-md col-lg-3" style="display: none;"></div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
                 <div id="div_list" class="profile-body margin-bottom-20" style="width: 100%"></div>
         </div>
         
@@ -472,6 +506,9 @@
     <script type="text/javascript" src="js/page_list.js"></script>
     <script type="text/javascript" src="assets/js/plugins/blockUI.js"></script>
     
+    <script type="text/javascript" src="assets/plugins/star-rating-svg/jquery.star-rating-svg.min.js"></script>
+
+
     <script type="text/javascript">
         
         jQuery(document).ready(function() {
