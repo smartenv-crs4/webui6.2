@@ -1,6 +1,6 @@
 var sidebarTemplate = `
 <div class=" md-margin-bottom-40; text-center">
-  <img class="img-thumbnail profile-img margin-bottom-20" style="max-width: 200px; border: none" src="assets/img/team/img32-md.jpg" alt="" id="imgBox">
+  <img class="img-thumbnail profile-img margin-bottom-20" style="max-width: 100px; border: none" src="assets/img/team/img32-md.jpg" alt="" id="imgBox">
 
   <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
       <!-- li class="list-group-item active">
