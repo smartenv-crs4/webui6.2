@@ -164,7 +164,7 @@ function render_row(data, arr_par)
                                     + '<td>'
                                     + '    <img class="rounded-x" style="width: 100px" src="'; 
                                     if (data.docs[i].logo) 
-                                        _str = _str +  data.docs[i].logo; 
+                                        _str = _str +  _brokerMsUrl + "files/" + data.docs[i].logo; 
                                     else 
                                         _str = _str +  'assets/img/testimonials/user.jpg';
                                     _str = _str +  '" alt="logo">'
