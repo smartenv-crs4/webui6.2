@@ -103,52 +103,20 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config, beforeSe
   
           canvas.getContext('2d').drawImage(image, 0, 0, width, height);
 
-          //console.log(file.type);
-          var dataUrl = canvas.toDataURL(file.type);                       
-          //var resizedImage = dataURLToBlob(dataUrl);
+          var dataUrl = canvas.toDataURL("image/jpeg");                       
+          //var dataUrl = canvas.toDataURL(file.type);                       
           var resizedImage = b64toBlob(dataUrl)
 
 
+            console.log(suf);
             imgList.push({
               "suffix": suf,
               "blob": resizedImage,
               "origName" : file.name
             });            
 
-
-/*
-          canvas.toBlob(function(resizedImage){
-            var idx = nImg;
-            nImg--;
-               
-            imgList.push({
-              "suffix": sufs[sufs.length - idx],
-              "blob": resizedImage,
-              "origName" : file.name
-            });            
-            if(nImg == 0)
-            {
-              if(imgList[0].blob.size > imgList[1].blob.size)
-              {
-                imgList[0].suffix = "o"; 
-                imgList[1].suffix = "t";
-              }
-              else
-              {
-                imgList[1].suffix = "o"; 
-                imgList[0].suffix = "t";
-              }
-
-              uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend);
-            }
-
-          });
-        */
         }               
         uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend);
-        
-        // fare l'upload
-        //uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend);i
       }
       image.src = readerEvent.target.result;
 
@@ -167,7 +135,6 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config, beforeSe
  * @return Blob
  */
 function b64toBlob(dataURL, sliceSize) {
-  console.log(dataURL);
   if(!sliceSize)
     sliceSize = 256;
   var BASE64_MARKER = ';base64,';  
@@ -198,33 +165,6 @@ function b64toBlob(dataURL, sliceSize) {
   }
   return null;
 }
-
-
-
-
-/* Utility function to convert a canvas to a BLOB */
-function dataURLToBlob(dataURL) {
-  var BASE64_MARKER = ';base64,';
-  if (dataURL.indexOf(BASE64_MARKER) == -1) {
-    var parts = dataURL.split(',');
-    var contentType = parts[0].split(':')[1];
-    var raw = parts[1];
-
-    return new Blob([raw], {type: contentType});
-  }
-
-  var parts = dataURL.split(BASE64_MARKER);
-  var contentType = parts[0].split(':')[1];
-  var raw = window.atob(parts[1]);
-  var rawLength = raw.length;
-
-  var uInt8Array = new Uint8Array(rawLength);
-  for (var i = 0; i < rawLength; ++i) {
-      uInt8Array[i] = raw.charCodeAt(i);
-  }
-  return new Blob([uInt8Array], {type: contentType});
-}
-
 
 function uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend)
 {
