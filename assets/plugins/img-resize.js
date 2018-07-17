@@ -17,6 +17,7 @@ var defaultResizeConfig =
   }
 }
 
+
 function resizeImage(imgField, msUploadUrl, doSuccess, doError, config, beforeSend)
 {
   if(config)
@@ -103,9 +104,19 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config, beforeSe
           canvas.getContext('2d').drawImage(image, 0, 0, width, height);
 
           //console.log(file.type);
-          //var dataUrl = canvas.toDataURL(file.type);                       
+          var dataUrl = canvas.toDataURL(file.type);                       
           //var resizedImage = dataURLToBlob(dataUrl);
+          var resizedImage = b64toBlob(dataUrl)
 
+
+            imgList.push({
+              "suffix": suf,
+              "blob": resizedImage,
+              "origName" : file.name
+            });            
+
+
+/*
           canvas.toBlob(function(resizedImage){
             var idx = nImg;
             nImg--;
@@ -126,13 +137,15 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config, beforeSe
               {
                 imgList[1].suffix = "o"; 
                 imgList[0].suffix = "t";
-              } 
+              }
 
               uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend);
             }
 
           });
+        */
         }               
+        uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend);
         
         // fare l'upload
         //uploadImages(imgList, msUploadUrl, doSuccess, doError, beforeSend);i
@@ -143,6 +156,50 @@ function resizeImage(imgField, msUploadUrl, doSuccess, doError, config, beforeSe
     reader.readAsDataURL(file);
   }
 }
+
+/**
+ * Convert a base64 string in a Blob according to the data and contentType.
+ * 
+ * @param b64Data {String} Pure base64 string without contentType
+ * @param contentType {String} the content type of the file i.e (image/jpeg - image/png - text/plain)
+ * @param sliceSize {Int} SliceSize to process the byteCharacters
+ * @see http://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript
+ * @return Blob
+ */
+function b64toBlob(dataURL, sliceSize) {
+  console.log(dataURL);
+  if(!sliceSize)
+    sliceSize = 256;
+  var BASE64_MARKER = ';base64,';  
+  if (dataURL.indexOf(BASE64_MARKER) != -1) {
+    var parts = dataURL.split(',');
+    var contentType = parts[0].split(':')[1];
+    var raw = parts[1];
+
+    var byteCharacters = atob(raw);
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        var byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        var byteArray = new Uint8Array(byteNumbers);
+
+        byteArrays.push(byteArray);
+    }
+
+    var blob = new Blob(byteArrays, {type: contentType});
+
+    return blob;
+  }
+  return null;
+}
+
+
 
 
 /* Utility function to convert a canvas to a BLOB */

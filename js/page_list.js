@@ -23,6 +23,8 @@ if (!arr_par[0].type_search)
 
 $( document).ready(function() {
     
+    
+    
     if (arr_par[0].type_search == 'p')
         $('#searchTitle').text(i18next.t("product.searchProductTitle")); 
     else
@@ -91,6 +93,13 @@ $(document).on('translate', function()
 //alert(localStorage.lng);
 });
 
+// gestioen dinamica menu sinistra
+if(sessionStorage.type)
+    {
+        $('#content-list').addClass('col-lg-9');
+    }
+
+
 
 });
 
@@ -138,26 +147,29 @@ function render_row(data, arr_par)
                                     
                       if (arr_par[0].type_search == 's')
                       {              
+                          
+                          
+                        /*  
                           _str = _str +'<div class="table-search-v2" id="divSearch_table">';
                             _str = _str +'<div class="table-responsive" >';
-                                _str = _str +'<table class="table table-bordered table-striped" >';
+                                _str = _str +'<table class="table table-bordered table-striped " >';
                                     _str = _str +'<thead>';
                                     _str = _str +'<tr>';
-                                        _str = _str +'<th style="width: 10%" data-i18n="product.thLogo"></th>';
-                                        _str = _str +'<th class="hidden-sm" style="width: 70%" data-i18n="product.thAbout"></th>';
-                                        _str = _str +'<th style="width: 10%" data-i18n="product.thRates"></th>';
-                                        _str = _str +'<th data-i18n="product.thAction"></th>';
+                                        _str = _str +'<th  data-i18n="product.thLogo"></th>';
+                                        _str = _str +'<th class=""  data-i18n="product.thAbout"></th>';
+                                       _str = _str +'<th class="hidden-xs"  data-i18n="product.thAction"></th>';
                                     _str = _str +'</tr>';
                                     _str = _str +'</thead>';
                                     _str = _str +'<tbody id="t_list">';
                                     
                                     
-                                            
+                        */                    
                           
                           
                           
                           for (var i = 0; i < data.docs.length; i++) {
-                                    
+                          
+                          /*          
                                      link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i]._id).replace("??", "?").replace("?&", "?");    
                                         
                                     _str += '<tr>'
@@ -171,24 +183,27 @@ function render_row(data, arr_par)
                                     + '</td>'
                                     + '<td>'
                                     + '    <h3><a class="aName" href="page_catalog.html?'+link+'">' + data.docs[i].name + '</a></h3>'
-                                    + '    <p>Descr</p>'
-                                    + '    <small class="hex"><span data-i18n="product.tabLabelRegistration"></span>'+ getDateFromObjectId(data.docs[i]._id) +'</small>'
+                                    
+                                    + '<div><span style="cursor: pointer;" tabindex="0" data-trigger="focus" data-toggle="popover" data-html="true" data-content="" class="popOver" id="rates_'+data.docs[i]._id+'" data-id="'+data.docs[i]._id+'"></span></div>';
+                                   
+                                    
+                                    
+                                    if (data.docs[i].description)
+                                        _str = _str +   '    <p>'+ data.docs[i].description +'</p>'
+                                    
+                                    _str = _str +  '    <small class="hex"><span data-i18n="product.tabLabelRegistration"></span>'+ getDateFromObjectId(data.docs[i]._id) +'</small>'
                                     + '<div><br><a class="a_productList" data-id="' + data.docs[i]._id + '" style="cursor: pointer" data-i18n="product.tabMsgProduct"></a></div>'
                                     + '<div id="divListProducts' + data.docs[i]._id + '" style="display: none"></div><br>'
+                                    
+                                    + '<button class="btn-u btn-block rounded hidden-sm hidden-md hidden-lg sDetails" type="button" data-par="'+var_par+'" data-id="'+ data.docs[i]._id +'" style="width: 100px"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>'
+                                    
+                                    
                                     + '</td>'
                                      
-                                    + '  <!--  <span><a href="#">' + data.docs[i].email + '</a></span>';
-                                    if (data.docs[i].website) _str = _str + '<span><a href="#">'+ data.docs[i].website +'</a></span>';
-                                    if (data.docs[i].phone) _str = _str + '<span>'+ data.docs[i].phone +'</span>';
-                                    _str = _str + '</td> -->'
-                                    + '<td>'
-                                    + '<span style="cursor: pointer;" tabindex="0" data-trigger="focus" data-toggle="popover" data-html="true" data-content="" class="popOver" id="rates_'+data.docs[i]._id+'" data-id="'+data.docs[i]._id+'"></span>'
-                                   // + '<div id="rates_' + data.docs[i]._id + '"></div>'
                                     
                                     
-                                    _str = _str +   '</td>'
                                     
-                                    + '<td>'
+                                    + '<td class="hidden-xs">'
                                     + '<button class="btn-u btn-block rounded sDetails" type="button" data-par="'+var_par+'" data-id="'+ data.docs[i]._id +'"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>';
                                     
                                     + '</td>' 
@@ -209,18 +224,75 @@ function render_row(data, arr_par)
                                 _str = _str +'</div>';
                                 _str = _str +'</div>';        
                                 
+                            */    
+                                
+                                
+                                // -----------------------------------------------------------
+                                
+                                
+                                link = ('page_catalog.html?'+var_par+'&idSupplier='+data.docs[i]._id).replace("??", "?").replace("?&", "?");    
+                                
+                                _str += '<div class="row">';
+                                    
+                                    _str +=     '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 text-center" href="#">';
+                                    _str +=         '<img class="rounded-x" style="width: 100px" src="'; 
+                                    if (data.docs[i].logo) 
+                                        _str = _str +  _brokerMsUrl + "files/" + data.docs[i].logo; 
+                                    else 
+                                        _str = _str +  'assets/img/testimonials/user.jpg';
+                                    _str = _str +  '" alt="logo">';
+                                    _str +=         '</div>';
+                                        
+                        
+                                    _str += '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">'
+                                    _str +=    '<div class="clearfix margin_left_10" style="overflow:hidden; margin-top: 4px;">'
+                                    _str +=                 '<h3><a class="aName" href="page_catalog.html?'+link+'">' + data.docs[i].name + '</a></h3>';
+                                    _str +=     '</div>';
+                                    _str +=     '<div class="giveMeEllipsis blog-author-desc margin_left_10">';
+                                    _str +=              '<span style="cursor: pointer;" tabindex="0" data-trigger="focus" data-toggle="popover" data-html="true" data-content="" class="popOver" id="rates_'+data.docs[i]._id+'" data-id="'+data.docs[i]._id+'"></span>';
+                                    _str +=      "</div>";
+                                    
+                                    if (data.docs[i].description)
+                                        _str = _str +   '    <div class="giveMeEllipsis blog-author-desc" style="margin-left: 10px">'+ data.docs[i].description +'</div>'
+                                    
+                                    _str = _str +  '    <small class="hex"><span data-i18n="product.tabLabelRegistration"></span>'+ getDateFromObjectId(data.docs[i]._id) +'</small>'
+                                    + '<div><br><a class="a_productList" data-id="' + data.docs[i]._id + '" style="cursor: pointer" data-i18n="product.tabMsgProduct"></a></div>'
+                                    + '<div id="divListProducts' + data.docs[i]._id + '" style="display: none"></div><br>'
+                                    _str +=     '</div>';
+                                    
+                                    _str +=     '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 text-left">';
+                                    _str +=         '<button class="btn-u btn-block rounded sDetails" type="button" data-par="'+var_par+'" data-id="'+ data.docs[i]._id +'" style="width: 100px"><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span><span data-i18n="buttons.details"></span></button>';
+                                    _str +=     '</div>';
+                                     
+                          _str +=   "</div>";
+                          _str += '<hr>';           
+                          
+                          
+                          
+                          _str += '<div id="popover-content_'+data.docs[i]._id+'" class="hide">'
+                                _str +=     '<div class="clearfix" style="padding: 4px 0"><span class="pull-left" data-i18n="evaluation.price_rate">:</span>&nbsp;<span class="pull-right" id="rates_price_value_'+data.docs[i]._id+'"></span></div>' 
+                                _str +=     '<div class="clearfix" style="padding: 4px 0"><span class="pull-left" data-i18n="evaluation.delivery_rate">:</span>&nbsp;<span class="pull-right" id="rates_delivery_'+data.docs[i]._id+'"></span></div>'  
+                                _str +=     '<div class="clearfix" style="padding: 4px 0"><span class="pull-left" data-i18n="evaluation.product_rate">:</span>&nbsp;<span class="pull-right" id="rates_product_'+data.docs[i]._id+'"></span></div>'  
+                                _str +=     '<div class="clearfix" style="padding: 4px 0"><span class="pull-left" data-i18n="evaluation.customer_rate">:</span>&nbsp;<span class="pull-right" id="rates_customer_service_'+data.docs[i]._id+'"></span></div>';
+                                _str +=     '</div>';
+  
+                                
+                          }    
+                                
+                                
+                                // -----------------------------------------------------------
+                                
+                                
                                 
                                       
                                       $('#div_list').append(_str);                  
                                       
                                       // star ratings
                                 for (var i = 0; i < data.docs.length; i++) {
+                                    
+                                    let data_r = data.docs[i];
                                       
-                                    getStars("#rates_" +data.docs[i]._id,                                   data.docs[i].rates.bayesian_overall_rate);
-                                    getStars("#rates_price_value_" +data.docs[i]._id,                data.docs[i].rates.bayesian_price_value_rate);
-                                    getStars("#rates_delivery_" +data.docs[i]._id,                     data.docs[i].rates.bayesian_delivery_rate);
-                                    getStars("#rates_product_" +data.docs[i]._id,                     data.docs[i].rates.bayesian_product_rate);
-                                    getStars("#rates_customer_service_" +data.docs[i]._id,      data.docs[i].rates.bayesian_customer_service_rate);
+                                    renderStars(data_r, data.docs[i]._id);
                                     
                                 }
                                       
@@ -348,7 +420,7 @@ function render_row(data, arr_par)
                                     if (mcat.type == 1)
                                         _str +=                 ' per '+translation[localStorage.lng].translation.rfq[data.docs[i].unit]+'</span>';
                                     _str +='                </li>';
-                                    _str +=                 '<li style="text-align: right; font-weight: bold">Score:<span> ' +checkValue(data.docs[i].score)+ ' </span></li>';
+                                    _str +=                 '<li style="text-align: right; font-weight: bold">Score:<span> ' +checkValueStr(data.docs[i].score, 4, null)+ ' </span></li>';
                                     _str +=             '</ul>';
                                      
                                     _str +=     '</div>';
@@ -381,14 +453,13 @@ function render_row(data, arr_par)
                                 
                                 // star ratings
                                 for (var i = 0; i < data.docs.length; i++) {
-                                     console.log(data.docs[i].supplierId.rates); 
-                                    getStars("#rates_" +data.docs[i]._id,                                   data.docs[i].supplierId.rates.bayesian_overall_rate);
-                                    getStars("#rates_price_value_" +data.docs[i]._id,                data.docs[i].supplierId.rates.bayesian_price_value_rate);
-                                    getStars("#rates_delivery_" +data.docs[i]._id,                     data.docs[i].supplierId.rates.bayesian_delivery_rate);
-                                    getStars("#rates_product_" +data.docs[i]._id,                     data.docs[i].supplierId.rates.bayesian_product_rate);
-                                    getStars("#rates_customer_service_" +data.docs[i]._id,      data.docs[i].supplierId.rates.bayesian_customer_service_rate); 
+                                
+                                let data_r = data.docs[i].supplierId;    
                                     
+                                    renderStars(data_r, data.docs[i]._id);
                                 }
+                                   
+                                
                                 
                                 
                                     $('.popOver').popover({html: true,
@@ -438,6 +509,22 @@ function getStars(el, count)
             
 });
 
+}
+
+function renderStars(data_r, id)
+{
+    if (!data_r.rates) data_r.rates = {};
+    if (!data_r.rates.bayesian_overall_rate) data_r.rates.bayesian_overall_rate = 0;
+    if (!data_r.rates.bayesian_price_value_rate) data_r.rates.bayesian_price_value_rate = 0;
+    if (!data_r.rates.bayesian_delivery_rate) data_r.rates.bayesian_delivery_rate = 0;
+    if (!data_r.rates.bayesian_product_rate) data_r.rates.bayesian_product_rate = 0;
+    if (!data_r.rates.bayesian_customer_service_rate) data_r.rates.bayesian_customer_service_rate = 0;
+         
+    getStars("#rates_" +id,                            data_r.rates.bayesian_overall_rate);
+    getStars("#rates_price_value_" + id,                data_r.rates.bayesian_price_value_rate);
+    getStars("#rates_delivery_" + id,                   data_r.rates.bayesian_delivery_rate);
+    getStars("#rates_product_" + id,                    data_r.rates.bayesian_product_rate);
+    getStars("#rates_customer_service_" + id,           data_r.rates.bayesian_customer_service_rate); 
 }
 
 
@@ -665,7 +752,7 @@ function getProductsSupplier(id, _arr_par)
                                       
                                       var str_listProducts2 = '<table>';
                                       var translate;
-                                      
+                                      console.log(data);
                                       for (var c = 0; c < data.total; c++) {
                                       
                                             translate = translate_product(data.docs[c].name, data.docs[c].description, data.docs[c].translation[0], lang);
@@ -1123,12 +1210,41 @@ function getDateFromObjectId(objectId)
     return datestring;
 }
 
+
+// check valore render div
+function checkValueStr(value, len, sub)
+{
+    if (sub == null)
+        sub = ' -- ';
+    
+    
+    
+    if (value)
+    {
+        let val = value.toString();
+            
+        if (val.length > 4)
+        {
+            val = val.substring(0, 4);
+        }
+        return val;
+    }
+    else
+    {
+        return sub;
+    }    
+}
+
+
 // check valore render div
 function checkValue(value)
 {
+    console.log();
     if (value)
     {
-       return value; 
+        if (value.length > 4)
+            value.substring(4,0);
+        return value;
     }
     else
     {
