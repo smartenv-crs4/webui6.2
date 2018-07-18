@@ -891,7 +891,7 @@ function openNewRfq(){
         data.nameS = nameS;
 
         jQuery.ajax({
-            url: _localServiceUrl + "products?supplierId=" + idS,
+            url: _localServiceUrl + "products?supplierId=" + idS + "&dd=true",
             type: "GET",
             contentType: "application/json",
             dataType: 'json',
