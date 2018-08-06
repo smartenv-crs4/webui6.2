@@ -36,9 +36,9 @@ var translation = {
                 "missing_date": "Please enter a validity date",
                 "invalid_number": "Please enter only digits",
                 "noparameter": "Wrong parameter",
-                "void_name": "Name cannot be void",
+                "void_name": "Italian name cannot be void",
                 "void_category": "Category cannot be void",
-                "void_desc": "Description cannot be void",
+                "void_desc": "Italian description cannot be void",
                 "void_unit": "Unit cannot be void"
             },
             "warning": {
@@ -341,9 +341,9 @@ var translation = {
                 "missing_date": "Devi inserire una data",
                 "invalid_number": "Puoi inserire solo un numero",
                 "noparameter": "Parametri non corretti",
-                "void_name": "Devi inserire un nome",
+                "void_name": "Devi inserire un nome in italiano",
                 "void_category": "Devi inserire una categoria",
-                "void_desc": "Devi inserire una descrizione",
+                "void_desc": "Devi inserire una descrizione in italiano",
                 "void_unit": "Devi inserire un'unità di misura"
             },
             "warning": {

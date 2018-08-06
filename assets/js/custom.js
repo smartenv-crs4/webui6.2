@@ -411,7 +411,13 @@ function autoCompleteCat(tagId, callback)
     name: 'categories',
     display: 'name',
     source: acCategories,
-    limit: 10
+    limit: 100,
+    minLength: 3
+  });
+
+  jQuery('#' + tagId).on("click", function() {
+    console.log("click");
+    //jQuery(this).typeahead('open');
   });
   
   jQuery('#' + tagId).bind('typeahead:selected', function(obj, datum, name){

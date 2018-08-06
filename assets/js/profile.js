@@ -828,9 +828,11 @@ function uploadLogo()
         case 403:
           msg = i18next.t("error.unauthorized");
           break;
+          /*
         case 500:
           msg = i18next.t("disk_quota_exceeded");
           break;
+          */
         default:
           try
           {        
@@ -896,9 +898,11 @@ function uploadDocument()
         case 403:
           msg = i18next.t("error.unauthorized");
           break;
+          /*
         case 500:
           msg = i18next.t("disk_quota_exceeded");
           break;
+          */
         default:
           try
           {        
@@ -963,9 +967,11 @@ function getDocumentList()
         case 403:
           msg = i18next.t("error.unauthorized");
           break;
+          /*
         case 500:
           msg = i18next.t("disk_quota_exceeded");
           break;
+          */
         default:
           try
           {        
@@ -1021,9 +1027,11 @@ function deleteDocument(fid)
         case 403:
           msg = i18next.t("error.unauthorized");
           break;
+          /*
         case 500:
           msg = i18next.t("disk_quota_exceeded");
           break;
+          */
         default:
           try
           {        

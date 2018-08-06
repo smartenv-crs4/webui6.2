@@ -213,6 +213,10 @@
                             <li><a data-toggle="tab" href="#documentsTab"><i class="fa fa-file-pdf-o"></i>&nbsp;<span
                                     data-i18n="profile.documents">Documents</span> </a>
                             </li>
+                            <li style="background-color:#1e4d7d;" id="fTabRfq">
+                              <a data-toggle="tab" href="#" aria-expanded="false">
+                                <i style="color:#ffffff" class="fa fa-paper-plane"></i>&nbsp;<span style="color:#ffffff" data-i18n="rfq.sendRFQ"></span></a>
+                            </li>
                         </ul>
                         </ul>
 
@@ -576,11 +580,11 @@
     <script type="text/x-handlebars-template" id="supplier-info_template">
         <div class="blog-author " style="min-height: 110px;">
             {{#if logged}}
-            <button class="btn-u " id="btn_rfq" type="button" style="float: right; background-color:#1E4D7D; 
+            <!-- button class="btn-u " id="btn_rfq" type="button" style="float: right; background-color:#1E4D7D; 
                     padding: 15px; margin-bottom:8px; font-size:15pt; width:100%"
                     onclick="javascript:window.location='page_rfq_new.html?supplierId={{_id}}&supplierName={{plusname}}'">
                 <i class="fa fa-paper-plane"></i> <span data-i18n="rfq.sendRFQ"></span>
-            </button>
+            </button -->
             {{/if}}
             <img onError="this.onerror=null;this.src='assets/img/team/img1-md.jpg'" src="{{logo}}" alt="">
             <div class="blog-author-desc" style="display:inline-block">
@@ -646,7 +650,6 @@
             <div class="panel-heading overflow-h">
                 <h2 class="panel-title heading-sm pull-left"><i class="fa fa-briefcase"></i>
                     Certifications</h2>
-                <a href="#"><i class="fa fa-cog pull-right"></i></a>
             </div>
             <div class="panel-body margin-bottom-40">
                 <ul class="timeline-v2 timeline-me">
@@ -1035,6 +1038,14 @@
                 values['logged'] = logged && (userType() == "customer");
                 var compiled = cacheCompile(templateid, values);
 
+
+                jQuery('body').append('<style>#fTabRfq a:hover { background-color: #1e4d7d  !important;}</style>');
+
+                jQuery("#fTabRfq a").first().attr("onclick", "javascript:window.location='page_rfq_new.html?supplierId="+ values._id + "&supplierName=" + values.plusname + "'");
+
+
+
+
                 $(target).empty();
                 $(target).html(compiled);
 
@@ -1187,6 +1198,13 @@
             searchListURL = searchListURL.replace('?&', '?');
             
             $("#searchResultsAnchor").attr('href', searchListURL);
+
+
+
+            if(sessionStorage.getItem("type") != "customer")           
+            {
+              jQuery("#fTabRfq").remove();
+            }
 
             $("body").localize();
 

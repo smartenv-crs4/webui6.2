@@ -204,6 +204,7 @@
           jQuery("#availability_box").show();
         }
       });
+      jQuery('[data-toggle="tooltip"]').tooltip(); 
   });
   
   
@@ -555,8 +556,8 @@
             <div class="row" >
                 <section class="col col-3" id="unit_box">
                     <label class="label" data-i18n="catalog.unit"></label>
-                    <label class="select">
-                        <select id="unit" >
+                    <label class="select" data-toggle="tooltip" data-trigger="hover" data-i18n="[title]catalog.unit">
+                        <select id="unit" data-i18n="[title]catalog.unit">
                           <option value="unty" data-i18n="rfq.unty"></option>
                           <option value="kg" data-i18n="rfq.kg"></option>
                           <option value="mtr" data-i18n="rfq.mtr"></option>
@@ -570,40 +571,40 @@
 
                 <section class="col col-3" id="qmin_box">
                     <label class="label" data-i18n="catalog.atleast"></label>
-                    <label class="input">
+                    <label class="input" data-toggle="tooltip" data-trigger="hover" data-i18n="[title]product.minimumQuantity">
                         <i class="icon-append   icon-arrow-down"></i>
-                        <input id="qmin"type="text" data-i18n="[placeholder]product.minimumQuantity" >
+                        <input id="qmin"type="text" data-i18n="[placeholder]product.minimumQuantity;[title]product.minimumQuantity" >
                     </label>
                 </section>
 
                 <section class="col col-3" id="qmax_box">
                     <label class="label" data-i18n="catalog.atmost"></label>
-                    <label class="input">
+                    <label class="input" data-toggle="tooltip" data-trigger="hover" data-i18n="[title]product.maximumQuantity">
                         <i class="icon-append   icon-arrow-up"></i>
-                        <input id="qmax" type="text"  data-i18n="[placeholder]product.maximumQuantity" name="product">
+                        <input id="qmax" type="text"  data-i18n="[placeholder]product.maximumQuantity;[title]product.maximumQuantity" name="product">
                     </label>
                 </section>               
                 
                 <section class="col col-3" id="availability_box">
                     <label class="label" data-i18n="catalog.availability"></label>
-                    <label class="input">
+                    <label class="input" data-toggle="tooltip" data-trigger="hover" data-i18n="[title]catalog.availability">
                         <i class="icon-append  icon-layers"></i>
-                        <input id="availability" type="text" data-i18n="[placeholder]catalog.availability" >
+                        <input id="availability" type="text" data-i18n="[placeholder]catalog.availability;[title]catalog.availability" >
                     </label>
                 </section>
                 
                 <section class="col col-3" id="deliveryIn_box">
                     <label class="label" data-i18n="catalog.deliveryIn"></label>
-                    <label class="input">
+                    <label class="input" data-toggle="tooltip" data-trigger="hover" data-i18n="[title]product.numberOfDays">
                         <i class="icon-append  icon-calendar"></i>
-                        <input id="delin" type="text"  data-i18n="[placeholder]product.numberOfDays">
+                        <input id="delin" type="text" data-i18n="[placeholder]product.numberOfDays;[title]product.numberOfDays">
                     </label>
                 </section>
                 <section class="col col-3" id="price_box">
                     <label class="label" data-i18n="catalog.price"></label>
-                    <label class="input">
+                    <label class="input" data-toggle="tooltip" data-trigger="hover" data-i18n="[title]catalog.price">
                         <i class="icon-append   icon-finance-246"></i>
-                        <input id="price" type="text"  >
+                        <input id="price" type="text"  data-i18n="[title]catalog.price">
                     </label>
                 </section>
                 
