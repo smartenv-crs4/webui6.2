@@ -339,7 +339,10 @@ function render_row(data, arr_par)
                                     var _img = [];
                                     
                                     
-                                    for (var i = 0; i < data.docs.length; i++) {        
+                                    for (var i = 0; i < data.docs.length; i++) { 
+                                      try
+                                      {
+                                      
                                     
                                         _img = [];
                                         
@@ -447,7 +450,10 @@ function render_row(data, arr_par)
                                     
                                     
                                     
-                                }
+                                    }
+                                    catch(error){}
+                      
+                      }
                                     
                                     $('#div_list').append(_str);
                                 
