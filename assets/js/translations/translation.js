@@ -530,7 +530,7 @@ var translation = {
                 "unit": "Unità di misura",
                 "days": "giorni",
                 "searchResults":"Risultati ricerca",
-                "price":"Prezzo",
+                "price":"Prezzo per unità",
                 "availability": "Disponibilità immediata",
                 "resultsLabel": "Prodotti ricercati",
                 "showAll": "Mostra tutti i prodotti"
