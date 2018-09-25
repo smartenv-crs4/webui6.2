@@ -1150,6 +1150,10 @@ function addUserCategory()
     success: function(dataResp, textStatus, xhr)
     {        
       getUserCategoryList();
+      jQuery("#acCat").val("");
+      jQuery("#acCat").data("cat-id", "");
+      jQuery("#acCat").data("cat-name", "");
+
       //console.log(dataResp);
     },     
     error: function(xhr, status)

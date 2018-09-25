@@ -416,7 +416,7 @@ function autoCompleteCat(tagId, callback)
   });
 
   jQuery('#' + tagId).on("click", function() {
-    console.log("click");
+    //console.log("click");
     //jQuery(this).typeahead('open');
   });
   

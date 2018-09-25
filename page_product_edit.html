@@ -507,7 +507,8 @@
       {          
         // dataResp.id                    
         jQuery.jGrowl(i18next.t("product.updated"), {theme:'bg-color-green1', life: 5000});    
-        getProductInfo(getUrlParameter("pid"));                  
+        getProductInfo(getUrlParameter("pid"));
+        jQuery(".box-img").remove(); 
       },     
       error: function(xhr, status)
       {
@@ -579,6 +580,7 @@
   {
     var box = document.createElement("div");
     box.style.marginBottom = "5px";
+    box.className = "box-img"
     
     var bt = document.createElement("button");
     bt.setAttribute("onclick", "jQuery(this.parentNode).remove();");    
@@ -796,7 +798,7 @@
                   <button onclick="addImgInput()" class="btn-u btn-u-default" style="float:left"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                 </div>
                 <br><br>
-                <div style="margin-bottom:5px">                              
+                <div style="margin-bottom:5px" class="box-img">                              
                   <button onclick="jQuery(this.parentNode).remove()" class="btn-u" style="display:inline-block; margin-right: 10px"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                   <input type="file" id="prod-img_1" style="display:inline-block">
                 </div>
