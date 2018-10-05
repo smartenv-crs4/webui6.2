@@ -26,7 +26,7 @@ var sidebarTemplate = `
       </li>
 
       <li class="list-group-item">
-          <a href="page_profile_settings.html"><i class="fa fa-cog"></i> <span data-i18n="profile.profile"></span></a>
+          <a href="page_profile_settings.html"><i class="fa fa-cog"></i> <span data-i18n="profile.profileManagement"></span></a>
       </li>
   </ul>
 

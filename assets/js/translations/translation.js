@@ -37,7 +37,7 @@ var translation = {
                 "invalid_number": "Please enter only digits",
                 "noparameter": "Wrong parameter",
                 "void_name": "Italian name cannot be void",
-                "void_category": "Category cannot be void",
+                "void_category": "Invalid category",
                 "void_desc": "Italian description cannot be void",
                 "void_unit": "Unit cannot be void"
             },
@@ -84,6 +84,7 @@ var translation = {
                 "reviews": "Reviews",
                 "chooseLogo": "Choose a logo",
                 "profile": "Profile",
+                "profileManagement": "Profile Management",
                 "verified": "Verified",
                 "verifyCode": "Verify code",
                 "sendVerificationCode": "Send verification code",
@@ -342,7 +343,7 @@ var translation = {
                 "invalid_number": "Puoi inserire solo un numero",
                 "noparameter": "Parametri non corretti",
                 "void_name": "Devi inserire un nome in italiano",
-                "void_category": "Devi inserire una categoria",
+                "void_category": "Devi inserire una categoria valida",
                 "void_desc": "Devi inserire una descrizione in italiano",
                 "void_unit": "Devi inserire un'unità di misura"
             },
@@ -389,6 +390,7 @@ var translation = {
                 "reviews": "Recensioni",
                 "chooseLogo": "Scegli un logo",
                 "profile": "Profilo",
+                "profileManagement": "Gestione Profilo",
                 "verified": "Verificato",
                 "verifyCode": "Verifica codice",
                 "sendVerificationCode": "Invia codice di verifica",

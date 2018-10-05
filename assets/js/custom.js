@@ -419,6 +419,17 @@ function autoCompleteCat(tagId, callback)
     //console.log("click");
     //jQuery(this).typeahead('open');
   });
+
+  jQuery('#' + tagId).on("keydown", function(e) {
+    if(e.keyCode != 13)
+    {
+      jQuery('#' + tagId).data("cat-id", "");
+      jQuery('#' + tagId).data("cat-type", "");
+      jQuery('#' + tagId).data("cat-name", "");
+    }
+   });
+
+
   
   jQuery('#' + tagId).bind('typeahead:selected', function(obj, datum, name){
     jQuery('#' + tagId).data("cat-id", datum.id);
