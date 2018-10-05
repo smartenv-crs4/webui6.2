@@ -42,8 +42,16 @@ Email: <a href="mailto:cport2020@gmail.com" class="">cport2020@gmail.com</a>
     <div class="row">
     <div class="col-md-6">
     <p>
-    2015 &copy; All Rights Reserved.
-<a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+    2018 &copy; All Rights Reserved.
+<a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <span onclick="jQuery('#creditsContainer').toggle()"style="cursor:pointer">Credits</span>
+<div style="display:none" id="creditsContainer">
+  <a href="https://www.flickr.com/photos/cristianocani/2904948048/in/photolist-5qGBRb">Navigator of the sea</a><br>
+  <a href="https://www.flickr.com/photos/20896325@N00/2655737448/">Dal porto</a><br>
+  <a href="https://www.flickr.com/photos/sdrcosta/8194629064/">Al porto di Cagliari</a><br>
+  <a href="https://www.flickr.com/photos/nicolasdogyuma/18081758493/">Cagliari</a><br>
+  <a href="https://www.flickr.com/photos/gzzimox/4225666640/in/photolist-5o22uK-ecQpbD-5gWRzE-p2QiQ9-6Q9fyN-5gStmH-aLNB9g-5gWTxy-5oqbXn-aLNQVn-9wao2o-uCw544-7rpDto-akxAhN">Veduta del Golfo di Cagliari con Porto Turistico</a><br>
+
+</div>
 </p>
 </div>
 
