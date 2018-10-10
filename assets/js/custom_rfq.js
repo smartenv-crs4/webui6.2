@@ -219,11 +219,15 @@ function getConversationRequestsAndMessages()
                     //console.log(data);
                     for(var i in data.messages)
                     {
-                      
-                      if(data.messages[i].sender.logo && !data.messages[i].sender.logo.startsWith("http"))
+                      if(!data.messages[i].sender.logo)
+                      {
+                        data.messages[i].sender.logo = defaultImg; 
+                      }
+                      else if(data.messages[i].sender.logo && !data.messages[i].sender.logo.startsWith("http"))
                       {
                         data.messages[i].sender.logo = _brokerMsUrl + "files/" + data.messages[i].sender.logo;
                       }
+                     
                     }
 
                  
@@ -285,14 +289,21 @@ function getConversationRequestsAndMessages()
                         o.dateIn = msg.date;
                         o.sender = users_info[msg["sender"]];
                         o.type = users_info[msg["sender"]].type;
+                     
 
                         if(o.sender.logo)
                         {
+
                           if(!o.sender.logo.startsWith("http"))
                           {
                             o.sender.logo = _brokerMsUrl + "files/" + o.sender.logo;
                           }
                         }
+                        else
+                        {
+                          o.sender.logo = defaultImg;
+                        }                        
+
 
                         if(msg.aux)
                         {
@@ -536,7 +547,7 @@ function updateRequest(rqs){
     });
 
     if(rqs.status == 'pending' || rqs.status == 'acceptedByS'){
-        iconPanelRqs =  "fa-exclamation-circle";
+        iconPanelRqs =  "fa-comments";
         $("#status-"+num_req).removeClass(classcolor).addClass("color-info");
     }
     else if(rqs.status == 'acceptedByC' ){
@@ -550,8 +561,8 @@ function updateRequest(rqs){
 
     //console.log(rqs.status);
 
-    $("a[href='#collapse-"+num_req+"'] i").
-    replaceWith("<i class='fa "+iconPanelRqs+" fa-lg pull-right'></i>");
+    $("a[href='#collapse-"+num_req+"'] i.i-sattus").
+    replaceWith("<i class='fa "+iconPanelRqs+" fa-lg pull-right i-status'></i>");
    // setEnableSelect();
 
     addTooltipField();

@@ -255,16 +255,16 @@
             <h4 class="panel-title">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-panel"
                    href="#collapse-{{inc @index}}">
-                    <i class="fa fa-angle-down fa-lg pull-right"></i>
+                    <i class="fa fa-angle-down fa-lg pull-right i-status"></i>
                     {{inc @index}} - RFQ: <span>{{product.name}}</span>
                     {{#if_eq_or_eq status 'pending' status 'acceptedByS'}}
-                    <i class="fa fa-exclamation-circle fa-lg pull-right"></i>
+                    <i class="fa fa-comments fa-lg pull-right i-status"></i>
                     {{/if_eq_or_eq}}
                     {{#if_eq_or_eq status 'rejectedByC' status 'rejectedByS'}}
-                    <i class="fa fa-times-circle fa-lg pull-right"></i>
+                    <i class="fa fa-times-circle fa-lg pull-right i-status"></i>
                     {{/if_eq_or_eq}}
                     {{#if_eq status 'acceptedByC'}}
-                    <i class="fa fa-check-circle fa-lg pull-right"></i>
+                    <i class="fa fa-check-circle fa-lg pull-right i-status"></i>
                     {{/if_eq}}
                 </a>
 
