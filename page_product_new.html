@@ -157,6 +157,10 @@
 
 <script type="text/javascript">
 
+  jQuery(document).on("translate", function(){
+    updateCatLang();
+  });
+
   jQuery(document).ready(function () {
       App.init();
       
@@ -246,6 +250,56 @@
     if(imgCounter == 0)
     {
       sendAddRequest();
+    }
+  }
+
+  function updateCatLang()
+  {
+    var id = jQuery("#categoryField").data("cat-id");
+
+    if(id != "")
+    {
+      jQuery.ajax({
+        url: _brokerMsUrl + "categories/" + id,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(dataResp, textStatus, xhr)
+        {          
+
+          try
+          {
+            var tName = dataResp.name[localStorage.lng];
+            jQuery("#categoryField").val(tName);
+          }
+          catch(error)
+          {
+            console.log(error)
+          }
+                
+        },     
+        error: function(xhr, status)
+        {
+          var msg;
+          try
+          {
+            msg = xhr.responseJSON.message;
+          }
+          catch(err)
+          {
+            msg = i18next.t("error.internal_server_error");
+          }
+          
+          jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+                
+          return;    
+        },
+        beforeSend: function(xhr, settings) 
+        { 
+          xhr.setRequestHeader('Authorization','Bearer ' + sessionStorage.token); 
+        }                    
+      });
+
     }
   }
   
