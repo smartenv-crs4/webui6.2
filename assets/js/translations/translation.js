@@ -39,7 +39,8 @@ var translation = {
                 "void_name": "Italian name cannot be void",
                 "void_category": "Invalid category",
                 "void_desc": "Italian description cannot be void",
-                "void_unit": "Unit cannot be void"
+                "void_unit": "Unit cannot be void",
+                "terms": "You must accept terms and conditions"
             },
             "warning": {
                 "warning": "Warning!",
@@ -64,7 +65,9 @@ var translation = {
                 "forgotPassword": "Forgot your password ?",
                 "resetPassword": "Reset password",
                 "resetSuccess":  "Your password has been reset successfully",
-                "resetEmail":  "Your password reset email has been sent. When you receieve the Email you will need to follow the link and complete the password reset form"
+                "resetEmail":  "Your password reset email has been sent. When you receieve the Email you will need to follow the link and complete the password reset form",
+                "agree": "I agree to",
+                "terms": "terms and conditions"                  
 
             },
             "profile": {
@@ -345,7 +348,8 @@ var translation = {
                 "void_name": "Devi inserire un nome in italiano",
                 "void_category": "Devi inserire una categoria valida",
                 "void_desc": "Devi inserire una descrizione in italiano",
-                "void_unit": "Devi inserire un'unità di misura"
+                "void_unit": "Devi inserire un'unità di misura",
+                "terms": "Devi accettare i Termini e le Condizioni d'uso per poterti registrare"
             },
             "warning": {
                 "warning": "Attenzione!",
@@ -370,7 +374,10 @@ var translation = {
                 "forgotPassword": "Hai dimenticato la password ?",
                 "resetPassword": "Reimposta password",
                 "resetSuccess":  "Password reimpostata correttamente",
-                "resetEmail":  "Ti è stata inviata un' email. Seguendo il link riportato su di essa potrai accedere alla pagina in cui inserire una nuova password."
+                "resetEmail":  "Ti è stata inviata un' email. Seguendo il link riportato su di essa potrai accedere alla pagina in cui inserire una nuova password.",
+                "agree": "Ho letto e accetto i",
+                "terms": "termini e le condizioni"
+
 
             },
             "profile": {

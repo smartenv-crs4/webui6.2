@@ -114,13 +114,23 @@ function signIn()
 
 function signUp()
 {
+  var respBlock = jQuery("#signUpResponse");
+
+  if(!jQuery("#checkterms").attr('checked'))
+  {
+
+    respBlock.removeClass("invisible");
+    respBlock.html(i18next.t("error.terms"))
+    return;
+  }
+
   var email = jQuery("#signUpEmail").val();
   var name = jQuery("#signUpName").val();
   var password = jQuery("#signUpPassword").val();
   var password2 = jQuery("#signUpPassword2").val();
   var userType = jQuery("#signUpUserType").val();
 
-  var respBlock = jQuery("#signUpResponse");
+
 
   if(respBlock.is(":visible"))
   {
