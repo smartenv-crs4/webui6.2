@@ -385,8 +385,8 @@ function autoCompleteCat(tagId, callback)
         //console.log(JSON.stringify(ret));
         return ret;
       },
-      prepare: function(query, settings){
-        settings.url = settings.url + "name=" + query + "&lang=" + localStorage.lng;
+      prepare: function(query, settings){       
+        settings.url = settings.url + "name=" + query + "&lang=" + localStorage.getItem("lng");
         return settings;
       },
       transport(opts, onSuccess, onError){
@@ -407,12 +407,11 @@ function autoCompleteCat(tagId, callback)
   jQuery("#" + tagId).attr("data-i18n-bak", jQuery("#" + tagId).attr("data-i18n"));
   jQuery("#" + tagId).removeAttr("data-i18n");
 
-  jQuery('#' + tagId).typeahead(null, {
+  jQuery('#' + tagId).typeahead({minLength: 0}, {
     name: 'categories',
     display: 'name',
     source: acCategories,
-    limit: 100,
-    minLength: 3
+    limit: 100
   });
 
   jQuery('#' + tagId).on("click", function() {
