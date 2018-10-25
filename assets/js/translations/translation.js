@@ -40,6 +40,8 @@ var translation = {
                 "void_category": "Invalid category",
                 "void_desc": "Italian description cannot be void",
                 "void_unit": "Unit cannot be void",
+                "invalid_url": "Web address must start with either http:// or https://",
+                "invalid-piva": "Partita IVA (VAT) must have 11 digits",
                 "terms": "You must accept terms and conditions"
             },
             "warning": {
@@ -349,6 +351,8 @@ var translation = {
                 "void_category": "Devi inserire una categoria valida",
                 "void_desc": "Devi inserire una descrizione in italiano",
                 "void_unit": "Devi inserire un'unità di misura",
+                "invalid_url": "L'indirizzo web deve iniziare con http:// o https://",
+                "invalid-piva": "La partita IVA deve essere composta da 11 cifre",
                 "terms": "Devi accettare i Termini e le Condizioni d'uso per poterti registrare"
             },
             "warning": {

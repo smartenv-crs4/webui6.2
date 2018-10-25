@@ -366,6 +366,14 @@ function updateProfile()
       }
     }
   });
+
+
+  if(data.user["web"] && data.user["web"].trim() != "" && !data.user["web"].trim().startsWith("http"))
+  {
+    var msg = i18next.t("error.invalid_url");
+    jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+    return;
+  }
   
   //console.log(sessionStorage.token);
   jQuery.ajax({
@@ -388,6 +396,10 @@ function updateProfile()
       try
       {
         msg = xhr.responseJSON.message;
+        if(msg.startsWith('"pIva"'))
+        {
+          msg = i18next.t("error.invalid-piva");
+        }
       }
       catch(err)
       {
@@ -1133,7 +1145,9 @@ function addUserCategory()
   
   if(category == "" || category == undefined)
   {
-    //
+    var msg = i18next.t("error.void_category");
+                 
+    jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
     return;
   }
   
