@@ -50,7 +50,8 @@ function sendEvaluation()
   var customerservice = jQuery("input[name='customerservice']");
   evaluation["customer_service_rate"] = getStarRating(customerservice);
   evaluation["pros_review"] = jQuery("textarea[name='pros_review']").val();
-  evaluation["cons_review"] = jQuery("textarea[name='cons_review']").val();
+  //evaluation["cons_review"] = jQuery("textarea[name='cons_review']").val();
+  evaluation["cons_review"] = "";
   console.log('overall rate: ' + evaluation["overall_rate"]);
   console.log('product rate: ' + evaluation["product_rate"]);
   console.log('delivery rate: ' + evaluation["delivery_rate"]);
