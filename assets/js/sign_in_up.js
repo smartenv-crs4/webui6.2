@@ -116,13 +116,19 @@ function signUp()
 {
   var respBlock = jQuery("#signUpResponse");
 
-  if(!jQuery("#checkterms").attr('checked'))
-  {
+  jQuery(".missingVld").removeClass("missingVld");
 
-    respBlock.removeClass("invisible");
-    respBlock.html(i18next.t("error.terms"))
-    return;
-  }
+  jQuery(".checkterms").each(function()
+  {
+    if(!jQuery(this).attr("checked"))
+    {
+      jQuery(this).parent().addClass("missingVld");
+      respBlock.removeClass("invisible");
+      respBlock.html(i18next.t("error.terms"))
+      return;
+    }
+  });
+
 
   var email = jQuery("#signUpEmail").val();
   var name = jQuery("#signUpName").val();

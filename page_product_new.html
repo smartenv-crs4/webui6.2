@@ -362,13 +362,47 @@
       param.categories = [param.categories];
     }
         
-    if(jQuery("#categoryField").data("type") === 1 && (!param.unit || param.unit.trim() == "" ))
+    
+    if(jQuery("#categoryField").data("type") === 1)
     {
-      var msg = i18next.t("error.void_unit");
+      if(!param.unit || param.unit.trim() == "" )
+      {
+        var msg = i18next.t("error.void_unit");
+        jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+        return;
+      }
+      else if(!param.minNum || param.minNum.trim() == "" )
+      {
+        var msg = i18next.t("error.void_minNum");
+        jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+        return;
+      }
+      else if(!param.maxNum || param.maxNum.trim() == "" )
+      {
+        var msg = i18next.t("error.void_maxNum");
+        jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+        return;
+      }
+      else if(!param.deliveryIn || param.deliveryIn.trim() == "" )
+      {
+        var msg = i18next.t("error.void_deliveryIn");
+        jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+        return;
+      }
+      else if(!param.availability || param.availability.trim() == "" )
+      {
+        var msg = i18next.t("error.void_availability");
+        jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+        return;
+      }
+    }
+
+    if(!param.price || param.price.trim() == "")
+    {
+      var msg = i18next.t("error.void_price");
       jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
       return;
     }
-    
     
     if(param.description.trim() == "")
     {

@@ -89,6 +89,8 @@ function getUserProfile()
             buttonBefore: true});
         jQuery("#logoInput").filestyle({buttonText: i18next.t("profile.logoInputLabel"),
             buttonBefore: true});
+
+
     /*        
         var tCertTab = Handlebars.compile(certificationsTabTemplate); 
         jQuery("#tabContainer").append(tCertTab());
@@ -118,7 +120,23 @@ function getUserProfile()
         jQuery("#tabBodyContainer").append(tCert());
         jQuery("#tabBodyContainer").localize();     
         
-        getCertificationsList();    
+        getCertificationsList();   
+
+        if(jQuery('#iCertDate').length)
+        {
+          jQuery('#iCertDate').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            prevText: '<i class="fa fa-angle-left"></i>',
+            nextText: '<i class="fa fa-angle-right"></i>',
+            onSelect: function( selectedDate )
+            {
+              //  $('#finish').datepicker('option', 'minDate', selectedDate);
+            }
+
+	  	    });
+        }
 
         var tfeedbackTab = Handlebars.compile(feedbackTabTemplate); 
         jQuery("#tabContainer").append(tfeedbackTab());
@@ -874,6 +892,20 @@ function uploadDocument()
   var f = jQuery("#documentInput")[0];
   fd.append( 'document', f.files[0] );
   fd.append('docName', f.files[0].name);
+
+  var docArr = [];
+  jQuery(".supDocLnk").each(function(){
+    docArr.push(this.innerHTML.trim());
+  });
+
+  if(docArr.indexOf(f.files[0].name.trim()) >= 0)
+  {
+    var m = i18next.t("profile.sameNameDoc")
+    var r = confirm(m);
+    
+    if(r == false)
+      return;
+  }
  
   //var url = _brokerMsUrl + "users/actions/attachment";
   var url = _brokerMsUrl + "files/actions/attachments";
@@ -1203,6 +1235,45 @@ function addCertification()
   var name = jQuery("#iCertName").val();
   var date = jQuery("#iCertDate").val();
   var desc = jQuery("#iCertDescription").val();
+
+  var vDate = true;
+
+  var ds = date.split("/");
+
+  if(ds.length == 3)
+  {
+    if(!isNaN(ds[0]) && !isNaN(ds[1]) && !isNaN(ds[2]))
+    {
+      var dY = parseInt(ds[2]);
+      var dM = parseInt(ds[1]);
+      var dD = parseInt(ds[0]);
+      var dObj = new Date();
+      dObj.setFullYear(dY, dM - 1, dD);
+
+      if(!(dObj.getFullYear() == dY && dObj.getMonth() == (dM - 1) && dObj.getDate() == dD))
+      {
+        vDate = false;
+      }
+    }
+    else
+    {
+      vDate = false;
+    }
+  }
+  else
+  {
+    vDate = false;
+  }
+
+  console.log(vDate);
+
+  if(!vDate)
+  {
+    var msg = i18next.t("error.wrong_date");
+    jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+    return;
+  }
+
   
   
   var data = new Object();
@@ -1220,7 +1291,10 @@ function addCertification()
     dataType: "json",
     success: function(dataResp, textStatus, xhr)
     {     
-      getCertificationsList();               
+      getCertificationsList();  
+      jQuery("#iCertName").val("");
+      jQuery("#iCertDate").val("");
+      jQuery("#iCertDescription").val("");
     },     
     error: function(xhr, status)
     {

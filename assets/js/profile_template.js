@@ -100,7 +100,7 @@ var customerProfileTemplate = `
   <dt><strong data-i18n="profile.logo"></strong></dt>
   <dd>
     <a class="editable editable-click" data-name="logo" data-i18n="[data-emptytext]profile.emptyText" id="ed-logo" data-type="text" href="#">{{logo}}</a>
-  </dd -->
+  </dd>
   <hr>
   <dt><strong data-i18n="profile.favoriteSuppliers"></strong></dt>
   <dd>
@@ -402,7 +402,7 @@ var documentsTableTemplate = `
         {{#each this}}               
           <tr>
             <td>
-              <a href="{{url}}"> {{name}} </a>
+              <a class="supDocLnk"  target="_blank" href="{{url}}"> {{name}} </a>
               <span>                
                 <a class="pull-right" data-toggle="confirmation" 
                    data-placement="top" href="#" data-on-confirm="deleteDocument" data-fid="{{fid}}" data-fname="{{name}}" 
