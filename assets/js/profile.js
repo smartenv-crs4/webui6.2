@@ -481,13 +481,21 @@ function changePassword()
     error: function(xhr, status)
     {
       var msg;
-      try
-      {        
-        msg = xhr.responseJSON.message;
-      }
-      catch(err)
+
+      if(xhr.status == 401)
       {
-        msg = i18next.t("error.internal_server_error");
+        msg = i18next.t("error.wrong_old_password");
+      }
+      else
+      {
+        try
+        {        
+          msg = xhr.responseJSON.message;
+        }
+        catch(err)
+        {
+          msg = i18next.t("error.internal_server_error");
+        }
       }
       
       jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});

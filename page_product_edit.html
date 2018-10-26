@@ -462,8 +462,8 @@
     {
       param.categories = [param.categories];
     }
-    
-    if(jQuery("#categoryField").data("type") === 1)
+   
+    if(jQuery("#categoryField").data("cat-type") === 1)
     {
       if(!param.unit || param.unit.trim() == "" )
       {
@@ -492,6 +492,12 @@
       else if(!param.availability || param.availability.trim() == "" )
       {
         var msg = i18next.t("error.void_availability");
+        jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
+        return;
+      }
+      else if(param.maxNum < param.minNum)
+      {
+        var msg = i18next.t("error.max_lt_min");
         jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
         return;
       }
