@@ -490,7 +490,7 @@ function changePassword()
       {
         try
         {        
-          msg = xhr.responseJSON.message;
+          msg = xhr.responseJSON.error_message;
         }
         catch(err)
         {
