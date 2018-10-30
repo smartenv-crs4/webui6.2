@@ -318,7 +318,7 @@ var documentsTemplate = `
   <br>
     <div class="row">
       <div class="col-xs-10"><input  type="file" id="documentInput" name="document"></div>
-      <button type="button" class="btn-u" data-i18n="profile.uploadDocument" onclick="uploadDocument()"></button>
+      <button id="btnUploadDoc" type="button" class="btn-u" data-i18n="profile.uploadDocument" onclick="uploadDocument()"></button>
     </div>
     <hr />
   <div id="documentsList">     

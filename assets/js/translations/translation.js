@@ -1,4 +1,4 @@
-var translation = {
+translation = {
 
     en: {
         translation: {
@@ -27,6 +27,7 @@ var translation = {
                 "internal_server_error": "Internal server error",
                 "invalid_auth": "Invalid email and/or password",
                 "invalid_link": "Link is not valid",
+                "wrong_old_password": "Your current password isn't correct",
                 "password_differs": "Passwords must be equals",
                 "unknown_user_type": "Select a valid user type",
                 "user_already_exixts": "Email address already in use",
@@ -34,15 +35,22 @@ var translation = {
                 "disk_quota_exceeded": "Disk quota exceeded",
                 "request_rejected": "The request has bee rejected",
                 "missing_date": "Please enter a validity date",
+                "wrong_date": "Invalid date",
                 "invalid_number": "Please enter only digits",
                 "noparameter": "Wrong parameter",
                 "void_name": "Italian name cannot be void",
                 "void_category": "Invalid category",
                 "void_desc": "Italian description cannot be void",
                 "void_unit": "Unit cannot be void",
+                "void_minNum": "Minimum quantity cannot be void",
+                "void_maxNum": "Maximum quantity cannot be void",
+                "max_lt_min": "Minimum quantity cannot be greater than maximum",
+                "void_deliveryIn": "Delivery time cannot be void",
+                "void_price": "Price cannot be void", 
+                "void_availability": "Availability cannot be void",
                 "invalid_url": "Web address must start with either http:// or https://",
                 "invalid-piva": "Partita IVA (VAT) must have 11 digits",
-                "terms": "You must accept terms and conditions"
+                "terms": "You must accept all terms and conditions"
             },
             "warning": {
                 "warning": "Warning!",
@@ -106,6 +114,7 @@ var translation = {
                 "documentsTitle": "Manage your public documents",
                 "documentsTitle2": "Below you can add or remove documents",
                 "documentDeleted": "The document has been deleted successfully",
+                "sameNameDoc": "A document with this name already exists. Do you want upload it anyway?",
                 "feedbackTitle": "Your customers opinion about you",
                 "feedbackTitle2": "The most frequent words in their comments",
 
@@ -339,21 +348,29 @@ var translation = {
                 "invalid_auth": "Email e/o password errati",
                 "invalid_link": "Link non valido",
                 "password_differs": "Le password differiscono",
+                "wrong_old_password": "La password attuale non è corretta",
                 "unknown_user_type": "Seleziona il tipo di account che vuoi creare",
                 "user_already_exixts": "Indirizzo email già registrato",
                 "invalid_pdf": "Puoi caricare soltanto file pdf",
                 "disk_quota_exceeded": "La quota disco a tua disposizione è stata superata",
                 "request_rejected": "La richiesta non può essere accolta",
                 "missing_date": "Devi inserire una data",
+                "wrong_date": "Data non valida",
                 "invalid_number": "Puoi inserire solo un numero",
                 "noparameter": "Parametri non corretti",
                 "void_name": "Devi inserire un nome in italiano",
                 "void_category": "Devi inserire una categoria valida",
                 "void_desc": "Devi inserire una descrizione in italiano",
                 "void_unit": "Devi inserire un'unità di misura",
+                "void_minNum": "Devi inserire una quantità minima",
+                "void_maxNum": "Devi inserire una quantità massima",
+                "max_lt_min": "La quantità minima non può essere superiore alla massima",
+                "void_availability": "Devi inserire la quantità disponibile",
+                "void_deliveryIn": "Devi inserire un tempo di consegna",
+                "void_price": "Devi inserire un prezzo",
                 "invalid_url": "L'indirizzo web deve iniziare con http:// o https://",
                 "invalid-piva": "La partita IVA deve essere composta da 11 cifre",
-                "terms": "Devi accettare i Termini e le Condizioni d'uso per poterti registrare"
+                "terms": "Devi accettare tutti i termini e tutte le condizioni d'uso per poterti registrare"
             },
             "warning": {
                 "warning": "Attenzione!",
@@ -420,6 +437,7 @@ var translation = {
                 "documentsTitle2": "Qui puoi aggiungere o rimuovere documenti",
                 "documentsInputLabel": "Scegli un documento pdf",
                 "logoInputLabel": "Scegli un'immagine",
+                "sameNameDoc": "Un documento con questo nome esiste già. Vuoi caricarlo comunque ?",
                 "feedbackTitle": "Cosa scrivono di te i clienti",
                 "feedbackTitle2": "Le parole che hanno usato maggiormente",
                 "uploadDocument": "Upload",

@@ -84,3 +84,22 @@ a:hover {
 select::-ms-expand {
   display: none;
 }
+
+
+
+.ui-datepicker-month, .ui-datepicker-year
+{
+  background-color: white;
+  padding: 2px;
+  border-radius: 4px;
+  border: 1px solid #AAAAAA;
+  margin: 3px;
+}
+
+
+.missingVld
+{
+  background-color: #fff2f2;
+  border: solid 1px #b72a2a;
+}
+
