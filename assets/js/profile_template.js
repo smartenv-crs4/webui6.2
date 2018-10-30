@@ -313,7 +313,7 @@ var feedbackTemplate = `
      </div>
     </div>
   </div>
-  <br>
+  <!-- br>
   <p data-i18n="profile.feedbackTitle2"></p>
   <br>
   <div style="text-align:center;width:100%">
@@ -323,7 +323,7 @@ var feedbackTemplate = `
       <p data-i18n="profile.feedback_cons" style="font-size:15pt"></p>
       <div id="cons_feedbackBox">     
       </div>
-  </div>
+  </div -->
 
 </div>
 `;
