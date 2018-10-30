@@ -118,16 +118,25 @@ function signUp()
 
   jQuery(".missingVld").removeClass("missingVld");
 
+  var termsChecked  = true;
+
   jQuery(".checkterms").each(function()
   {
     if(!jQuery(this).attr("checked"))
     {
       jQuery(this).parent().addClass("missingVld");
       respBlock.removeClass("invisible");
-      respBlock.html(i18next.t("error.terms"))
+      respBlock.html(i18next.t("error.terms"));
+      termsChecked = false
       return;
     }
+
   });
+
+  if(!termsChecked)
+  {
+    return;
+  }
 
 
   var email = jQuery("#signUpEmail").val();
