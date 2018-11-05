@@ -43,7 +43,7 @@ Email: <a href="mailto:cport2020@gmail.com" class="">cport2020@gmail.com</a>
     <div class="col-md-6">
     <p>
     2018 &copy; All Rights Reserved.
-<a href="#">Privacy Policy</a> | <a href="terms.html">Terms of Service</a> | <span onclick="jQuery('#creditsContainer').toggle()"style="cursor:pointer">Credits</span>
+<a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a> | <span onclick="jQuery('#creditsContainer').toggle()"style="cursor:pointer">Credits</span>
 <div style="display:none" id="creditsContainer">
   <a href="https://www.flickr.com/photos/cristianocani/2904948048/in/photolist-5qGBRb">Navigator of the sea</a><br>
   <a href="https://www.flickr.com/photos/20896325@N00/2655737448/">Dal porto</a><br>
