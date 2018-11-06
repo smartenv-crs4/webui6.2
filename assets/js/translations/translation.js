@@ -319,7 +319,8 @@ translation = {
                 "contactus": "Contact Us",
                 "aboutus": "About us",
                 "site": "Site",
-                "everything": "Everything"
+                "everything": "Everything",
+                "testing": "This is a  beta release under testing,  we are sorry for any inconveniences"
             }
         }
     },
@@ -644,7 +645,8 @@ translation = {
                 "contactus": "Contattaci",
                 "aboutus": "Chi siamo",
                 "site": "Sito",
-                "everything": "Tutte"
+                "everything": "Tutte",
+                "testing": "Questo servizio è una versione beta in fase di sperimentazione, ci scusiamo in anticipo per eventuali inconvenienti"
 
             }
         }
