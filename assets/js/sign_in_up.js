@@ -144,17 +144,6 @@ function signUp(confirmNoRfq)
     return;
   }
 
-  if(rfqApproval == false && confirmNoRfq !== true)
-  {
-    respBlock.removeClass("invisible");
-    respBlock.html(i18next.t("warning.noRfqConfirm"));
-    var b = document.createElement("button");
-    b.className = "btn-u btn-block rounded";
-    b.appendChild(document.createTextNode(i18next.t("login.confirm")));
-    jQuery(b).click(function(){signUp(true);});
-    respBlock.append(b);
-    return;
-  }
 
 
   var email = jQuery("#signUpEmail").val();
@@ -163,6 +152,22 @@ function signUp(confirmNoRfq)
   var password2 = jQuery("#signUpPassword2").val();
   var userType = jQuery("#signUpUserType").val();
 
+
+
+  if(rfqApproval == false && confirmNoRfq !== true)
+  {
+    respBlock.removeClass("invisible");
+    if(userType == "supplier")
+      respBlock.html(i18next.t("warning.noRfqConfirmSupplier"));
+    else
+      respBlock.html(i18next.t("warning.noRfqConfirmCustomer"));
+    var b = document.createElement("button");
+    b.className = "btn-u btn-block rounded";
+    b.appendChild(document.createTextNode(i18next.t("login.confirm")));
+    jQuery(b).click(function(){signUp(true);});
+    respBlock.append(b);
+    return;
+  }
 
 
   if(respBlock.is(":visible"))

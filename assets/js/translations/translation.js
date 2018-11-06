@@ -50,11 +50,12 @@ translation = {
                 "void_availability": "Availability cannot be void",
                 "invalid_url": "Web address must start with either http:// or https://",
                 "invalid-piva": "Partita IVA (VAT) must have 11 digits",
-                "terms": "You must accept all terms and conditions"
+                "terms": "To sign up highlighted privacy and general conditions shall be accepted"
             },
             "warning": {
                 "warning": "Warning!",
-                 "noRfqConfirm": "Warning, if you don't agree with RfQ conditions you will be registered but you will not be able to use any services. Do you confirm?",
+                "noRfqConfirmCustomer": "WARNING, without agreement about Request for Quotations (RfQs), you will not be able to negotiate with any suppliers",
+                "noRfqConfirmSupplier": "WARNING: without your agreement about Request for Quotations (RfQs), no customers will be allowed to contact you",
                 "emptyResult": "No result to show"
             },
             "buttons": {
@@ -372,12 +373,13 @@ translation = {
                 "void_price": "Devi inserire un prezzo",
                 "invalid_url": "L'indirizzo web deve iniziare con http:// o https://",
                 "invalid-piva": "La partita IVA deve essere composta da 11 cifre",
-                "terms": "Devi accettare tutti i termini e tutte le condizioni d'uso per poterti registrare"
+                "terms": "Per la registrazione è necessario accettare i termini e le condizioni di utiizzo evidenziati"
             },
             "warning": {
                 "warning": "Attenzione!",
                 "emptyResult": "Nessun risultato da mostrare",
-                "noRfqConfirm": "Attenzione, senza il consenso per l'utilizzo delle RfQ verrai registrato nel sistema ma non potrai accedere ad alcuna funzionalità dell'applicazione. Confermi ?",
+                "noRfqConfirmCustomer": "Attenzione, senza il consenso per l'utilizzo delle RfQ non sarà possibile contattare alcun fornitore",
+                "noRfqConfirmSupplier": "Attenzione, senza il consenso per l'utilizzo delle RfQ non sarà possibile essere contattati dai clienti",
             },
             "buttons": {
                 "send": "Invia",
