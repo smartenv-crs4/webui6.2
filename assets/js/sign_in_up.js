@@ -112,17 +112,19 @@ function signIn()
 
 
 
-function signUp()
+function signUp(confirmNoRfq)
 {
   var respBlock = jQuery("#signUpResponse");
 
   jQuery(".missingVld").removeClass("missingVld");
 
   var termsChecked  = true;
+  var rfqApproval = false;
 
   jQuery(".checkterms").each(function()
   {
-    if(!jQuery(this).attr("checked"))
+   
+    if(!jQuery(this).attr("checked") && jQuery(this).attr("id") != "checkterms-rfq")
     {
       jQuery(this).parent().addClass("missingVld");
       respBlock.removeClass("invisible");
@@ -130,11 +132,27 @@ function signUp()
       termsChecked = false
       return;
     }
+    else if(jQuery(this).attr("id") == "checkterms-rfq" && jQuery(this).attr("checked"))
+    {
+      rfqApproval = true;
+    }
 
   });
 
   if(!termsChecked)
   {
+    return;
+  }
+
+  if(rfqApproval == false && confirmNoRfq !== true)
+  {
+    respBlock.removeClass("invisible");
+    respBlock.html(i18next.t("warning.noRfqConfirm"));
+    var b = document.createElement("button");
+    b.className = "btn-u btn-block rounded";
+    b.appendChild(document.createTextNode(i18next.t("login.confirm")));
+    jQuery(b).click(function(){signUp(true);});
+    respBlock.append(b);
     return;
   }
 
@@ -179,6 +197,7 @@ function signUp()
   data["name"] = name;
   data["password"] = password;
   data["type"] = userType;
+  data["rfqApproval"] = rfqApproval; 
 
   jQuery.ajax({
     url: _brokerMsUrl + "users/signup",

@@ -41,6 +41,14 @@ function isApplicativeUser()
     return false;
 }
 
+function isAdmin()
+{
+  if(sessionStorage.type == "admin")
+    return true;
+  else
+    return false;
+}
+
 function userId() {
 
     if (window.sessionStorage.userId)

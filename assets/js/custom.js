@@ -74,6 +74,7 @@ jQuery(document).ready(function(){
   var headerHTML = headerCompiled({
     isLogged: isLogged(),
     isApplicativeUser: isApplicativeUser(),
+    isAdmin: isAdmin(),
     showSearch : isSearchVisible(),
     isHome : window['isHome'] || false,
     isRFQ : window['isRFQ'] || false

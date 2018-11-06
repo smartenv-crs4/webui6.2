@@ -59,11 +59,13 @@ var header_template = `	<div class="header">
           </li>          
             {{else}}
               {{#if isLogged}}
-                <li class="logged">
-                  <a href="./page_admin.html"  >
-                    ADMIN
-                 </a>              
-                </li>          
+                {{#if isAdmin}}
+                  <li class="logged">
+                    <a href="./page_admin.html"  >
+                      ADMIN
+                   </a>              
+                  </li>          
+                {{/if}}
               {{/if}}
             {{/if}}
           <!-- li>

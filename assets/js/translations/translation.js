@@ -54,6 +54,7 @@ translation = {
             },
             "warning": {
                 "warning": "Warning!",
+                 "noRfqConfirm": "Warning, if you don't agree with RfQ conditions you will be registered but you will not be able to use any services. Do you confirm?",
                 "emptyResult": "No result to show"
             },
             "buttons": {
@@ -64,6 +65,7 @@ translation = {
             "login": {
                 "signUp": "Sign Up",
                 "signIn": "Sign In",
+                "confirm": "Confirm",
                 "yourEmail": "Your email",
                 "yourName": "Your name",
                 "password": "Password",
@@ -374,7 +376,8 @@ translation = {
             },
             "warning": {
                 "warning": "Attenzione!",
-                "emptyResult": "Nessun risultato da mostrare"
+                "emptyResult": "Nessun risultato da mostrare",
+                "noRfqConfirm": "Attenzione, senza il consenso per l'utilizzo delle RfQ verrai registrato nel sistema ma non potrai accedere ad alcuna funzionalità dell'applicazione. Confermi ?",
             },
             "buttons": {
                 "send": "Invia",
@@ -384,6 +387,7 @@ translation = {
             "login": {
                 "signUp": "Registrati",
                 "signIn": "Accedi",
+                "confirm": "Confermo",
                 "yourEmail": "Il tuo indirizzo email",
                 "yourName": "Il tuo nome",
                 "password": "Password",
