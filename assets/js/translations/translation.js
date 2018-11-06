@@ -55,7 +55,7 @@ translation = {
             "warning": {
                 "warning": "Warning!",
                 "noRfqConfirmCustomer": "WARNING, without agreement about Request for Quotations (RfQs), you will not be able to negotiate with any suppliers",
-                "noRfqConfirmSupplier": "WARNING: without your agreement about Request for Quotations (RfQs), no customers will be allowed to contact you",
+                "noRfqConfirmSupplier": "WARNING: without your agreement about Request for Quotations (RfQs), customers will not be allowed to contact you",
                 "emptyResult": "No result to show"
             },
             "buttons": {
