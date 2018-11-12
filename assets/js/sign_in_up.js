@@ -144,8 +144,6 @@ function signUp(confirmNoRfq)
     return;
   }
 
-
-
   var email = jQuery("#signUpEmail").val();
   var name = jQuery("#signUpName").val();
   var password = jQuery("#signUpPassword").val();
