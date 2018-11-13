@@ -495,7 +495,7 @@
         jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
         return;
       }
-      else if(param.maxNum < param.minNum)
+      else if(parseInt(param.maxNum,10) < parseInt(param.minNum,10))
       {
         var msg = i18next.t("error.max_lt_min");
         jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
