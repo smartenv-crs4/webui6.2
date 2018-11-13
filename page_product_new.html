@@ -322,6 +322,8 @@
         
     param.minNum = jQuery("#qmin").val();
     param.maxNum = jQuery("#qmax").val();
+	  console.log('param.maxNum=' + param.maxNum);
+	  console.log('param.minNum=' + param.minNum);
     param.deliveryIn = jQuery("#delin").val();
     param.price = jQuery("#price").val();
     param.availability = jQuery("#availability").val();                
@@ -395,8 +397,11 @@
         jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
         return;
       }
-      else if(param.maxNum < param.minNum)
+      else if(parseInt(param.maxNum, 10) < parseInt(param.minNum, 10))
       {
+	      console.log('param.maxNum=' + param.maxNum);
+	      console.log('param.minNum=' + param.minNum);
+	      console.log(param.maxNum < param.minNum);
         var msg = i18next.t("error.max_lt_min");
         jQuery.jGrowl(msg, {theme:'bg-color-red', life: 5000});
         return;
