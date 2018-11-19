@@ -369,7 +369,7 @@ function render_row(data, arr_par)
                                     _str += '<div class="row">';
                                     
                                     _str +=     '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 text-center" href="#">';
-                                    _str +=         '<img class="media-s100 img-circle" src="' + _img[0].url +'" alt="" style="cursor:pointer; height: 100px; width:100px" onclick="openGallery(this)" data-iid="'+ _img[0].id +'" onError="this.onerror=null;this.src=\'assets/img/team/img1-md.jpg\'">';
+                                    _str +=         '<img class="" src="' + _img[0].url +'" alt="" style="max-width:80px; max-height:80px; cursor:pointer;" onclick="openGallery(this)" data-iid="'+ _img[0].id +'" onError="this.onerror=null;this.src=\'assets/img/team/img1-md.jpg\'">';
                                     _str +=     '<div class="center-block margin-left-10">';
                                     for (var t in _img)
                                     {       
