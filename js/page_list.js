@@ -537,8 +537,9 @@ function renderStars(data_r, id)
 // render pagination number
 function render_paginate(tot_page, act_page, arr_par)
 {
-   var_par = get_par_string(arr_par);
+    index = 4;
     
+    var_par = get_par_string(arr_par);
     
     var str = '<div class="text-left" id="divPagination">'
     + '<ul class="pagination pagination-sm" ><li><a ';
@@ -557,10 +558,11 @@ function render_paginate(tot_page, act_page, arr_par)
                     start = 1;
                     limit = tot_page;
                 }
-                else if (act_page < 4)
+                else if (act_page < index)
                 {
+                    console.log('actual page: ' + act_page);
                     start = 1;
-                    limit = 4;
+                    limit = index;
                 }
                 else if (act_page == tot_page)
                 {
@@ -568,12 +570,12 @@ function render_paginate(tot_page, act_page, arr_par)
                         + '<li><a>...</a></li>';
                           
                     
-                    start = tot_page - 3;
+                    start = tot_page - (index - 1);
                     limit = tot_page;
                 
                 
                 }
-                else if (act_page >= 4)
+                else if (act_page >= index)
                 {
                     str = str + '<li><a href="#" class="p_link" data-par="'+var_par+'" data-page="1">1</a></li>'
                         + '<li><a>...</a></li>';
@@ -591,22 +593,21 @@ function render_paginate(tot_page, act_page, arr_par)
                 
                   
                 
-                
                 for (var i = start; i <= limit; i++)
                 {
                     check_Active = '';
                     if (act_page == i)
-                    if (page == i)
+                    //if (page == i)
                         check_Active = 'class="active"';
                     
                     str = str + '<li '+ check_Active +'><a href="#" class="p_link" data-par="'+var_par+'" data-page="'+i+'">'+i+'</a></li>';
                 }
                     
                                 
-                   
-                if ((tot_page > ((act_page - 1) + 3)))
+                if ((tot_page == limit + 1 && act_page < index) || (tot_page > ((act_page - 1) + 3) && tot_page > index))
                 {
-                    str = str + '<li><a>...</a></li>';
+                    //if (tot_page > index + 1)
+                        str = str + '<li><a>...</a></li>';
                     str = str + '<li><a href="#" class="p_link" data-par="'+var_par+'" data-page="'+tot_page+'">'+tot_page+'</a></li>';
                 }
     
@@ -667,7 +668,6 @@ function get_list(_arr_par)
     _var_par = get_par_string(_arr_par);
     
     
-    console.log(_var_par);
     
     
     $.ajax({
