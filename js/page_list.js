@@ -759,7 +759,7 @@ function getProductsSupplier(id, _arr_par)
                                       var str_listProducts2 = '<table>';
                                       var translate;
                                       console.log(data);
-                                      for (var c = 0; c < data.total; c++) {
+                                      for (var c = 0; c < data.docs.length; c++) {
                                       
                                             translate = translate_product(data.docs[c].name, data.docs[c].description, data.docs[c].translation[0], lang);
                                          
