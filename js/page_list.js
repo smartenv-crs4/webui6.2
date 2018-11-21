@@ -235,7 +235,7 @@ function render_row(data, arr_par)
                                 _str += '<div class="row">';
                                     
                                     _str +=     '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 text-center" href="#">';
-                                    _str +=         '<img class="rounded-x" style="width: 100px" src="'; 
+                                    _str +=         '<img class="" style="width: 100px" src="'; 
                                     if (data.docs[i].logo) 
                                         _str = _str +  _brokerMsUrl + "files/" + data.docs[i].logo; 
                                     else 
