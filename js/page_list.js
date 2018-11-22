@@ -412,10 +412,10 @@ function render_row(data, arr_par)
                                     _str +=             '<ul class="list-inline share-list margin_left_10">';  
                                     if (mcat.type == 1)
                                     {
-                                        _str +=                 '<li><i class="fa fa-chevron-up"></i><span data-i18n="catalog.atleast">Min</span> '+checkValue(data.docs[i].minNum)+'</li>';
-                                        _str +=                 '<li><i class="fa fa-chevron-down"></i><span data-i18n="catalog.atmost">Max</span> '+checkValue(data.docs[i].maxNum)+'</li>';
+                                        _str +=                 '<li><i class="fa fa-chevron-up"></i><span data-i18n="catalog.atleast">Min</span> '+checkValue(data.docs[i].minNum)+ ' ' + translation[localStorage.lng].translation.rfq[data.docs[i].unit] +'</li>';
+                                        _str +=                 '<li><i class="fa fa-chevron-down"></i><span data-i18n="catalog.atmost">Max</span> '+checkValue(data.docs[i].maxNum)+ ' ' + translation[localStorage.lng].translation.rfq[data.docs[i].unit] +'</li>';
                                     }
-                                    _str +=                 '<li><i class="fa fa-calendar-o"></i><span data-i18n="catalog.deliveryIn">Consegna in</span> '+checkValue(data.docs[i].deliveryIn); 
+                                    _str +=                 '<li><i class="fa fa-calendar-o"></i><span data-i18n="catalog.deliveryIn">Consegna in </span> '+checkValue(data.docs[i].deliveryIn); 
                                     _str +=                     '<span data-i18n="catalog.days"> giorni</span></li>';
                                     if (mcat.type == 1)
                                         _str +=                 '<li><i class="fa fa-inbox"></i><span data-i18n="catalog.availability"></span><span> ' +checkValue(data.docs[i].availability)+' '+translation[localStorage.lng].translation.rfq[data.docs[i].unit]+'</span></li>';
