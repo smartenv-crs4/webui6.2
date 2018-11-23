@@ -24,7 +24,6 @@ if (!arr_par[0].type_search)
 $( document).ready(function() {
     
     
-    
     if (arr_par[0].type_search == 'p')
         $('#searchTitle').text(i18next.t("product.searchProductTitle")); 
     else
