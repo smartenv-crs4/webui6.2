@@ -79,8 +79,9 @@ var customerProfileTemplate = `
     {{/if_eq}}
 
     {{#if_not_eq phoneVerified 'true'}}
-      <div style="display: inline-block;margin-left: 12px;">
-         <button type="button" class="btn-u" data-i18n="profile.sendVerificationCode" onclick="sendPhoneVerificationCode()">Send verification code</button>
+    {{#if phone}}
+      <div style="display: inline-block;margin-left: 12px;" id="phoneVerificationBlock">
+         <button type="button" class="btn-u" data-i18n="profile.sendVerificationCode" onclick="sendPhoneVerificationCode()"></button>
          <div class="input-group">
            <span class="input-group-btn">
              <button type="button" data-i18n="profile.verifyCode" onclick="verifyPhoneCode()" class="btn-u btn-outline-secondary">
@@ -90,7 +91,7 @@ var customerProfileTemplate = `
          </div>
       </div>
 
-
+     {{/if}}
 
     {{/if_not_eq}}
 
@@ -199,17 +200,18 @@ var supplierProfileTemplate = `
     {{/if_eq}}
 
     {{#if_not_eq phoneVerified 'true'}}
-      <div style="display: inline-block;margin-left: 12px;">
+    {{#if phone}}
+      <div style="display: inline-block; margin-left: 12px;"  id="phoneVerificationBlock">
          <button type="button" class="btn-u" data-i18n="profile.sendVerificationCode" onclick="sendPhoneVerificationCode()"></button>
          <div class="input-group">
            <span class="input-group-btn">
              <button type="button" data-i18n="profile.verifyCode" onclick="verifyPhoneCode()" class="btn-u btn-outline-secondary">
-               Verify code
              </button>
            </span>
            <input class="form-control" id="phoneValidationCode"  type="text">
          </div>
       </div>
+    {{/if}}
     {{/if_not_eq}}
   </dd>
   <!-- hr>

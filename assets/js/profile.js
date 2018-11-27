@@ -223,9 +223,15 @@ function getUserProfile()
       //jQuery(".editable:not('#ed-phone')").editable();
 
       jQuery('#ed-phone').on('hidden', function(e, reason) {
+        console.log(reason);
 
         if(reason == "save" || reason == "nochange")
         {
+          if(reason == "save")
+          {
+            jQuery("#phoneVerificationBlock").hide();
+          }
+
           var cd = jQuery("#ed-phone").parent().find("input").first().intlTelInput("getSelectedCountryData");
           var dialCode = "+39";
           if(cd && cd.dialCode)
