@@ -420,7 +420,16 @@ function render_row(data, arr_par)
                                         _str +=                 '<li><i class="fa fa-inbox"></i><span data-i18n="catalog.availability"></span><span> ' +checkValue(data.docs[i].availability)+' '+translation[localStorage.lng].translation.rfq[data.docs[i].unit]+'</span></li>';
                                     _str +=                 '<li><i class="fa fa-euro"></i><span> ' +checkValue(data.docs[i].price)+ ' <span class="fa fa-euro"></span>';
                                     if (mcat.type == 1)
-                                        _str +=                 ' per '+translation[localStorage.lng].translation.rfq[data.docs[i].unit]+'</span>';
+                                        _str +=                 ' per '+translation[localStorage.lng].translation.rfq[data.docs[i].unit]+' ' 
+
+                                     if(checkValue(data.docs[i].salesTaxIncluded) == undefined || checkValue(data.docs[i].salesTaxIncluded) == true)
+                                       _str += '(<span data-i18n="catalog.vatIncluded"></span>)';
+                                     else
+                                       _str += '(<span data-i18n="catalog.vatNotIncluded"></span>)';
+                                          
+                                          
+                                          
+                                    _str += '</span>';
                                     _str +='                </li>';
                                     _str +=                 '<li style="text-align: right; font-weight: bold">Score:<span> ' +checkValueStr(data.docs[i].score, 4, null)+ ' </span></li>';
                                     _str +=             '</ul>';

@@ -326,6 +326,7 @@
 	  console.log('param.minNum=' + param.minNum);
     param.deliveryIn = jQuery("#delin").val();
     param.price = jQuery("#price").val();
+    param.salesTaxIncluded = jQuery('#tax:checked').length > 0;
     param.availability = jQuery("#availability").val();                
    
     if(param.unit == null || param.unit.trim() == "")
@@ -704,6 +705,12 @@
                     <label class="input" data-toggle="tooltip" data-trigger="hover" data-i18n="[title]catalog.price">
                         <i class="icon-append   icon-finance-246"></i>
                         <input id="price" type="text"  data-i18n="[title]catalog.price">
+                    </label>
+                </section>
+
+                <section class="col col-3" id="tax_box">
+                    <label class="label" data-i18n="catalog.tax"></label>
+                        <input id="tax" type="checkbox" checked="checked"/>
                     </label>
                 </section>
                 

@@ -263,6 +263,11 @@
         jQuery("#price").val(dataResp.price);
         jQuery("#delin").val(dataResp.deliveryIn);        
         jQuery("#unit").val(dataResp.unit);
+
+        if(dataResp.salesTaxIncluded == undefined || dataResp.salesTaxIncluded == true)
+        {
+          jQuery("#tax").attr("checked", "checked");
+        }
         
         var category = dataResp.categories;
         
@@ -422,6 +427,7 @@
     param.maxNum = jQuery("#qmax").val();
     param.deliveryIn = jQuery("#delin").val();
     param.price = jQuery("#price").val();
+    param.salesTaxIncluded = jQuery('#tax:checked').length > 0;
     param.availability = jQuery("#availability").val();
 
 
@@ -866,6 +872,12 @@
                     <label class="input" data-toggle="tooltip" data-trigger="hover" data-i18n="[title]catalog.price">
                         <i class="icon-append   icon-finance-246"></i>
                         <input id="price" type="text"  data-i18n="[title]catalog.price" >
+                    </label>
+                </section>
+
+                <section class="col col-3" id="tax_box">
+                    <label class="label" data-i18n="catalog.tax"></label>
+                        <input id="tax" type="checkbox" />
                     </label>
                 </section>
                 

@@ -244,6 +244,9 @@ translation = {
                 "days": "days",
                 "searchResults":"Search results",
                 "price":"Price",
+                "tax":"VAT included",
+                "vatIncluded":"VAT incl.",
+                "vatNotIncluded":"VAT not incl.",
                 "availability": "Ready availability ",
                 "resultsLabel": "Desired products ",
                 "showAll": "Show all products"
@@ -569,6 +572,9 @@ translation = {
                 "days": "giorni",
                 "searchResults":"Risultati ricerca",
                 "price":"Prezzo per unità",
+                "tax":"IVA inclusa",
+                "vatIncluded":"IVA incl.",
+                "vatNotIncluded":"IVA non incl.",
                 "availability": "Disponibilità immediata",
                 "resultsLabel": "Prodotti ricercati",
                 "showAll": "Mostra tutti i prodotti"

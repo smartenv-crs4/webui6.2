@@ -467,7 +467,7 @@
                       <span data-i18n="catalog.days"></span></li>
                     <li><i class="fa fa-inbox"></i><span data-i18n="catalog.availability"></span> {{availability}} <span data-i18n="rfq.{{unit}}"></span></li>
                         
-                    <li><i class="fa fa-euro"></i><span> {{price}}€ per <span data-i18n="rfq.{{unit}}"></span></span>
+                    <li><i class="fa fa-euro"></i><span> {{price}}€ per <span data-i18n="rfq.{{unit}}"></span> {{#if salesTaxIncluded}}(<span data-i18n="catalog.vatIncluded"></span>){{else}}(<span data-i18n="catalog.vatNotIncluded"></span>){{/if}}</span>
                     </li>
                 </ul>
                 {{/each}}
@@ -820,7 +820,11 @@
                     }
                     else {
                         prods[i].imgUrl.push({"url": "assets/img/team/img1-md.jpg", id: ""});
-                    }                                        
+                    }
+                    if(prods[i].salesTaxIncluded == undefined)
+                    {
+                      prods[i].salesTaxIncluded = true;
+                    } 
 
                       
                     prods[i].locName = {"it": prods[i].name, "en": prods[i].translation[0].name};
