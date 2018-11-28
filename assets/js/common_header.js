@@ -75,7 +75,7 @@ var header_template = `	<div class="header">
           </li -->
           </li>
           <li>
-          </span><a href="page_faq.html" data-i18n="nav.help"></a>
+          </span><a href="https://docs.google.com/document/d/1D2oue9tna6nvPKxpKn8aoB43oa5lVoAtEInOSn0QyhU/edit" target="_blank" data-i18n="nav.help"></a>
           </li>
           <li id="h_logout"><a href="#" onclick="logout()"><span  class="fa fa-sign-out"></span><span  data-i18n="nav.logout"></span></a></li>
           {{#if showSearch}}

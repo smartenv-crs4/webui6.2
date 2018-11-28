@@ -29,7 +29,8 @@ var footer_template = ` <div class="footer-v1 sticky-footer">
     Edificio 1 <br />
 Loc. Pixina Manna <br />
 Pula, CA <br />
-Email: <a href="mailto:cport2020@gmail.com" class="">cport2020@gmail.com</a>
+Email: <a href="mailto:cport2020@gmail.com" class="">cport2020@gmail.com</a><br/>
+Tel: +39 3313106278
 </address>
 </div><!--/col-md-3-->
 <!-- End Address -->
