@@ -392,7 +392,7 @@ function setPassword()
     dataType: "json",
     success: function(data, textStatus, xhr)
     {
-      if(xhr.status == 200)
+      if(xhr.status == 201)
       {
         respBlock.removeClass("invisible");
         respBlock.removeClass("alert-danger");
