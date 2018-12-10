@@ -255,7 +255,7 @@ function render_row(data, arr_par)
                                         _str = _str +   '    <div class="giveMeEllipsis blog-author-desc" style="margin-left: 10px">'+ data.docs[i].description +'</div>'
                                     
                                     _str = _str +  '    <small class="hex"><span data-i18n="product.tabLabelRegistration"></span>'+ getDateFromObjectId(data.docs[i]._id) +'</small>'
-                                    + '<div><br><a class="a_productList" data-id="' + data.docs[i]._id + '" style="cursor: pointer" data-i18n="product.tabMsgProduct"></a></div>'
+                                    // + '<div><br><a class="a_productList" data-id="' + data.docs[i]._id + '" style="cursor: pointer" data-i18n="product.tabMsgProduct"></a></div>'
                                     + '<div id="divListProducts' + data.docs[i]._id + '" style="display: none"></div><br>'
                                     _str +=     '</div>';
                                     
