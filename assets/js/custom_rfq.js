@@ -512,11 +512,13 @@ function updateRequest(rqs){
     var cuser = sessionStorage.type;
     var iconPanelRqs;
 
-    $("#status-"+num_req).text(s);
+    $("#status-" + num_req).text(s);
+    $("#status-" + num_req).data("val", rqs.status);
+
     if(rqs.status == 'acceptedByS' || rqs.status == 'rejectedByS')
-        $("#last-modify-"+num_req).text(rqs.conversation.supplier.name);
+        $("#last-modify-" + num_req).text(rqs.conversation.supplier.name);
     else
-        $("#last-modify-"+num_req).text(rqs.conversation.customer.name);
+        $("#last-modify-" + num_req).text(rqs.conversation.customer.name);
 
     $('#unsaved_'+ num_req).addClass('hidden');
 
@@ -566,6 +568,28 @@ function updateRequest(rqs){
    // setEnableSelect();
 
     addTooltipField();
+
+   var completed = true;
+   jQuery(".status-rfq").each(function(){
+     if(!jQuery(this).data("val"))
+     {
+       jQuery(this).data("val", jQuery(this).attr("value"));
+     }
+
+
+
+     if(jQuery(this).data("val") == "pending" || jQuery(this).data("val") == "acceptedByS" || jQuery(this).data("val") == "")
+     {
+       completed = false;
+     }
+
+   });
+
+   if(completed)
+   {
+     location.reload();
+   }
+
 }
 
 function acceptByCustomer(id_conv, id_req, num_req, name) {
