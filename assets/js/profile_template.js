@@ -175,7 +175,7 @@ var supplierProfileTemplate = `
   </dd>
   <hr>
   <dt><strong data-i18n="profile.address"></strong></dt>
-  <dd contenteditable="true">
+  <dd>
     <a class="editable editable-click" data-name="address" data-i18n="[data-emptytext]profile.emptyText" id="ed-address" data-type="text" href="#">{{address}}</a>
     <!-- span>
       <a class="pull-right" href="#">
